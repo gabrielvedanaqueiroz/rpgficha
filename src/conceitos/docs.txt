@@ -1,0 +1,9 @@
+link do figma
+
+COR:
+  Primaria   #F8cc27
+  Secundaria #ea541c
+
+
+Usei a organizacao do firebase em 3 niveis e organizi conteitualmente as tabelas dessa forma:
+tabela/id/registroS
