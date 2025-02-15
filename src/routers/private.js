@@ -1,6 +1,7 @@
 import { useState, useEffect} from "react"; 
 import {auth} from '../services/firebaseConnection';
 import {onAuthStateChanged} from 'firebase/auth';
+import {Navigate} from 'react-router-dom';
 
 
 function Private({children}){
@@ -36,6 +37,10 @@ function Private({children}){
 
   if(loading){
     return(<div></div>);
+  }
+
+  if(!signed){
+    return <Navigate to='/' />
   }
   return children;
 }

@@ -1,8 +1,10 @@
 function Ficha(){
 
   return(
-    <div>
+    <div className="admin-container">
       RGPFicha
+
+      <br></br><button> Deslogar </button>
     </div>
   )
 }

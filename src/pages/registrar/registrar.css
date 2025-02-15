@@ -7,7 +7,7 @@
   height: 100vh;
   width: 100%;
   border-radius: 8px;
-  background-color: #F8cc27;
+  background-color: #ea541c; 
 }
 
 .home-container h1{
@@ -38,13 +38,13 @@
   height: 36px;
   border:0;
   border-radius: 4px;
-  background-color: #ea541c;
+  background-color: #F8cc27;
   color: #FFF;
   font-size: 18px;
 }
 
 .button-link{
-  color: #ea541c;
+  color: #F8cc27;
   text-decoration: none;
   margin: 14px 0;
   font-size: 14px;
