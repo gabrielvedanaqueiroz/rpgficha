@@ -6,6 +6,35 @@ Instale os pacotes necessários:
 `npm install react-router-dom`
 `npm install --save react-toastify`
 
+## 📦 Tecnologias Utilizadas
+
+- **React** ⚛️
+- **react-toastify** (Notificações)  
+- **firebase** (Banco de dados)  
+- **react-router-dom** (Navegação)  
+
+📌 Funcionalidades
+    • 📜 Login, credenciais firebase 
+    • ❤️ Controle de ficha de personagem
+    • 📜 Varios personagens por jogador
+    • 🔔 Notificações visíveis de erros do sistema ou erros de cadastros
+    • 📜 Cadastrar Ataques, Magias, Caracteristicas
+
+# Descrição 
+
+ Ficha RPG, para jogadores organizarem suas fichas e personagens, Ficha de RPG (D&D 5e 2014) 
+
+# 📝 Estrutura do Projeto
+📂 src
+ ├── 📂 components     # Componentes reutilizáveis
+ ├── 📂 pages          # Páginas da aplicação
+ ├── 📂 services       # Conexão com Firebase
+ ├── 📜 App.js         # Arquivo principal
+ ├── 📜 index.js       # Ponto de entrada
+
+
+# anotações do React
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

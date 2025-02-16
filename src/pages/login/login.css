@@ -49,3 +49,19 @@
   margin: 14px 0;
   font-size: 14px;
 }
+
+.home-div-senha{
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  padding: 0;
+}
+
+.home-div-senha img{
+  margin-left: 4px;
+  margin-top: 0px;
+}
+
+.home-div-senha input{
+  width: 100%;
+}

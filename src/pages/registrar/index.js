@@ -4,6 +4,7 @@ import {auth} from '../../services/firebaseConnection';
 import {createUserWithEmailAndPassword} from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import {toast, ToastContainer} from 'react-toastify';
+import BtnExibirSenha from '../../components/btnexibirsenha';
 
 function Login(){
 
@@ -28,10 +29,19 @@ function Login(){
       toast.error('Preencha todos os campos');
   }
 
+  function onExibirSenha(){
+    let senha = document.getElementById("editSenha");
+    
+    if(senha.type === "password")
+      senha.type = "text";
+    else
+      senha.type = "password"; 
+  }
+
   return(
     <div className='home-container'>
       <h1>RPGFicha</h1>
-      <span>Criar seu usuario</span>
+      <span>Crie seu usuário</span>
       <form className='form' onSubmit={handleLogin}>
         <input
             type="text"
@@ -40,14 +50,18 @@ function Login(){
             onChange={(e) => setEmail(e.target.value) }
           />
 
+        <div className='home-div-senha'>
           <input
+            id='editSenha'
             type="password"
-            placeholder="******"
+            placeholder="digite sua senha"
             value={senha}
             onChange={(e) => setSenha(e.target.value) }
           />
 
-          <button type="submit" >Criar</button>
+          <BtnExibirSenha click={onExibirSenha}/>
+        </div>
+        <button type="submit" >Criar</button>
       </form>
       
       <ToastContainer />

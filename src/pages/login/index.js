@@ -4,6 +4,7 @@ import {auth} from '../../services/firebaseConnection';
 import {signInWithEmailAndPassword} from 'firebase/auth';
 import { Link, useNavigate} from 'react-router-dom';
 import {toast, ToastContainer} from 'react-toastify';
+import BtnExibirSenha from '../../components/btnexibirsenha';
 
 function Login(){
 
@@ -17,7 +18,7 @@ function Login(){
     if((email !== '') && (senha !== '')){
       await signInWithEmailAndPassword(auth, email, senha)
       .then(()=>{
-        navigate('/ficha', {replace:false})
+        navigate('/', {replace:false})
       })
       .catch((error)=>{
         console.error('Erro ao efetuar login: '+ error);
@@ -28,26 +29,40 @@ function Login(){
       toast.error('Preencha todos os campos');
   }
 
+  function onExibirSenha(){
+    let senha = document.getElementById("editSenha");
+    
+    if(senha.type === "password")
+      senha.type = "text";
+    else
+      senha.type = "password"; 
+  }
+
   return(
     <div className="home-container">
       <h1>RPGFicha</h1>
       <span>Login</span>
       <form className="form" onSubmit={handleLogin}>
         <input
-            type="text"
-            placeholder="Digite seu email..."
-            value={email}
-            onChange={(e) => setEmail(e.target.value) }
-          />
+          type="text"
+          placeholder="Digite seu email..."
+          value={email}
+          onChange={(e) => setEmail(e.target.value) }
+        />
 
+        <div className='home-div-senha'>
           <input
+            id='editSenha'
             type="password"
-            placeholder="******"
+            placeholder="digite sua senha"
             value={senha}
             onChange={(e) => setSenha(e.target.value) }
           />
 
-          <button type="submit" >Acessar</button>
+          <BtnExibirSenha click={onExibirSenha}/>
+        </div>
+
+        <button type="submit" >Acessar</button>
       </form>
 
       <Link className="button-link" to="/registrar">

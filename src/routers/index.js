@@ -9,9 +9,9 @@ function RoutesApp(){
   return(
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Login/>}/>
+        <Route path='/' element={<Private> <Ficha/> </Private>}/>
         <Route path='/registrar' element={<Registrar/>}/> 
-        <Route path='/ficha' element={<Private> <Ficha/> </Private>}/> 
+        <Route path='/login' element={<Login/>}/> 
       </Routes>
     </BrowserRouter>
   )
