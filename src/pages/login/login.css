@@ -65,3 +65,7 @@
 .home-div-senha input{
   width: 100%;
 }
+
+.hidden {
+  visibility: hidden;
+}

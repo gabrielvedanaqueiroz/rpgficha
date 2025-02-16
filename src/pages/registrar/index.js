@@ -11,6 +11,8 @@ function Login(){
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const navigate = useNavigate();
+  
+  localStorage.setItem('RF@tela', '1');
 
   async function handleLogin(e) {
     e.preventDefault();

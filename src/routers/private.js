@@ -19,7 +19,7 @@ function Private({children}){
             email: user.email,
           }
 
-          localStorage.setItem('@detailUser', JSON.stringify(userData));
+          localStorage.setItem('RF@detailUser', JSON.stringify(userData));
           setLoading(false);
           setSigned(true);
         }

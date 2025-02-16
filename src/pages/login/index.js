@@ -1,5 +1,5 @@
 import './login.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {auth} from '../../services/firebaseConnection';
 import {signInWithEmailAndPassword} from 'firebase/auth';
 import { Link, useNavigate} from 'react-router-dom';
@@ -12,6 +12,8 @@ function Login(){
   const [senha, setSenha] = useState('');
   const navigate = useNavigate();
 
+  localStorage.setItem('RF@tela', '1');
+  
   async function handleLogin(e) {
     e.preventDefault();
 

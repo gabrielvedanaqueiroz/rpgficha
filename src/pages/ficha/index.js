@@ -2,8 +2,6 @@ import './ficha.css';
 import {auth} from '../../services/firebaseConnection';
 import {signOut} from 'firebase/auth';
 import { useEffect, useState } from 'react';
-import Footer from '../../components/footer';
-import Header from '../../components/header';
 
 function Ficha(){
 
@@ -11,8 +9,11 @@ function Ficha(){
 
   useEffect(()=>{
 
-    const userDetail = localStorage.getItem('@detailUser');
+    localStorage.setItem('RF@tela', '2');
+    const userDetail = localStorage.getItem('RF@detailUser');
     setUser(JSON.parse(userDetail));
+
+    console.log('desenhou a Ficha');
 
   },[]);
 
@@ -21,18 +22,17 @@ function Ficha(){
   }
 
   return(
-    <div className="admin-container">
-      <Header/>
+    <div>
 
       <div className='fi-container'>
         RGPFicha<br/>
         Usuario UID: {user?.uid}<br/>
         Usuario Email: {user?.email}<br/>
+
+        {/* esse botao esaria na tela de personagens, nao aqui na principal */}
+        <br/><button onClick={onDeslogar}> Deslogar </button>
       </div>
       
-      <Footer/>
-      {/* esse botao esaria na tela de personagens, nao aqui na principal */}
-      <br/><button onClick={onDeslogar}> Deslogar </button>
     </div>
   )
 }
