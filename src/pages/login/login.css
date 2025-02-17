@@ -1,5 +1,5 @@
 
-.home-container{
+.lg-container{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,23 +10,23 @@
   background-color: #F8cc27;
 }
 
-.home-container h1{
+.lg-container h1{
   font-size: 48px;
   margin-bottom: 8px;
 }
 
-.home-container span{
+.lg-container span{
   margin-bottom: 28px;
 }
 
-.form{
+.lg-form{
   display: flex;
   flex-direction: column;
   width: 90%;
   max-width: 600px;
 }
 
-.form input{
+.lg-form input{
   border:0;
   margin-bottom: 12px;
   height: 36px;
@@ -34,7 +34,7 @@
   padding: 0 8px;
 }
 
-.form button{
+.lg-form button{
   height: 36px;
   border:0;
   border-radius: 4px;
@@ -43,29 +43,21 @@
   font-size: 18px;
 }
 
-.button-link{
+.lg-button-link{
   color: #ea541c;
   text-decoration: none;
   margin: 14px 0;
   font-size: 14px;
 }
 
-.home-div-senha{
+.lg-div-senha{
   display: flex;
   width: 100%;
   flex-direction: row;
   padding: 0;
 }
 
-.home-div-senha img{
-  margin-left: 4px;
-  margin-top: 0px;
-}
-
-.home-div-senha input{
+.lg-div-senha input{
   width: 100%;
-}
-
-.hidden {
-  visibility: hidden;
+  margin-right: 4px;
 }

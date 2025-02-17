@@ -9,11 +9,17 @@ function Ficha(){
 
   useEffect(()=>{
 
-    localStorage.setItem('RF@tela', '2');
+    let topo = document.getElementById("router-header");
+    let rodape = document.getElementById("router-footer");
+
+    if(topo !== null)
+      topo.style.display = "flex";
+      
+    if(rodape !== null)
+      rodape.style.display = "flex";
+
     const userDetail = localStorage.getItem('RF@detailUser');
     setUser(JSON.parse(userDetail));
-
-    console.log('desenhou a Ficha');
 
   },[]);
 
@@ -22,17 +28,13 @@ function Ficha(){
   }
 
   return(
-    <div>
+    <div className='fi-container'>
+      RGPFicha<br/>
+      Usuario UID: {user?.uid}<br/>
+      Usuario Email: {user?.email}<br/>
 
-      <div className='fi-container'>
-        RGPFicha<br/>
-        Usuario UID: {user?.uid}<br/>
-        Usuario Email: {user?.email}<br/>
-
-        {/* esse botao esaria na tela de personagens, nao aqui na principal */}
-        <br/><button onClick={onDeslogar}> Deslogar </button>
-      </div>
-      
+      {/* esse botao esaria na tela de personagens, nao aqui na principal */}
+      <br/><button onClick={onDeslogar}> Deslogar </button>
     </div>
   )
 }

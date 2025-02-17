@@ -1,5 +1,5 @@
 
-.home-container{
+.rg-container{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,23 +10,23 @@
   background-color: #F8cc27; 
 }
 
-.home-container h1{
+.rg-container h1{
   font-size: 48px;
   margin-bottom: 8px;
 }
 
-.home-container span{
+.rg-container span{
   margin-bottom: 28px;
 }
 
-.form{
+.rg-form{
   display: flex;
   flex-direction: column;
   width: 90%;
   max-width: 600px;
 }
 
-.form input{
+.rg-form input{
   border:0;
   margin-bottom: 12px;
   height: 36px;
@@ -34,7 +34,7 @@
   padding: 0 8px;
 }
 
-.form button{
+.rg-form button{
   height: 36px;
   border:0;
   border-radius: 4px;
@@ -43,25 +43,14 @@
   font-size: 18px;
 }
 
-.button-link{
-  color: #ea541c;
-  text-decoration: none;
-  margin: 14px 0;
-  font-size: 14px;
-}
-
-.home-div-senha{
+.rg-div-senha{
   display: flex;
   width: 100%;
   flex-direction: row;
   padding: 0;
 }
 
-.home-div-senha img{
-  margin-left: 4px;
-  margin-top: 0px;
-}
-
-.home-div-senha input{
+.rg-div-senha input{
   width: 100%;
+  margin-right: 4px;
 }

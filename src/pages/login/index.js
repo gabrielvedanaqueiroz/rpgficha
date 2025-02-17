@@ -12,7 +12,17 @@ function Login(){
   const [senha, setSenha] = useState('');
   const navigate = useNavigate();
 
-  localStorage.setItem('RF@tela', '1');
+  useEffect(()=>{
+    let topo = document.getElementById("router-header");
+    let rodape = document.getElementById("router-footer");
+
+    if(topo !== null)
+      topo.style.display = "none";
+      
+    if(rodape !== null)
+      rodape.style.display = "none";
+    
+  },[]);
   
   async function handleLogin(e) {
     e.preventDefault();
@@ -20,6 +30,9 @@ function Login(){
     if((email !== '') && (senha !== '')){
       await signInWithEmailAndPassword(auth, email, senha)
       .then(()=>{
+
+        setEmail('');
+        setSenha('');
         navigate('/', {replace:false})
       })
       .catch((error)=>{
@@ -41,10 +54,10 @@ function Login(){
   }
 
   return(
-    <div className="home-container">
+    <div className="lg-container">
       <h1>RPGFicha</h1>
       <span>Login</span>
-      <form className="form" onSubmit={handleLogin}>
+      <form className="lg-form" onSubmit={handleLogin}>
         <input
           type="text"
           placeholder="Digite seu email..."
@@ -52,7 +65,7 @@ function Login(){
           onChange={(e) => setEmail(e.target.value) }
         />
 
-        <div className='home-div-senha'>
+        <div className='lg-div-senha'>
           <input
             id='editSenha'
             type="password"
@@ -67,7 +80,7 @@ function Login(){
         <button type="submit" >Acessar</button>
       </form>
 
-      <Link className="button-link" to="/registrar">
+      <Link className="lg-button-link" to="/registrar">
         Não possui uma conta? Cadastre-se
       </Link>
       <ToastContainer />

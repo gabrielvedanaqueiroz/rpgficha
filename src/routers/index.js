@@ -8,34 +8,15 @@ import Footer from '../components/footer';
 
 function RoutesApp(){
 
-  function renderizar(){
-    const tela = localStorage.getItem('RF@tela');
-    
-    return(
-      <BrowserRouter>
-        {(tela !== '1')?<Header/>:<div/>}
-        <Routes>
-          <Route path='/' element={<Private> <Ficha/> </Private>}/>
-          <Route path='/registrar' element={<Registrar/>}/> 
-          <Route path='/login' element={<Login/>}/> 
-        </Routes>
-        {(tela !== '1')?<Footer/>:<div/>}
-      </BrowserRouter> 
-    ); 
-    
-  }
-
   return(
-
-    // renderizar()
     <BrowserRouter>
-      <Header/>
+      <div id='router-header'><Header/></div> {/* controle/gambiara para mander essa estrutura e ocultar quando elemento nao é necessario. GV 16-02-2025*/}
       <Routes>
-        <Route path='/' element={<Private> <Ficha/> </Private>}/>
+        <Route path='/' element={<Private> <Ficha/> </Private>}/> {/* elemento de validacao de acesso. GV 16-02-2025*/}
         <Route path='/registrar' element={<Registrar/>}/> 
         <Route path='/login' element={<Login/>}/> 
       </Routes>
-      <Footer/>
+      <div id='router-footer'><Footer/></div>
     </BrowserRouter>
   )
 }
