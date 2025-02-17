@@ -40,15 +40,14 @@
 
 .ft_div-ficha{
   padding: 0;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5); /* X, Y, desfoque, cor */
-  background-color: #F8cc27;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); /* X, Y, desfoque, cor */
+  background-color: #ea541c;
   height: 48px;
   width: 48px;
   border-radius: 24px;
   align-items: center;
   display: flex;
   justify-content: center;
-  
 }
 
 .ft_img40px{

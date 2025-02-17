@@ -2,6 +2,7 @@ import './ficha.css';
 import {auth} from '../../services/firebaseConnection';
 import {signOut} from 'firebase/auth';
 import { useEffect, useState } from 'react';
+import {exibirBarras} from '../../utils';
 
 function Ficha(){
 
@@ -9,14 +10,7 @@ function Ficha(){
 
   useEffect(()=>{
 
-    let topo = document.getElementById("router-header");
-    let rodape = document.getElementById("router-footer");
-
-    if(topo !== null)
-      topo.style.display = "flex";
-      
-    if(rodape !== null)
-      rodape.style.display = "flex";
+    exibirBarras();
 
     const userDetail = localStorage.getItem('RF@detailUser');
     setUser(JSON.parse(userDetail));

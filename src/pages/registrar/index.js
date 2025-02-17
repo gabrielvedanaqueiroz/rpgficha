@@ -5,6 +5,7 @@ import {createUserWithEmailAndPassword} from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import {toast, ToastContainer} from 'react-toastify';
 import BtnExibirSenha from '../../components/btnexibirsenha';
+import {ocultarBarras} from '../../utils';
 
 function Login(){
 
@@ -13,17 +14,8 @@ function Login(){
   const navigate = useNavigate();
   
   useEffect(()=>{
-    let topo = document.getElementById("router-header");
-    let rodape = document.getElementById("router-footer");
-  
-    if(topo !== null)
-      topo.style.display = "none";
-      
-    if(rodape !== null)
-      rodape.style.display = "none";
-    
+    ocultarBarras();    
   },[]);
-    
 
   async function handleLogin(e) {
     e.preventDefault();
