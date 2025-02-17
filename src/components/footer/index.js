@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import inc from '../../res/inc.svg';
 import caracteristicas from '../../res/caracteristica.svg';
 import personagem from '../../res/personagem.svg';
-import ataques from '../../res/ataque.svg';
+import inventario from '../../res/inventario.svg';
 import magias from '../../res/magia.svg';
 
 function Footer(){
@@ -22,7 +22,7 @@ function Footer(){
         </div>  
       </Link>
       <Link className='ft_button_disfarcado' to='/'>
-        <img className='ft_img32px' src={ataques} alt='ataques'/>
+        <img className='ft_img32px' src={inventario} alt='inventario'/>
       </Link>
       <Link className='ft_button_disfarcado' to='/'>
         <img className='ft_img32px' src={magias} alt='magias'/>
