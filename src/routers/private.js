@@ -20,6 +20,7 @@ function Private({children}){
           }
 
           localStorage.setItem('RF@detailUser', JSON.stringify(userData));
+          localStorage.setItem('RF@personagemID', 'Ph3YdE5qOua601u0m0Wj'); //trocar
           setLoading(false);
           setSigned(true);
         }

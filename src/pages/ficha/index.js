@@ -9,7 +9,7 @@ import {toast, ToastContainer } from 'react-toastify';
 function Ficha(){
 
   const [user, setUser] = useState({});
-  const personagemID    = 'Ph3YdE5qOua601u0m0Wj'; //localStorage.getItem('RF@personagemID');//pegar id do personagem ativo do localstorage
+  const personagemID    = localStorage.getItem('RF@personagemID');
   const [personagen, setPersonagem] = useState({});
 
   useEffect(()=>{

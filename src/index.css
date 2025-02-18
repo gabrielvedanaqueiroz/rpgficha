@@ -4,6 +4,7 @@
   box-sizing: border-box;
 }
 
+
 body {
   margin: 0;
   background-color: #e6e3da;
@@ -14,11 +15,20 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+ul{
+  list-style: none;
+}
+
+a{
+  text-decoration: none;
 }
 
 button{
   cursor: pointer;
 }
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+

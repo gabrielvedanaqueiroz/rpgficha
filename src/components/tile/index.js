@@ -1,35 +1,52 @@
-import { useState } from 'react';
 import './tile.css';
+import expandir_mais from '../../res/expandir_mais.svg';
+import expandir_menos from '../../res/expandir_menos.svg';
+import { useState } from 'react';
 
-function Tile({id, children}){
-
-  const [altura, setAltura] = useState('45px');
-
+function Tile({id, titulo, children}){
+  
+  const [expandido, setExpandido] = useState(false);
+  const [img, setImg] = useState(expandir_mais);
+  const iddiv = `div-${id}`; 
+  const iddivchildren = `divchildren-${id}`;
+   
   function onExpandir(){
     
-    let topo = document.getElementById(id);
-    if(topo){
+    const cDiv          = document.getElementById(iddiv); 
+    const cDivChildren  = document.getElementById(iddivchildren); 
+    let altura        = cDiv.style.height;
+    let visibilidade  = cDivChildren.style.display;
 
-      console.log(topo.style.height);
-      console.log(altura);
-      // setAltura(topo.style.height);
+    if(expandido === false){
+      setExpandido(true);
+      altura = 'auto';
+      setImg(expandir_menos);
+      visibilidade = "flex";
+    }
+    else{
+      setExpandido(false);
+      altura = '45px';
+      setImg(expandir_mais);
+      visibilidade = "none";
+    }
 
-      if(altura === '45px')
-        setAltura('200px')
-      else  
-        setAltura('45px');
-    
-      topo.style.height = altura;
-    };
+    cDiv.style.height           = altura;
+    cDivChildren.style.display  = visibilidade;
   }
 
   return(
-    <div id={id} className='tl_container'>
-      
-      {children}
+    <div id={iddiv} className='tl_container'>
+      <div className='tl_conteudo'>
+        <strong className='tl_titulo'>{titulo}</strong>
+        <div id={iddivchildren} className='tl-children'>
+          {children}
+        </div>
+      </div>
 
       <div className='tl_btnexpandir'>
-        <button onClick={onExpandir}>+</button>
+        <button className ='tl_buttom' onClick={onExpandir}>
+          <img className='tl_img' src={img} alt='expandir/recolher'/>
+        </button>
       </div>
 
     </div>

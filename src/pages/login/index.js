@@ -23,7 +23,6 @@ function Login(){
     if((email !== '') && (senha !== '')){
       await signInWithEmailAndPassword(auth, email, senha)  //logar no firebase authentication
       .then(()=>{
-
         setEmail('');
         setSenha('');
         navigate('/', {replace:false})
