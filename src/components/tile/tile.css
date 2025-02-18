@@ -1,7 +1,7 @@
 .tl_container{
   padding: 8px;
   margin-bottom: 4px;
-  background-color: burlywood;
+  background-color: white;
   border-radius: 4px;
   min-height: 45px;
   height: 45px;
@@ -19,6 +19,5 @@
   justify-items: center;
   position: fixed;
   margin-left: 8px;
-  right: 8px;
-  background-color: black;
+  right: 0px;
 }
