@@ -13,7 +13,7 @@ function Footer(){
       <Link className='ft_button_disfarcado' to='/'>
         <img className='ft_img32px' src={inc} alt='personagens'/>
       </Link>
-      <Link className='ft_button_disfarcado' to='/'>
+      <Link className='ft_button_disfarcado' to='/caracteristica'>
         <img className='ft_img32px' src={caracteristicas} alt='caracteristicas'/>
       </Link>
       <Link className='ft_button_disfarcado' to='/'>

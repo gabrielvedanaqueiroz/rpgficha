@@ -21,7 +21,7 @@ function Login(){
     e.preventDefault();
 
     if((email !== '') && (senha !== '')){
-      await createUserWithEmailAndPassword(auth, email, senha)
+      await createUserWithEmailAndPassword(auth, email, senha)   //criar usuario no firebase authentication
       .then(()=>{
         setEmail('');
         setSenha('');
