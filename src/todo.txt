@@ -1,4 +1,4 @@
 
-criar caracteristica
+excluir caracteristica
 editar caracteristica
 trocar cor das imagens

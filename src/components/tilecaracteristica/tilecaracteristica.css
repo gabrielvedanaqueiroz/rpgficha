@@ -1,0 +1,27 @@
+
+.cai-container{
+  flex-direction: column;
+  width: 100%;
+  background-color: aqua;
+  display: flex;
+}
+
+.cai_texto{
+  text-align: justify;
+  width: 100%;
+}
+
+.cai_botoes{
+  height: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: aliceblue;
+}
+
+.cai_btn{
+  height: 20px;
+  width: 20px;
+  margin-left: 4px;
+}

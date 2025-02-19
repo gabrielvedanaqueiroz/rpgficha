@@ -35,7 +35,7 @@
 
 .ft_img32px{
   height: 32px;
-  color: #ea541c;
+  filter: invert(40%) sepia(100%) saturate(500%) hue-rotate(-10deg); 
 }
 
 .ft_div-ficha{
@@ -52,4 +52,5 @@
 
 .ft_img40px{
   height: 40px;
+  filter: invert(75%) sepia(100%) saturate(300%) hue-rotate(5deg);
 }

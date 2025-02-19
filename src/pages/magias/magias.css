@@ -1,2 +1,21 @@
 /* color: #ea541c; */
 /* #F8cc27 */
+
+.cai_texto{
+  padding: 8px;
+  text-align: justify;
+}
+
+.cai_botoes{
+  height: 32px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cai_btn{
+  position: relative;
+  height: 20px;
+  width: 20px;
+  margin: 4px;
+}
