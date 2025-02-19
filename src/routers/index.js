@@ -1,11 +1,12 @@
 import {BrowserRouter, Routes, Route} from 'react-router';
 import Login from '../pages/login';
 import Registrar from '../pages/registrar';
-import Ficha from '../pages/ficha';
-import Caracteristica from '../pages/caracteristica';
 import Private from './private';
 import Header from '../components/header';
 import Footer from '../components/footer';
+import Ficha from '../pages/ficha';
+import Caracteristica from '../pages/caracteristica';
+import Magias from '../pages/magias';
 
 function RoutesApp(){
 
@@ -15,7 +16,7 @@ function RoutesApp(){
       <Routes>
         <Route path='/' element={<Private> <Ficha/> </Private>}/> {/* elemento de validacao de acesso. GV 16-02-2025*/}
         <Route path='/caracteristica' element={<Private> <Caracteristica/> </Private>}/> 
-
+        <Route path='/magia' element={<Private> <Magias/> </Private>}/> 
 
         <Route path='/registrar' element={<Registrar/>}/> 
         <Route path='/login' element={<Login/>}/> 

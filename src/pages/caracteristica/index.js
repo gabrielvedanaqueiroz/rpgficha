@@ -11,6 +11,12 @@ function Caracteristica(){
   const personagemID    = localStorage.getItem('RF@personagemID');
   const [lstProficiencia, setProficiencia] = useState([]);
   const [lstCaracteristica, setCaracteristica] = useState([]);
+  
+  /* modal */
+  const [isOpen, setIsOpen] = useState(false);
+  const [titulo, setTitulo] = useState('');
+  const [descricao, setDescricao] = useState('');
+
 
   async function buscarCaracteristicas(){
     const q = query(collection(db, "tb_caracteristica"), where("ca_idpersonagem", "==", personagemID.trim()));
@@ -38,9 +44,23 @@ function Caracteristica(){
     buscarCaracteristicas();
   },[]);
 
-  function onAdicionar(){
-    alert('abrir um modal para informar as caracteristicas');
-    buscarCaracteristicas();
+
+  function onModal(visivel){
+    setIsOpen(visivel);
+  }
+
+  async function onSalvar(e){
+    e.preventDefault();
+    setTitulo('');
+    setDescricao('');
+    alert('salvou');
+    onModal(false);
+    // buscarCaracteristicas();
+  }
+
+  function onCancelar(){
+    setTitulo('');
+    setDescricao('');
   }
 
   return(
@@ -79,11 +99,36 @@ function Caracteristica(){
         </ul>
       </div>
       <div className='cr_div-rodape-botao'>
-        <button className='cr_bt-adicionar' onClick={onAdicionar} >
+        <button className='cr_bt-adicionar' onClick={()=>{onModal(true)}} >
           <img className='cr_img-adicionar' src={expandir_mais} alt='adicionar uma caracteristica'/>
           Adicionar
         </button>
       </div>
+
+      {/* Tela Flutuante */}
+      {isOpen && (
+        <div className="overlay">
+          <div className='mca_container'>
+            <div className='mca_titulo'>
+              <strong >Característica</strong>
+            </div>
+            <form className='mca_form' onSubmit={onSalvar}>
+              <div className='mca_div-edit'>
+                <label>Título</label>
+                <input className='mca_edit' placeholder='Digite um título' value={titulo} onChange={(e)=>{setTitulo(e.target.value)}}/>
+              </div>
+              <div className='mca_div-edit'>
+                <label>Descrição</label>
+                <textarea className='mca_edit' placeholder='Digite uma descrição' value={descricao} onChange={(e)=>{setDescricao(e.target.value)}}/>
+              </div>
+              <div className='mca_botoes'>
+                <button className='mca_btn-cancelar' type='button' onClick={()=>{onModal(false)}}>Cancelar</button>
+                <button className='mca_btn-salvar' type='submmit'>Salvar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
