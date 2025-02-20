@@ -1,7 +1,6 @@
 import './ficha.css';
-import {auth, db} from '../../services/firebaseConnection';
+import {db} from '../../services/firebaseConnection';
 import {doc, getDoc} from 'firebase/firestore';
-import {signOut} from 'firebase/auth';
 import { useEffect, useState } from 'react';
 import {exibirBarras} from '../../utils';
 import {toast, ToastContainer } from 'react-toastify';
@@ -46,19 +45,12 @@ function Ficha(){
 
   },[]);
 
-  async function onDeslogar() {
-    await signOut(auth);                                      //metodo pra deslogar do firebase authentication
-  }
-
   return(
     <div className='fi-container'>
       RGPFicha<br/>
       Usuario UID: {user?.uid}<br/>
       Usuario Email: {user?.email}<br/>
       Personagen nome: {personagen.pe_nome}
-
-      {/* esse botao esaria na tela de personagens, nao aqui na principal */}
-      <br/><button onClick={onDeslogar}> Deslogar </button>
 
       <ToastContainer/>
     </div>

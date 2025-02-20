@@ -1,10 +1,14 @@
 import RoutesApp from './routers';
+import AuthProvider from './utils/auth';
+
 
 function App() {
 
   return (
     <div>     
-      <RoutesApp/>
+      <AuthProvider>
+        <RoutesApp/>
+      </AuthProvider>
     </div>
     
   );

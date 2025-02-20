@@ -1,5 +1,4 @@
-import './caracteristica.css';
-import '../../components/tile';
+import './caracteristicas.css';
 import Tile from '../../components/tile';
 import { useEffect, useState } from 'react';
 import {db} from '../../services/firebaseConnection';
@@ -8,7 +7,7 @@ import expandir_mais from '../../res/expandir_mais.svg';
 import {toast, ToastContainer } from 'react-toastify';
 import TileCaracteristica from '../../components/tilecaracteristica';
 
-function Caracteristica(){
+function Caracteristicas(){
   
   const personagemID    = localStorage.getItem('RF@personagemID');
   const [lstProficiencia, setProficiencia] = useState([]);
@@ -199,4 +198,4 @@ function Caracteristica(){
   );
 }
 
-export default Caracteristica;
+export default Caracteristicas;

@@ -1,4 +1,8 @@
 
-excluir caracteristica
-editar caracteristica
+caracteristica
+  editar caracteristica ta com erro?
+  excluir 
 trocar cor das imagens
+
+usar ContextAPI pra pegar id do usuario apenas uma vez?
+

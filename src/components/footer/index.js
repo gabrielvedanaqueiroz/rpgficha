@@ -10,10 +10,10 @@ function Footer(){
 
   return(
     <footer className='ft_bottom-bar'> 
-      <Link className='ft_button_disfarcado' to='/'>
+      <Link className='ft_button_disfarcado' to='/personagens'>
         <img className='ft_img32px' src={inc} alt='personagens'/>
       </Link>
-      <Link className='ft_button_disfarcado' to='/caracteristica'>
+      <Link className='ft_button_disfarcado' to='/caracteristicas'>
         <img className='ft_img32px' src={caracteristicas} alt='caracteristicas'/>
       </Link>
       <Link className='ft_button_disfarcado' to='/'>
@@ -24,7 +24,7 @@ function Footer(){
       <Link className='ft_button_disfarcado' to='/'>
         <img className='ft_img32px' src={inventario} alt='inventario'/>
       </Link>
-      <Link className='ft_button_disfarcado' to='/magia'>
+      <Link className='ft_button_disfarcado' to='/magias'>
         <img className='ft_img32px' src={magias} alt='magias'/>
       </Link>
     </footer>

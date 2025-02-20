@@ -1,17 +1,19 @@
 import './login.css';
-import { useEffect, useState } from 'react';
-import {auth} from '../../services/firebaseConnection';
-import {signInWithEmailAndPassword} from 'firebase/auth';
+import { useEffect, useState, useContext } from 'react';
+// import {auth} from '../../services/firebaseConnection';
+// import {signInWithEmailAndPassword} from 'firebase/auth';
 import { Link, useNavigate} from 'react-router-dom';
 import {toast, ToastContainer} from 'react-toastify';
 import BtnExibirSenha from '../../components/btnexibirsenha';
 import {ocultarBarras} from '../../utils';
+import { AuthContext } from '../../utils/auth';
 
 function Login(){
 
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const navigate = useNavigate();
+  const {onSingIn} = useContext(AuthContext);
 
   useEffect(()=>{
     ocultarBarras();    
@@ -21,16 +23,25 @@ function Login(){
     e.preventDefault();
 
     if((email !== '') && (senha !== '')){
-      await signInWithEmailAndPassword(auth, email, senha)  //logar no firebase authentication
-      .then(()=>{
-        setEmail('');
-        setSenha('');
-        navigate('/', {replace:false})
-      })
-      .catch((error)=>{
-        console.error('Erro ao efetuar login: '+ error);
-        toast.error('Erro ao efetuar login')
-      })
+      await onSingIn(email, senha).then((resultado)=>{
+        if(resultado){
+          setEmail('');
+          setSenha('');
+          navigate('/', {replace:true})
+        }
+      });
+
+
+      // await signInWithEmailAndPassword(auth, email, senha)  //logar no firebase authentication
+      // .then(()=>{
+      //   setEmail('');
+      //   setSenha('');
+      //   navigate('/', {replace:false})
+      // })
+      // .catch((error)=>{
+      //   console.error('Erro ao efetuar login: '+ error);
+      //   toast.error('Erro ao efetuar login')
+      // })
     }
     else
       toast.error('Preencha todos os campos');
