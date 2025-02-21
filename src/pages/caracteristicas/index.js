@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import {db} from '../../services/firebaseConnection';
 import {collection, query, where, getDocs, addDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import expandir_mais from '../../res/expandir_mais.svg';
-import {toast, ToastContainer } from 'react-toastify';
+import {toast} from 'react-toastify';
 import TileCaracteristica from '../../components/tilecaracteristica';
 
 function Caracteristicas(){
@@ -55,7 +55,7 @@ function Caracteristicas(){
 
     if((titulo.trim() !== '') && (descricao.trim() !== '')){
 
-      if(idCaracteristica.trim() !== null){     // inserir
+      if(idCaracteristica.trim() === null){     // inserir
         await addDoc(collection(db, 'tb_caracteristica'),{
           ca_idpersonagem: personagemID.trim(),
           ca_nome: titulo.trim(),
@@ -95,23 +95,23 @@ function Caracteristicas(){
   }
 
   function onEditar(item){
-    setTitulo(item.ca_nome);
-    setDescricao(item.ca_descricao);
-    setIdCaracteristica(item.ca_id);
+    setTitulo(item.ca_nome.trim());
+    setDescricao(item.ca_descricao.trim());
+    setIdCaracteristica(item.ca_id.trim());
     setIsOpen(true);
   }
 
   async function onExcluir(id) {
-    // const docRef = doc(db, "tb_caracteristica", id);
-    // await deleteDoc(docRef)
-    // .then(()=>{
-    //   buscarCaracteristicas();
-    // })
-    // .catch((error)=>{
-    //   toast.error('Erro ao excluir');
-    //   console.log('erro ao buscar '+error);
-    // });  
-    alert('exkuir');
+    const docRef = doc(db, "tb_caracteristica", id);
+    await deleteDoc(docRef)
+    .then(()=>{
+      buscarCaracteristicas();
+    })
+    .catch((error)=>{
+      toast.error('Erro ao excluir');
+      console.log('erro ao buscar '+error);
+    });  
+  
   }
 
   function onFecharModal(){
@@ -154,7 +154,6 @@ function Caracteristicas(){
                     excluir={ ()=>{onExcluir(item.ca_id)} } 
                     editar={ ()=>{onEditar(item)} }
                   />
-                  <labe></labe> {/* costomizar a filho com mais elementos se quiser*/}
                 </Tile>
               );
             })
@@ -193,7 +192,6 @@ function Caracteristicas(){
         </div>
       )}
 
-      <ToastContainer/>
     </div>
   );
 }

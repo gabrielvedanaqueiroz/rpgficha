@@ -1,0 +1,33 @@
+
+.pri-container{
+  flex-direction: column;
+  width: 100%;
+  display: flex;
+}
+
+.pri_texto{
+  text-align: justify;
+  width: 100%;
+}
+
+.pri_botoes{
+  height: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.pri_btn{
+  height: 20px;
+  width: 20px;
+  margin-left: 4px;
+}
+
+.pri_btn:hover{
+  transform: scale(1.1);
+}
+
+.pri_btn:active{
+  transform: scale(0.9);
+}

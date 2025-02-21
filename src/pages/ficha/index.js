@@ -3,7 +3,7 @@ import {db} from '../../services/firebaseConnection';
 import {doc, getDoc} from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import {exibirBarras} from '../../utils';
-import {toast, ToastContainer } from 'react-toastify';
+import {toast} from 'react-toastify';
 
 function Ficha(){
 
@@ -51,8 +51,6 @@ function Ficha(){
       Usuario UID: {user?.uid}<br/>
       Usuario Email: {user?.email}<br/>
       Personagen nome: {personagen.pe_nome}
-
-      <ToastContainer/>
     </div>
   )
 }

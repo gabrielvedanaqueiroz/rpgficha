@@ -1,9 +1,7 @@
 import './login.css';
 import { useEffect, useState, useContext } from 'react';
-// import {auth} from '../../services/firebaseConnection';
-// import {signInWithEmailAndPassword} from 'firebase/auth';
 import { Link, useNavigate} from 'react-router-dom';
-import {toast, ToastContainer} from 'react-toastify';
+import {toast} from 'react-toastify';
 import BtnExibirSenha from '../../components/btnexibirsenha';
 import {ocultarBarras} from '../../utils';
 import { AuthContext } from '../../utils/auth';
@@ -13,7 +11,7 @@ function Login(){
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const navigate = useNavigate();
-  const {onSingIn} = useContext(AuthContext);
+  const {onSingIn, loadingAuth} = useContext(AuthContext);
 
   useEffect(()=>{
     ocultarBarras();    
@@ -30,18 +28,6 @@ function Login(){
           navigate('/', {replace:true})
         }
       });
-
-
-      // await signInWithEmailAndPassword(auth, email, senha)  //logar no firebase authentication
-      // .then(()=>{
-      //   setEmail('');
-      //   setSenha('');
-      //   navigate('/', {replace:false})
-      // })
-      // .catch((error)=>{
-      //   console.error('Erro ao efetuar login: '+ error);
-      //   toast.error('Erro ao efetuar login')
-      // })
     }
     else
       toast.error('Preencha todos os campos');
@@ -80,13 +66,14 @@ function Login(){
           <BtnExibirSenha click={onExibirSenha}/>
         </div>
 
-        <button type="submit" >Acessar</button>
+        <button type="submit" >
+          {loadingAuth? 'Conectando..' : 'Acessar'}
+        </button>
       </form>
 
       <Link className="lg-button-link" to="/registrar">
         Não possui uma conta? Cadastre-se
       </Link>
-      <ToastContainer />
     </div>
   );
 }

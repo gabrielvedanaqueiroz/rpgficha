@@ -1,17 +1,19 @@
 import './registrar.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import {auth} from '../../services/firebaseConnection';
 import {createUserWithEmailAndPassword} from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import {toast, ToastContainer} from 'react-toastify';
+import {toast} from 'react-toastify';
 import BtnExibirSenha from '../../components/btnexibirsenha';
 import {ocultarBarras} from '../../utils';
+import {AuthContext} from '../../utils/auth';
 
 function Login(){
 
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const navigate = useNavigate();
+  const {onCriarUsuario, loadingAuth} = useContext(AuthContext);
   
   useEffect(()=>{
     ocultarBarras();    
@@ -21,16 +23,24 @@ function Login(){
     e.preventDefault();
 
     if((email !== '') && (senha !== '')){
-      await createUserWithEmailAndPassword(auth, email, senha)   //criar usuario no firebase authentication
+
+      onCriarUsuario(email, senha)
       .then(()=>{
-        setEmail('');
-        setSenha('');
-        navigate('/', {replace:true})
-      })
-      .catch((error)=>{
-        console.error('Erro ao efetuar login: '+ error);
-        toast.error('Erro ao efetuar login')
-      })
+          setEmail('');
+          setSenha('');
+          navigate('/', {replace:true})
+      });
+
+      // await createUserWithEmailAndPassword(auth, email, senha)   //criar usuario no firebase authentication
+      // .then(()=>{
+      //   setEmail('');
+      //   setSenha('');
+      //   navigate('/', {replace:true})
+      // })
+      // .catch((error)=>{
+      //   console.error('Erro ao efetuar login: '+ error);
+      //   toast.error('Erro ao efetuar login')
+      // })
     }
     else
       toast.error('Preencha todos os campos');
@@ -68,10 +78,11 @@ function Login(){
 
           <BtnExibirSenha click={onExibirSenha}/>
         </div>
-        <button type="submit" >Criar</button>
+        <button type="submit">
+          {loadingAuth? 'Criando..' : 'Acessar'}
+        </button>
       </form>
       
-      <ToastContainer />
     </div>
   );
 }

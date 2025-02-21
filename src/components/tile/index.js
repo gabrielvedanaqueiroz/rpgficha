@@ -44,7 +44,7 @@ function Tile({id, titulo, children}){
             {children}
           </div>
         </div>
-
+        {/* <label>em uso</label> */}
         <div className='tl_btnexpandir'>
           <button className ='tl_buttom' onClick={onExpandir}>
             <img className='tl_img' src={img} alt='expandir/recolher'/>

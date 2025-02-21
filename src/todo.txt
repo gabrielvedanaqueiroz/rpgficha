@@ -1,8 +1,33 @@
+personagem
+  criar
+  excluir
+  editar
+  salvar
+  TileItem
 
-caracteristica
-  editar caracteristica ta com erro?
-  excluir 
-trocar cor das imagens
+magias
+  criar
+  excluir
+  editar
+  salvar
+  TileItem
 
-usar ContextAPI pra pegar id do usuario apenas uma vez?
+caracteristica-proficiecias
+  exibir card
 
+inventaio
+  criar
+  excluir
+  editar
+  salvar
+  TileItem
+
+principal
+  lista ataque
+  lista magias
+  cabecalho
+
+componente vazio
+componente erro
+
+tile deslize suave
