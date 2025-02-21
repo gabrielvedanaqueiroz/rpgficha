@@ -2,12 +2,21 @@
 .pri-container{
   flex-direction: column;
   width: 100%;
+  height: auto;
   display: flex;
+  transition: all 0.3s ease-in-out;
 }
 
 .pri_texto{
   text-align: justify;
+  flex-direction: row;
+  display: flex;
   width: 100%;
+  height: auto;
+  justify-items: center;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
 }
 
 .pri_botoes{
@@ -30,4 +39,71 @@
 
 .pri_btn:active{
   transform: scale(0.9);
+}
+
+.pri_div-personagem{
+  border: 2px;
+  height: 60px;
+  width: 60px;
+  border-color: #ea541c;/*black;*/
+  border-radius: 30px;
+  border-style: dashed;
+  align-items: center;
+  justify-items: center;
+  display: flex;
+  padding: 2px;
+  margin-right: 8px;
+}
+
+.pri_img-personagem{
+  height: 55px;
+  width: 55px;
+}
+
+.pri_div-nivel{
+  border: 3px solid;
+  height: 55px;
+  width: 48px;
+  border-color: black;
+  border-radius: 16px;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  display: flex;
+  padding: 8px;
+  flex-direction: column;  
+}
+
+.pri_div-vida{
+  padding: 8px;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  background-image: url('../../res/vida.svg');
+  background-repeat: no-repeat;
+  width: 55px;
+  height: 55px;
+  background-size: contain;
+  background-position: center;
+  margin-bottom: 4px;
+}
+
+.pri_div-dados{
+  position: absolute;
+  margin-left: 68px;
+  margin-right: 8px;
+  display: flex;
+  font-size: 14px;
+  text-align: left;
+  min-width: 40%;
+  width: 55%;
+}
+
+.pri_div-direita{
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  width: auto;
 }

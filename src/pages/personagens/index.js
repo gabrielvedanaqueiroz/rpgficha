@@ -29,8 +29,15 @@ function Personagens(){
           listaPost.push({
             pe_id: doc.id.trim(),
             pe_nome: doc.data().pe_nome.trim(),
-            // pe_nivel: doc.data().pe_nivel,
-                  
+            pe_nivel: doc.data().pe_nivel,
+            pe_catotal: doc.data().pe_catotal,
+            pe_vida: doc.data().pe_vida,
+            pe_raca: doc.data().pe_raca.trim(),
+            pe_subraca: doc.data().pe_subraca.trim(),
+            pe_classe: doc.data().pe_classe.trim(),
+            pe_subclasse: doc.data().pe_subclasse.trim(),      
+            pe_tendencia: doc.data().pe_tendencia.trim(),      
+            pe_antecedente: doc.data().pe_antecedente.trim(),
           })
         });
         
@@ -49,18 +56,18 @@ function Personagens(){
       
     }
     buscar();
-  },[]);
+  },[personagemID, usuario]);
 
   async function onDeslogar() {
     await onSingOut();
   }
 
   function onEditar(item){
-
+    alert(item.pe_nome);
   }
 
   function onExcluir(id){
-
+    alert(id);
   }
 
   return(
@@ -79,8 +86,15 @@ function Personagens(){
                   <TilePersonagem
                     puso={item.pe_id === personagemID}
                     pclasse='Patrulheiro'
-                    praca='Anão'
-                    excluir={ ()=>{onExcluir(item.ca_id)} } 
+                    praca={item.pe_raca}
+                    psubclasse={item.pe_subclasse}
+                    psubraca={item.pe_subraca}
+                    pvida={item.pe_vida}
+                    pnivel={item.pe_nivel}
+                    pantecedente={item.pe_antecedente}
+                    ptendencia={item.pe_tendencia}
+                    pcatotal={item.pe_catotal}
+                    excluir={ ()=>{onExcluir(item.pe_id)} } 
                     editar={ ()=>{onEditar(item)} }
                   /> 
                 </Tile>
