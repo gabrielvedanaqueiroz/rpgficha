@@ -41,11 +41,11 @@
   transform: scale(0.9);
 }
 
-.pri_div-personagem{
+.pri_div-esquerda{
   border: 2px;
   height: 60px;
   width: 60px;
-  border-color: #ea541c;/*black;*/
+  border-color: #ea541c;
   border-radius: 30px;
   border-style: dashed;
   align-items: center;
@@ -55,7 +55,7 @@
   margin-right: 8px;
 }
 
-.pri_img-personagem{
+.pri_img-esquerda{
   height: 55px;
   width: 55px;
 }
@@ -87,12 +87,10 @@
   height: 55px;
   background-size: contain;
   background-position: center;
-  /* margin-bottom: 4px; */
   margin-right: 8px;
-
 }
 
-.pri_div-dados{
+.pri_div-centro{
   position: absolute;
   margin-left: 68px;
   margin-right: 8px;
@@ -100,7 +98,7 @@
   font-size: 14px;
   text-align: left;
   min-width: 40%;
-  width: 55%;
+  width: max-content;
   flex-direction: column;
 }
 
@@ -139,4 +137,10 @@
   display: flex;
   flex-direction: column;
   margin-right: 8px;
+}
+
+.pri-separador{
+  height: 1px;
+  width: auto;
+  background-color: black;
 }

@@ -2,7 +2,6 @@ import RoutesApp from './routers';
 import AuthProvider from './utils/auth';
 import { ToastContainer } from 'react-toastify';
 
-
 function App() {
 
   return (

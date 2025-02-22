@@ -8,21 +8,21 @@ function TilePersonagem(props){
     
     <div className='pri-container'>
       <div className='pri_texto'>
-        <div className='pri_div-personagem'>
-          <img className='pri_img-personagem' src={personagem} alt='personagem'/>
+        <div className='pri_div-esquerda'>
+          <img className='pri_img-esquerda' src={personagem} alt='personagem'/>
         </div>
-        <div className='pri_div-dados'>
+        <div className='pri_div-centro'>
           <span className='pri-linha-1'>{props.pclasse} - {props.psubclasse}</span>
           <span className='pri-linha-2'>{props.praca} {props.psubraca}<br/></span>
           <div className='pri-div-linha-3'>
             <div className='pri-div-linha-3-item'>
               <span className='pri-linha-3'>{props.pantecedente} </span>
-              <hr/>
+              <div className='pri-separador'/>
               <span className='pri-linha-3'>Antecedente</span>
             </div>
             <div className='pri-div-linha-3-item'>
               <span className='pri-linha-3'> {props.ptendencia} </span>
-              <hr/>
+              <div className='pri-separador'/>
               <span className='pri-linha-3'> Tendência </span>
             </div>
           </div>

@@ -1,9 +1,14 @@
+registrar
+  salvar nome do jogador;
+  
 personagem
   criar
   excluir
   editar
   salvar
-  TileItem
+  fazer um tile pra mostar dados do jogador e deixar o delogar ali tbm
+    ( Usuario UID: {usuario?.uid}<br/>
+      Usuario Email: {usuario?.email}<br/> )
 
 magias
   criar

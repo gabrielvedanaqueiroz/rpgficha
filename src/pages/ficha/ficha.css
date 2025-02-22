@@ -1,5 +1,116 @@
 .fi-container{
-  margin: 8px;
-  max-width: 500px;
+  /* margin: 8px; */
   padding-bottom: 55px;
+}
+
+.fi-cabecalho{
+  padding: 8px;
+  background-color: #F8cc27;
+  height: 120px;
+  justify-content: space-between;
+  display: flex;
+}
+
+.fi-cb-esquerda{
+  width: 33%;
+  /* color: #fff; */
+  height: 55px;
+  /* background-color: #fff; */
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-shape {
+  width:65px;
+  height: 55px;
+  background: black;
+  text-align: center;
+  padding-bottom: 8px;
+  /* border: 3px solid; */
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
+  color: #F8cc27;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  margin-left: 4px;
+  margin-right: 4px;
+  
+}
+
+.custom-shape label{
+  font-size: 12px;
+}
+
+
+.fi-cb-imgclasse{
+  width: 115px;
+  height: 115px;
+  /* border-radius: 36px; */
+  /* border: 1px solid; */
+  /* border-color: black; */
+  background-image: url('../../res/classe.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.fi-cb-direita{
+  width: 33%;
+  flex-direction: row;
+  display: flex;
+  height: 55px;
+  justify-items: center;
+  align-items: center;
+  justify-content: end;
+}
+
+
+.fi_div-nivel{
+  background-image: url('../../res/badge6.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 70px;
+  width: 80px;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  display: flex;
+  padding: 8px;
+  flex-direction: column;    
+}
+
+.fi-separador2{
+  height: 1px; 
+  width: 15px; 
+  background-color: #F8cc27;
+}
+
+.fi-separador{
+  height: 1px; 
+  width: 15px; 
+  background-color: black;
+}
+
+
+.fi_div-vida{
+  padding: 8px;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  background-image: url('../../res/vida.svg');
+  background-repeat: no-repeat;
+  width: 55px;
+  height: 55px;
+  background-size: contain;
+  background-position: center;
+  margin-right: 8px;
+}
+
+.d-esquerda{
+  display: flex;
 }
