@@ -87,7 +87,9 @@
   height: 55px;
   background-size: contain;
   background-position: center;
-  margin-bottom: 4px;
+  /* margin-bottom: 4px; */
+  margin-right: 8px;
+
 }
 
 .pri_div-dados{
@@ -99,11 +101,42 @@
   text-align: left;
   min-width: 40%;
   width: 55%;
+  flex-direction: column;
+}
+
+.pri-linha-1{
+  font-size: 16px;
+}
+
+.pri-linha-2{
+  font-size: 14px;
+}
+
+.pri-linha-3{
+  font-size: 12px;
 }
 
 .pri_div-direita{
   align-items: center;
   justify-items: center;
-  justify-content: center;
-  width: auto;
+  justify-content: center;  
+  padding: 2px;
+  display: flex;
+  flex-direction: row;
+}
+
+.pri-div-linha-3{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.pri-div-linha-3 hr{
+  border: 0.1px solid;
+}
+
+.pri-div-linha-3-item{
+  display: flex;
+  flex-direction: column;
+  margin-right: 8px;
 }

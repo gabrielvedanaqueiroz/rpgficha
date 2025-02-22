@@ -16,9 +16,10 @@
 
 .tl-children{
   margin-top: 8px;
-  width: 90vw;
+  width: 95vw;
   height: 100%;
   display: none;
+  padding-right: 8px;
 }
 
 .tl_btnexpandir{
@@ -26,7 +27,8 @@
   height: 100%;
   align-items: center; 
   justify-items: center;
-  position: relative;
+  position: absolute;
+  right: 15px;
 }
 
 .tl_buttom{

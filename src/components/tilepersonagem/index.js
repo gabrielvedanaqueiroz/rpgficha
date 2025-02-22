@@ -2,8 +2,8 @@ import './tilepersonagem.css';
 import editar from '../../res/edit.svg';
 import excluir from '../../res/delete.svg';
 import personagem from '../../res/personagem.svg';
+
 function TilePersonagem(props){
-  /*Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consectetur, ipsum eget elementum sagittis, velit sem facilisis tortor, nec sodales neque sem eget elit. Vivamus sed magna nisl. */
   return(
     
     <div className='pri-container'>
@@ -12,9 +12,20 @@ function TilePersonagem(props){
           <img className='pri_img-personagem' src={personagem} alt='personagem'/>
         </div>
         <div className='pri_div-dados'>
-          {props.pclasse} * {props.psubclasse}<br/>
-          {props.praca} {props.psubraca}<br/>
-          antecedente: {props.pantecedente} | tendencia: {props.ptendencia}
+          <span className='pri-linha-1'>{props.pclasse} - {props.psubclasse}</span>
+          <span className='pri-linha-2'>{props.praca} {props.psubraca}<br/></span>
+          <div className='pri-div-linha-3'>
+            <div className='pri-div-linha-3-item'>
+              <span className='pri-linha-3'>{props.pantecedente} </span>
+              <hr/>
+              <span className='pri-linha-3'>Antecedente</span>
+            </div>
+            <div className='pri-div-linha-3-item'>
+              <span className='pri-linha-3'> {props.ptendencia} </span>
+              <hr/>
+              <span className='pri-linha-3'> Tendência </span>
+            </div>
+          </div>
         </div>
         <div className='pri_div-direita'>
           <div className='pri_div-vida'>
@@ -25,7 +36,6 @@ function TilePersonagem(props){
             <label>Nível</label>
           </div>
         </div>
-        {/* costomizar a filho com mais elementos se quiser*/}
       </div>
       <div className='pri_botoes'>
         <img src={excluir} className='pri_btn'  alt='excluir' onClick={()=>{props.excluir()}}/>
