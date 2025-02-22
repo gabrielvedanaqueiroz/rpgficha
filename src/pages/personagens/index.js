@@ -31,7 +31,7 @@ function Personagens(){
             pe_nome: doc.data().pe_nome.trim(),
             pe_nivel: doc.data().pe_nivel,
             pe_catotal: doc.data().pe_catotal,
-            pe_vida: doc.data().pe_vida,
+            pe_vidaatual: doc.data().pe_vidaatual,
             pe_raca: doc.data().pe_raca.trim(),
             pe_subraca: doc.data().pe_subraca.trim(),
             pe_classe: doc.data().pe_classe.trim(),
@@ -89,7 +89,7 @@ function Personagens(){
                     praca={item.pe_raca}
                     psubclasse={item.pe_subclasse}
                     psubraca={item.pe_subraca}
-                    pvida={item.pe_vida}
+                    pvida={item.pe_vidaatual}
                     pnivel={item.pe_nivel}
                     pantecedente={item.pe_antecedente}
                     ptendencia={item.pe_tendencia}
