@@ -9,6 +9,7 @@ import Caracteristicas from '../pages/caracteristicas';
 import Magias from '../pages/magias';
 import Personagens from '../pages/personagens';
 import PersonagenDetalhe from '../pages/personagemdetalhe';
+import Inventario from '../pages/inventario';
 
 function RoutesApp(){
 
@@ -21,6 +22,7 @@ function RoutesApp(){
         <Route path='/magias' element={<Private> <Magias/> </Private>}/> 
         <Route path='/personagens' element={<Private> <Personagens/> </Private>}/> 
         <Route path='/personagemdetalhe' element={<Private> <PersonagenDetalhe/> </Private>}/> 
+        <Route path='/inventario' element={<Private> <Inventario/> </Private>}/> 
 
         <Route path='/registrar' element={<Registrar/>}/> 
         <Route path='/login' element={<Login/>}/> 

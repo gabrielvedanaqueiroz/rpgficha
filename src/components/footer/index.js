@@ -21,7 +21,7 @@ function Footer(){
           <img className='ft_img40px' src={personagem} alt='ficha'/>  
         </div>  
       </Link>
-      <Link className='ft_button_disfarcado' to='/'>
+      <Link className='ft_button_disfarcado' to='/inventario'>
         <img className='ft_img32px' src={inventario} alt='inventario'/>
       </Link>
       <Link className='ft_button_disfarcado' to='/magias'>

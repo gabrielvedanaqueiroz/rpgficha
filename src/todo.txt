@@ -16,6 +16,7 @@ magias
   editar
   salvar
   TileItem
+  preparar
 
 caracteristica-proficiecias
   exibir card
@@ -28,11 +29,16 @@ inventaio
   TileItem
 
 principal
-  lista ataque
-  lista magias
-  cabecalho
+  vidas
+  upar
+  exibir magia prerada por completo num modal
 
 componente vazio
 componente erro
 
 tile deslize suave
+
+usar hooks a interessantes
+  (x) useRef 
+  (x) useFormStatus();
+  ( ) useTransition()

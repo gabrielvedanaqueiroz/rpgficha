@@ -1,6 +1,6 @@
 import './ficha.css';
 import {db} from '../../services/firebaseConnection';
-import {doc, getDoc} from 'firebase/firestore';
+import {doc, getDoc, query, where, collection, getDocs} from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import {exibirBarras} from '../../utils';
 import {toast} from 'react-toastify';
@@ -8,18 +8,17 @@ import img_classe from '../../res/logo.svg';
 import Tile from '../../components/tile';
 import Personagem from '../../utils/personagem.js'
 import TileAtaque from '../../components/tileataque/index.js';
+import ModalAtaque from '../../components/modalataque/index.js';
 
 function Ficha(){
 
   const personagemID    = localStorage.getItem('RF@personagemID');
   const [personagem, setPersonagem] = useState({});
   const [loading, setLoading] = useState(true);
-
-  function onModificador(aValor){
-    let modificador = (aValor - 10) / 2;
-
-    return Math.ceil(modificador);
-  }
+  const [showModalAtaque, setShowModalAtaque] = useState(false);
+  const [showModalMagia, setShowModalMagia] = useState(false);
+  const [lstAtaque, setLstAtaque] = useState([]);
+  const [lstMagia, setLstMagia] = useState([]);
 
   useEffect(()=>{
 
@@ -31,7 +30,7 @@ function Ficha(){
       await getDoc(ref)                                       //executar busca    
       .then((snapshot) =>{
 
-          console.log(snapshot.data());
+          // console.log(snapshot.data());
 
           if(snapshot.exists){
 
@@ -63,6 +62,8 @@ function Ficha(){
 
             setPersonagem(personagem);
   
+            buscarAtaque();
+            buscarMagia();
           }
           
       })
@@ -74,16 +75,64 @@ function Ficha(){
       setLoading(false);
     }
 
+    async function buscarAtaque() {
+      const q = query(collection(db, "tb_ataque"), where("at_idpersonagem", "==", personagemID.trim()));
+      const querySnapshot = await getDocs(q); 
+      let lista = [];
+  
+      try {
+        querySnapshot.forEach((doc)=>{
+          lista.push({
+            at_idpersonagem: doc.id.trim(),
+            at_descricao: doc.data().at_descricao.trim(),
+            at_alcance: doc.data().at_alcance.trim(),
+            at_bonus: doc.data().at_bonus,
+            at_dano: doc.data().at_dano.trim(),
+            at_tipo: doc.data().at_tipo.trim(),
+          })
+        });
+    
+        setLstAtaque(lista);
+      } catch (error) {
+        toast.error('Erro ao carregar caracteristica'+error); 
+      }
+    }
+
+    async function buscarMagia() {
+      const q = query(collection(db, "tb_magia"), where("mg_idpersonagem", "==", personagemID.trim()));
+      const querySnapshot = await getDocs(q); 
+      let lista = [];
+  
+      try {
+        querySnapshot.forEach((doc)=>{
+          lista.push({
+            mg_id: doc.id.trim(),
+            mg_nome: doc.data().mg_nome.trim(),
+            mg_alcance: doc.data().mg_alcance.trim(),
+            mg_duracao: doc.data().mg_duracao.trim(),
+            mg_dano: doc.data().mg_dano.trim(),
+            mg_nivel: doc.data().mg_nivel,
+          })
+        });
+
+        lista.sort((a, b)=> a.mg_nivel > b.mg_nivel);
+    
+        setLstMagia(lista);
+      } catch (error) {
+        toast.error('Erro ao carregar caracteristica'+error); 
+      }
+    }
+
     buscar();
 
   },[]);
 
   function onAddAtaque(){
-    alert('onAddAtaque')
+    setShowModalAtaque(true);
   }
 
   function onAddMagia(){
-    alert('onAddMagia');
+    setShowModalMagia(true);
   }
 
   if(loading)
@@ -142,11 +191,15 @@ function Ficha(){
       <div className='fi-corpo'>
         <div className='fi-vidas'>
           <div className='pri_div-vida'>
-            <label>{personagem.getVida()}</label>
+            <label>{personagem.pe_vidaatual}</label>
           </div> 
 
           <div className='pri_div-vida'>
             <label>{personagem.pe_vidatemp}</label>
+          </div> 
+
+          <div className='pri_div-vida'>
+            <label>{personagem.getVida()}</label>
           </div> 
 
           <div className='fi-cd-div-flag'>
@@ -205,22 +258,20 @@ function Ficha(){
           <Tile titulo='Ataques' id='fiataques'>
             <div className='fi-at-conteudo'>
               <TileAtaque at_id='xpto'/>
-              <TileAtaque 
-                at_id='xpto1' 
-                at_nome='Espada Curta'
-                at_alcance='Corpo a corpo'
-                at_bonus='5'
-                at_dano='1d6+5'
-                at_tipo='Cortante'
-              />
-              <TileAtaque 
-                at_id='xpto2' 
-                at_nome='Arco'
-                at_alcance='13/20m'
-                at_bonus='5'
-                at_dano='1d6+5'
-                at_tipo='Perfurante'
-              />
+              {
+                lstAtaque.map((item)=>{
+                  return(
+                    <TileAtaque 
+                      at_id={item.at_id} 
+                      at_nome={item.at_descricao} 
+                      at_alcance={item.at_alcance} 
+                      at_bonus={item.at_bonus} 
+                      at_dano={item.at_dano} 
+                      at_tipo={item.at_tipo} 
+                    />
+                  );  
+                })
+              }
               <button className='fi-at-btn-descreto' onClick={onAddAtaque}>Adicionar +</button>
             </div>
           </Tile>
@@ -229,29 +280,28 @@ function Ficha(){
         <div className='fi-magias'>
           <Tile titulo='Magias preparadas' id='fimagias'>
             <div className='fi-at-conteudo'>
-            <TileAtaque at_id='xpto'/>
-              <TileAtaque 
-                at_id='xpto1' 
-                at_nome='Bola de fogo'
-                at_alcance='Corpo a corpo'
-                at_bonus='5'
-                at_dano='1d6+5'
-                at_tipo='Cortante'
-              />
-              <TileAtaque 
-                at_id='xpto2' 
-                at_nome='Silencio'
-                at_alcance='13/20m'
-                at_bonus='5'
-                at_dano='1d6+5'
-                at_tipo='Perfurante'
-              />
-              <button className='fi-at-btn-descreto' onClick={onAddMagia}>Adicionar +</button>
+              <TileAtaque at_id='xpto'/>
+              {
+                lstMagia.map((item)=>{
+                  return(
+                    <TileAtaque 
+                      at_id={item.mg_id} 
+                      at_nome={item.mg_nome} 
+                      at_alcance={item.mg_alcance} 
+                      at_bonus={item.mg_nivel} 
+                      at_dano={item.mg_dano} 
+                      at_tipo={item.mg_duracao} 
+                    />
+                  );  
+                })
+              }
             </div>
           </Tile>
         </div>
       </div>
-      
+
+      { showModalAtaque ? <ModalAtaque onOcultar={(()=>{setShowModalAtaque(false)})} personagemID={personagemID}/> :<div/>} 
+      { showModalMagia ? <ModalAtaque onOcultar={(()=>{setShowModalMagia(false)})} personagemID={personagemID}/> :<div/>} 
     </div>
   )
 }
