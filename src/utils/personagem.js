@@ -1,4 +1,4 @@
-class Personagem{
+export default class Personagem{
 
   constructor(
     pe_id,
@@ -21,6 +21,9 @@ class Personagem{
     pe_inteligencia,
     pe_sabedoria,
     pe_carisma,
+    pe_cabase,
+    pe_catotal,
+    pe_movimento,
   ){
     this.pe_id = pe_id;
     this.pe_nome = pe_nome;
@@ -42,38 +45,41 @@ class Personagem{
     this.pe_inteligencia = pe_inteligencia;
     this.pe_sabedoria = pe_sabedoria;
     this.pe_carisma = pe_carisma;
+    this.pe_cabase = pe_cabase;
+    this.pe_catotal = pe_catotal;
+    this.pe_movimento = pe_movimento;
   }
 
-  onModificador(aValor){
+  #onModificador(aValor){
     let modificador = (aValor - 10) / 2;
     return Math.ceil(modificador);
   }
 
-  mod_forca() {
-    return onModificador(this.pe_forca)
+  getModForca() {
+    return this.#onModificador(this.pe_forca)
   }
 
-  mod_destreza() {
-    return onModificador(this.pe_destreza)
+  getModDestreza() {
+    return this.#onModificador(this.pe_destreza)
   }
 
-  mod_constituicao() {
-    return onModificador(this.pe_constituicao)
+  getModConstituicao() {
+    return this.#onModificador(this.pe_constituicao)
   }
 
-  mod_inteligencia() {
-    return onModificador(this.pe_inteligencia)
+  getModInteligencia() {
+    return this.#onModificador(this.pe_inteligencia)
   }
 
-  mod_sabedoria() {
-    return onModificador(this.pe_sabedoria)
+  getModSabedoria() {
+    return this.#onModificador(this.pe_sabedoria)
   }
 
-  mod_carisma() {
-    return onModificador(this.pe_carisma)
+  getModCarisma() {
+    return this.#onModificador(this.pe_carisma)
   }
 
-  pe_vida(){
+  getVida(){
     return (this.pe_vidaatual + this.pe_vidatemp);
   }
   
@@ -84,19 +90,18 @@ class Personagem{
 
   }
 
-  vida_inc(aValor){
+  vida_incValor(aValor){
     
     if(this.pe_vidaatual < this.pe_vidabase){
       
-      if((this.pe_vidaatual + aValor) > this.pe_vidabase)
+      this.pe_vidaatual = this.pe_vidaatual + aValor;
+
+      if(this.pe_vidaatual > this.pe_vidabase)
         this.pe_vidaatual = this.pe_vidabase;
-      else
-        this.pe_vidaatual = this.pe_vidaatual + aValor;
 
     }
     
   }
-
   
   vida_dec(){
     
@@ -108,49 +113,42 @@ class Personagem{
 
   }
 
-  #vidadecaux(aValor){
-
-    if((this.pe_vidaatual - aValor) < 0){
-      this.pe_vidaatual = 0;
-    }
-    else  
-      this.pe_vidaatual = (this.pe_vidaatual - aValor);
-
-  }
-
-  vida_dec(aValor){
+  vida_decValor(aValor){
     
-    if(this.pe_vida() > 0){
+    if(this.getVida() > 0){
 
       if(this.pe_vidatemp > 0){
 
         let sobra = this.pe_vidatemp - aValor;
+        this.pe_vidatemp = this.pe_vidatemp - aValor;
         
-        if(sobra < 0){
+        if(sobra <= 0){
           this.pe_vidatemp = 0;
-          this.pe_vidaatual = this.pe_vidaatual - sobra;
+          this.pe_vidaatual = this.pe_vidaatual - (sobra * -1);
         }
-        else
-         this.#vidadecaux(aValor)
 
       }
-      else  
-        this.#vidadecaux(aValor)
+      else  {
+        this.pe_vidaatual = (this.pe_vidaatual - aValor);
+    
+        if((this.pe_vidaatual - aValor) < 0)
+          this.pe_vidaatual = 0;  
+      }
   
     }
     
   }
 
-  pe_classe(){
+  getClasse(){
     return this.pe_classe + ' ' + this.pe_subclasse;
   }
   
-  pe_raca(){
+  getRaca(){
     return this.pe_raca + ' ' + this.pe_subraca;
   }
 
-  pe_iniciativa(){
-    return this.pe_destreza;
+  getIniciativa(){
+    return this.getModDestreza();
   }
 
   

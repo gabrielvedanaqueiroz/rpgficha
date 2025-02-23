@@ -156,6 +156,8 @@
 .fi-ataques{
   height: auto;
   padding: 8px;
+  display: flex;
+  flex-direction: column;
 }
 
 .fi-magias{
@@ -173,6 +175,10 @@
   display: flex;
 }
 
+.fi-at-conteudo{
+  width: 100%;
+  height: auto;
+}
 .fi-at-btn-descreto{
   text-decoration: none;
   border: none;

@@ -15,6 +15,7 @@ function Personagens(){
   const [lista, setLista] = useState([]);
   const {usuario} = useContext(AuthContext);  
   const {onSingOut} = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
 
   useEffect(()=>{
     
@@ -54,6 +55,8 @@ function Personagens(){
         toast.error('Erro ao efetuar busca');
       }
       
+      setLoading(false);
+      
     }
     buscar();
   },[personagemID, usuario]);
@@ -69,6 +72,9 @@ function Personagens(){
   function onExcluir(id){
     alert(id);
   }
+
+  if(loading)
+    return <div>carregand...</div>
 
   return(
     <div className='pr_container'>

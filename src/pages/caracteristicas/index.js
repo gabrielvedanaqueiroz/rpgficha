@@ -12,6 +12,7 @@ function Caracteristicas(){
   const personagemID    = localStorage.getItem('RF@personagemID');
   const [lstProficiencia, setProficiencia] = useState([]);
   const [lstCaracteristica, setCaracteristica] = useState([]);
+  const [loading, setLoading] = useState(true);
   
   /* modal */
   const [isOpen, setIsOpen] = useState(false);
@@ -46,8 +47,11 @@ function Caracteristicas(){
   }
 
   useEffect(()=>{
+
     buscarProficiencias();
     buscarCaracteristicas();
+
+    setLoading(false);
   },[]);
 
   async function onSalvar(e){
@@ -120,6 +124,9 @@ function Caracteristicas(){
     setIdCaracteristica('');
     setIsOpen(false)
   }
+
+  if(loading)
+    return <div>carregand...</div>
 
   return(
     <div className='cr_container'>
