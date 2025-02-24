@@ -1,5 +1,5 @@
 import './modalataque.css';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { toast } from 'react-toastify';
 import BtnSalvarForm from '../btnsalvarform';
 import { addDoc, collection } from 'firebase/firestore';

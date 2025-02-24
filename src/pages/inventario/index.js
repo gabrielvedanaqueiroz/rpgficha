@@ -5,6 +5,8 @@ function Inventario(){
   return(
     <div>
       iventario
+
+      
     </div>
   );
 }

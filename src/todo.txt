@@ -31,7 +31,6 @@ inventaio
 principal
   vidas
   upar
-  exibir magia prerada por completo num modal
 
 componente vazio
 componente erro

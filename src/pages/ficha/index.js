@@ -7,8 +7,10 @@ import {toast} from 'react-toastify';
 import img_classe from '../../res/logo.svg';
 import Tile from '../../components/tile';
 import Personagem from '../../utils/personagem.js'
-import TileAtaque from '../../components/tileataque/index.js';
-import ModalAtaque from '../../components/modalataque/index.js';
+import TileAtaque from '../../components/tileataque';
+import TileMagia from '../../components/tilemagia';
+import ModalAtaque from '../../components/modalataque';
+import ModalMagia from '../../components/modalmagia';
 
 function Ficha(){
 
@@ -19,6 +21,7 @@ function Ficha(){
   const [showModalMagia, setShowModalMagia] = useState(false);
   const [lstAtaque, setLstAtaque] = useState([]);
   const [lstMagia, setLstMagia] = useState([]);
+  const [magiaID, setMagiaID] = useState('');
 
   useEffect(()=>{
 
@@ -99,7 +102,10 @@ function Ficha(){
     }
 
     async function buscarMagia() {
-      const q = query(collection(db, "tb_magia"), where("mg_idpersonagem", "==", personagemID.trim()));
+      const q = query(collection(db, "tb_magia"),
+       where("mg_idpersonagem", "==", personagemID.trim()),
+       where("mg_preparada", "==", true)
+      );
       const querySnapshot = await getDocs(q); 
       let lista = [];
   
@@ -112,6 +118,7 @@ function Ficha(){
             mg_duracao: doc.data().mg_duracao.trim(),
             mg_dano: doc.data().mg_dano.trim(),
             mg_nivel: doc.data().mg_nivel,
+            mg_tempoconjuracao: doc.data().mg_tempoconjuracao.trim()
           })
         });
 
@@ -130,11 +137,7 @@ function Ficha(){
   function onAddAtaque(){
     setShowModalAtaque(true);
   }
-
-  function onAddMagia(){
-    setShowModalMagia(true);
-  }
-
+ 
   if(loading)
     return <div>carregand...</div>
   
@@ -280,17 +283,23 @@ function Ficha(){
         <div className='fi-magias'>
           <Tile titulo='Magias preparadas' id='fimagias'>
             <div className='fi-at-conteudo'>
-              <TileAtaque at_id='xpto'/>
+              <TileMagia at_id='xpto'/>
               {
                 lstMagia.map((item)=>{
                   return(
-                    <TileAtaque 
-                      at_id={item.mg_id} 
-                      at_nome={item.mg_nome} 
-                      at_alcance={item.mg_alcance} 
-                      at_bonus={item.mg_nivel} 
-                      at_dano={item.mg_dano} 
-                      at_tipo={item.mg_duracao} 
+                    <TileMagia 
+                      btn='true'
+                      mg_id={item.mg_id} 
+                      mg_nome={item.mg_nome} 
+                      mg_alcance={item.mg_alcance} 
+                      mg_nivel={item.mg_nivel} 
+                      mg_dano={item.mg_dano} 
+                      mg_duracao={item.mg_duracao} 
+                      mg_tempoconjuracao={item.mg_tempoconjuracao}
+                      onClickDetalhe={()=>{
+                        setMagiaID(item.mg_id);
+                        setShowModalMagia(true)
+                      }}
                     />
                   );  
                 })
@@ -301,7 +310,7 @@ function Ficha(){
       </div>
 
       { showModalAtaque ? <ModalAtaque onOcultar={(()=>{setShowModalAtaque(false)})} personagemID={personagemID}/> :<div/>} 
-      { showModalMagia ? <ModalAtaque onOcultar={(()=>{setShowModalMagia(false)})} personagemID={personagemID}/> :<div/>} 
+      { showModalMagia ? <ModalMagia onOcultar={(()=>{setShowModalMagia(false)})} mg_id={magiaID}/> :<div/>} 
     </div>
   )
 }
