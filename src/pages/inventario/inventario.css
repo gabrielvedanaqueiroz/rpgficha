@@ -1,84 +1,22 @@
-
-/* Estiliza o fundo escuro quando o modal está aberto */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.mii_container{
-  display: flex;
-  justify-items: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 0;
-  width: 400px;
-  background-color: #fff;
-  border-radius: 4px;
-  margin-top: 16px;
-}
-
-.mii_titulo{
-  background-color: #000;
-  width: 100%;
-  color: #fff;
-  font-size: 20px;
-  margin-bottom: 8px;
-  padding: 8px;
-}
-
-.mii_form{
-  width: 100%;
-  margin-bottom: 0px;
-  padding: 8px;
-}
-
-.mii_edit{
-  border: 2px solid rgba(0, 0, 0, 0.2); /* Contorno suave */
-  border-radius: 8px; /* Cantos arredondados */
-  padding: 10px 15px; /* Espaçamento interno */
-  font-size: 16px; /* Tamanho da fonte */
-  outline: none; /* Remove o contorno padrão ao focar */
-  transition: all 0.3s ease-in-out; /* Suaviza transições */
-  width: 100%;
-  margin-bottom: 8px;
-}
-
-.mii_edit:focus {
-  border-color: rgba(216, 13, 13, 0.4); /* Cor do contorno ao focar */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Efeito de leve sombra */
-}
-
-.mii_botoes{
-  display: flex;
-  justify-content: end;
-}
-
-.mii_btn-cancelar{
-  text-decoration: none;
-  background: #ea541c;
-  border: 0px;
-  padding: 8px;
+.ttm-container{
+  border-right: 1px solid #000;
+  border-bottom: 0px solid #000;
+  width: 160px;
+  height: 100px;
   margin: 8px;
-  border-radius: 4px;
-  color: #fff;
-  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  justify-content: space-between;
+  padding: 8px;  
 }
 
-.mii_btn-salvar{
-  text-decoration: none;
-  background: #F8cc27;
-  border: 0px;
-  padding: 8px;
-  margin-top: 8px;
+.ttm-titulo{
+  width: 100%;
   margin-bottom: 8px;
-  border-radius: 4px;
-  /* color: #fff; */
-  font-size: 18px;
+  text-align: start;
+}
+
+.ttm-checkbox{
+ margin: 4px;
 }

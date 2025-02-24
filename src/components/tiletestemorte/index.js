@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import './inventario.css';
+import './tiletestemorte.css';
 
-function Inventario(){
+function TileTesteMorte(){
 
   const [chkSucesso, setChkSucesso] = useState({
     option1: false,
@@ -33,26 +33,26 @@ function Inventario(){
 
   return(
     <div >
-      <div className='ttm-container'>
-        <strong className='ttm-titulo'>Teste contra morte</strong>
+      <div className='tetm-container'>
+        <strong className='tetm-titulo'>Teste contra morte</strong>
 
         <div>
           <div >
-            <input className='ttm-checkbox'
+            <input className='tetm-checkbox'
               type="checkbox"
               name="option1"
               checked={chkSucesso.option1}
               onChange={onChanceSucesso}
             />
             
-            <input className='ttm-checkbox'
+            <input className='tetm-checkbox'
               type="checkbox"
               name="option2"
               checked={chkSucesso.option2}
               onChange={onChanceSucesso}
             />
           
-            <input className='ttm-checkbox'
+            <input className='tetm-checkbox'
               type="checkbox"
               name="option3"
               checked={chkSucesso.option3}
@@ -63,21 +63,21 @@ function Inventario(){
           </div>
 
           <div>
-          <input className='ttm-checkbox'
+          <input className='tetm-checkbox'
               type="checkbox"
               name="option1"
               checked={chkFalha.option1}
               onChange={onChanceFalha}
             />
             
-            <input className='ttm-checkbox'
+            <input className='tetm-checkbox'
               type="checkbox"
               name="option2"
               checked={chkFalha.option2}
               onChange={onChanceFalha}
             />
           
-            <input className='ttm-checkbox'
+            <input className='tetm-checkbox'
               type="checkbox"
               name="option3"
               checked={chkFalha.option3}
@@ -94,4 +94,4 @@ function Inventario(){
   );
 }
 
-export default Inventario;
+export default TileTesteMorte;

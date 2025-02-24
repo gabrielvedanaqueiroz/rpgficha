@@ -1,0 +1,20 @@
+.tetm-container{
+  border-right: 1px solid #000;
+  width: 150px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 8px;  
+  padding-bottom: 8px;  
+  justify-content: space-between;
+}
+
+.tetm-titulo{
+  width: 100%;
+  text-align: start;
+  height: 25px;
+}
+
+.tetm-checkbox{
+ margin: 4px;
+}

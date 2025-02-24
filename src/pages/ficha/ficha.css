@@ -167,7 +167,7 @@
 
 .fi-vidas{
   background-color: white;
-  height: 75px;
+  height: auto;
   margin: 8px;
   padding: 8px;
   border-radius: 8px;
@@ -186,4 +186,33 @@
   background-color: white;
   height: 18px;
   color: darkslategrey;  
+}
+
+.fi-cd-div-outras{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+}
+
+.fi-cd-div-percepcao{
+  background-color: black;
+  color: #F8cc27;
+  display: flex;
+  border-radius: 4px;
+  margin-bottom: 2px;
+  justify-content: space-around;
+  flex-direction: column;
+  padding: 3px;
+  align-items: center;
+  width: 75px;
+}
+
+.fi-cd-div-percepcao span{
+  font-size: 16px;
+}
+
+.fi-cd-div-percepcao label{
+  font-size: 11px;
 }

@@ -24,6 +24,8 @@ export default class Personagem{
     pe_cabase,
     pe_catotal,
     pe_movimento,
+    pe_idclasse, 
+    pe_idraca,
   ){
     this.pe_id = pe_id;
     this.pe_nome = pe_nome;
@@ -48,6 +50,9 @@ export default class Personagem{
     this.pe_cabase = pe_cabase;
     this.pe_catotal = pe_catotal;
     this.pe_movimento = pe_movimento;
+    this.pe_idclasse = pe_idclasse;
+    this.pe_idraca = pe_idraca;
+
   }
 
   #onModificador(aValor){
@@ -151,5 +156,19 @@ export default class Personagem{
     return this.getModDestreza();
   }
 
+  //metodo para mostrar uma imagem dependendo da classe do personagem
+  getImagem(){
+    let url = '';
+    switch (this.pe_idclasse) {
+      case '1':
+        url = '';
+        break;
+    
+      default:
+        url = '';
+        break;
+    }
+    return url;
+  }
   
 }

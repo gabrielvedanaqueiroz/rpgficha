@@ -11,6 +11,8 @@ import TileAtaque from '../../components/tileataque';
 import TileMagia from '../../components/tilemagia';
 import ModalAtaque from '../../components/modalataque';
 import ModalMagia from '../../components/modalmagia';
+import TileVida from '../../components/tilevida/';
+import TileTesteMorte from '../../components/tiletestemorte/index.js';
 
 function Ficha(){
 
@@ -193,23 +195,43 @@ function Ficha(){
 
       <div className='fi-corpo'>
         <div className='fi-vidas'>
-          <div className='pri_div-vida'>
-            <label>{personagem.pe_vidaatual}</label>
-          </div> 
+          
+          <TileVida 
+            pe_vidaatual={personagem.pe_vidaatual}
+            pe_vidatemp={personagem.pe_vidatemp}
+            pe_vidabase={personagem.pe_vidabase}
+            pe_vidadadousado='0'
+            pe_vidadados='1d8'
+            incrementar={()=>{ personagem.vida_inc(); console.log(personagem.pe_vidaatual) }}
+            decrementar={()=>{ personagem.vida_dec(); console.log(personagem.pe_vidaatual) }}
+          />
 
-          <div className='pri_div-vida'>
-            <label>{personagem.pe_vidatemp}</label>
-          </div> 
+          <TileTesteMorte/>
+          <div className='fi-cd-div-outras'>
 
-          <div className='pri_div-vida'>
-            <label>{personagem.getVida()}</label>
-          </div> 
+            <div className='fi-cd-div-percepcao'>
+              <span>12</span>
+              <div className='fi-separador2'/>
+              <label>Percepção</label>
+            </div> 
 
+            <div className='fi-cd-div-flag'>
+              <span>{personagem.pe_catotal}</span>
+              <div className='fi-separador2'/>
+              <label>CA</label>
+            </div> 
+            
+          </div>
+        </div>
+
+        <div className='fi-atributos'>
+          Salvar-Guarda
           <div className='fi-cd-div-flag'>
-          <span>{personagem.pe_catotal}</span>
+            <span>{personagem.getModForca()}</span>
+            <label>{personagem.pe_forca}</label>
             <div className='fi-separador2'/>
-            <label>CA</label>
-          </div> 
+            <label>Força</label>
+          </div>  
         </div>
 
         <div className='fi-atributos'>

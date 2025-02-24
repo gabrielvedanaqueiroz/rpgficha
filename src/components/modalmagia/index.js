@@ -9,6 +9,7 @@ function ModalMagia(props){
   const idMagia = props.mg_id;
   
   const [magia, setMagia] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(()=>{
     async function buscar(){
@@ -34,6 +35,8 @@ function ModalMagia(props){
         console.log('Erro ao efetuar busca: '+error);
         toast.error('Erro ao efetuar busca');
       });
+      
+      setLoading(false);
     }
     
     buscar();
@@ -43,26 +46,30 @@ function ModalMagia(props){
     props.onOcultar();
   }
 
+  if(loading)
+    return;
+
   return(
     <div>
       <div className="overlay">
         <div className='mai_container'>
-          <div className='mai_titulo'>
-            <strong >{magia.mg_nome}</strong>
-          </div>
-          <div className='mai-corpo'>
-            <label>{magia.mg_descricao}</label>
-            <label>Nível: {magia.mg_nivel}</label>
-            <label>Tempo: {magia.mg_tempoconjuracao}</label>
-            <label>Alcance: {magia.mg_alcance}</label>
-            <label>Componentes: {magia.mg_componentes}</label>
-            <label>Duração: {magia.mg_duracao}</label>
-          </div>
-          <div className='mai_botoes'>
-            <button className='mai_btn-cancelar' type='button' onClick={()=>{onFecharModal()}}>
-              Voltar
-            </button>
-          </div>
+          { (loading?<div>carregand..</div>:
+          <div>
+            <div className='mai_titulo'>
+              <strong >{magia.mg_nome}</strong>
+              <button className='mai_btn-cancelar' type='button' onClick={()=>{onFecharModal()}}>
+                x
+              </button>
+            </div>
+            <div className='mai-corpo'>
+              <label>{magia.mg_descricao}</label>
+              <label>Nível: {magia.mg_nivel}</label>
+              <label>Tempo: {magia.mg_tempoconjuracao}</label>
+              <label>Alcance: {magia.mg_alcance}</label>
+              <label>Componentes: {magia.mg_componentes}</label>
+              <label>Duração: {magia.mg_duracao}</label>
+            </div>
+          </div>) }
         </div>
       </div>
     </div>

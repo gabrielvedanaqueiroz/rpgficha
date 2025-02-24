@@ -1,0 +1,83 @@
+.vd-container{
+  border-right: 1px solid #000;
+  width: 160px;
+  height: 100%;
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  margin-right: 8px;
+}
+
+.vd-titulo{
+  text-align: center;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.vd-valores{
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.vd-vidaatual{
+  border-right: 1px solid #000;
+  padding: 8px;
+  width: 40%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.vd-vdatual-botoes{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.vd-vdatual-botao{
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background-color: #ea541c;
+  border: 0px;
+  border-radius: 10px;
+  color: #F8cc27;
+}
+
+.vd-vidacentro{
+ width: 30%;
+ height: 100%;
+ display: flex;
+ flex-direction: column;
+ padding-left: 8px;
+ font-size: 13px;
+ border-right: 1px solid #000;
+}
+
+.vd-vidatemp{
+  height: 50%; 
+  width: 100%;
+}
+
+.vd-linha{
+  height: 1px;
+  width: 100%;
+  border-bottom: 1px solid #000;
+}
+
+.vd-vidadireita{
+  width: 30%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 8px;
+  font-size: 13px;
+ }
