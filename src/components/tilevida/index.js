@@ -7,7 +7,11 @@ function TileVida(props){
       <strong className='vd-titulo'>Vida</strong>
       <div className='vd-valores'>
         <div className='vd-vidaatual'>
-          {props.pe_vidaatual}
+          
+          {/* <div className='fi_div-vida'> */}
+            {props.pe_vidaatual}
+          {/* </div> */}
+
           <div className='vd-vdatual-botoes'>
             <button className='vd-vdatual-botao' onClick={()=>{ props.incrementar() }}> + </button>
             <button className='vd-vdatual-botao' onClick={()=>{ props.decrementar()} }> - </button>

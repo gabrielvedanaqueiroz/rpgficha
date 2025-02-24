@@ -32,7 +32,6 @@ function TileTesteMorte(){
   };
 
   return(
-    <div >
       <div className='tetm-container'>
         <strong className='tetm-titulo'>Teste contra morte</strong>
 
@@ -88,9 +87,7 @@ function TileTesteMorte(){
         </div>
       </div>
 
-      {/* <p>Selecionados setChkSucesso: {Object.keys(chkSucesso).filter((key) => chkSucesso[key]).join(", ") || "Nenhum"}</p>
-      <p>Selecionados setChkSucesso: {Object.keys(chkFalha).filter((key) => chkFalha[key]).join(", ") || "Nenhum"}</p> */}
-    </div>
+    
   );
 }
 

@@ -1,6 +1,6 @@
 .vd-container{
   border-right: 1px solid #000;
-  width: 160px;
+  width: 50%;
   height: 100%;
   margin-top: 8px;
   display: flex;
@@ -81,3 +81,19 @@
   padding-left: 8px;
   font-size: 13px;
  }
+/* 
+ .fi_div-vida{
+  padding: 8px;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  display: flex;
+  
+  background-image: url('../../res/vida.svg');
+  background-repeat: no-repeat;
+  width: 75px;
+  height: 75px;
+  background-size: contain;
+  background-position: center;
+  margin-right: 2px;
+} */

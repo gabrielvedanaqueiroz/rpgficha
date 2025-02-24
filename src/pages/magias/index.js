@@ -6,6 +6,7 @@ function Magias(){
   /* teste de conceitos */
   return(
     <div >  
+      <h2>Em Construção</h2>
       <strong>Magias</strong>
       <div className='cai-container'>
         <div className='cai_texto'>

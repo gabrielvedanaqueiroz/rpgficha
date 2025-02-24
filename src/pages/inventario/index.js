@@ -33,6 +33,8 @@ function Inventario(){
 
   return(
     <div >
+
+      <h2>Em Construção</h2>
       <div className='ttm-container'>
         <strong className='ttm-titulo'>Teste contra morte</strong>
 

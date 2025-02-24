@@ -6,6 +6,7 @@ import {collection, query, where, getDocs, addDoc, doc, updateDoc, deleteDoc } f
 import expandir_mais from '../../res/expandir_mais.svg';
 import {toast} from 'react-toastify';
 import TileCaracteristica from '../../components/tilecaracteristica';
+import TileProficiencia from '../../components/tileproficiencia';
 
 function Caracteristicas(){
   
@@ -137,12 +138,69 @@ function Caracteristicas(){
           <hr/>
         </div>
         <ul className='cr_lista'>
-          <Tile id='Força' titulo='Força'> Força </Tile>
-          <Tile id='Destreza' titulo='Destreza'> Destreza </Tile>
-          <Tile id='Constituição' titulo='Constituição'> Constituição </Tile>
-          <Tile id='Inteligência' titulo='inteligência'> Inteligência </Tile>
-          <Tile id='Sabedoria' titulo='Sabedoria'> Sabedoria </Tile>
-          <Tile id='Carisma' titulo='Carisma'> Carisma </Tile>
+          <Tile id='Força' titulo='Força'>
+            <div className='cr-proficiencia'>
+              <TileProficiencia titulo='Atletismo' valor='3' proficiente='1'/>
+            </div>
+
+            <div class="ca-cd-div-flag">
+              <span>2</span>
+              <div className='ca-separador2'/>
+              <label>10</label>
+            </div>
+          </Tile>
+          <Tile id='Destreza' titulo='Destreza'>
+            <div className='cr-proficiencia'>
+              <TileProficiencia titulo='Acrobacia' valor='3' proficiente='0'/>
+              <TileProficiencia titulo='Furtividade' valor='3' proficiente='0'/>
+              <TileProficiencia titulo='Prestidigitacao' valor='3' proficiente='0'/>
+            </div>
+            <div class="ca-cd-div-flag">
+              <span>2</span>
+              <div className='ca-separador2'/>
+              <label>10</label>
+            </div>
+          </Tile>
+          <Tile id='Inteligência' titulo='Inteligência'> 
+            <div className='cr-proficiencia'>
+              <TileProficiencia titulo='Arcanismo' valor='3' proficiente='0'/>
+              <TileProficiencia titulo='Historia' valor='3' proficiente='0'/>
+              <TileProficiencia titulo='Investigação' valor='3' proficiente='1'/>             
+              <TileProficiencia titulo='Natureza' valor='3' proficiente='0'/>             
+            </div>
+            <div class="ca-cd-div-flag">
+              <span>2</span>
+              <div className='ca-separador2'/>
+              <label>10</label>
+            </div>
+          </Tile>
+          <Tile id='Sabedoria' titulo='Sabedoria'>
+            <div className='cr-proficiencia'>
+              <TileProficiencia titulo='Intuição' valor='3' proficiente='0'/>
+              <TileProficiencia titulo='Lidar com animais' valor='3' proficiente='0'/>
+              <TileProficiencia titulo='Medicina' valor='3' proficiente='1'/>             
+              <TileProficiencia titulo='Percepção' valor='3' proficiente='0'/>             
+              <TileProficiencia titulo='Sobrevivência' valor='3' proficiente='0'/>             
+            </div>
+            <div class="ca-cd-div-flag">
+              <span>2</span>
+              <div className='ca-separador2'/>
+              <label>10</label>
+            </div>
+            </Tile>
+          <Tile id='Carisma' titulo='Carisma'> 
+            <div className='cr-proficiencia'>
+              <TileProficiencia titulo='Atuação' valor='3' proficiente='0'/>
+              <TileProficiencia titulo='Blefar' valor='3' proficiente='0'/>
+              <TileProficiencia titulo='Intimidação' valor='3' proficiente='1'/>             
+              <TileProficiencia titulo='Persuasão' valor='3' proficiente='0'/>                
+            </div>
+            <div class="ca-cd-div-flag">
+              <span>2</span>
+              <div className='ca-separador2'/>
+              <label>10</label>
+            </div>
+          </Tile>
         </ul>
       </div>
 

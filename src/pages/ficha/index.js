@@ -155,14 +155,14 @@ function Ficha(){
             </div>
             <div className='fi-cb-flag'>
               <div class="fi-cd-div-flag">
-                <span>{personagem.pe_bproficiencia}</span>
+                <span>{personagem.getIniciativa()}</span>
                 <div className='fi-separador2'/>
-                <label>B Proficiência</label>
+                <label>Iniciativa</label>
               </div>
               <div class="fi-cd-div-flag">
-                <span>{personagem.pe_experiencia}</span>
+                <span>{personagem.pe_movimento}</span>
                 <div className='fi-separador2'/>
-                <label>Experiência</label>
+                <label>Movimento</label>
               </div>
             </div>
           </div>
@@ -180,14 +180,14 @@ function Ficha(){
           </div>
           <div className='fi-cb-flag'>
             <div class="fi-cd-div-flag">
-              <span>{personagem.getIniciativa()}</span>
+              <span>{personagem.pe_bproficiencia}</span>
               <div className='fi-separador2'/>
-              <label>Iniciativa</label>
+              <label>B Proficiência</label>
             </div>
             <div class="fi-cd-div-flag">
-              <span>{personagem.pe_movimento}</span>
+              <span>{personagem.pe_experiencia}</span>
               <div className='fi-separador2'/>
-              <label>Movimento</label>
+              <label>Experiência</label>
             </div>
           </div>
         </div>
@@ -207,7 +207,56 @@ function Ficha(){
           />
 
           <TileTesteMorte/>
-          <div className='fi-cd-div-outras'>
+          
+        </div>
+
+        <div className='fi-div-outras'>
+
+          <div className='fi-salvagarda'>
+            <strong>Salvar-Guarda</strong>
+
+            <div className='fi-sg-propriedade'>
+              <div className='fi-sg-item'>
+                <div className='fi-sg-noproficiente'/>
+                <label>Força</label>
+              </div>
+              <label>{personagem.getModForca()}</label>
+            </div> 
+
+            <div className='fi-sg-propriedade'>
+              <div className='fi-sg-item'>
+                <div className='fi-sg-proficiente'/>
+                <label>Destreza</label>
+              </div>
+              <label>{personagem.getModForca()}</label>
+            </div>
+
+            <div className='fi-sg-propriedade'>
+              <div className='fi-sg-item'>
+                <div className='fi-sg-noproficiente'/>
+                <label>Constituição</label>
+              </div>
+              <label>{personagem.getModConstituicao()}</label>
+            </div>
+            
+            <div className='fi-sg-propriedade'>
+              <div className='fi-sg-item'>
+                <div className='fi-sg-proficiente'/>
+                <label>Inteligência</label>
+              </div>            
+              <label>{personagem.getModInteligencia()}</label>
+            </div>
+
+            <div className='fi-sg-propriedade'>  
+              <div className='fi-sg-item'>
+                <div className='fi-sg-proficiente'/>
+                <label>Sabedoria</label>
+              </div>
+              <label>{personagem.getModSabedoria()}</label>
+            </div>
+          </div>
+
+          <div className='fi-outras'>
 
             <div className='fi-cd-div-percepcao'>
               <span>12</span>
@@ -220,22 +269,12 @@ function Ficha(){
               <div className='fi-separador2'/>
               <label>CA</label>
             </div> 
-            
+
           </div>
         </div>
+        
 
         <div className='fi-atributos'>
-          Salvar-Guarda
-          <div className='fi-cd-div-flag'>
-            <span>{personagem.getModForca()}</span>
-            <label>{personagem.pe_forca}</label>
-            <div className='fi-separador2'/>
-            <label>Força</label>
-          </div>  
-        </div>
-
-        <div className='fi-atributos'>
-          
           <div className='fi-cd-div-flag'>
           <span>{personagem.getModForca()}</span>
             <label>{personagem.pe_forca}</label>

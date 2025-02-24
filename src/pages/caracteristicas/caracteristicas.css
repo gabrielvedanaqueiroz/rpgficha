@@ -66,8 +66,6 @@
 .cr_img-adicionar{
   height: 28px;
   width: 28px;
-  /* filter: invert(100%); branco*/ 
-  /* filter: invert(40%) sepia(100%) saturate(500%) hue-rotate(-10deg); laranja */
   filter: invert(75%) sepia(100%) saturate(300%) hue-rotate(5deg);
 }
 
@@ -161,6 +159,48 @@
   margin-top: 8px;
   margin-bottom: 8px;
   border-radius: 4px;
-  /* color: #fff; */
   font-size: 18px;
+}
+
+.cr-proficiencia{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  border-right: 1px solid black;
+  margin-bottom: 4px;
+  padding-right: 8px;
+}
+
+.ca-cd-div-flag {
+  width: 75px;
+  height: 65px;
+  background: black;
+  text-align: center;
+  padding-bottom: 8px;
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
+  color: #F8cc27;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  margin-left: 4px;
+  margin-right: 4px;
+  position: relative;
+  left: 15%;
+}
+
+.ca-cd-div-flag span{
+  font-size: 16px;
+}
+
+.ca-cd-div-flag label{
+  font-size: 11px;
+}
+
+.ca-separador2{
+  height: 1px; 
+  width: 15px; 
+  margin-bottom: 2px;
+  background-color: #F8cc27;
 }

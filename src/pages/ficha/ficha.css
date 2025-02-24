@@ -54,7 +54,6 @@
   justify-content: center;
   margin-left: 4px;
   margin-right: 4px;
-  
 }
 
 .fi-cd-div-flag span{
@@ -122,22 +121,6 @@
   background-color: black;
 }
 
-.fi_div-vida{
-  padding: 8px;
-  align-items: center;
-  justify-items: center;
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
-  background-image: url('../../res/vida.svg');
-  background-repeat: no-repeat;
-  width: 55px;
-  height: 55px;
-  background-size: contain;
-  background-position: center;
-  margin-right: 8px;
-}
-
 .fi-atributos{
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 3 colunas de tamanho igual */
@@ -188,7 +171,7 @@
   color: darkslategrey;  
 }
 
-.fi-cd-div-outras{
+.fi-outras{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -215,4 +198,62 @@
 
 .fi-cd-div-percepcao label{
   font-size: 11px;
+}
+
+.fi-div-outras{
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  margin-bottom: 8px;
+  background-color: white;
+  border-radius: 8px;
+  padding: 8px;
+  margin: 8px;
+}
+
+.fi-div-outras strong{
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.fi-salvagarda{
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  border-right: 1px solid black;
+  margin-right: 8px;  
+}
+
+.fi-sg-propriedade{
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  justify-content: space-between;
+}
+
+.fi-sg-propriedade label{
+  margin-right: 8px;
+  font-size: 14px;
+}
+
+.fi-sg-noproficiente{
+  height: 8px;
+  width: 8px;
+  border-radius: 4px;
+  border: 1px solid black;
+  margin-right: 4px;
+}
+
+.fi-sg-proficiente{
+  height: 8px;
+  width: 8px;
+  border-radius: 4px;
+  background-color: black;
+  margin-right: 4px;
+}
+
+.fi-sg-item{
+  display: flex;
+  align-items: center;
 }

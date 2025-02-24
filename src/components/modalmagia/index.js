@@ -56,12 +56,13 @@ function ModalMagia(props){
           { (loading?<div>carregand..</div>:
           <div>
             <div className='mai_titulo'>
-              <strong >{magia.mg_nome}</strong>
+              <strong>Magia Preparada</strong>
               <button className='mai_btn-cancelar' type='button' onClick={()=>{onFecharModal()}}>
                 x
               </button>
             </div>
             <div className='mai-corpo'>
+              <strong className='mai_titulo-strong'>{magia.mg_nome}</strong>
               <label>{magia.mg_descricao}</label>
               <label>Nível: {magia.mg_nivel}</label>
               <label>Tempo: {magia.mg_tempoconjuracao}</label>
