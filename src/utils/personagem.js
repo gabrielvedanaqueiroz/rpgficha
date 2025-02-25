@@ -88,35 +88,38 @@ export default class Personagem{
     return (this.pe_vidaatual + this.pe_vidatemp);
   }
   
-  vida_inc(){
+  // vida_inc(){
     
-    if(this.pe_vidaatual < this.pe_vidabase)
-      ++this.pe_vidaatual;
+  //   if(this.pe_vidaatual < this.pe_vidabase)
+  //     ++this.pe_vidaatual;
 
-  }
+  //   return this.pe_vidaatual;
+  // }
 
-  vida_incValor(aValor){
+  // vida_incValor(aValor){
     
-    if(this.pe_vidaatual < this.pe_vidabase){
+  //   if(this.pe_vidaatual < this.pe_vidabase){
       
-      this.pe_vidaatual = this.pe_vidaatual + aValor;
+  //     this.pe_vidaatual = this.pe_vidaatual + aValor;
 
-      if(this.pe_vidaatual > this.pe_vidabase)
-        this.pe_vidaatual = this.pe_vidabase;
+  //     if(this.pe_vidaatual > this.pe_vidabase)
+  //       this.pe_vidaatual = this.pe_vidabase;
 
-    }
+  //   }
+
+  //   return this.pe_vidaatual;
     
-  }
+  // }
   
-  vida_dec(){
+  // vida_dec(){
     
-    if(this.pe_vidatemp > 0)
-      --this.pe_vidatemp;
-    else
-      if(this.pe_vidaatual > 0)
-        --this.pe_vidaatual;
+  //   if(this.pe_vidatemp > 0)
+  //     --this.pe_vidatemp;
+  //   else
+  //     if(this.pe_vidaatual > 0)
+  //       --this.pe_vidaatual;
 
-  }
+  // }
 
   vida_decValor(aValor){
     

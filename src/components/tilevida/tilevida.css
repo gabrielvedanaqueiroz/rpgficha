@@ -81,6 +81,33 @@
   padding-left: 8px;
   font-size: 13px;
  }
+
+ .number-label {
+  background: transparent;  /* Remove o fundo */
+  border: none;             /* Remove a borda */
+  font-size: 13px;          /* Define o tamanho da fonte */
+  color: black;             /* Define a cor do texto */
+  text-align: center;       /* Centraliza o texto */
+  width: 50px;              /* Define uma largura fixa */
+  outline: none;            /* Remove a borda ao focar */
+  
+  appearance: auto;
+  -webkit-appearance: auto;
+  -moz-appearance: auto;
+}
+
+/* Estilização ao passar o mouse */
+.number-label:hover {
+  cursor: pointer;
+}
+
+/* Estilização ao focar */
+.number-label:focus {
+  border-bottom: 1px solid black; /* Adiciona um sublinhado ao editar */
+}
+
+
+
 /* 
  .fi_div-vida{
   padding: 8px;

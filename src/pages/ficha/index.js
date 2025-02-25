@@ -139,6 +139,19 @@ function Ficha(){
   function onAddAtaque(){
     setShowModalAtaque(true);
   }
+
+  function incrementar(vidaatual){
+    console.log(vidaatual); 
+    personagem.pe_vidaatual = vidaatual;
+    //salvar banco 
+  }
+
+  function decrementar(vidaatual, vidatemp){
+    console.log(vidaatual); console.log(vidatemp);
+    personagem.pe_vidaatual = vidaatual;
+    personagem.pe_vidatemp  = vidatemp;
+    //salvar banco 
+  }
  
   if(loading)
     return <div>carregand...</div>
@@ -202,8 +215,8 @@ function Ficha(){
             pe_vidabase={personagem.pe_vidabase}
             pe_vidadadousado='0'
             pe_vidadados='1d8'
-            incrementar={()=>{ personagem.vida_inc(); console.log(personagem.pe_vidaatual) }}
-            decrementar={()=>{ personagem.vida_dec(); console.log(personagem.pe_vidaatual) }}
+            incrementar={(vidaatual)=>{  incrementar(vidaatual) }}
+            decrementar={(vidaatual, vidatemp)=>{  decrementar(vidaatual, vidatemp);  }}
           />
 
           <TileTesteMorte/>
