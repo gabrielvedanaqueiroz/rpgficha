@@ -1,34 +1,6 @@
-.mg-container{
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding: 8px;
-  margin-bottom: 55px;
-  max-width: 500px;
-}
 
-.mg-titulo{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  color: #ea541c;
-  margin-bottom: 4px;
-  justify-content: space-between;
-}
 
-.mg-titulo hr{
-  width: 100%;
-  height: 1px;
-  margin-top: 4px;
-  border-color: #ea541c;
-}
-
-.mg-titulo strong{
-  width: 55%;
-  height: 20px;
-}
-
-.mg-div-rodape-botao{
+.bta-div-rodape-botao{
   width: 100%;
   height: auto;
   position: fixed;
@@ -37,7 +9,7 @@
   justify-content: center;
 }
 
-.mg-bt-adicionar{
+.bta-bt-adicionar{
   text-decoration: none;
   background-color: #ea541c;
   border-radius: 4px;
@@ -53,16 +25,16 @@
   margin-right: 8px;
 }
 
-.mg-bt-adicionar:hover {
+.bta-bt-adicionar:hover {
   border-radius: 5px;
   transform: scale(1.1);
 }
 
-.mg-bt-adicionar:active {
+.bta-bt-adicionar:active {
   transform: scale(0.9);
 }
 
-.mg-img-adicionar{
+.bta-img-adicionar{
   height: 28px;
   width: 28px;
   filter: invert(75%) sepia(100%) saturate(300%) hue-rotate(5deg);

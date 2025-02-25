@@ -1,7 +1,5 @@
 import './registrar.css';
-import { useState, useEffect, useContext } from 'react';
-import {auth} from '../../services/firebaseConnection';
-import {createUserWithEmailAndPassword} from 'firebase/auth';
+import { useRef, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {toast} from 'react-toastify';
 import BtnExibirSenha from '../../components/btnexibirsenha';
@@ -10,9 +8,9 @@ import {AuthContext} from '../../utils/auth';
 
 function Login(){
 
-  const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
-  const [nome, setNome] = useState('');
+  const email = useRef('');
+  const senha = useRef('');
+  const nome  = useRef('');
   const navigate = useNavigate();
   const {onCriarUsuario, loadingAuth} = useContext(AuthContext);
   
@@ -23,13 +21,16 @@ function Login(){
   async function handleLogin(e) {
     e.preventDefault();
 
-    if((email !== '') && (senha !== '')){
+    let lemail = email.current?.value;
+    let lsenha = senha.current?.value;
+
+    if((lemail.trim() !== '') && (lsenha.trim() !== '')){
 
       onCriarUsuario(email, senha)
       .then(()=>{
-          setEmail('');
-          setSenha('');
-          setNome('');
+          // setEmail('');
+          // setSenha('');
+          // setNome('');
           navigate('/', {replace:true})
       });
 
@@ -56,15 +57,13 @@ function Login(){
         <input
             type="text"
             placeholder="Digite seu nome..."
-            value={nome}
-            onChange={(e) => setNome(e.target.value) }
+            ref={nome}
           />
 
         <input
             type="text"
             placeholder="Digite seu email..."
-            value={email}
-            onChange={(e) => setEmail(e.target.value) }
+            ref={email}
           />
 
         <div className='rg-div-senha'>
@@ -72,8 +71,7 @@ function Login(){
             id='editSenha'
             type="password"
             placeholder="digite sua senha"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value) }
+            ref={senha}
           />
 
           <BtnExibirSenha click={onExibirSenha}/>

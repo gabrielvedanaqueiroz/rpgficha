@@ -1,5 +1,5 @@
 import './login.css';
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useContext, useRef } from 'react';
 import { Link, useNavigate} from 'react-router-dom';
 import {toast} from 'react-toastify';
 import BtnExibirSenha from '../../components/btnexibirsenha';
@@ -8,9 +8,9 @@ import { AuthContext } from '../../utils/auth';
 
 function Login(){
 
-  const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
   const navigate = useNavigate();
+  const email    = useRef('');
+  const senha    = useRef('');
   const {onSingIn, loadingAuth} = useContext(AuthContext);
 
   useEffect(()=>{
@@ -20,11 +20,12 @@ function Login(){
   async function handleLogin(e) {
     e.preventDefault();
 
-    if((email !== '') && (senha !== '')){
-      await onSingIn(email, senha).then((resultado)=>{
+    let lemail = email.current?.value;
+    let lsenha = senha.current?.value;
+        
+    if((lemail.trim() !== '') && (lsenha.trim() !== '')){
+      await onSingIn(lemail.trim(), lsenha.trim()).then((resultado)=>{
         if(resultado){
-          setEmail('');
-          setSenha('');
           navigate('/', {replace:true})
         }
       });
@@ -50,8 +51,7 @@ function Login(){
         <input
           type="text"
           placeholder="Digite seu email..."
-          value={email}
-          onChange={(e) => setEmail(e.target.value) }
+          ref={email}
         />
 
         <div className='lg-div-senha'>
@@ -59,8 +59,7 @@ function Login(){
             id='editSenha'
             type="password"
             placeholder="digite sua senha"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value) }
+            ref={senha}
           />
 
           <BtnExibirSenha click={onExibirSenha}/>

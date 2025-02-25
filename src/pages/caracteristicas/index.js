@@ -3,10 +3,10 @@ import Tile from '../../components/tile';
 import { useEffect, useState } from 'react';
 import {db} from '../../services/firebaseConnection';
 import {collection, query, where, getDocs, addDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
-import expandir_mais from '../../res/expandir_mais.svg';
 import {toast} from 'react-toastify';
 import TileCaracteristica from '../../components/tilecaracteristica';
 import TileProficiencia from '../../components/tileproficiencia';
+import BtnAdicionar from '../../components/btnadicionar';
 
 function Caracteristicas(){
   
@@ -225,12 +225,8 @@ function Caracteristicas(){
           }
         </ul>
       </div>
-      <div className='cr_div-rodape-botao'>
-        <button className='cr_bt-adicionar' onClick={()=>{setIsOpen(true)}} >
-          <img className='cr_img-adicionar' src={expandir_mais} alt='adicionar uma caracteristica'/>
-          Adicionar
-        </button>
-      </div>
+
+      <BtnAdicionar alt='adicionar uma caracteristica' adicionar={()=>{setIsOpen(true)}}/>
 
       {/* Tela Flutuante */}
       {isOpen && (

@@ -21,7 +21,6 @@ function AuthProvider({children}){
   },[]);
   
   function setUsuario(aUsuario){
-    
     setUsuarioInterno(aUsuario);
   }
 

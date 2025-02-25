@@ -1,97 +1,84 @@
-import { useState } from 'react';
 import './inventario.css';
+import Tile from '../../components/tile';
+import { useState, useEffect } from 'react';
+import {db} from '../../services/firebaseConnection';
+import {collection, query, where, getDocs, addDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
+import { toast } from 'react-toastify';
+import BtnAdicionar from '../../components/btnadicionar';
+import TileCaracteristica from '../../components/tilecaracteristica';
 
 function Inventario(){
 
-  const [chkSucesso, setChkSucesso] = useState({
-    option1: false,
-    option2: false,
-    option3: false,
-  });
+  const personagemID    = localStorage.getItem('RF@personagemID');
+  const [lista, setLista] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const [chkFalha, setChkFalha] = useState({
-    option1: false,
-    option2: false,
-    option3: false,
-  });
+  async function buscar(){
+    const q = query(collection(db, "tb_inventario"), where("in_idpersonagem", "==", personagemID.trim()));
+    const querySnapshot = await getDocs(q); 
+    let lista = [];
 
-  const onChanceSucesso = (event) => {
-    const { name, checked } = event.target;
-    setChkSucesso((prev) => ({
-      ...prev,
-      [name]: checked,
-    }));
-  };
+    try {
+      querySnapshot.forEach((doc)=>{
+        lista.push({
+          mg_id: doc.id.trim(),
+          in_nome: doc.data().in_nome.trim(),
+          in_descricao: doc.data().in_descricao.trim(),
+        })
+      });
+      lista.sort((a, b)=> a.in_nome > b.in_nome);
+  
+      setLista(lista);
+    } catch (error) {
+      toast.error('Erro ao carregar inventario'+error); 
+    }
+    
+  }
 
-  const onChanceFalha = (event) => {
-    const { name, checked } = event.target;
-    setChkFalha((prev) => ({
-      ...prev,
-      [name]: checked,
-    }));
-  };
+  useEffect(()=>{
+
+    buscar();
+
+    setLoading(false);
+  },[]);
+
+  if(loading)
+    return <div>carregand...</div>
 
   return(
-    <div >
+    <div className='it-container'>
 
-      <h2>Em Construção</h2>
-      <div className='ttm-container'>
-        <strong className='ttm-titulo'>Teste contra morte</strong>
+      <div>
 
-        <div>
-          <div >
-            <input className='ttm-checkbox'
-              type="checkbox"
-              name="option1"
-              checked={chkSucesso.option1}
-              onChange={onChanceSucesso}
-            />
-            
-            <input className='ttm-checkbox'
-              type="checkbox"
-              name="option2"
-              checked={chkSucesso.option2}
-              onChange={onChanceSucesso}
-            />
-          
-            <input className='ttm-checkbox'
-              type="checkbox"
-              name="option3"
-              checked={chkSucesso.option3}
-              onChange={onChanceSucesso}
-            />
-            
-            <label>Sucesso</label>
-          </div>
-
-          <div>
-          <input className='ttm-checkbox'
-              type="checkbox"
-              name="option1"
-              checked={chkFalha.option1}
-              onChange={onChanceFalha}
-            />
-            
-            <input className='ttm-checkbox'
-              type="checkbox"
-              name="option2"
-              checked={chkFalha.option2}
-              onChange={onChanceFalha}
-            />
-          
-            <input className='ttm-checkbox'
-              type="checkbox"
-              name="option3"
-              checked={chkFalha.option3}
-              onChange={onChanceFalha}
-            />
-            <label>Falha</label>
-          </div>
+        <div className='it-titulo'>
+          <strong>Inventário</strong>
+          <hr/>
         </div>
+        <ul>
+          {
+            lista.map((item)=>{
+              return(
+                <Tile id={'prp'+item.mg_id} titulo={item.in_nome}>
+                  <TileCaracteristica 
+                    descricao={item.in_descricao} 
+                    excluir={ ()=>{ 
+                      // onExcluir(item.ca_id) 
+                    }} 
+                    editar={ ()=>{
+                      // onEditar(item)
+                    }}
+                  /> 
+                </Tile>
+              );
+              
+            })
+          }
+        </ul>
+         
       </div>
 
-      {/* <p>Selecionados setChkSucesso: {Object.keys(chkSucesso).filter((key) => chkSucesso[key]).join(", ") || "Nenhum"}</p>
-      <p>Selecionados setChkSucesso: {Object.keys(chkFalha).filter((key) => chkFalha[key]).join(", ") || "Nenhum"}</p> */}
+      <BtnAdicionar alt='adicinoar novo item' adicionar={()=>{}}/>
+
     </div>
   );
 }

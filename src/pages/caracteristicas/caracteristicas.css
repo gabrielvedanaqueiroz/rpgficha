@@ -3,7 +3,9 @@
   flex-direction: column;
   height: 100%;
   padding: 8px;
-  margin-bottom: 55px;
+  /* margin-bottom: 55px; */
+  padding-bottom: 55px;
+  max-width: 500px;
 }
 
 .cr_proficiencias{

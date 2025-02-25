@@ -18,9 +18,6 @@ magias
   TileItem
   preparar
 
-caracteristica-proficiecias
-  exibir card
-
 inventaio
   criar
   excluir
@@ -30,12 +27,23 @@ inventaio
 
 principal
   vidas
-  upar
+    salvar inc
+    salvar dec
+    salvar uso dados
+    salvar teste morte
+  
+gerenciar personagem
+  criar, editar, upar
+  abrir uma nova pagina
+  navegar para o lado em grupo de interesses;
 
 componente vazio
 componente erro
 
 tile deslize suave
+
+tirar do auth.js a linha:
+  localStorage.setItem('RF@personagemID', 'Ph3YdE5qOua601u0m0Wj'); 
 
 usar hooks a interessantes
   (x) useRef 

@@ -6,8 +6,8 @@ import {collection, query, where, getDocs } from 'firebase/firestore';
 import {toast} from 'react-toastify';
 import { AuthContext } from '../../utils/auth';
 import logout from '../../res/logout.svg';
-import expandir_mais from '../../res/expandir_mais.svg';
 import TilePersonagem from '../../components/tilepersonagem';
+import BtnAdicionar from '../../components/btnadicionar';
 
 function Personagens(){
 
@@ -109,16 +109,18 @@ function Personagens(){
           }
         </ul>
       </div>
-      <div className='pr_div-rodape-botao'>
-        <button className='pr_bt-adicionar' >
-          <img className='pr_img-adicionar' src={expandir_mais} alt='adicionar uma caracteristica'/>
-          Adicionar
-        </button>
-        <button className='pr_bt-deslogar' onClick={onDeslogar}>
-          <img className='pr_img-deslogar' src={logout} alt='Deslogar'/>
-          Deslogar 
-        </button>
-      </div>
+      <Tile id={usuario.uid.trim()} titulo={'Usuário'} >
+        <div className='pr_usuario'>
+          <label>{usuario.email}</label>
+          <label>{usuario.uid.trim()}</label>
+          <button className='pr_bt-deslogar' onClick={onDeslogar}>
+            <img className='pr_img-deslogar' src={logout} alt='Deslogar'/>
+            Deslogar 
+          </button>
+        </div>
+      </Tile> 
+
+      <BtnAdicionar alt='adicionar um personagem' adicionar={()=>{}}/>
     </div>
   );
 }
