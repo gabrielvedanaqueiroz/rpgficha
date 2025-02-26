@@ -82,24 +82,30 @@ function TileVida(props){
 
   }
 
+  function usarDado(e){
+    setDadoUsado(e.target.value)
+  }
+  
+  function setarVidaTemp(e){
+    setVidaTemp(e.target.value)
+  }
+
   return(
     <div className='vd-container'>
       <strong className='vd-titulo'>Vida</strong>
       <div className='vd-valores'>
         <div className='vd-vidaatual'>
-          
-          {/* <div className='fi_div-vida'> */}
-            {vidaatual}
-          {/* </div> */}
-
+          <div className='fi_div-vida'>
+          {vidaatual}
+          </div>
           <div className='vd-vdatual-botoes'>
-            <button className='vd-vdatual-botao' onClick={()=>{ incrementar() }}> + </button>
-            <button className='vd-vdatual-botao' onClick={()=>{ decrementar() } }> - </button>
+            <button className='vd-vdatual-botaomais' onClick={()=>{ incrementar() }}> + </button>
+            <button className='vd-vdatual-botaomenos' onClick={()=>{ decrementar() } }> - </button>
           </div>
         </div>
         <div className='vd-vidacentro'>
           <div className='vd-vidatemp'>
-            {vidatemp}
+            <input className='vd-number-label' type='number' value={vidatemp} onChange={(e)=>{setarVidaTemp(e)}}/>
             <div className='vd-linha'></div>
             Temp
           </div>
@@ -112,7 +118,7 @@ function TileVida(props){
 
         <div className='vd-vidadireita'>
           <div className='vd-vidatemp'>
-            <input className='number-label' type='number' value={dadousado} onChange={(e)=>{setDadoUsado(e.target.value)}}/>
+            <input className='vd-number-label' type='number' value={dadousado} onChange={(e)=>{usarDado(e)}}/>
             <div className='vd-linha'></div>
             Usado
           </div>

@@ -21,16 +21,14 @@ function Login(){
   async function handleLogin(e) {
     e.preventDefault();
 
-    let lemail = email.current?.value;
-    let lsenha = senha.current?.value;
+    let lemail  = email.current?.value;
+    let lsenha  = senha.current?.value;
+    let lnome   = nome.current?.value;
 
-    if((lemail.trim() !== '') && (lsenha.trim() !== '')){
+    if((lemail.trim() !== '') && (lsenha.trim() !== '') && (lnome.trim() !== '')){
 
-      onCriarUsuario(email, senha)
-      .then(()=>{
-          // setEmail('');
-          // setSenha('');
-          // setNome('');
+      onCriarUsuario(lemail, lsenha, lnome)
+      .then(()=>{         
           navigate('/', {replace:true})
       });
 

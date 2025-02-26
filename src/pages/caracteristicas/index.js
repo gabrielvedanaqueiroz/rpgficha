@@ -60,7 +60,7 @@ function Caracteristicas(){
 
     if((titulo.trim() !== '') && (descricao.trim() !== '')){
 
-      if(idCaracteristica.trim() === null){     // inserir
+      if(idCaracteristica.trim() === ''){     // inserir
         await addDoc(collection(db, 'tb_caracteristica'),{
           ca_idpersonagem: personagemID.trim(),
           ca_nome: titulo.trim(),
@@ -107,6 +107,7 @@ function Caracteristicas(){
   }
 
   async function onExcluir(id) {
+
     const docRef = doc(db, "tb_caracteristica", id);
     await deleteDoc(docRef)
     .then(()=>{

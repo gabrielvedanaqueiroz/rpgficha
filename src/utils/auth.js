@@ -1,11 +1,12 @@
 import { useState, createContext, useEffect } from "react";
-import {auth} from '../services/firebaseConnection';
+import {auth, db} from '../services/firebaseConnection';
 import {
     signInWithEmailAndPassword, 
     signOut, 
     createUserWithEmailAndPassword, 
-    onAuthStateChanged
+    onAuthStateChanged,
 } from 'firebase/auth';
+import {collection, addDoc } from 'firebase/firestore';
 import {toast} from 'react-toastify';
 
 export const AuthContext = createContext({});
@@ -85,7 +86,24 @@ function AuthProvider({children}){
     setUsuario(null);
   }
 
-  const onCriarUsuario = async(email, senha) =>{
+  async function onSalvarJogador(id, nome, fechar) {
+
+    await addDoc(collection(db, 'tb_jogador'),{
+      jo_idlogin : id.trim(),
+      jo_nome : nome.trim(),
+    })
+    .then( () =>{
+      fechar();
+      return true;
+    })
+    .catch((error)=>{
+      console.log('Erro ao inserir; '+error);
+      toast.error('Erro ao inserir');
+      return false;
+    });  
+  }
+
+  const onCriarUsuario = async(email, senha, nome) =>{
 
     setLoadingAuth(true);
 
@@ -95,11 +113,15 @@ function AuthProvider({children}){
       const userData ={
         uid: userCredential.user.uid,
         email: userCredential.user.email,
+        nome: nome.trim(),
       };
 
-      setLoadingAuth(false);
-      localStorage.setItem('RF@detailUser', JSON.stringify(userData));
-      setUsuarioInterno(userData);
+      onSalvarJogador(userCredential.user.uid, nome, ()=>{
+        setLoadingAuth(false);
+        localStorage.setItem('RF@detailUser', JSON.stringify(userData));
+        setUsuarioInterno(userData);
+      });
+      
       return true;
     })
     .catch((error)=>{

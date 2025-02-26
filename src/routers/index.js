@@ -17,14 +17,12 @@ function RoutesApp(){
     <BrowserRouter>
       <div id='router-header'><Header/></div> {/* controle/gambiara para mander essa estrutura e ocultar quando elemento nao é necessario. GV 16-02-2025*/}
       <Routes>
-        <Route path='/' element={ <Ficha/> } /> {/* elemento de validacao de acesso. GV 16-02-2025*/}
         <Route path='/' element={<Private> <Ficha/> </Private>}/> elemento de validacao de acesso. GV 16-02-2025
         <Route path='/caracteristicas' element={<Private> <Caracteristicas/> </Private>}/> 
         <Route path='/magias' element={<Private> <Magias/> </Private>}/> 
         <Route path='/personagens' element={<Private> <Personagens/> </Private>}/> 
-        <Route path='/personagemdetalhe' element={<Private> <PersonagenDetalhe/> </Private>}/> 
         <Route path='/inventario' element={<Private> <Inventario/> </Private>}/> 
-
+        <Route path='/personagemdetalhe' element={<Private> <PersonagenDetalhe/> </Private>}/> 
         <Route path='/registrar' element={<Registrar/>}/> 
         <Route path='/login' element={<Login/>}/> 
       </Routes>

@@ -31,7 +31,7 @@ function Ficha(){
 
     async function buscar() {
 
-      const ref = doc(db, 'tb_personagem', personagemID);     //presetando pra efetuar a busca por id
+      const ref = doc(db, 'tb_personagem', personagemID.trim());     //presetando pra efetuar a busca por id
       await getDoc(ref)                                       //executar busca    
       .then((snapshot) =>{
 
@@ -63,6 +63,23 @@ function Ficha(){
               snapshot.data().pe_cabase, 
               snapshot.data().pe_catotal, 
               snapshot.data().pe_movimento,
+              snapshot.data().pe_idclasse,
+              snapshot.data().pe_idraca,
+              snapshot.data().pe_vidadado,
+              snapshot.data().pe_vidadadousado,
+              snapshot.data().pe_tcmfalha1,
+              snapshot.data().pe_tcmfalha2,
+              snapshot.data().pe_tcmfalha3,
+              snapshot.data().pe_tcmsucesso1,
+              snapshot.data().pe_tcmsucesso2,
+              snapshot.data().pe_tcmsucesso3,
+              snapshot.data().pe_sgforca,
+              snapshot.data().pe_sgdestreza,
+              snapshot.data().pe_sgconstituicao,
+              snapshot.data().pe_sginteligencia,
+              snapshot.data().pe_sgsabedoria,
+              snapshot.data().pe_sgcarisma,
+              snapshot.data().pe_proacrobacia,
             ); 
 
             setPersonagem(personagem);
@@ -213,13 +230,20 @@ function Ficha(){
             pe_vidaatual={personagem.pe_vidaatual}
             pe_vidatemp={personagem.pe_vidatemp}
             pe_vidabase={personagem.pe_vidabase}
-            pe_vidadadousado='0'
-            pe_vidadados='1d8'
+            pe_vidadadousado={personagem.pe_vidadadousado}
+            pe_vidadados={personagem.pe_vidadado}
             incrementar={(vidaatual)=>{  incrementar(vidaatual) }}
             decrementar={(vidaatual, vidatemp)=>{  decrementar(vidaatual, vidatemp);  }}
           />
 
-          <TileTesteMorte/>
+          <TileTesteMorte 
+            pe_tcmfalha1={personagem.pe_tcmfalha1}
+            pe_tcmfalha2={personagem.pe_tcmfalha2}
+            pe_tcmfalha3={personagem.pe_tcmfalha3}
+            pe_tcmsucesso1={personagem.pe_tcmsucesso1}
+            pe_tcmsucesso2={personagem.pe_tcmsucesso2}
+            pe_tcmsucesso3={personagem.pe_tcmsucesso3}
+          />
           
         </div>
 
@@ -230,42 +254,50 @@ function Ficha(){
 
             <div className='fi-sg-propriedade'>
               <div className='fi-sg-item'>
-                <div className='fi-sg-noproficiente'/>
+                {personagem.pe_sgforca? <div className='fi-sg-proficiente'/>: <div className='fi-sg-noproficiente'/>} 
                 <label>Força</label>
               </div>
-              <label>{personagem.getModForca()}</label>
+              <label>{personagem.getSGForca()}</label>
             </div> 
 
             <div className='fi-sg-propriedade'>
               <div className='fi-sg-item'>
-                <div className='fi-sg-proficiente'/>
+                {personagem.pe_sgdestreza? <div className='fi-sg-proficiente'/>: <div className='fi-sg-noproficiente'/>}                 
                 <label>Destreza</label>
               </div>
-              <label>{personagem.getModForca()}</label>
+              <label>{personagem.getSGDestreza()}</label>
             </div>
 
             <div className='fi-sg-propriedade'>
               <div className='fi-sg-item'>
-                <div className='fi-sg-noproficiente'/>
+                {personagem.pe_sgconstituicao? <div className='fi-sg-proficiente'/>: <div className='fi-sg-noproficiente'/>} 
                 <label>Constituição</label>
               </div>
-              <label>{personagem.getModConstituicao()}</label>
+              <label>{personagem.getSGConstituicao()}</label>
             </div>
             
             <div className='fi-sg-propriedade'>
               <div className='fi-sg-item'>
-                <div className='fi-sg-proficiente'/>
+                {personagem.pe_sginteligencia? <div className='fi-sg-proficiente'/>: <div className='fi-sg-noproficiente'/>} 
                 <label>Inteligência</label>
               </div>            
-              <label>{personagem.getModInteligencia()}</label>
+              <label>{personagem.getSGInteligencia()}</label>
             </div>
 
             <div className='fi-sg-propriedade'>  
               <div className='fi-sg-item'>
-                <div className='fi-sg-proficiente'/>
+                {personagem.pe_sgsabedoria? <div className='fi-sg-proficiente'/>: <div className='fi-sg-noproficiente'/>} 
                 <label>Sabedoria</label>
               </div>
-              <label>{personagem.getModSabedoria()}</label>
+              <label>{personagem.getSGSabedoria()}</label>
+            </div>
+
+            <div className='fi-sg-propriedade'>  
+              <div className='fi-sg-item'>
+                {personagem.pe_sgcarisma? <div className='fi-sg-proficiente'/>: <div className='fi-sg-noproficiente'/>} 
+                <label>Carisma</label>
+              </div>
+              <label>{personagem.getSGCarisma()}</label>
             </div>
           </div>
 
@@ -285,7 +317,6 @@ function Ficha(){
 
           </div>
         </div>
-        
 
         <div className='fi-atributos'>
           <div className='fi-cd-div-flag'>

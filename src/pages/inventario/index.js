@@ -13,6 +13,12 @@ function Inventario(){
   const [lista, setLista] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  /* modal */
+  const [isOpen, setIsOpen] = useState(false);
+  const [nome, setNome] = useState('');
+  const [descricao, setDescricao] = useState('');
+  const [idItem, setIdItem] = useState('');
+
   async function buscar(){
     const q = query(collection(db, "tb_inventario"), where("in_idpersonagem", "==", personagemID.trim()));
     const querySnapshot = await getDocs(q); 
@@ -21,7 +27,7 @@ function Inventario(){
     try {
       querySnapshot.forEach((doc)=>{
         lista.push({
-          mg_id: doc.id.trim(),
+          in_id: doc.id.trim(),
           in_nome: doc.data().in_nome.trim(),
           in_descricao: doc.data().in_descricao.trim(),
         })
@@ -42,6 +48,77 @@ function Inventario(){
     setLoading(false);
   },[]);
 
+  async function onExcluir(id){
+    const docRef = doc(db, "tb_inventario", id);
+    await deleteDoc(docRef)
+    .then(()=>{
+      buscar();
+    })
+    .catch((error)=>{
+      toast.error('Erro ao excluir');
+      console.log('erro ao buscar '+error);
+    });  
+  }
+
+  function onEditar(item){
+    setNome(item.in_nome.trim());
+    setDescricao(item.in_descricao.trim());
+    setIdItem(item.in_id.trim());
+    setIsOpen(true);
+  }
+
+  function onFecharModal(){
+    setNome('');
+    setDescricao('');
+    setIdItem('');
+    setIsOpen(false)
+  }
+
+  async function onSalvar(e) {
+
+    e.preventDefault();
+
+    if((nome.trim() !== '') && (descricao.trim() !== '')){
+
+      if(idItem.trim() === ''){     // inserir
+        await addDoc(collection(db, 'tb_inventario'),{
+          in_idpersonagem: personagemID.trim(),
+          in_nome: nome.trim(),
+          in_descricao: descricao.trim(),
+        })
+        .then( () =>{
+          onFecharModal();
+          buscar();
+        })
+        .catch((error)=>{
+          console.log('Erro ao inserir; '+error);
+          toast.error('Erro ao inserir');
+        });
+      }
+      else{                                     //editar
+        const docRef = doc(db, "tb_inventario", idItem);
+          await updateDoc(docRef, {
+            in_idpersonagem: personagemID.trim(),
+            in_nome: nome.trim(),
+            in_descricao: descricao.trim(),
+          }
+        )
+        .then(()=>{
+          onFecharModal();
+          buscar();
+        })
+        .catch((error)=>{
+          console.log('Erro ao editar: '+error);
+          toast.error('Erro ao editar');
+        });
+      }
+      
+    }
+    else  
+      toast.error('Campo obrigatorio não preenchido');
+    
+  }
+
   if(loading)
     return <div>carregand...</div>
 
@@ -58,15 +135,11 @@ function Inventario(){
           {
             lista.map((item)=>{
               return(
-                <Tile id={'prp'+item.mg_id} titulo={item.in_nome}>
+                <Tile id={'prp'+item.in_id} titulo={item.in_nome}>
                   <TileCaracteristica 
                     descricao={item.in_descricao} 
-                    excluir={ ()=>{ 
-                      // onExcluir(item.ca_id) 
-                    }} 
-                    editar={ ()=>{
-                      // onEditar(item)
-                    }}
+                    excluir={ ()=>{ onExcluir(item.in_id) }} 
+                    editar={ ()=>{ onEditar(item) }}
                   /> 
                 </Tile>
               );
@@ -77,7 +150,37 @@ function Inventario(){
          
       </div>
 
-      <BtnAdicionar alt='adicinoar novo item' adicionar={()=>{}}/>
+      <BtnAdicionar alt='adicinoar novo item' adicionar={()=>{ 
+        setNome('');
+        setDescricao('');
+        setIdItem('');
+        setIsOpen(true) }
+      }/>
+
+      {/* Tela Flutuante */}
+      {isOpen && (
+        <div className="overlay">
+          <div className='min_container'>
+            <div className='min_titulo'>
+              <strong >Característica</strong>
+            </div>
+            <form className='min_form' onSubmit={onSalvar}>
+              <div className='min_div-edit'>
+                <label>Título</label>
+                <input className='min_edit' placeholder='Digite um título' value={nome} onChange={(e)=>{setNome(e.target.value)}}/>
+              </div>
+              <div className='min_div-edit'>
+                <label>Descrição</label>
+                <textarea className='min_edit' placeholder='Digite uma descrição' value={descricao} onChange={(e)=>{setDescricao(e.target.value)}}/>
+              </div>
+              <div className='min_botoes'>
+                <button className='min_btn-cancelar' type='button' onClick={()=>{onFecharModal()}}>Cancelar</button>
+                <button className='min_btn-salvar' type='submmit'>Salvar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
     </div>
   );

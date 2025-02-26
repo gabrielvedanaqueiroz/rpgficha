@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import './tiletestemorte.css';
 
-function TileTesteMorte(){
+function TileTesteMorte(props){
 
   const [chkSucesso, setChkSucesso] = useState({
-    option1: false,
-    option2: false,
-    option3: false,
+    option1: !!props.pe_tcmsucesso1,
+    option2: !!props.pe_tcmsucesso2,
+    option3: !!props.pe_tcmsucesso3,
   });
 
   const [chkFalha, setChkFalha] = useState({
-    option1: false,
-    option2: false,
-    option3: false,
+    option1: !!props.pe_tcmfalha1,
+    option2: !!props.pe_tcmfalha2,
+    option3: !!props.pe_tcmfalha3,
   });
 
   const onChanceSucesso = (event) => {

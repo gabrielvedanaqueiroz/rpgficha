@@ -1,16 +1,22 @@
-
-.cai-container{
+.ttm_container{
   flex-direction: column;
   width: 100%;
   display: flex;  
+  transition: height 0.3s ease-in-out;
 }
 
-.cai_texto{
+.ttm_texto{
   text-align: justify;
   width: 100%;
+  margin-bottom: 4px;
 }
 
-.cai_botoes{
+.ttm_prepadada{
+  color: green;
+  width: 80px;
+}
+
+.ttm_botoes{
   height: 20px;
   width: 100%;
   display: flex;
@@ -18,16 +24,16 @@
   align-items: center;
 }
 
-.cai_btn{
+.ttm_btn{
   height: 20px;
   width: 20px;
   margin-left: 4px;
 }
 
-.cai_btn:hover{
+.ttm_btn:hover{
   transform: scale(1.1);
 }
 
-.cai_btn:active{
+.ttm_btn:active{
   transform: scale(0.9);
 }

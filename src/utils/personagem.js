@@ -26,6 +26,24 @@ export default class Personagem{
     pe_movimento,
     pe_idclasse, 
     pe_idraca,
+    
+    pe_vidadado,
+    pe_vidadadousado,
+    pe_tcmfalha1,
+    pe_tcmfalha2,
+    pe_tcmfalha3,
+    pe_tcmsucesso1,
+    pe_tcmsucesso2,
+    pe_tcmsucesso3,
+    pe_sgforca,
+    pe_sgdestreza,
+    pe_sgconstituicao,
+    pe_sginteligencia,
+    pe_sgsabedoria,
+    pe_sgcarisma,
+    pe_proacrobacia,
+
+
   ){
     this.pe_id = pe_id;
     this.pe_nome = pe_nome;
@@ -52,6 +70,21 @@ export default class Personagem{
     this.pe_movimento = pe_movimento;
     this.pe_idclasse = pe_idclasse;
     this.pe_idraca = pe_idraca;
+    this.pe_vidadado = pe_vidadado;
+    this.pe_vidadadousado = pe_vidadadousado;
+    this.pe_tcmfalha1 = pe_tcmfalha1;
+    this.pe_tcmfalha2 = pe_tcmfalha2;
+    this.pe_tcmfalha3 = pe_tcmfalha3;
+    this.pe_tcmsucesso1 = pe_tcmsucesso1;
+    this.pe_tcmsucesso2 = pe_tcmsucesso2;
+    this.pe_tcmsucesso3 = pe_tcmsucesso3;
+    this.pe_sgforca = pe_sgforca;
+    this.pe_sgdestreza = pe_sgdestreza;
+    this.pe_sgconstituicao = pe_sgconstituicao;
+    this.pe_sginteligencia = pe_sginteligencia;
+    this.pe_sgsabedoria = pe_sgsabedoria;
+    this.pe_sgcarisma = pe_sgcarisma;
+    this.pe_proacrobacia = pe_proacrobacia;
 
   }
 
@@ -82,6 +115,30 @@ export default class Personagem{
 
   getModCarisma() {
     return this.#onModificador(this.pe_carisma)
+  }
+
+  getSGForca() {
+    return this.#onModificador(this.pe_forca) + (this.pe_sgforca?this.pe_bproficiencia:0);
+  }
+
+  getSGDestreza() {
+    return this.#onModificador(this.pe_destreza) + (this.pe_sgdestreza?this.pe_bproficiencia:0);
+  }
+
+  getSGConstituicao() {
+    return this.#onModificador(this.pe_constituicao) + (this.pe_sgconstituicao?this.pe_bproficiencia:0);
+  }
+
+  getSGInteligencia() {
+    return this.#onModificador(this.pe_inteligencia) + (this.pe_sginteligencia?this.pe_bproficiencia:0);
+  }
+
+  getSGSabedoria() {
+    return this.#onModificador(this.pe_sabedoria) + (this.pe_sgsabedoria?this.pe_bproficiencia:0);
+  }
+
+  getSGCarisma() {
+    return this.#onModificador(this.pe_carisma) + (this.pe_sgcarisma?this.pe_bproficiencia:0);
   }
 
   getVida(){

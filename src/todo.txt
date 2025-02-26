@@ -1,29 +1,18 @@
-registrar
-  salvar nome do jogador;
-  
+
 personagem
   criar
   excluir
   editar
-  salvar
+  salvar,
+  upar (
+    abrir uma nova pagina
+    navegar para o lado em grupo de interesses;
+  )
   fazer um tile pra mostar dados do jogador e deixar o delogar ali tbm
-    ( Usuario UID: {usuario?.uid}<br/>
-      Usuario Email: {usuario?.email}<br/> )
+    ( Nome tb_jogador.jo_nome localizando por jo_idlogin)
 
-magias
-  criar
-  excluir
-  editar
-  salvar
-  TileItem
-  preparar
-
-inventaio
-  criar
-  excluir
-  editar
-  salvar
-  TileItem
+caracteriscita
+  puxar proficiencias corretas(valor, proficiente)
 
 principal
   vidas
@@ -31,11 +20,12 @@ principal
     salvar dec
     salvar uso dados
     salvar teste morte
-  
-gerenciar personagem
-  criar, editar, upar
-  abrir uma nova pagina
-  navegar para o lado em grupo de interesses;
+
+magias
+  criar
+  editar
+  salvar
+  mostrar informacoes do cabecalho da folha de magia
 
 componente vazio
 componente erro
