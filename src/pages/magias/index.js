@@ -1,16 +1,18 @@
 import './magias.css';
 import Tile from '../../components/tile';
 import BtnAdicionar from '../../components/btnadicionar';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import {db} from '../../services/firebaseConnection';
 import {collection, query, where, getDocs, addDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import TileMagia from '../../components/tilemagia';
 import BtnSalvarForm from '../../components/btnsalvarform';
+import {AuthContext} from '../../utils/auth';
 
 function Magias(){
   
   const personagemID    = localStorage.getItem('RF@personagemID');
+  const {personagem}  = useContext(AuthContext);
   const [lista, setLista] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -175,7 +177,24 @@ function Magias(){
     <div className='mg-container'>  
 
       <div>
+        <div className='mg_cabecalho'>
+          <div className='mg_cb-item'>
+            <label>Habilidade de Conjuração</label> 
+            <strong>{personagem.pe_habilidadeconjuracao}</strong>
+          </div>
 
+          <div className='mg_linha-vert'/>
+          <div className='mg_cb-item'>
+            <label>CD de resistência magia</label>
+            <strong>{personagem.pe_cdmagia}</strong>
+          </div>
+
+          <div className='mg_linha-vert'/>
+          <div className='mg_cb-item'>
+            <label>Bônus de ataque de magia</label>
+            <strong>{personagem.pe_bonusataquemagia}</strong>
+          </div>
+        </div>
         <div className='mg-titulo'>
           <strong>Magias Preparadas</strong>
           <hr/>

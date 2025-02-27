@@ -3,6 +3,7 @@
   width: 100%;
   display: flex;  
   transition: height 0.3s ease-in-out;
+  max-width: 465px;
 }
 
 .ttm_texto{
@@ -41,6 +42,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  max-width: 465px;
 }
 
 .ttm_btn{

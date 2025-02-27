@@ -10,7 +10,7 @@
   flex-direction: row;
   justify-content: space-between;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  transition: display 0.3s ease-in-out;
+  transition: height 0.3s ease-in-out;
   overflow: hidden; /* Evita que o conteúdo vaze */
 }
 
@@ -20,6 +20,8 @@
   height: 100%;
   display: none;
   padding-right: 8px;
+  max-width: 465px;
+  transition: height 0.3s ease-in-out;
 }
 
 .tl_btnexpandir{
@@ -27,8 +29,8 @@
   height: 100%;
   align-items: center; 
   justify-items: center;
-  position: absolute;
-  right: 15px;
+  position: sticky; /*absolute*/
+  right: 8px;
 }
 
 .tl_buttom{

@@ -68,7 +68,6 @@
   filter: invert(75%) sepia(100%) saturate(300%) hue-rotate(5deg);
 }
 
-
 /* Estiliza o fundo escuro quando o modal está aberto */
 .overlay {
   position: fixed;
@@ -168,4 +167,35 @@
 .mmg_div-2coluna div{
   width: 48%;
   margin-right: 4px;
+}
+
+.mg_cabecalho{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  background-color: #fff;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.mg_cb-item{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  /* background-color: khaki; */
+}
+
+.mg_cb-item span{
+  font-size: 16px;
+}
+
+.mg_cb-item label{
+  font-size: 12px;
+}
+
+.mg_linha-vert{
+  width: 4px;
+  border-left: 1px black solid;
+  height: 50px;
 }

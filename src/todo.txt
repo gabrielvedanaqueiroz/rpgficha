@@ -18,9 +18,6 @@ principal
     salvar uso dados
     salvar teste morte
 
-magias
-  mostrar informacoes do cabecalho da folha de magia
-
 componente vazio
 componente erro
 

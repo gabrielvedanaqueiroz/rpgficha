@@ -10,6 +10,7 @@ import Magias from '../pages/magias';
 import Personagens from '../pages/personagens';
 import PersonagenDetalhe from '../pages/personagemdetalhe';
 import Inventario from '../pages/inventario';
+import NaoEncontrado from '../pages/naoencontrado';
 
 function RoutesApp(){
 
@@ -17,7 +18,7 @@ function RoutesApp(){
     <BrowserRouter>
       <div id='router-header'><Header/></div> {/* controle/gambiara para mander essa estrutura e ocultar quando elemento nao é necessario. GV 16-02-2025*/}
       <Routes>
-        <Route path='/' element={<Private> <Ficha/> </Private>}/> elemento de validacao de acesso. GV 16-02-2025
+        <Route path='/' element={<Private> <Ficha/> </Private>}/> {/* elemento de validacao de acesso. GV 16-02-2025 */}
         <Route path='/caracteristicas' element={<Private> <Caracteristicas/> </Private>}/> 
         <Route path='/magias' element={<Private> <Magias/> </Private>}/> 
         <Route path='/personagens' element={<Private> <Personagens/> </Private>}/> 
@@ -25,6 +26,7 @@ function RoutesApp(){
         <Route path='/personagemdetalhe' element={<Private> <PersonagenDetalhe/> </Private>}/> 
         <Route path='/registrar' element={<Registrar/>}/> 
         <Route path='/login' element={<Login/>}/> 
+        <Route path='*' element={<NaoEncontrado/>}/> 
       </Routes>
       <div id='router-footer'><Footer/></div>
     </BrowserRouter>
