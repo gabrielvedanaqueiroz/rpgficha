@@ -15,6 +15,8 @@ function AuthProvider({children}){
 
   const [usuario, setUsuarioInterno] = useState(null);
   const [loadingAuth, setLoadingAuth] = useState(false);
+  const [personagem, setPersonagemInterno] = useState({});
+  const [personagemId, setPersonagemIdInterno] = useState('');
 
   useEffect(()=>{
     const LUsuario  = localStorage.getItem('RF@detailUser');
@@ -155,16 +157,28 @@ function AuthProvider({children}){
     });
   }
 
+  function setPersonagem(aPersonagem){
+    setPersonagemInterno(aPersonagem);
+  }
+
+  function setPersonagemId(aPersonagemId){
+    setPersonagemIdInterno(aPersonagemId);
+  }
+
   return(
     <AuthContext.Provider
       value={{
         signed: !!usuario, //duas exclamacao converte pra boleano e faz o teste
         usuario,
+        personagem,
+        personagemId,
+        setPersonagemId,
+        loadingAuth,
         setUsuario,
+        setPersonagem,
         onSingIn, 
         onSingOut,
         onCriarUsuario,
-        loadingAuth,
         onCheckLogin,
       }}
     >

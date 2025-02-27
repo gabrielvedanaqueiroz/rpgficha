@@ -25,8 +25,7 @@ export default class Personagem{
     pe_catotal,
     pe_movimento,
     pe_idclasse, 
-    pe_idraca,
-    
+    pe_idraca,    
     pe_vidadado,
     pe_vidadadousado,
     pe_tcmfalha1,
@@ -42,8 +41,25 @@ export default class Personagem{
     pe_sgsabedoria,
     pe_sgcarisma,
     pe_proacrobacia,
-
-
+    pe_proarcanismo,
+    pe_proatletismo,
+    pe_proatuacao,
+    pe_problefar,
+    pe_profurtividade,
+    pe_prohistoria,
+    pe_prointimidacao,
+    pe_prointuicao,
+    pe_proinvestigacao,
+    pe_prolidaranimais,
+    pe_promedicina,
+    pe_pronatureza,
+    pe_propercepcao,
+    pe_propersuacao,
+    pe_proprestidigitacao,
+    pe_prosobrevivencia,
+    pe_habilidadeconjuracao,
+    pe_cdmagia,
+    pe_bonusataquemagia
   ){
     this.pe_id = pe_id;
     this.pe_nome = pe_nome;
@@ -85,7 +101,25 @@ export default class Personagem{
     this.pe_sgsabedoria = pe_sgsabedoria;
     this.pe_sgcarisma = pe_sgcarisma;
     this.pe_proacrobacia = pe_proacrobacia;
-
+    this.pe_proarcanismo = pe_proarcanismo;
+    this.pe_proatletismo = pe_proatletismo;
+    this.pe_proatuacao = pe_proatuacao;
+    this.pe_problefar = pe_problefar;
+    this.pe_profurtividade = pe_profurtividade;
+    this.pe_prohistoria = pe_prohistoria;
+    this.pe_prointimidacao = pe_prointimidacao;
+    this.pe_prointuicao = pe_prointuicao;
+    this.pe_proinvestigacao = pe_proinvestigacao;
+    this.pe_prolidaranimais = pe_prolidaranimais;
+    this.pe_promedicina = pe_promedicina;
+    this.pe_pronatureza = pe_pronatureza;
+    this.pe_propercepcao = pe_propercepcao;
+    this.pe_propersuacao = pe_propersuacao;
+    this.pe_proprestidigitacao = pe_proprestidigitacao;
+    this.pe_prosobrevivencia = pe_prosobrevivencia;
+    this.pe_habilidadeconjuracao = pe_habilidadeconjuracao;
+    this.pe_cdmagia = pe_cdmagia;
+    this.pe_bonusataquemagia = pe_bonusataquemagia;
   }
 
   #onModificador(aValor){
@@ -141,69 +175,34 @@ export default class Personagem{
     return this.#onModificador(this.pe_carisma) + (this.pe_sgcarisma?this.pe_bproficiencia:0);
   }
 
+  getProForca(aProficiente) {
+    return this.#onModificador(this.pe_forca) + (aProficiente?this.pe_bproficiencia:0);
+  }
+
+  getProDestreza(aProficiente) {
+    return this.#onModificador(this.pe_destreza) + (aProficiente?this.pe_bproficiencia:0);
+  }
+
+  getProConstituicao(aProficiente) {
+    return this.#onModificador(this.pe_constituicao) + (aProficiente?this.pe_bproficiencia:0);
+  }
+
+  getProInteligencia(aProficiente) {
+    return this.#onModificador(this.pe_inteligencia) + (aProficiente?this.pe_bproficiencia:0);
+  }
+
+  getProSabedoria(aProficiente) {
+    return this.#onModificador(this.pe_sabedoria) + (aProficiente?this.pe_bproficiencia:0);
+  }
+
+  getProCarisma(aProficiente) {
+    return this.#onModificador(this.pe_carisma) + (aProficiente?this.pe_bproficiencia:0);
+  }
+
   getVida(){
     return (this.pe_vidaatual + this.pe_vidatemp);
   }
   
-  // vida_inc(){
-    
-  //   if(this.pe_vidaatual < this.pe_vidabase)
-  //     ++this.pe_vidaatual;
-
-  //   return this.pe_vidaatual;
-  // }
-
-  // vida_incValor(aValor){
-    
-  //   if(this.pe_vidaatual < this.pe_vidabase){
-      
-  //     this.pe_vidaatual = this.pe_vidaatual + aValor;
-
-  //     if(this.pe_vidaatual > this.pe_vidabase)
-  //       this.pe_vidaatual = this.pe_vidabase;
-
-  //   }
-
-  //   return this.pe_vidaatual;
-    
-  // }
-  
-  // vida_dec(){
-    
-  //   if(this.pe_vidatemp > 0)
-  //     --this.pe_vidatemp;
-  //   else
-  //     if(this.pe_vidaatual > 0)
-  //       --this.pe_vidaatual;
-
-  // }
-
-  vida_decValor(aValor){
-    
-    if(this.getVida() > 0){
-
-      if(this.pe_vidatemp > 0){
-
-        let sobra = this.pe_vidatemp - aValor;
-        this.pe_vidatemp = this.pe_vidatemp - aValor;
-        
-        if(sobra <= 0){
-          this.pe_vidatemp = 0;
-          this.pe_vidaatual = this.pe_vidaatual - (sobra * -1);
-        }
-
-      }
-      else  {
-        this.pe_vidaatual = (this.pe_vidaatual - aValor);
-    
-        if((this.pe_vidaatual - aValor) < 0)
-          this.pe_vidaatual = 0;  
-      }
-  
-    }
-    
-  }
-
   getClasse(){
     return this.pe_classe + ' ' + this.pe_subclasse;
   }

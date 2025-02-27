@@ -11,9 +11,6 @@ personagem
   fazer um tile pra mostar dados do jogador e deixar o delogar ali tbm
     ( Nome tb_jogador.jo_nome localizando por jo_idlogin)
 
-caracteriscita
-  puxar proficiencias corretas(valor, proficiente)
-
 principal
   vidas
     salvar inc
@@ -22,9 +19,6 @@ principal
     salvar teste morte
 
 magias
-  criar
-  editar
-  salvar
   mostrar informacoes do cabecalho da folha de magia
 
 componente vazio

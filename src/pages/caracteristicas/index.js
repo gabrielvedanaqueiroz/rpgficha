@@ -1,27 +1,28 @@
 import './caracteristicas.css';
 import Tile from '../../components/tile';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import {db} from '../../services/firebaseConnection';
-import {collection, query, where, getDocs, addDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
+import {collection, query, where, getDocs, addDoc, doc, updateDoc, deleteDoc, getDoc } from 'firebase/firestore';
 import {toast} from 'react-toastify';
 import TileCaracteristica from '../../components/tilecaracteristica';
 import TileProficiencia from '../../components/tileproficiencia';
 import BtnAdicionar from '../../components/btnadicionar';
+import { AuthContext } from '../../utils/auth';
 
 function Caracteristicas(){
   
   const personagemID    = localStorage.getItem('RF@personagemID');
-  const [lstProficiencia, setProficiencia] = useState([]);
   const [lstCaracteristica, setCaracteristica] = useState([]);
   const [loading, setLoading] = useState(true);
-  
+  const {personagem} = useContext(AuthContext);
+
   /* modal */
   const [isOpen, setIsOpen] = useState(false);
   const [titulo, setTitulo] = useState('');
   const [descricao, setDescricao] = useState('');
   const [idCaracteristica, setIdCaracteristica] = useState('');
 
-  async function buscarCaracteristicas(){
+  async function buscar(){
     const q = query(collection(db, "tb_caracteristica"), where("ca_idpersonagem", "==", personagemID.trim()));
     const querySnapshot = await getDocs(q); 
     let lista = [];
@@ -43,17 +44,11 @@ function Caracteristicas(){
     
   }
 
-  async function buscarProficiencias(){
-
-  }
 
   useEffect(()=>{
-
-    buscarProficiencias();
-    buscarCaracteristicas();
-
+    buscar();
     setLoading(false);
-  },[]);
+  },[personagemID]);
 
   async function onSalvar(e){
     e.preventDefault();
@@ -68,7 +63,7 @@ function Caracteristicas(){
         })
         .then( () =>{
           onFecharModal();
-          buscarCaracteristicas();
+          buscar();
         })
         .catch((error)=>{
           console.log('Erro ao inserir; '+error);
@@ -85,7 +80,7 @@ function Caracteristicas(){
         )
         .then(()=>{
           onFecharModal();
-          buscarCaracteristicas();
+          buscar();
         })
         .catch((error)=>{
           console.log('Erro ao editar: '+error);
@@ -111,7 +106,7 @@ function Caracteristicas(){
     const docRef = doc(db, "tb_caracteristica", id);
     await deleteDoc(docRef)
     .then(()=>{
-      buscarCaracteristicas();
+      buscar();
     })
     .catch((error)=>{
       toast.error('Erro ao excluir');
@@ -141,65 +136,65 @@ function Caracteristicas(){
         <ul className='cr_lista'>
           <Tile id='Força' titulo='Força'>
             <div className='cr-proficiencia'>
-              <TileProficiencia titulo='Atletismo' valor='3' proficiente='1'/>
+              <TileProficiencia titulo='Atletismo' valor={personagem.getProForca(personagem.pe_proatletismo)}  proficiente={personagem.pe_proatletismo}/>
             </div>
 
             <div class="ca-cd-div-flag">
-              <span>2</span>
+              <span>{personagem.getModForca()}</span>
               <div className='ca-separador2'/>
-              <label>10</label>
+              <label>{personagem.pe_forca}</label>
             </div>
           </Tile>
           <Tile id='Destreza' titulo='Destreza'>
             <div className='cr-proficiencia'>
-              <TileProficiencia titulo='Acrobacia' valor='3' proficiente='0'/>
-              <TileProficiencia titulo='Furtividade' valor='3' proficiente='0'/>
-              <TileProficiencia titulo='Prestidigitacao' valor='3' proficiente='0'/>
+              <TileProficiencia titulo='Acrobacia' valor={personagem.getProForca(personagem.pe_proacrobacia)}  proficiente={personagem.pe_proacrobacia}/>
+              <TileProficiencia titulo='Furtividade' valor={personagem.getProForca(personagem.pe_profurtividade)}  proficiente={personagem.pe_profurtividade}/>
+              <TileProficiencia titulo='Prestidigitacao' valor={personagem.getProForca(personagem.pe_proprestidigitacao)}  proficiente={personagem.pe_proprestidigitacao}/>
             </div>
             <div class="ca-cd-div-flag">
-              <span>2</span>
+              <span>{personagem.getModDestreza()}</span>
               <div className='ca-separador2'/>
-              <label>10</label>
+              <label>{personagem.pe_destreza}</label>
             </div>
           </Tile>
           <Tile id='Inteligência' titulo='Inteligência'> 
             <div className='cr-proficiencia'>
-              <TileProficiencia titulo='Arcanismo' valor='3' proficiente='0'/>
-              <TileProficiencia titulo='Historia' valor='3' proficiente='0'/>
-              <TileProficiencia titulo='Investigação' valor='3' proficiente='1'/>             
-              <TileProficiencia titulo='Natureza' valor='3' proficiente='0'/>             
+              <TileProficiencia titulo='Arcanismo' valor={personagem.getProForca(personagem.pe_proarcanismo)}  proficiente={personagem.pe_proarcanismo}/>
+              <TileProficiencia titulo='Historia' valor={personagem.getProForca(personagem.pe_prohistoria)}  proficiente={personagem.pe_prohistoria}/>
+              <TileProficiencia titulo='Investigação' valor={personagem.getProForca(personagem.pe_proinvestigacao)}  proficiente={personagem.pe_proinvestigacao}/>             
+              <TileProficiencia titulo='Natureza' valor={personagem.getProForca(personagem.pe_pronatureza)}  proficiente={personagem.pe_pronatureza}/>             
             </div>
             <div class="ca-cd-div-flag">
-              <span>2</span>
+              <span>{personagem.getModInteligencia()}</span>
               <div className='ca-separador2'/>
-              <label>10</label>
+              <label>{personagem.pe_inteligencia}</label>
             </div>
           </Tile>
           <Tile id='Sabedoria' titulo='Sabedoria'>
             <div className='cr-proficiencia'>
-              <TileProficiencia titulo='Intuição' valor='3' proficiente='0'/>
-              <TileProficiencia titulo='Lidar com animais' valor='3' proficiente='0'/>
-              <TileProficiencia titulo='Medicina' valor='3' proficiente='1'/>             
-              <TileProficiencia titulo='Percepção' valor='3' proficiente='0'/>             
-              <TileProficiencia titulo='Sobrevivência' valor='3' proficiente='0'/>             
+              <TileProficiencia titulo='Intuição' valor={personagem.getProForca(personagem.pe_prointuicao)}  proficiente={personagem.pe_prointuicao}/>
+              <TileProficiencia titulo='Lidar com animais' valor={personagem.getProForca(personagem.pe_prolidaranimais)}  proficiente={personagem.pe_prolidaranimais}/>
+              <TileProficiencia titulo='Medicina' valor={personagem.getProForca(personagem.pe_promedicina)}  proficiente={personagem.pe_promedicina}/>             
+              <TileProficiencia titulo='Percepção' valor={personagem.getProForca(personagem.pe_propercepcao)}  proficiente={personagem.pe_propercepcao}/>             
+              <TileProficiencia titulo='Sobrevivência' valor={personagem.getProForca(personagem.pe_prosobrevivencia)}  proficiente={personagem.pe_prosobrevivencia}/>             
             </div>
             <div class="ca-cd-div-flag">
-              <span>2</span>
+              <span>{personagem.getModSabedoria()}</span>
               <div className='ca-separador2'/>
-              <label>10</label>
+              <label>{personagem.pe_sabedoria}</label>
             </div>
             </Tile>
           <Tile id='Carisma' titulo='Carisma'> 
             <div className='cr-proficiencia'>
-              <TileProficiencia titulo='Atuação' valor='3' proficiente='0'/>
-              <TileProficiencia titulo='Blefar' valor='3' proficiente='0'/>
-              <TileProficiencia titulo='Intimidação' valor='3' proficiente='1'/>             
-              <TileProficiencia titulo='Persuasão' valor='3' proficiente='0'/>                
+              <TileProficiencia titulo='Atuação' valor={personagem.getProForca(personagem.pe_proatuacao)}  proficiente={personagem.pe_proatuacao}/>
+              <TileProficiencia titulo='Blefar' valor={personagem.getProForca(personagem.pe_problefar)}  proficiente={personagem.pe_problefar}/>
+              <TileProficiencia titulo='Intimidação' valor={personagem.getProForca(personagem.pe_prointimidacao)}  proficiente={personagem.pe_prointimidacao}/>             
+              <TileProficiencia titulo='Persuasão' valor={personagem.getProForca(personagem.pe_propersuacao)}  proficiente={personagem.pe_propersuacao}/>                
             </div>
             <div class="ca-cd-div-flag">
-              <span>2</span>
+              <span>{personagem.getModCarisma()}</span>
               <div className='ca-separador2'/>
-              <label>10</label>
+              <label>{personagem.pe_carisma}</label>
             </div>
           </Tile>
         </ul>

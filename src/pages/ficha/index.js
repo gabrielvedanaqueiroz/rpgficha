@@ -1,7 +1,7 @@
 import './ficha.css';
 import {db} from '../../services/firebaseConnection';
 import {doc, getDoc, query, where, collection, getDocs} from 'firebase/firestore';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import {exibirBarras} from '../../utils';
 import {toast} from 'react-toastify';
 import img_classe from '../../res/logo.svg';
@@ -13,11 +13,14 @@ import ModalFiAtaque from '../../components/modalfiataque/index.js';
 import ModalFiMagia from '../../components/modalfimagia';
 import TileVida from '../../components/tilevida/';
 import TileTesteMorte from '../../components/tiletestemorte/index.js';
+import { AuthContext } from '../../utils/auth';
 
 function Ficha(){
 
-  const personagemID    = localStorage.getItem('RF@personagemID');
-  const [personagem, setPersonagem] = useState({});
+  const personagemID    = localStorage.getItem('RF@personagemID');  
+  const {personagem}    = useContext(AuthContext);  
+  const {setPersonagem} = useContext(AuthContext);  
+
   const [loading, setLoading] = useState(true);
   const [showModalAtaque, setShowModalAtaque] = useState(false);
   const [showModalMagia, setShowModalMagia] = useState(false);
@@ -80,6 +83,25 @@ function Ficha(){
               snapshot.data().pe_sgsabedoria,
               snapshot.data().pe_sgcarisma,
               snapshot.data().pe_proacrobacia,
+              snapshot.data().pe_proarcanismo,
+              snapshot.data().pe_proatletismo,
+              snapshot.data().pe_proatuacao,
+              snapshot.data().pe_problefar,
+              snapshot.data().pe_profurtividade,
+              snapshot.data().pe_prohistoria,
+              snapshot.data().pe_prointimidacao,
+              snapshot.data().pe_prointuicao,
+              snapshot.data().pe_proinvestigacao,
+              snapshot.data().pe_prolidaranimais,
+              snapshot.data().pe_promedicina,
+              snapshot.data().pe_pronatureza,
+              snapshot.data().pe_propercepcao,
+              snapshot.data().pe_propersuacao,
+              snapshot.data().pe_proprestidigitacao,
+              snapshot.data().pe_prosobrevivencia,
+              snapshot.data().pe_habilidadeconjuracao ,
+              snapshot.data().pe_cdmagia,
+              snapshot.data().pe_bonusataquemagia,
             ); 
 
             setPersonagem(personagem);
