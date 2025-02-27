@@ -20,7 +20,7 @@
 }
 
 .pri_botoes{
-  height: 20px;
+  height: 25px;
   width: 100%;
   display: flex;
   justify-content: flex-end;
@@ -28,8 +28,8 @@
 }
 
 .pri_btn{
-  height: 20px;
-  width: 20px;
+  height: 25px;
+  width: 25px;
   margin-left: 4px;
 }
 

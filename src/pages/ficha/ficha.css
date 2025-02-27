@@ -179,6 +179,7 @@
   justify-content: center;
   justify-items: center;
   padding-top: 14px;
+  width: 25%;
 }
 
 .fi-cd-div-percepcao{
@@ -200,6 +201,7 @@
 
 .fi-cd-div-percepcao label{
   font-size: 11px;
+  text-align: center;
 }
 
 .fi-div-outras{

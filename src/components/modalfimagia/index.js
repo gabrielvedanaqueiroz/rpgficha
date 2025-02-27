@@ -1,10 +1,10 @@
-import './modalmagia.css';
+import './modalfimagia.css';
 import { useEffect, useState } from 'react';
 import { db } from '../../services/firebaseConnection';
 import {doc, getDoc} from 'firebase/firestore';
 import { toast } from 'react-toastify';
 
-function ModalMagia(props){
+function ModalFiMagia(props){
 
   const idMagia = props.mg_id;
   
@@ -77,4 +77,4 @@ function ModalMagia(props){
   );
 }
 
-export default ModalMagia;
+export default ModalFiMagia;

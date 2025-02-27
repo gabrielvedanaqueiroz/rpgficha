@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import {db} from '../../services/firebaseConnection';
 import {collection, query, where, getDocs, addDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
-import TileTelaMagia from '../../components/tiletelamagia';
+import TileMagia from '../../components/tilemagia';
 
 function Magias(){
   
@@ -98,7 +98,7 @@ function Magias(){
               if(item.mg_preparada){
                 return(
                   <Tile id={'prp'+item.mg_id} titulo={item.mg_nome}>
-                    <TileTelaMagia 
+                    <TileMagia 
                       mg_id={item.mg_id} 
                       mg_descricao={item.mg_descricao} 
                       mg_nivel={item.mg_nivel} 
@@ -133,7 +133,7 @@ function Magias(){
               return(
                 <Tile id={'cnc'+item.mg_id} titulo={item.mg_nome}>
               
-                  <TileTelaMagia 
+                  <TileMagia 
                     mg_id={item.mg_id} 
                     mg_descricao={item.mg_descricao} 
                     mg_nivel={item.mg_nivel} 

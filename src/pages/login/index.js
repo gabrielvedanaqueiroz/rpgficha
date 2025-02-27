@@ -5,20 +5,21 @@ import {toast} from 'react-toastify';
 import BtnExibirSenha from '../../components/btnexibirsenha';
 import {ocultarBarras} from '../../utils';
 import { AuthContext } from '../../utils/auth';
+import BtnLoginForm from '../../components/btnloginform';
 
 function Login(){
 
   const navigate = useNavigate();
   const email    = useRef('');
   const senha    = useRef('');
-  const {onSingIn, loadingAuth} = useContext(AuthContext);
+  const {onSingIn} = useContext(AuthContext);
 
   useEffect(()=>{
     ocultarBarras();    
   },[]);
   
-  async function handleLogin(e) {
-    e.preventDefault();
+  async function onLogin(e) {
+    // e.preventDefault();
 
     let lemail = email.current?.value;
     let lsenha = senha.current?.value;
@@ -47,7 +48,7 @@ function Login(){
     <div className="lg-container">
       <h1>RPGFicha</h1>
       <span>Login</span>
-      <form className="lg-form" onSubmit={handleLogin}>
+      <form className="lg-form" action={onLogin}>
         <input
           type="text"
           placeholder="Digite seu email..."
@@ -64,10 +65,8 @@ function Login(){
 
           <BtnExibirSenha click={onExibirSenha}/>
         </div>
-
-        <button type="submit" >
-          {loadingAuth? 'Conectando..' : 'Acessar'}
-        </button>
+        <BtnLoginForm/>
+        
       </form>
 
       <Link className="lg-button-link" to="/registrar">

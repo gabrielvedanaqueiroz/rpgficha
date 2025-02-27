@@ -112,7 +112,7 @@ function Personagens(){
       <Tile id={usuario.uid.trim()} titulo={'Usuário'} >
         <div className='pr_usuario'>
           <label>Gabriel</label>
-          <label>{usuario.email}</label>
+          <label>e-mail: {usuario.email}</label>
           
           <button className='pr_bt-deslogar' onClick={onDeslogar}>
             <img className='pr_img-deslogar' src={logout} alt='Deslogar'/>

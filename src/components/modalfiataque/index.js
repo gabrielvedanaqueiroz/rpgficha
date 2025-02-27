@@ -1,11 +1,11 @@
-import './modalataque.css';
+import './modalfiataque.css';
 import { useRef } from 'react';
 import { toast } from 'react-toastify';
 import BtnSalvarForm from '../btnsalvarform';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../../services/firebaseConnection';
 
-function ModalAtaque(props){
+function ModalFiAtaque(props){
 
   const personagemID = props.personagemID;
   const nome    = useRef(props.nome);
@@ -76,4 +76,4 @@ function ModalAtaque(props){
   );
 }
 
-export default ModalAtaque;
+export default ModalFiAtaque;

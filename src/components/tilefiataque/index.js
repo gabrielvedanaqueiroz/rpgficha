@@ -1,6 +1,6 @@
-import './tileataque.css';
+import './tilefiataque.css';
 
-function TileAtaque(props){
+function TileFiAtaque(props){
 
   return(
     <div key ={props.at_id} className='ta-container'>
@@ -13,4 +13,4 @@ function TileAtaque(props){
   )
 }
 
-export default TileAtaque;
+export default TileFiAtaque;

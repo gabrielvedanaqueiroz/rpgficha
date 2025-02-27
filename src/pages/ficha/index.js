@@ -7,10 +7,10 @@ import {toast} from 'react-toastify';
 import img_classe from '../../res/logo.svg';
 import Tile from '../../components/tile';
 import Personagem from '../../utils/personagem.js'
-import TileAtaque from '../../components/tileataque';
-import TileMagia from '../../components/tilemagia';
-import ModalAtaque from '../../components/modalataque';
-import ModalMagia from '../../components/modalmagia';
+import TileFiAtaque from '../../components/tilefiataque';
+import TileFiMagia from '../../components/tilefimagia';
+import ModalFiAtaque from '../../components/modalfiataque/index.js';
+import ModalFiMagia from '../../components/modalfimagia';
 import TileVida from '../../components/tilevida/';
 import TileTesteMorte from '../../components/tiletestemorte/index.js';
 
@@ -306,7 +306,7 @@ function Ficha(){
             <div className='fi-cd-div-percepcao'>
               <span>12</span>
               <div className='fi-separador2'/>
-              <label>Percepção</label>
+              <label>Percepção passiva</label>
             </div> 
 
             <div className='fi-cd-div-flag'>
@@ -365,11 +365,11 @@ function Ficha(){
         <div className='fi-ataques'>
           <Tile titulo='Ataques' id='fiataques'>
             <div className='fi-at-conteudo'>
-              <TileAtaque at_id='xpto'/>
+              <TileFiAtaque at_id='atxpto'/>
               {
                 lstAtaque.map((item)=>{
                   return(
-                    <TileAtaque 
+                    <TileFiAtaque 
                       at_id={item.at_id} 
                       at_nome={item.at_descricao} 
                       at_alcance={item.at_alcance} 
@@ -388,11 +388,11 @@ function Ficha(){
         <div className='fi-magias'>
           <Tile titulo='Magias preparadas' id='fimagias'>
             <div className='fi-at-conteudo'>
-              <TileMagia at_id='xpto'/>
+              <TileFiMagia at_id='mgxpto'/>
               {
                 lstMagia.map((item)=>{
                   return(
-                    <TileMagia 
+                    <TileFiMagia 
                       btn='true'
                       mg_id={item.mg_id} 
                       mg_nome={item.mg_nome} 
@@ -414,8 +414,8 @@ function Ficha(){
         </div>
       </div>
 
-      { showModalAtaque ? <ModalAtaque onOcultar={(()=>{setShowModalAtaque(false)})} personagemID={personagemID}/> :<div/>} 
-      { showModalMagia ? <ModalMagia onOcultar={(()=>{setShowModalMagia(false)})} mg_id={magiaID}/> :<div/>} 
+      { showModalAtaque ? <ModalFiAtaque onOcultar={(()=>{setShowModalAtaque(false)})} personagemID={personagemID}/> :<div/>} 
+      { showModalMagia ? <ModalFiMagia onOcultar={(()=>{setShowModalMagia(false)})} mg_id={magiaID}/> :<div/>} 
     </div>
   )
 }

@@ -1,22 +1,33 @@
 import './tilemagia.css';
+import editar from '../../res/edit.svg';
+import excluir from '../../res/delete.svg';
+import preparar from '../../res/preparar.svg';
 
-function TileMagia(props){
 
-  function onClickDetalhe(){
-    if(props.btn)
-      props.onClickDetalhe();
-  }
+function TiteTelaMagia(props){
 
   return(
-    <div key ={props.mg_id} className='tm-container' onClick={()=>{onClickDetalhe(props.mg_id)}}>
-      <span className='tmi-nome'>{props.mg_nome?props.mg_nome:'Nome'}</span>
-      <span className='tmi-alcance'>{props.mg_alcance?props.mg_alcance:'Alcance'}</span>
-      <span className='tmi-tempo'>{props.mg_tempoconjuracao?props.mg_tempoconjuracao:'Tempo'}</span>
-      <span className='tmi-nivel'>{props.mg_nivel?props.mg_nivel:'Nivel'}</span>
-      <span className='tmi-dano'>{props.mg_dano?props.mg_dano:'Dano'}</span>
-      <span className='tmi-tipo'>{props.mg_duracao?props.mg_duracao:'Duração'}</span>
+    <div key={props.mg_id} className='ttm_container'>
+      <label className='ttm_texto'>{props.mg_descricao}</label>
+      <label>Nível: {props.mg_nivel} </label>
+      <label>Tempo: {props.mg_tempoconjuracao} </label>
+      <label>Alcance: {props.mg_alcance} </label>
+      <label>Componentes: {props.mg_componentes} </label>
+      <label>Duração: {props.mg_duracao} </label>
+
+      {
+        props.mg_preparada?
+          <div className='ttm_prepadada'><label>Preparada</label></div>:
+          <div className='ttm_conhecida'><label>Conhecida</label></div>
+      }
+
+      <div className='ttm_botoes'>
+        <img src={excluir} className='ttm_btn'  alt='excluir' onClick={()=>{props.excluir()}}/>
+        <img src={editar} className='ttm_btn' alt='editar' onClick={()=>{props.editar()}}/>
+        <img src={preparar} className='ttm_btn'  alt='preparar' onClick={()=>{props.preparar()}}/>
+      </div>
     </div>
   )
 }
 
-export default TileMagia;
+export default TiteTelaMagia;

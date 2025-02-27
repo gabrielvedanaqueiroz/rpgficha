@@ -125,10 +125,12 @@ function AuthProvider({children}){
       return true;
     })
     .catch((error)=>{
-      console.error('Erro ao efetuar login: '+ error);
       setLoadingAuth(false);
-      toast.error('Erro ao efetuar login');
+      console.error('Erro ao registrar: '+ error);
+      toast.error('Erro ao registar');
       return false;
+
+      // auth/invalid-email
     })
   }
 

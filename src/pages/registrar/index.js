@@ -5,6 +5,7 @@ import {toast} from 'react-toastify';
 import BtnExibirSenha from '../../components/btnexibirsenha';
 import {ocultarBarras} from '../../utils';
 import {AuthContext} from '../../utils/auth';
+import BtnRegistrarForm from '../../components/btnregistrarform';
 
 function Login(){
 
@@ -18,8 +19,7 @@ function Login(){
     ocultarBarras();    
   },[]);
 
-  async function handleLogin(e) {
-    e.preventDefault();
+  async function onSalvar(e) {
 
     let lemail  = email.current?.value;
     let lsenha  = senha.current?.value;
@@ -30,11 +30,19 @@ function Login(){
       onCriarUsuario(lemail, lsenha, lnome)
       .then(()=>{         
           navigate('/', {replace:true})
+          return true;
+      })
+      .catch((error)=>{
+        toast.error('Erro ao registar');
+        console.log(error);
+        return false;
       });
 
     }
-    else
+    else{
       toast.error('Preencha todos os campos');
+      return true;
+    }
   }
 
   function onExibirSenha(){
@@ -50,7 +58,7 @@ function Login(){
     <div className='rg-container'>
       <h1>RPGFicha</h1>
       <span>Crie seu usuário</span>
-      <form className='rg-form' onSubmit={handleLogin}>
+      <form className='rg-form' action={onSalvar}>
         
         <input
             type="text"
@@ -74,9 +82,7 @@ function Login(){
 
           <BtnExibirSenha click={onExibirSenha}/>
         </div>
-        <button type="submit">
-          {loadingAuth? 'Criando..' : 'Acessar'}
-        </button>
+        <BtnRegistrarForm/>
       </form>
       
     </div>

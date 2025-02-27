@@ -38,4 +38,3 @@ tirar do auth.js a linha:
 usar hooks a interessantes
   (x) useRef 
   (x) useFormStatus();
-  ( ) useTransition()
