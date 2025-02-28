@@ -1,5 +1,5 @@
 import './personagem-criacao-atributos.css';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import BtnSalvarForm from '../../components/btnsalvarform';
 import { toast } from 'react-toastify';
@@ -22,8 +22,12 @@ function PersonagenCriacaoAtributos(){
   const [modInteligencia, setModInteligencia] = useState('');
   const [modSabedoria, setModSabedoria]       = useState('');
   const [modCarisma, setModCarisma]           = useState('');
+  const [personagemCriado, setPersonagemCriado] = useState({});
 
-  const personagemID  = localStorage.getItem('RF@personagemID');
+  useEffect(()=>{
+    const data = localStorage.getItem("RF@personagem-criado");
+    setPersonagemCriado(JSON.parse(data));
+  }, []);
 
   async function onAvancar(e){
 
@@ -45,7 +49,7 @@ function PersonagenCriacaoAtributos(){
     valido = valido && (lcarisma.trim() !== '');
 
     if(valido){
-      const docRef = doc(db, "tb_personagem", personagemID);
+      const docRef = doc(db, "tb_personagem", personagemCriado.id);
       await updateDoc(docRef, {
           pe_forca: lforca.trim(),
           pe_destreza: ldestreza.trim(),
@@ -53,6 +57,13 @@ function PersonagenCriacaoAtributos(){
           pe_inteligencia: linteligencia.trim(),
           pe_sabedoria: lsabedoria.trim(),
           pe_carisma: lcarisma.trim(),
+          pe_vidabase: (personagemCriado.vidaNv1 + modCostituicao),
+          pe_vidaatual: (personagemCriado.vidaNv1 + modCostituicao),
+          pe_vidatemp: 0,
+          pe_vidadadousado: 0,
+          pe_cdmagia: 15,
+          pe_bonusataquemagia: 5,
+          pe_cabase: (personagemCriado.CABase  + modDestreza + modCostituicao),
         }
       )
       .then(()=>{

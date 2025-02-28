@@ -1,20 +1,16 @@
 
 personagem
-  criar(
-    (x) cabecalho
-    (x) atributos
-    ( ) proficiencias
-    ( ) salva-guardas
-    ( ) vida
-  )
   editar
-  
+  escolher ativo
   upar (
     abrir uma nova pagina
     navegar para o lado em grupo de interesses;
   )
-  fazer um tile pra mostar dados do jogador e deixar o delogar ali tbm
-    ( Nome tb_jogador.jo_nome localizando por jo_idlogin)
+  criar(
+    pe_cdmagia 8+ mod + bprof
+    pe_bonusataquemagia mod + bprof
+    pe_habilidadeconjuracao habilidade
+  )
 
 principal
   vidas

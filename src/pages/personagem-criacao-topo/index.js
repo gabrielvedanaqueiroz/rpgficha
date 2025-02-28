@@ -23,6 +23,10 @@ function PersonagenCriacaoTopo(){
   const [optClasse, setOptionClasse]            = useState("");
   const [optSubclasse, setOptionSubclasse]      = useState("");
   const [optAlinhamento, setOptionAlinhamento]  = useState("");
+  const [dadoVida, setDadoVida]                 = useState("");
+  const [vidaNv1, setVidaNv1]                   = useState(0);
+  const [CABase, setCABase]                     = useState(0);
+  const [movimento, setMovimento]               = useState(0);
   const nome        = useRef('');
   const antecedente = useRef('');
 
@@ -30,18 +34,34 @@ function PersonagenCriacaoTopo(){
   const jClasses = [
     {
       "cl_descricao": "Bárbaro",
+      "cl_dado_vida": "d12",
+      "cl_vida_nivel_1": 12,
+      "cl_cabase": 10,
+      "cl_habilidadeconjuracao": "", 
       "cl_sub": ["Caminho do Berserker", "Caminho do Guerreiro Totêmico"]
     },
     {
       "cl_descricao": "Bardo",
+      "cl_dado_vida": "d8",
+      "cl_vida_nivel_1": 8,
+      "cl_cabase": 11,
+      "cl_habilidadeconjuracao": "8+bprof+Carisma", 
       "cl_sub": ["Colégio do Conhecimento", "Colégio do Valor"]
     },
     {
       "cl_descricao": "Bruxo",
+      "cl_dado_vida": "d8",
+      "cl_vida_nivel_1": 8,
+      "cl_cabase": 11,
+      "cl_habilidadeconjuracao": "8+bprof+Carisma", 
       "cl_sub": ["Arquifada", "O Grande Antigo", "O Senhor Imortal"]
     },
     {
       "cl_descricao": "Clérigo",
+      "cl_dado_vida": "d8",
+      "cl_vida_nivel_1": 8,
+      "cl_cabase": 16,
+      "cl_habilidadeconjuracao": "8+bprof+Sabedoria", 
       "cl_sub": [
         "Domínio da Vida",
         "Domínio do Conhecimento",
@@ -54,14 +74,26 @@ function PersonagenCriacaoTopo(){
     },
     {
       "cl_descricao": "Druida",
+      "cl_dado_vida": "d8",
+      "cl_vida_nivel_1": 8,
+      "cl_cabase": 12,
+      "cl_habilidadeconjuracao": "8+bprof+Sabedoria", 
       "cl_sub": ["Círculo da Terra", "Círculo da Lua"]
     },
     {
       "cl_descricao": "Feiticeiro",
+      "cl_dado_vida": "d6",
+      "cl_vida_nivel_1": 6,
+      "cl_cabase": 10,
+      "cl_habilidadeconjuracao": "8+bprof+Carisma", 
       "cl_sub": ["Linhagem Dracônica", "Magia Selvagem"]
     },
     {
       "cl_descricao": "Guerreiro",
+      "cl_dado_vida": "d10",
+      "cl_vida_nivel_1": 10,
+      "cl_cabase": 16,
+      "cl_habilidadeconjuracao": "8+bprof+Inteligencia", 
       "cl_sub": [
         "Arquétipo do Campeão",
         "Arquétipo do Mestre de Batalha",
@@ -70,6 +102,10 @@ function PersonagenCriacaoTopo(){
     },
     {
       "cl_descricao": "Ladino",
+      "cl_dado_vida": "d8",
+      "cl_vida_nivel_1": 8,
+      "cl_cabase": 11,
+      "cl_habilidadeconjuracao": "8+bprof+Intelgencia", 
       "cl_sub": [
         "Tradição do Ladrão",
         "Tradição do Assassino",
@@ -78,6 +114,10 @@ function PersonagenCriacaoTopo(){
     },
     {
       "cl_descricao": "Mago",
+      "cl_dado_vida": "d6",
+      "cl_vida_nivel_1": 6,
+      "cl_cabase": 10,
+      "cl_habilidadeconjuracao": "8+bprof+Inte", 
       "cl_sub": [
         "Escola de Abjuração",
         "Escola de Adivinhação",
@@ -91,6 +131,10 @@ function PersonagenCriacaoTopo(){
     },
     {
       "cl_descricao": "Monge",
+      "cl_dado_vida": "d8",
+      "cl_vida_nivel_1": 8,
+      "cl_cabase": 10,
+      "cl_habilidadeconjuracao": "", 
       "cl_sub": [
         "Caminho da Mão Aberta",
         "Caminho da Sombra",
@@ -99,6 +143,10 @@ function PersonagenCriacaoTopo(){
     },
     {
       "cl_descricao": "Paladino",
+      "cl_dado_vida": "d10",
+      "cl_vida_nivel_1": 10,
+      "cl_cabase": 16,
+      "cl_habilidadeconjuracao": "8+bprof+Carisma", 
       "cl_sub": [
         "Juramento de Devoção",
         "Juramento dos Anciões",
@@ -107,6 +155,10 @@ function PersonagenCriacaoTopo(){
     },
     {
       "cl_descricao": "Patrulheiro",
+      "cl_dado_vida": "d10",
+      "cl_vida_nivel_1": 10,
+      "cl_cabase": 14,
+      "cl_habilidadeconjuracao": "8+bprof+Sab", 
       "cl_sub": ["Conclave do Caçador", "Conclave Mestre das Feras"]
     }
   ];
@@ -115,13 +167,15 @@ function PersonagenCriacaoTopo(){
   const jRacas = [
     {
         "rc_descricao": "Anão",
+        "rc_movimento": 5,
         "rc_sub": [
-            "Anão da Colina",
-            "Anão da Montanha"
+            "da Colina",
+            "da Montanha"
         ]
     },
     {
         "rc_descricao": "Elfo",
+        "rc_movimento": 6,
         "rc_sub": [
             "Alto Elfo",
             "Elfo da Floresta",
@@ -130,6 +184,7 @@ function PersonagenCriacaoTopo(){
     },
     {
         "rc_descricao": "Halfling",
+        "rc_movimento": 5,
         "rc_sub": [
             "Pés-Leves",
             "Robusto"
@@ -137,19 +192,31 @@ function PersonagenCriacaoTopo(){
     },
     {
         "rc_descricao": "Humano",
+        "rc_movimento": 6,
         "rc_sub": [
-            "Humano Padrão",
-            "Humano Variante"
+            "Padrão",
+            "Variante"
         ]
     },
     {
         "rc_descricao": "Draconato",
+        "rc_movimento": 6,
         "rc_sub": [
-            "Sem sub-raças, mas com cores diferentes que afetam a ancestralidade dracônica"
+            "Azul",
+            "Branco",
+            "Bronze",
+            "Cobre",
+            "Latão",
+            "Negro",
+            "Ouro",
+            "Prata",
+            "Verde",
+            "Vermelho",
         ]
     },
     {
         "rc_descricao": "Gnomo",
+        "rc_movimento": 5,
         "rc_sub": [
             "Gnomo da Floresta",
             "Gnomo das Rochas"
@@ -157,20 +224,23 @@ function PersonagenCriacaoTopo(){
     },
     {
         "rc_descricao": "Meio-Elfo",
+        "rc_movimento": 6,
         "rc_sub": [
-            "Sem sub-raças, mas com personalização de atributos e talentos élficos"
+            "Sem sub-raças"
         ]
     },
     {
         "rc_descricao": "Meio-Orc",
+        "rc_movimento": 6,
         "rc_sub": [
             "Sem sub-raças"
         ]
     },
     {
         "rc_descricao": "Tiefling",
+        "rc_movimento": 6,
         "rc_sub": [
-            "Sem sub-raças, mas variando traços dependendo da descendência infernal"
+            "Sem sub-raças"
         ]
     }
   ];
@@ -179,12 +249,17 @@ function PersonagenCriacaoTopo(){
     setListaSubRaca([]);
     const raca = jRacas.find((r) => r.rc_descricao === aRaca);
     setListaSubRaca(raca ? raca.rc_sub : []);
+    setMovimento(raca.rc_movimento);
   }
 
   function onSelecionarSubClasse(aClasse) {
     setListaSubClasse([]);
+    setDadoVida('');
     const classe = jClasses.find((c) => c.cl_descricao === aClasse);
     setListaSubClasse(classe ? classe.cl_sub : []);
+    setDadoVida('1'+classe.cl_dado_vida);
+    setVidaNv1(classe.cl_vida_nivel_1);
+    setCABase(classe.cl_cabase);
   }
 
   useEffect(()=>{
@@ -225,10 +300,18 @@ function PersonagenCriacaoTopo(){
         pe_bproficiencia  : 2,
         pe_experiencia    : 0,
         pe_nivel          : 1,
+        pe_vidadado       : dadoVida,
+        pe_movimento      : movimento,
+        pe_ativo          : false,
       })
       .then( (docRef) =>{
-        // console.log(docRef.id);
-        localStorage.setItem('RF@personagemID', docRef.id); //trocar
+
+        let personagemCriado = {
+          id: docRef.id,
+          vidaNv1: vidaNv1,
+          CABase: CABase,
+        };
+        localStorage.setItem('RF@personagem-criado', JSON.stringify(personagemCriado));
         navigate('/personagem-criacao-atributos', {replace:true});
       })
       .catch((error)=>{

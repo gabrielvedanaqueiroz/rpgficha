@@ -49,18 +49,7 @@
   padding: 8px 8px; /* Espaçamento interno */
   font-size: 16px; /* Tamanho da fonte */
   outline: none; /* Remove o contorno padrão ao focar */
-  transition: all 0.3s ease-in-out; /* Suaviza transições */
-  width: 100%;
-}
-
-.pcp_form select, option{
-  border: none;
-  padding: 8px 8px; /* Espaçamento interno */
-  font-size: 16px; /* Tamanho da fonte */
-  outline: none; /* Remove o contorno padrão ao focar */
-  transition: all 0.3s ease-in-out; /* Suaviza transições */
-  width: 100%;
-  background-color: white;
+  margin-right: 8px;
 }
 
 .pcp_edit-top{
@@ -81,4 +70,8 @@
   border-bottom-right-radius: 10px;
   margin-top: 2px;
   margin-bottom: 8px;
+}
+
+.pcp-atrib{
+  font-size: 12px;
 }
