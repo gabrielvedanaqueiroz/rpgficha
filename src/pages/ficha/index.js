@@ -99,6 +99,7 @@ function Ficha(){
               snapshot.data().pe_propersuacao,
               snapshot.data().pe_proprestidigitacao,
               snapshot.data().pe_prosobrevivencia,
+              snapshot.data().pe_proreligiao,
               snapshot.data().pe_habilidadeconjuracao ,
               snapshot.data().pe_cdmagia,
               snapshot.data().pe_bonusataquemagia,

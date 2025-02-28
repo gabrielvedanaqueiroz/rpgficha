@@ -57,6 +57,7 @@ export default class Personagem{
     pe_propersuacao,
     pe_proprestidigitacao,
     pe_prosobrevivencia,
+    pe_proreligiao,
     pe_habilidadeconjuracao,
     pe_cdmagia,
     pe_bonusataquemagia
@@ -117,6 +118,7 @@ export default class Personagem{
     this.pe_propersuacao = pe_propersuacao;
     this.pe_proprestidigitacao = pe_proprestidigitacao;
     this.pe_prosobrevivencia = pe_prosobrevivencia;
+    this.pe_proreligiao = pe_proreligiao;
     this.pe_habilidadeconjuracao = pe_habilidadeconjuracao;
     this.pe_cdmagia = pe_cdmagia;
     this.pe_bonusataquemagia = pe_bonusataquemagia;

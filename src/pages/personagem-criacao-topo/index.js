@@ -5,15 +5,17 @@ import { useNavigate } from "react-router-dom";
 import BtnSalvarForm from '../../components/btnsalvarform';
 import { toast } from 'react-toastify';
 import {db} from '../../services/firebaseConnection';
-import {collection, onSnapshot, addDoc} from 'firebase/firestore';
+import {collection, addDoc} from 'firebase/firestore';
 import { AuthContext } from '../../utils/auth';
 
 function PersonagenCriacaoTopo(){
 
   const navigate                      = useNavigate();
   const {usuario}                     = useContext(AuthContext);  
-  const [listaRaca, setListaRaca]     = useState([]);
-  const [listaClasse, setListaClasse] = useState([]);
+  const [listaRaca, setListaRaca]           = useState([]);
+  const [listaSubRaca, setListaSubRaca]     = useState([]);
+  const [listaClasse, setListaClasse]       = useState([]);
+  const [listaSubClasse, setListaSubClasse] = useState([]);
   const [loading, setLoading]         = useState(true);
 
   const [optRaca, setOptionRaca]                = useState("");
@@ -24,58 +26,173 @@ function PersonagenCriacaoTopo(){
   const nome        = useRef('');
   const antecedente = useRef('');
 
-  async function buscarRaca() {
-    try{
-      onSnapshot(collection(db, "tb_raca"), (snapshot)=>{
-        let listaPost = [];
-
-        snapshot.forEach((doc)=>{
-          listaPost.push({
-            rc_id: doc.id.trim(),
-            rc_descricao : doc.data().rc_descricao.trim(),
-          })
-        });
-
-        listaPost.sort((a, b)=> a.rc_descricao > b.rc_descricao);
-        setListaRaca(listaPost);
-      })
+  //classe
+  const jClasses = [
+    {
+      "cl_descricao": "Bárbaro",
+      "cl_sub": ["Caminho do Berserker", "Caminho do Guerreiro Totêmico"]
+    },
+    {
+      "cl_descricao": "Bardo",
+      "cl_sub": ["Colégio do Conhecimento", "Colégio do Valor"]
+    },
+    {
+      "cl_descricao": "Bruxo",
+      "cl_sub": ["Arquifada", "O Grande Antigo", "O Senhor Imortal"]
+    },
+    {
+      "cl_descricao": "Clérigo",
+      "cl_sub": [
+        "Domínio da Vida",
+        "Domínio do Conhecimento",
+        "Domínio da Luz",
+        "Domínio da Natureza",
+        "Domínio da Tempestade",
+        "Domínio do Engano",
+        "Domínio da Guerra"
+      ]
+    },
+    {
+      "cl_descricao": "Druida",
+      "cl_sub": ["Círculo da Terra", "Círculo da Lua"]
+    },
+    {
+      "cl_descricao": "Feiticeiro",
+      "cl_sub": ["Linhagem Dracônica", "Magia Selvagem"]
+    },
+    {
+      "cl_descricao": "Guerreiro",
+      "cl_sub": [
+        "Arquétipo do Campeão",
+        "Arquétipo do Mestre de Batalha",
+        "Arquétipo do Cavaleiro Arcano"
+      ]
+    },
+    {
+      "cl_descricao": "Ladino",
+      "cl_sub": [
+        "Tradição do Ladrão",
+        "Tradição do Assassino",
+        "Tradição do Trapaceiro Arcano"
+      ]
+    },
+    {
+      "cl_descricao": "Mago",
+      "cl_sub": [
+        "Escola de Abjuração",
+        "Escola de Adivinhação",
+        "Escola de Evocação",
+        "Escola de Ilusão",
+        "Escola de Necromancia",
+        "Escola de Transmutação",
+        "Escola de Conjuração",
+        "Escola de Encantamento"
+      ]
+    },
+    {
+      "cl_descricao": "Monge",
+      "cl_sub": [
+        "Caminho da Mão Aberta",
+        "Caminho da Sombra",
+        "Caminho dos Quatro Elementos"
+      ]
+    },
+    {
+      "cl_descricao": "Paladino",
+      "cl_sub": [
+        "Juramento de Devoção",
+        "Juramento dos Anciões",
+        "Juramento da Vingança"
+      ]
+    },
+    {
+      "cl_descricao": "Patrulheiro",
+      "cl_sub": ["Conclave do Caçador", "Conclave Mestre das Feras"]
     }
-    catch(error){
-      console.error("Erro ao buscar documentos:", error);
+  ];
+
+  //raca
+  const jRacas = [
+    {
+        "rc_descricao": "Anão",
+        "rc_sub": [
+            "Anão da Colina",
+            "Anão da Montanha"
+        ]
+    },
+    {
+        "rc_descricao": "Elfo",
+        "rc_sub": [
+            "Alto Elfo",
+            "Elfo da Floresta",
+            "Elfo Negro (Drow)"
+        ]
+    },
+    {
+        "rc_descricao": "Halfling",
+        "rc_sub": [
+            "Pés-Leves",
+            "Robusto"
+        ]
+    },
+    {
+        "rc_descricao": "Humano",
+        "rc_sub": [
+            "Humano Padrão",
+            "Humano Variante"
+        ]
+    },
+    {
+        "rc_descricao": "Draconato",
+        "rc_sub": [
+            "Sem sub-raças, mas com cores diferentes que afetam a ancestralidade dracônica"
+        ]
+    },
+    {
+        "rc_descricao": "Gnomo",
+        "rc_sub": [
+            "Gnomo da Floresta",
+            "Gnomo das Rochas"
+        ]
+    },
+    {
+        "rc_descricao": "Meio-Elfo",
+        "rc_sub": [
+            "Sem sub-raças, mas com personalização de atributos e talentos élficos"
+        ]
+    },
+    {
+        "rc_descricao": "Meio-Orc",
+        "rc_sub": [
+            "Sem sub-raças"
+        ]
+    },
+    {
+        "rc_descricao": "Tiefling",
+        "rc_sub": [
+            "Sem sub-raças, mas variando traços dependendo da descendência infernal"
+        ]
     }
-    finally {
-      buscarClasse();
-    }  
+  ];
+
+  function onSelecionarSubRaca(aRaca) {
+    setListaSubRaca([]);
+    const raca = jRacas.find((r) => r.rc_descricao === aRaca);
+    setListaSubRaca(raca ? raca.rc_sub : []);
   }
 
-  async function buscarClasse() {
-    try{
-      onSnapshot(collection(db, "tb_classe"), (snapshot)=>{
-        let listaPost = [];
-
-        snapshot.forEach((doc)=>{
-          listaPost.push({
-            cl_id: doc.id.trim(),
-            cl_descricao : doc.data().cl_descricao.trim(),
-          })
-        });
-
-        listaPost.sort((a, b)=> a.rc_descricao > b.rc_descricao);
-        setListaClasse(listaPost);
-      })
-    }
-    catch(error){
-      console.error("Erro ao buscar documentos:", error);
-    }
-    finally {
-      setLoading(false);
-    }  
+  function onSelecionarSubClasse(aClasse) {
+    setListaSubClasse([]);
+    const classe = jClasses.find((c) => c.cl_descricao === aClasse);
+    setListaSubClasse(classe ? classe.cl_sub : []);
   }
 
   useEffect(()=>{
     ocultarBarras();   
     
-    buscarRaca();
+    setListaClasse(jClasses);
+    setListaRaca(jRacas);
+    setLoading(false);
 
     window.onpopstate = () => {
       exibirBarras();
@@ -135,56 +252,63 @@ function PersonagenCriacaoTopo(){
         <strong>Criação de Personagem</strong>
         <hr/>
       </div>
+      <span>Vamos a criação</span>
       
       <form className='pct_form' onSubmit={onAvancar}>
         <div className='pct_edit-top'>
           <input type='text' placeholder='Nome do personagem' ref={nome}/>
         </div>
         <div className='pct_edit-top'>
-          <select id="pct_selraca" value={optRaca} onChange={(e)=>{setOptionRaca(e.target.value);}}>
+          <select key="pct_selraca" value={optRaca} onChange={(e)=>{
+            setOptionRaca(e.target.value);
+            onSelecionarSubRaca(e.target.value);
+          }}>
             <option value="">Raça</option>
             {
-              listaRaca.map((item)=>{
-                return(
-                  <option key={item.rc_id} value={item.rc_descricao}>{item.rc_descricao}</option>
-                )
-              })
+              listaRaca.map((item, index)=>{
+                return(<option key={index} value={item.rc_descricao}>{item.rc_descricao}</option>) 
+              })              
             }
           </select> 
         </div>
         <div className='pct_edit-bottom'>
-          <select id="pct_selraca" value={optSubraca} onChange={(e)=>{setOptionSubraca(e.target.value);}}>
+          <select key="pct_selsubraca" value={optSubraca} onChange={(e)=>{setOptionSubraca(e.target.value);}}>
             <option value="">Sub-raça</option>
-            <option value="opcao1">Opção 1</option>
-            <option value="opcao2">Opção 2</option>
-            <option value="opcao3">Opção 3</option>
+            { 
+              listaSubRaca.map((item, index)=>{
+                return(<option key={index} value={item}>{item}</option>);
+              })
+            }
           </select> 
         </div>
         <div className='pct_edit-top'>
-          <select id="pct_selraca" value={optClasse} onChange={(e)=>{setOptionClasse(e.target.value);}} >
+          <select key="pct_selclasse" value={optClasse} onChange={(e)=>{
+            setOptionClasse(e.target.value);
+            onSelecionarSubClasse(e.target.value);
+          }} >
             <option value="">Classe</option>
             {
-              listaClasse.map((item)=>{
-                return(
-                  <option key={item.cl_id} value={item.cl_descricao}>{item.cl_descricao}</option>
-                )
-              })
+              listaClasse.map((item, index)=>{
+                return(<option key={index} value={item.cl_descricao}>{item.cl_descricao}</option>) 
+              })              
             }
           </select>
         </div>
         <div className='pct_edit-bottom'>
-        <select id="pct_selraca" value={optSubclasse} onChange={(e)=>{setOptionSubclasse(e.target.value);}}>
+        <select key="pct_selsubclasse" value={optSubclasse} onChange={(e)=>{setOptionSubclasse(e.target.value);}}>
             <option value="">Subclasse</option>
-            <option value="opcao1">Opção 1</option>
-            <option value="opcao2">Opção 2</option>
-            <option value="opcao3">Opção 3</option>
+            {
+              listaSubClasse.map((item, index)=>{
+                return(<option key={index} value={item}>{item}</option>);
+              })
+            }
           </select> 
         </div>
         <div className='pct_edit-top'>
           <input type='text' placeholder='Antecedente' ref={antecedente}/>
         </div>
         <div className='pct_edit-bottom'>
-        <select id="pct_selraca" value={optAlinhamento} onChange={(e)=>{setOptionAlinhamento(e.target.value);}}>
+        <select key="pct_selalinhamento" value={optAlinhamento} onChange={(e)=>{setOptionAlinhamento(e.target.value);}}>
             <option value="">Alinhamento</option>
             <option value="Leal e Bom">Leal e Bom</option>
             <option value="Neutro e Bom">Neutro e Bom</option>

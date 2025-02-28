@@ -111,6 +111,7 @@ function PersonagenCriacaoAtributos(){
         <strong>Criação de Personagem</strong>
         <hr/>
       </div>
+      <span>Definendo seus atributos</span>
       
       <form className='pca_form' onSubmit={onAvancar}>
         <div className='pca_edit-top'>

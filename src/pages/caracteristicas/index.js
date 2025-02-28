@@ -147,9 +147,9 @@ function Caracteristicas(){
           </Tile>
           <Tile id='Destreza' titulo='Destreza'>
             <div className='cr-proficiencia'>
-              <TileProficiencia titulo='Acrobacia' valor={personagem.getProForca(personagem.pe_proacrobacia)}  proficiente={personagem.pe_proacrobacia}/>
-              <TileProficiencia titulo='Furtividade' valor={personagem.getProForca(personagem.pe_profurtividade)}  proficiente={personagem.pe_profurtividade}/>
-              <TileProficiencia titulo='Prestidigitacao' valor={personagem.getProForca(personagem.pe_proprestidigitacao)}  proficiente={personagem.pe_proprestidigitacao}/>
+              <TileProficiencia titulo='Acrobacia' valor={personagem.getProDestreza(personagem.pe_proacrobacia)}  proficiente={personagem.pe_proacrobacia}/>
+              <TileProficiencia titulo='Furtividade' valor={personagem.getProDestreza(personagem.pe_profurtividade)}  proficiente={personagem.pe_profurtividade}/>
+              <TileProficiencia titulo='Prestidigitacao' valor={personagem.getProDestreza(personagem.pe_proprestidigitacao)}  proficiente={personagem.pe_proprestidigitacao}/>
             </div>
             <div class="ca-cd-div-flag">
               <span>{personagem.getModDestreza()}</span>
@@ -159,10 +159,11 @@ function Caracteristicas(){
           </Tile>
           <Tile id='Inteligência' titulo='Inteligência'> 
             <div className='cr-proficiencia'>
-              <TileProficiencia titulo='Arcanismo' valor={personagem.getProForca(personagem.pe_proarcanismo)}  proficiente={personagem.pe_proarcanismo}/>
-              <TileProficiencia titulo='Historia' valor={personagem.getProForca(personagem.pe_prohistoria)}  proficiente={personagem.pe_prohistoria}/>
-              <TileProficiencia titulo='Investigação' valor={personagem.getProForca(personagem.pe_proinvestigacao)}  proficiente={personagem.pe_proinvestigacao}/>             
-              <TileProficiencia titulo='Natureza' valor={personagem.getProForca(personagem.pe_pronatureza)}  proficiente={personagem.pe_pronatureza}/>             
+              <TileProficiencia titulo='Arcanismo' valor={personagem.getProInteligencia(personagem.pe_proarcanismo)}  proficiente={personagem.pe_proarcanismo}/>
+              <TileProficiencia titulo='Historia' valor={personagem.getProInteligencia(personagem.pe_prohistoria)}  proficiente={personagem.pe_prohistoria}/>
+              <TileProficiencia titulo='Investigação' valor={personagem.getProInteligencia(personagem.pe_proinvestigacao)}  proficiente={personagem.pe_proinvestigacao}/>             
+              <TileProficiencia titulo='Natureza' valor={personagem.getProInteligencia(personagem.pe_pronatureza)}  proficiente={personagem.pe_pronatureza}/>             
+              <TileProficiencia titulo='Religião' valor={personagem.getProInteligencia(personagem.pe_proreligiao)}  proficiente={personagem.pe_proreligiao}/>             
             </div>
             <div class="ca-cd-div-flag">
               <span>{personagem.getModInteligencia()}</span>
@@ -172,11 +173,11 @@ function Caracteristicas(){
           </Tile>
           <Tile id='Sabedoria' titulo='Sabedoria'>
             <div className='cr-proficiencia'>
-              <TileProficiencia titulo='Intuição' valor={personagem.getProForca(personagem.pe_prointuicao)}  proficiente={personagem.pe_prointuicao}/>
-              <TileProficiencia titulo='Lidar com animais' valor={personagem.getProForca(personagem.pe_prolidaranimais)}  proficiente={personagem.pe_prolidaranimais}/>
-              <TileProficiencia titulo='Medicina' valor={personagem.getProForca(personagem.pe_promedicina)}  proficiente={personagem.pe_promedicina}/>             
-              <TileProficiencia titulo='Percepção' valor={personagem.getProForca(personagem.pe_propercepcao)}  proficiente={personagem.pe_propercepcao}/>             
-              <TileProficiencia titulo='Sobrevivência' valor={personagem.getProForca(personagem.pe_prosobrevivencia)}  proficiente={personagem.pe_prosobrevivencia}/>             
+              <TileProficiencia titulo='Intuição' valor={personagem.getProSabedoria(personagem.pe_prointuicao)}  proficiente={personagem.pe_prointuicao}/>
+              <TileProficiencia titulo='Lidar com animais' valor={personagem.getProSabedoria(personagem.pe_prolidaranimais)}  proficiente={personagem.pe_prolidaranimais}/>
+              <TileProficiencia titulo='Medicina' valor={personagem.getProSabedoria(personagem.pe_promedicina)}  proficiente={personagem.pe_promedicina}/>             
+              <TileProficiencia titulo='Percepção' valor={personagem.getProSabedoria(personagem.pe_propercepcao)}  proficiente={personagem.pe_propercepcao}/>             
+              <TileProficiencia titulo='Sobrevivência' valor={personagem.getProSabedoria(personagem.pe_prosobrevivencia)}  proficiente={personagem.pe_prosobrevivencia}/>             
             </div>
             <div class="ca-cd-div-flag">
               <span>{personagem.getModSabedoria()}</span>
@@ -186,10 +187,10 @@ function Caracteristicas(){
             </Tile>
           <Tile id='Carisma' titulo='Carisma'> 
             <div className='cr-proficiencia'>
-              <TileProficiencia titulo='Atuação' valor={personagem.getProForca(personagem.pe_proatuacao)}  proficiente={personagem.pe_proatuacao}/>
-              <TileProficiencia titulo='Blefar' valor={personagem.getProForca(personagem.pe_problefar)}  proficiente={personagem.pe_problefar}/>
-              <TileProficiencia titulo='Intimidação' valor={personagem.getProForca(personagem.pe_prointimidacao)}  proficiente={personagem.pe_prointimidacao}/>             
-              <TileProficiencia titulo='Persuasão' valor={personagem.getProForca(personagem.pe_propersuacao)}  proficiente={personagem.pe_propersuacao}/>                
+              <TileProficiencia titulo='Atuação' valor={personagem.getProCarisma(personagem.pe_proatuacao)}  proficiente={personagem.pe_proatuacao}/>
+              <TileProficiencia titulo='Blefar' valor={personagem.getProCarisma(personagem.pe_problefar)}  proficiente={personagem.pe_problefar}/>
+              <TileProficiencia titulo='Intimidação' valor={personagem.getProCarisma(personagem.pe_prointimidacao)}  proficiente={personagem.pe_prointimidacao}/>             
+              <TileProficiencia titulo='Persuasão' valor={personagem.getProCarisma(personagem.pe_propersuacao)}  proficiente={personagem.pe_propersuacao}/>                
             </div>
             <div class="ca-cd-div-flag">
               <span>{personagem.getModCarisma()}</span>
