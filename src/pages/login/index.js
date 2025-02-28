@@ -19,7 +19,6 @@ function Login(){
   },[]);
   
   async function onLogin(e) {
-    // e.preventDefault();
 
     let lemail = email.current?.value;
     let lsenha = senha.current?.value;

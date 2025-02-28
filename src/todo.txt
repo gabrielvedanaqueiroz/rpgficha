@@ -1,9 +1,14 @@
 
 personagem
-  criar
-  excluir
+  criar(
+    (x) cabecalho
+    (x) atributos
+    ( ) proficiencias
+    ( ) salva-guardas
+    ( ) vida
+  )
   editar
-  salvar,
+  
   upar (
     abrir uma nova pagina
     navegar para o lado em grupo de interesses;
@@ -18,6 +23,12 @@ principal
     salvar uso dados
     salvar teste morte
 
+invenario
+  trocar modal botao por (import BtnSalvarForm from '../../components/btnsalvarform';)
+
+caracteristica
+  trocar modal botao por (import BtnSalvarForm from '../../components/btnsalvarform';)
+  
 componente vazio
 componente erro
 

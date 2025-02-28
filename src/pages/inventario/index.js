@@ -162,7 +162,7 @@ function Inventario(){
         <div className="overlay">
           <div className='min_container'>
             <div className='min_titulo'>
-              <strong >Característica</strong>
+              <strong >Item</strong>
             </div>
             <form className='min_form' onSubmit={onSalvar}>
               <div className='min_div-edit'>

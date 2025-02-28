@@ -8,7 +8,10 @@ import Ficha from '../pages/ficha';
 import Caracteristicas from '../pages/caracteristicas';
 import Magias from '../pages/magias';
 import Personagens from '../pages/personagens';
-import PersonagenDetalhe from '../pages/personagemdetalhe';
+import PersonagenCriacaoTopo from '../pages/personagem-criacao-topo';
+import PersonagenCriacaoAtributos from '../pages/personagem-criacao-atributos';
+import PersonagemCriacaoProficiencia from '../pages/personagem-criacao-proficiencias';
+import PersonagemCriacaoVida from '../pages/personagem-criacao-vida';
 import Inventario from '../pages/inventario';
 import NaoEncontrado from '../pages/naoencontrado';
 
@@ -23,7 +26,10 @@ function RoutesApp(){
         <Route path='/magias' element={<Private> <Magias/> </Private>}/> 
         <Route path='/personagens' element={<Private> <Personagens/> </Private>}/> 
         <Route path='/inventario' element={<Private> <Inventario/> </Private>}/> 
-        <Route path='/personagemdetalhe' element={<Private> <PersonagenDetalhe/> </Private>}/> 
+        <Route path='/personagem-criacao-topo' element={<Private> <PersonagenCriacaoTopo/> </Private>}/> 
+        <Route path='/personagem-criacao-atributos' element={<Private> <PersonagenCriacaoAtributos/> </Private>}/> 
+        <Route path='/personagem-criacao-proficiencias' element={<Private> <PersonagemCriacaoProficiencia/> </Private>}/> 
+        <Route path='/personagem-criacao-vida' element={<Private> <PersonagemCriacaoVida/> </Private>}/> 
         <Route path='/registrar' element={<Registrar/>}/> 
         <Route path='/login' element={<Login/>}/> 
         <Route path='*' element={<NaoEncontrado/>}/> 

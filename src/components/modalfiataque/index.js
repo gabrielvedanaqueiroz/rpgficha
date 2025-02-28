@@ -67,7 +67,7 @@ function ModalFiAtaque(props){
             </div>
             <div className='mii_botoes'>
               <button className='mii_btn-cancelar' type='button' onClick={()=>{onFecharModal()}}>Cancelar</button>
-              <BtnSalvarForm/>
+              <BtnSalvarForm esperando='Salvando..' inicial='Salvar'/>
             </div>
           </form>
         </div>

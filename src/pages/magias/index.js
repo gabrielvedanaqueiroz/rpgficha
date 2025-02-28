@@ -312,7 +312,7 @@ function Magias(){
               
               <div className='mmg_botoes'>
                 <button className='mmg_btn-cancelar' type='button' onClick={()=>{onFecharModal()}}>Cancelar</button>
-                <BtnSalvarForm/>
+                <BtnSalvarForm esperando='Salvando..' inicial='Salvar'/>
               </div>
             </form>
           </div>

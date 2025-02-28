@@ -2,12 +2,13 @@ import './personagens.css'
 import Tile from '../../components/tile'
 import {useState, useEffect, useContext} from 'react';
 import {db} from '../../services/firebaseConnection';
-import {collection, query, where, getDocs } from 'firebase/firestore';
+import {collection, query, where, getDocs, doc, deleteDoc } from 'firebase/firestore';
 import {toast} from 'react-toastify';
 import { AuthContext } from '../../utils/auth';
 import logout from '../../res/logout.svg';
 import TilePersonagem from '../../components/tilepersonagem';
 import BtnAdicionar from '../../components/btnadicionar';
+import {useNavigate} from 'react-router-dom';
 
 function Personagens(){
 
@@ -16,48 +17,47 @@ function Personagens(){
   const {usuario} = useContext(AuthContext);  
   const {onSingOut} = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  async function buscar(){
+      
+    try {
+      const q = query(collection(db, "tb_personagem"), where("pe_idjogador", "==", usuario?.uid.trim()));
+      const querySnapshot = await getDocs(q);
+      let listaPost = [];
+
+      querySnapshot.forEach((doc)=>{
+        listaPost.push({
+          pe_id: doc.id.trim(),
+          pe_nome: doc.data().pe_nome.trim(),
+          pe_nivel: doc.data().pe_nivel,
+          pe_catotal: doc.data().pe_catotal,
+          pe_vidaatual: doc.data().pe_vidaatual,
+          pe_raca: doc.data().pe_raca.trim(),
+          pe_subraca: doc.data().pe_subraca.trim(),
+          pe_classe: doc.data().pe_classe.trim(),
+          pe_subclasse: doc.data().pe_subclasse.trim(),      
+          pe_tendencia: doc.data().pe_tendencia.trim(),      
+          pe_antecedente: doc.data().pe_antecedente.trim(),
+        })
+      });
+      
+      listaPost.sort((a, b)=> {
+        if(a.pe_nome === personagemID) return -1;
+        if(b.pe_nome === personagemID) return 1;
+      });
+      setLista(listaPost);
+    } 
+    catch (error) {
+      console.log('Erro ao efetuar busca: '+error);
+      toast.error('Erro ao efetuar busca');
+    }
+    
+    setLoading(false);
+    
+  }
 
   useEffect(()=>{
-    
-    async function buscar(){
-      
-      try {
-        const q = query(collection(db, "tb_personagem"), where("pe_idjogador", "==", usuario?.uid.trim()));
-        const querySnapshot = await getDocs(q);
-        let listaPost = [];
-
-        querySnapshot.forEach((doc)=>{
-          listaPost.push({
-            pe_id: doc.id.trim(),
-            pe_nome: doc.data().pe_nome.trim(),
-            pe_nivel: doc.data().pe_nivel,
-            pe_catotal: doc.data().pe_catotal,
-            pe_vidaatual: doc.data().pe_vidaatual,
-            pe_raca: doc.data().pe_raca.trim(),
-            pe_subraca: doc.data().pe_subraca.trim(),
-            pe_classe: doc.data().pe_classe.trim(),
-            pe_subclasse: doc.data().pe_subclasse.trim(),      
-            pe_tendencia: doc.data().pe_tendencia.trim(),      
-            pe_antecedente: doc.data().pe_antecedente.trim(),
-          })
-        });
-        
-        listaPost.sort((a, b)=> {
-          // a.pe_nome > b.pe_nome
-          if(a.pe_nome === personagemID) return -1;
-          if(b.pe_nome === personagemID) return 1;
-          return a.localeCompare(b);
-        });
-        setLista(listaPost);
-      } 
-      catch (error) {
-        console.log('Erro ao efetuar busca: '+error);
-        toast.error('Erro ao efetuar busca');
-      }
-      
-      setLoading(false);
-      
-    }
     buscar();
   },[personagemID, usuario]);
 
@@ -69,8 +69,16 @@ function Personagens(){
     alert(item.pe_nome);
   }
 
-  function onExcluir(id){
-    alert(id);
+  async function onExcluir(id){
+    const docRef = doc(db, "tb_personagem", id);
+    await deleteDoc(docRef)
+    .then(()=>{
+      buscar();
+    })
+    .catch((error)=>{
+      toast.error('Erro ao excluir');
+      console.log('erro ao buscar '+error);
+    });  
   }
 
   if(loading)
@@ -121,7 +129,9 @@ function Personagens(){
         </div>
       </Tile> 
 
-      <BtnAdicionar alt='adicionar um personagem' adicionar={()=>{}}/>
+      <BtnAdicionar alt='adicionar um personagem' adicionar={()=>{
+        navigate('/personagem-criacao-topo', {replace:false});
+      }}/>
     </div>
   );
 }
