@@ -217,6 +217,23 @@ export default class Personagem{
     return this.getModDestreza();
   }
 
+  getCDMagia(){
+    let modificador = 0;
+    switch (this.pe_habilidadeconjuracao) {
+      case "Carisma":
+        modificador = this.getModCarisma();
+      break;
+      case "Sabedoria":
+        modificador = this.getModSabedoria();
+      break;
+      case "Inteligência":
+        modificador = this.getModInteligencia();
+      break;
+    }
+
+    return  8 + this.pe_bproficiencia + modificador;
+  }
+
   //metodo para mostrar uma imagem dependendo da classe do personagem
   getImagem(){
     let url = '';

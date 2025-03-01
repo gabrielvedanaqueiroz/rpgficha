@@ -27,6 +27,7 @@ function PersonagenCriacaoTopo(){
   const [vidaNv1, setVidaNv1]                   = useState(0);
   const [CABase, setCABase]                     = useState(0);
   const [movimento, setMovimento]               = useState(0);
+  const [habilidadeconjuracao, setHabilidadeConjuracao]  = useState('');
   const nome        = useRef('');
   const antecedente = useRef('');
 
@@ -260,6 +261,7 @@ function PersonagenCriacaoTopo(){
     setDadoVida('1'+classe.cl_dado_vida);
     setVidaNv1(classe.cl_vida_nivel_1);
     setCABase(classe.cl_cabase);
+    setHabilidadeConjuracao(classe.cl_cabasecabase);
   }
 
   useEffect(()=>{
@@ -303,6 +305,7 @@ function PersonagenCriacaoTopo(){
         pe_vidadado       : dadoVida,
         pe_movimento      : movimento,
         pe_ativo          : false,
+        // pe_habilidadeconjuracao : habilidadeconjuracao,
       })
       .then( (docRef) =>{
 
