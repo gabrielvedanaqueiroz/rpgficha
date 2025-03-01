@@ -1,16 +1,15 @@
 
 personagem
+ 
   editar
   escolher ativo
   upar (
     abrir uma nova pagina
     navegar para o lado em grupo de interesses;
   )
-  criar(
-    pe_cdmagia 8+ mod + bprof
-    pe_bonusataquemagia mod + bprof
-    pe_habilidadeconjuracao habilidade
-  )
+
+caracteristica
+  tb_anotacoes??? check no modal pra marcar se é caracteristica ou anotacao
 
 principal
   vidas
@@ -18,15 +17,6 @@ principal
     salvar dec
     salvar uso dados
     salvar teste morte
-
-invenario
-  trocar modal botao por (import BtnSalvarForm from '../../components/btnsalvarform';)
-
-caracteristica
-  trocar modal botao por (import BtnSalvarForm from '../../components/btnsalvarform';)
-  
-componente vazio
-componente erro
 
 tile deslize suave
 

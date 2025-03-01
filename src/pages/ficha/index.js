@@ -14,6 +14,7 @@ import ModalFiMagia from '../../components/modalfimagia';
 import TileVida from '../../components/tilevida/';
 import TileTesteMorte from '../../components/tiletestemorte/index.js';
 import { AuthContext } from '../../utils/auth';
+import Vazio from '../../components/vazio/index.js';
 
 function Ficha(){
 
@@ -100,9 +101,7 @@ function Ficha(){
               snapshot.data().pe_proprestidigitacao,
               snapshot.data().pe_prosobrevivencia,
               snapshot.data().pe_proreligiao,
-              snapshot.data().pe_habilidadeconjuracao ,
-              snapshot.data().pe_cdmagia,
-              snapshot.data().pe_bonusataquemagia,
+              snapshot.data().pe_idhabilidadeconjuracao,
             ); 
 
             setPersonagem(personagem);
@@ -174,7 +173,7 @@ function Ficha(){
 
     buscar();
 
-  },[]);
+  },[personagem]);
 
   function onAddAtaque(){
     setShowModalAtaque(true);
@@ -197,6 +196,7 @@ function Ficha(){
     return <div>carregand...</div>
   
   return(
+    personagemID === ''? <Vazio/> :
     <div className='fi-container'>
       <div className='fi-cabecalho'>
         <div className='fi-cb-esquerda'>

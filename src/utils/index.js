@@ -21,3 +21,243 @@ export function exibirBarras(){
   if(rodape !== null)
     rodape.style.display = "flex";
 }
+
+export const jClasses = [
+  {
+    "cl_id": 1,
+    "cl_idhabilidadeconjuracao": 0, 
+    "cl_descricao": "Bárbaro",
+    "cl_dado_vida": "d12",
+    "cl_vida_nivel_1": 12,
+    "cl_cabase": 10,
+    "cl_sub": ["Caminho do Berserker", "Caminho do Guerreiro Totêmico"],
+
+    "cl_up2":["Ataque Descuidado", "Sentido de Perigo"],
+    "cl_up3":["Caminho Primitivo", {"furia":3}],
+    "cl_up4":["Incremento no Valor de Habilidade"],
+    "cl_up5":["Ataque Extra", "Movimento Rápido", {"furia":4, "bonusproficiencia": 3}]
+  },
+  {
+    "cl_id": 2,
+    "cl_idhabilidadeconjuracao": 6, 
+    "cl_descricao": "Bardo",
+    "cl_dado_vida": "d8",
+    "cl_vida_nivel_1": 8,
+    "cl_cabase": 11,
+    "cl_sub": ["Colégio do Conhecimento", "Colégio do Valor"]
+  },
+  {
+    "cl_id": 3,
+    "cl_idhabilidadeconjuracao": 6, 
+    "cl_descricao": "Bruxo",
+    "cl_dado_vida": "d8",
+    "cl_vida_nivel_1": 8,
+    "cl_cabase": 11,
+    "cl_sub": ["Arquifada", "O Grande Antigo", "O Senhor Imortal"]
+  },
+  {
+    "cl_id": 4,
+    "cl_idhabilidadeconjuracao": 5, 
+    "cl_descricao": "Clérigo",
+    "cl_dado_vida": "d8",
+    "cl_vida_nivel_1": 8,
+    "cl_cabase": 16,
+    "cl_sub": [
+      "Domínio da Vida",
+      "Domínio do Conhecimento",
+      "Domínio da Luz",
+      "Domínio da Natureza",
+      "Domínio da Tempestade",
+      "Domínio do Engano",
+      "Domínio da Guerra"
+    ]
+  },
+  {
+    "cl_id": 5,
+    "cl_idhabilidadeconjuracao": 5, 
+    "cl_descricao": "Druida",
+    "cl_dado_vida": "d8",
+    "cl_vida_nivel_1": 8,
+    "cl_cabase": 12,
+    "cl_sub": ["Círculo da Terra", "Círculo da Lua"]
+  },
+  {
+    "cl_id": 6,
+    "cl_idhabilidadeconjuracao": 6, 
+    "cl_descricao": "Feiticeiro",
+    "cl_dado_vida": "d6",
+    "cl_vida_nivel_1": 6,
+    "cl_cabase": 10,
+    "cl_sub": ["Linhagem Dracônica", "Magia Selvagem"]
+  },
+  {
+    "cl_id": 7,
+    "cl_idhabilidadeconjuracao": 4, 
+    "cl_descricao": "Guerreiro",
+    "cl_dado_vida": "d10",
+    "cl_vida_nivel_1": 10,
+    "cl_cabase": 16,
+    "cl_sub": [
+      "Arquétipo do Campeão",
+      "Arquétipo do Mestre de Batalha",
+      "Arquétipo do Cavaleiro Arcano"
+    ]
+  },
+  {
+    "cl_id": 8,
+    "cl_idhabilidadeconjuracao": 4, 
+    "cl_descricao": "Ladino",
+    "cl_dado_vida": "d8",
+    "cl_vida_nivel_1": 8,
+    "cl_cabase": 11,
+    "cl_sub": [
+      "Tradição do Ladrão",
+      "Tradição do Assassino",
+      "Tradição do Trapaceiro Arcano"
+    ]
+  },
+  {
+    "cl_id": 9,
+    "cl_idhabilidadeconjuracao": 4, 
+    "cl_descricao": "Mago",
+    "cl_dado_vida": "d6",
+    "cl_vida_nivel_1": 6,
+    "cl_cabase": 10,
+    "cl_sub": [
+      "Escola de Abjuração",
+      "Escola de Adivinhação",
+      "Escola de Evocação",
+      "Escola de Ilusão",
+      "Escola de Necromancia",
+      "Escola de Transmutação",
+      "Escola de Conjuração",
+      "Escola de Encantamento"
+    ]
+  },
+  {
+    "cl_id": 10,
+    "cl_idhabilidadeconjuracao": 0, 
+    "cl_descricao": "Monge",
+    "cl_dado_vida": "d8",
+    "cl_vida_nivel_1": 8,
+    "cl_cabase": 10,
+    "cl_sub": [
+      "Caminho da Mão Aberta",
+      "Caminho da Sombra",
+      "Caminho dos Quatro Elementos"
+    ]
+  },
+  {
+    "cl_id": 11,
+    "cl_idhabilidadeconjuracao": 6, 
+    "cl_descricao": "Paladino",
+    "cl_dado_vida": "d10",
+    "cl_vida_nivel_1": 10,
+    "cl_cabase": 16,
+    "cl_sub": [
+      "Juramento de Devoção",
+      "Juramento dos Anciões",
+      "Juramento da Vingança"
+    ]
+  },
+  {
+    "cl_id": 12,
+    "cl_idhabilidadeconjuracao": 5, 
+    "cl_descricao": "Patrulheiro",
+    "cl_dado_vida": "d10",
+    "cl_vida_nivel_1": 10,
+    "cl_cabase": 14,
+    "cl_idhabilidadeconjuracao": 5, 
+    "cl_sub": ["Conclave do Caçador", "Conclave Mestre das Feras"]
+  }
+];
+
+export const jRacas = [
+  {
+    "rc_id": 1,
+    "rc_descricao": "Anão",
+    "rc_movimento": 5,
+    "rc_sub": [
+        "da Colina",
+        "da Montanha"
+    ]
+  },
+  {
+    "rc_id": 2,
+    "rc_descricao": "Elfo",
+    "rc_movimento": 6,
+    "rc_sub": [
+        "Alto Elfo",
+        "Elfo da Floresta",
+        "Elfo Negro (Drow)"
+    ]
+  },
+  {
+    "rc_id": 3,
+    "rc_descricao": "Halfling",
+    "rc_movimento": 5,
+    "rc_sub": [
+        "Pés-Leves",
+        "Robusto"
+    ]
+  },
+  {
+    "rc_id": 4,
+    "rc_descricao": "Humano",
+    "rc_movimento": 6,
+    "rc_sub": [
+        "Padrão",
+        "Variante"
+    ]
+  },
+  {
+    "rc_id": 5,
+    "rc_descricao": "Draconato",
+    "rc_movimento": 6,
+    "rc_sub": [
+        "Azul",
+        "Branco",
+        "Bronze",
+        "Cobre",
+        "Latão",
+        "Negro",
+        "Ouro",
+        "Prata",
+        "Verde",
+        "Vermelho",
+    ]
+  },
+  {
+    "rc_id": 6,
+    "rc_descricao": "Gnomo",
+    "rc_movimento": 5,
+    "rc_sub": [
+        "Gnomo da Floresta",
+        "Gnomo das Rochas"
+    ]
+  },
+  {
+    "rc_id": 7,
+    "rc_descricao": "Meio-Elfo",
+    "rc_movimento": 6,
+    "rc_sub": [
+        "Sem sub-raças"
+    ]
+  },
+  {
+    "rc_id": 8,
+    "rc_descricao": "Meio-Orc",
+    "rc_movimento": 6,
+    "rc_sub": [
+        "Sem sub-raças"
+    ]
+  },
+  {
+    "rc_id": 9,
+    "rc_descricao": "Tiefling",
+    "rc_movimento": 6,
+    "rc_sub": [
+        "Sem sub-raças"
+    ]
+  }
+];

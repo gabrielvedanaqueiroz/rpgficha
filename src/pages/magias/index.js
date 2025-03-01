@@ -8,11 +8,11 @@ import { toast } from 'react-toastify';
 import TileMagia from '../../components/tilemagia';
 import BtnSalvarForm from '../../components/btnsalvarform';
 import {AuthContext} from '../../utils/auth';
+import Vazio from '../../components/vazio';
 
 function Magias(){
   
-  const personagemID    = localStorage.getItem('RF@personagemID');
-  const {personagem}  = useContext(AuthContext);
+  const {personagem}    = useContext(AuthContext);
   const [lista, setLista] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -29,7 +29,7 @@ function Magias(){
   const [idMagia, setIdMagia]                 = useState('');
   
   async function buscar(){
-    const q = query(collection(db, "tb_magia"), where("mg_idpersonagem", "==", personagemID.trim()));
+    const q = query(collection(db, "tb_magia"), where("mg_idpersonagem", "==", personagem.pe_id.trim()));
     const querySnapshot = await getDocs(q); 
     let lista = [];
 
@@ -112,7 +112,7 @@ function Magias(){
       if(idMagia === ''){
         //inserir
         await addDoc(collection(db, 'tb_magia'),{
-          mg_idpersonagem: personagemID.trim(),
+          mg_idpersonagem: personagem.pe_id.trim(),
           mg_alcance: alcance.trim(),
           mg_componentes: componentes.trim(),
           mg_dano: dano.trim(),
@@ -135,7 +135,6 @@ function Magias(){
         //editar
         const docRef = doc(db, "tb_magia", idMagia);
           await updateDoc(docRef, {
-            mg_idpersonagem: personagemID.trim(),
             mg_alcance: alcance.trim(),
             mg_componentes: componentes.trim(),
             mg_dano: dano.trim(),
@@ -174,25 +173,27 @@ function Magias(){
   }
 
   return(
+    personagem === null ? <Vazio/> :
+
     <div className='mg-container'>  
 
       <div>
         <div className='mg_cabecalho'>
           <div className='mg_cb-item'>
             <label>Habilidade de Conjuração</label> 
-            <strong>{personagem.pe_habilidadeconjuracao}</strong>
+            <strong>{personagem.getHabilidadeConjuracao()}</strong>
           </div>
 
           <div className='mg_linha-vert'/>
           <div className='mg_cb-item'>
             <label>CD de resistência magia</label>
-            <strong>{personagem.pe_cdmagia}</strong>
+            <strong>{personagem.getCDMagia()}</strong>
           </div>
 
           <div className='mg_linha-vert'/>
           <div className='mg_cb-item'>
             <label>Bônus de ataque de magia</label>
-            <strong>{personagem.pe_bonusataquemagia}</strong>
+            <strong>{personagem.getBonusMagia()}</strong>
           </div>
         </div>
         <div className='mg-titulo'>

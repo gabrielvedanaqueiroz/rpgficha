@@ -44,7 +44,7 @@
   height: 20px;
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: center;
   text-decoration: none;
   background-color: #ea541c;
   border: 0;
@@ -60,7 +60,7 @@
   height: 20px;
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: center;
   text-decoration: none;
   background-color: #ea541c;
   border: 0;

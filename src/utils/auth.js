@@ -86,6 +86,9 @@ function AuthProvider({children}){
   const onSingOut = async()=>{
     await signOut(auth);  //metodo pra deslogar do firebase authentication
     setUsuario(null);
+    setPersonagem(null);
+    localStorage.setItem('RF@detailUser', JSON.stringify({}));
+    localStorage.setItem('RF@personagemID', '');
   }
 
   async function onSalvarJogador(id, nome, fechar) {

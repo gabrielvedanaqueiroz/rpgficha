@@ -58,9 +58,7 @@ export default class Personagem{
     pe_proprestidigitacao,
     pe_prosobrevivencia,
     pe_proreligiao,
-    pe_habilidadeconjuracao,
-    pe_cdmagia,
-    pe_bonusataquemagia
+    pe_idhabilidadeconjuracao,
   ){
     this.pe_id = pe_id;
     this.pe_nome = pe_nome;
@@ -119,9 +117,8 @@ export default class Personagem{
     this.pe_proprestidigitacao = pe_proprestidigitacao;
     this.pe_prosobrevivencia = pe_prosobrevivencia;
     this.pe_proreligiao = pe_proreligiao;
-    this.pe_habilidadeconjuracao = pe_habilidadeconjuracao;
-    this.pe_cdmagia = pe_cdmagia;
-    this.pe_bonusataquemagia = pe_bonusataquemagia;
+    this.pe_idhabilidadeconjuracao = pe_idhabilidadeconjuracao;
+
   }
 
   #onModificador(aValor){
@@ -217,21 +214,50 @@ export default class Personagem{
     return this.getModDestreza();
   }
 
-  getCDMagia(){
+  #getSelModificadorMagia(){
+
     let modificador = 0;
-    switch (this.pe_habilidadeconjuracao) {
-      case "Carisma":
+    switch (this.pe_idhabilidadeconjuracao) {
+      case 6:
         modificador = this.getModCarisma();
       break;
-      case "Sabedoria":
+      case 5:
         modificador = this.getModSabedoria();
       break;
-      case "Inteligência":
+      case 4:
         modificador = this.getModInteligencia();
       break;
     }
 
-    return  8 + this.pe_bproficiencia + modificador;
+    return modificador;
+
+  }
+
+  getHabilidadeConjuracao(){
+
+    let habilidade = '';
+    switch (this.pe_idhabilidadeconjuracao) {
+      case 6:
+        habilidade = 'Carisma';
+      break;
+      case 5:
+        habilidade = 'Sabedoria';
+      break;
+      case 4:
+        habilidade = 'Inteligência';
+      break;
+    }
+
+    return habilidade;
+
+  }
+
+  getCDMagia(){
+    return  8 + this.pe_bproficiencia + this.#getSelModificadorMagia();;
+  }
+
+  getBonusMagia(){
+    return  this.pe_bproficiencia + this.#getSelModificadorMagia();;
   }
 
   //metodo para mostrar uma imagem dependendo da classe do personagem

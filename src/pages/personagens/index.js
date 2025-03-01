@@ -12,7 +12,7 @@ import {useNavigate} from 'react-router-dom';
 
 function Personagens(){
 
-  const personagemID      = localStorage.getItem('RF@personagemID');
+  const {personagem}    = useContext(AuthContext);
   const [lista, setLista] = useState([]);
   const {usuario} = useContext(AuthContext);  
   const {onSingOut} = useContext(AuthContext);
@@ -43,8 +43,8 @@ function Personagens(){
       });
       
       listaPost.sort((a, b)=> {
-        if(a.pe_nome === personagemID) return -1;
-        if(b.pe_nome === personagemID) return 1;
+        if(a.pe_id === personagem.pe_id.trim()) return -1;
+        if(b.pe_id === personagem.pe_id.trim()) return 1;
       });
       setLista(listaPost);
     } 
@@ -59,7 +59,7 @@ function Personagens(){
 
   useEffect(()=>{
     buscar();
-  },[personagemID, usuario]);
+  },[personagem, usuario]);
 
   async function onDeslogar() {
     await onSingOut();
@@ -98,7 +98,7 @@ function Personagens(){
               return(
                 <Tile id={item.pe_id} titulo={item.pe_nome} >
                   <TilePersonagem
-                    puso={item.pe_id === personagemID}
+                    puso={item.pe_id === personagem.pe_id.trim()}
                     pclasse='Patrulheiro'
                     praca={item.pe_raca}
                     psubclasse={item.pe_subclasse}

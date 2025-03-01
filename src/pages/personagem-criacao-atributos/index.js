@@ -61,8 +61,6 @@ function PersonagenCriacaoAtributos(){
           pe_vidaatual: (personagemCriado.vidaNv1 + modCostituicao),
           pe_vidatemp: 0,
           pe_vidadadousado: 0,
-          pe_cdmagia: 15,
-          pe_bonusataquemagia: 5,
           pe_cabase: (personagemCriado.CABase  + modDestreza + modCostituicao),
         }
       )

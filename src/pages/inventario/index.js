@@ -1,15 +1,18 @@
 import './inventario.css';
 import Tile from '../../components/tile';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import {db} from '../../services/firebaseConnection';
 import {collection, query, where, getDocs, addDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import BtnAdicionar from '../../components/btnadicionar';
 import TileCaracteristica from '../../components/tilecaracteristica';
+import Vazio from '../../components/vazio';
+import BtnSalvarForm from '../../components/btnsalvarform';
+import { AuthContext } from '../../utils/auth';
 
 function Inventario(){
 
-  const personagemID    = localStorage.getItem('RF@personagemID');
+  const {personagem} = useContext(AuthContext);
   const [lista, setLista] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -20,7 +23,7 @@ function Inventario(){
   const [idItem, setIdItem] = useState('');
 
   async function buscar(){
-    const q = query(collection(db, "tb_inventario"), where("in_idpersonagem", "==", personagemID.trim()));
+    const q = query(collection(db, "tb_inventario"), where("in_idpersonagem", "==", personagem.pe_id.trim()));
     const querySnapshot = await getDocs(q); 
     let lista = [];
 
@@ -82,7 +85,7 @@ function Inventario(){
 
       if(idItem.trim() === ''){     // inserir
         await addDoc(collection(db, 'tb_inventario'),{
-          in_idpersonagem: personagemID.trim(),
+          in_idpersonagem: personagem.pe_id.trim(),
           in_nome: nome.trim(),
           in_descricao: descricao.trim(),
         })
@@ -98,7 +101,6 @@ function Inventario(){
       else{                                     //editar
         const docRef = doc(db, "tb_inventario", idItem);
           await updateDoc(docRef, {
-            in_idpersonagem: personagemID.trim(),
             in_nome: nome.trim(),
             in_descricao: descricao.trim(),
           }
@@ -123,6 +125,9 @@ function Inventario(){
     return <div>carregand...</div>
 
   return(
+
+    personagem === null? <Vazio/> :
+
     <div className='it-container'>
 
       <div>
@@ -175,7 +180,7 @@ function Inventario(){
               </div>
               <div className='min_botoes'>
                 <button className='min_btn-cancelar' type='button' onClick={()=>{onFecharModal()}}>Cancelar</button>
-                <button className='min_btn-salvar' type='submmit'>Salvar</button>
+                <BtnSalvarForm esperando='Salvando...' inicial='Salvar'/>
               </div>
             </form>
           </div>
@@ -183,6 +188,7 @@ function Inventario(){
       )}
 
     </div>
+    
   );
 }
 

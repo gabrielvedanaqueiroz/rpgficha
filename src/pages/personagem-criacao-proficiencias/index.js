@@ -115,6 +115,7 @@ function PersonagemCriacaoProficiencia() {
       })
       .then( () =>{
         exibirBarras();
+        localStorage.setItem('RF@personagem-criado', JSON.stringify({}));
         navigate('/personagens', {replace:true});
       })
       .catch((error)=>{

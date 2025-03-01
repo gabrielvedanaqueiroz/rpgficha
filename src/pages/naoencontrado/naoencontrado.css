@@ -1,0 +1,9 @@
+.ne_container{
+  color: #F8cc27; 
+  /* rgb(94, 92, 92) */
+  font-size: 32px;
+  text-align: center;
+  padding: 50px;
+  background-color: #ea541c;
+  min-height: 900px;
+}

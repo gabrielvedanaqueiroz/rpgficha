@@ -2,16 +2,17 @@ import './caracteristicas.css';
 import Tile from '../../components/tile';
 import { useEffect, useState, useContext } from 'react';
 import {db} from '../../services/firebaseConnection';
-import {collection, query, where, getDocs, addDoc, doc, updateDoc, deleteDoc, getDoc } from 'firebase/firestore';
+import {collection, query, where, getDocs, addDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import {toast} from 'react-toastify';
 import TileCaracteristica from '../../components/tilecaracteristica';
 import TileProficiencia from '../../components/tileproficiencia';
 import BtnAdicionar from '../../components/btnadicionar';
 import { AuthContext } from '../../utils/auth';
+import Vazio from '../../components/vazio';
+import BtnSalvarForm from '../../components/btnsalvarform';
 
 function Caracteristicas(){
   
-  const personagemID    = localStorage.getItem('RF@personagemID');
   const [lstCaracteristica, setCaracteristica] = useState([]);
   const [loading, setLoading] = useState(true);
   const {personagem} = useContext(AuthContext);
@@ -23,7 +24,7 @@ function Caracteristicas(){
   const [idCaracteristica, setIdCaracteristica] = useState('');
 
   async function buscar(){
-    const q = query(collection(db, "tb_caracteristica"), where("ca_idpersonagem", "==", personagemID.trim()));
+    const q = query(collection(db, "tb_caracteristica"), where("ca_idpersonagem", "==", personagem.pe_id.trim()));
     const querySnapshot = await getDocs(q); 
     let lista = [];
 
@@ -44,11 +45,10 @@ function Caracteristicas(){
     
   }
 
-
   useEffect(()=>{
     buscar();
     setLoading(false);
-  },[personagemID]);
+  },[]);
 
   async function onSalvar(e){
     e.preventDefault();
@@ -57,7 +57,7 @@ function Caracteristicas(){
 
       if(idCaracteristica.trim() === ''){     // inserir
         await addDoc(collection(db, 'tb_caracteristica'),{
-          ca_idpersonagem: personagemID.trim(),
+          ca_idpersonagem: personagem.pe_id.trim(),
           ca_nome: titulo.trim(),
           ca_descricao: descricao.trim(),
         })
@@ -73,7 +73,6 @@ function Caracteristicas(){
       else{                                     //editar
         const docRef = doc(db, "tb_caracteristica", idCaracteristica);
           await updateDoc(docRef, {
-            ca_idpersonagem: personagemID.trim(),
             ca_nome: titulo.trim(),
             ca_descricao: descricao.trim(),
           }
@@ -126,6 +125,7 @@ function Caracteristicas(){
     return <div>carregand...</div>
 
   return(
+    personagem === null? <Vazio/> :
     <div className='cr_container'>
 
       <div className='cr_proficiencias'>
@@ -243,7 +243,7 @@ function Caracteristicas(){
               </div>
               <div className='mca_botoes'>
                 <button className='mca_btn-cancelar' type='button' onClick={()=>{onFecharModal()}}>Cancelar</button>
-                <button className='mca_btn-salvar' type='submmit'>Salvar</button>
+                <BtnSalvarForm esperando='Salvando...' inicial='Salvar'/>
               </div>
             </form>
           </div>
