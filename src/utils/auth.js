@@ -1,11 +1,6 @@
 import { useState, createContext, useEffect } from "react";
 import {auth, db} from '../services/firebaseConnection';
-import {
-    signInWithEmailAndPassword, 
-    signOut, 
-    createUserWithEmailAndPassword, 
-    onAuthStateChanged,
-} from 'firebase/auth';
+import { signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import {collection, addDoc } from 'firebase/firestore';
 import {toast} from 'react-toastify';
 
@@ -13,6 +8,7 @@ export const AuthContext = createContext({});
 
 function AuthProvider({children}){
 
+  const [signed, setSigned] = useState(false);
   const [usuario, setUsuarioInterno] = useState(null);
   const [loadingAuth, setLoadingAuth] = useState(false);
   const [personagem, setPersonagemInterno] = useState({});
@@ -20,7 +16,7 @@ function AuthProvider({children}){
 
   useEffect(()=>{
     const LUsuario  = localStorage.getItem('RF@detailUser');
-    setUsuario(JSON.parse(LUsuario));
+    setUsuarioInterno(JSON.parse(LUsuario));
   },[]);
   
   function setUsuario(aUsuario){
@@ -41,6 +37,7 @@ function AuthProvider({children}){
         localStorage.setItem('RF@detailUser', JSON.stringify(userData));
         setUsuarioInterno(userData);
         setLoadingAuth(false);
+        setSigned(true);
         return true;
       })
       .catch((error)=>{
@@ -84,11 +81,9 @@ function AuthProvider({children}){
   };
 
   const onSingOut = async()=>{
-    await signOut(auth);  //metodo pra deslogar do firebase authentication
-    setUsuario(null);
-    setPersonagem(null);
     localStorage.setItem('RF@detailUser', JSON.stringify({}));
-    localStorage.setItem('RF@personagemID', '');
+    setPersonagem(null);
+    await signOut(auth);  //metodo pra deslogar do firebase authentication
   }
 
   async function onSalvarJogador(id, nome, fechar) {
@@ -125,7 +120,7 @@ function AuthProvider({children}){
         setLoadingAuth(false);
         localStorage.setItem('RF@detailUser', JSON.stringify(userData));
         setUsuarioInterno(userData);
-      });
+      });  
       
       return true;
     })
@@ -148,9 +143,9 @@ function AuthProvider({children}){
           email: user.email,
         }
 
-        setUsuario(userData);
+        setUsuarioInterno(userData);
+        setSigned(true);
         localStorage.setItem('RF@detailUser', JSON.stringify(userData));
-        localStorage.setItem('RF@personagemID', 'Ph3YdE5qOua601u0m0Wj'); //trocar
         setLoadingAuth(false);
       }
       else{
@@ -171,7 +166,7 @@ function AuthProvider({children}){
   return(
     <AuthContext.Provider
       value={{
-        signed: !!usuario, //duas exclamacao converte pra boleano e faz o teste
+        signed,
         usuario,
         personagem,
         personagemId,

@@ -1,28 +1,9 @@
 
 personagem
- 
   editar
-  escolher ativo
   upar (
     abrir uma nova pagina
     navegar para o lado em grupo de interesses;
   )
 
-caracteristica
-  tb_anotacoes??? check no modal pra marcar se é caracteristica ou anotacao
-
-principal
-  vidas
-    salvar inc
-    salvar dec
-    salvar uso dados
-    salvar teste morte
-
 tile deslize suave
-
-tirar do auth.js a linha:
-  localStorage.setItem('RF@personagemID', 'Ph3YdE5qOua601u0m0Wj'); 
-
-usar hooks a interessantes
-  (x) useRef 
-  (x) useFormStatus();

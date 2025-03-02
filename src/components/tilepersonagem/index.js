@@ -2,6 +2,7 @@ import './tilepersonagem.css';
 import editar from '../../res/edit.svg';
 import excluir from '../../res/delete.svg';
 import personagem from '../../res/personagem.svg';
+import selecionar from '../../res/preparar.svg';
 
 function TilePersonagem(props){
   return(
@@ -40,6 +41,7 @@ function TilePersonagem(props){
       <div className='pri_botoes'>
         <img src={excluir} className='pri_btn'  alt='excluir' onClick={()=>{props.excluir()}}/>
         <img src={editar} className='pri_btn' alt='editar' onClick={()=>{props.editar()}}/>
+        <img src={selecionar} className='pri_btn' alt='selecionar' onClick={()=>{props.selecionar()} }/>
       </div>
     </div>
     

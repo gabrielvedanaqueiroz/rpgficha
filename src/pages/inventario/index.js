@@ -12,6 +12,7 @@ import { AuthContext } from '../../utils/auth';
 
 function Inventario(){
 
+  const personagemID    = localStorage.getItem('RF@personagemID');  
   const {personagem} = useContext(AuthContext);
   const [lista, setLista] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -46,7 +47,8 @@ function Inventario(){
 
   useEffect(()=>{
 
-    buscar();
+    if(personagemID.trim() !== '')
+      buscar();
 
     setLoading(false);
   },[]);
@@ -126,7 +128,7 @@ function Inventario(){
 
   return(
 
-    personagem === null? <Vazio/> :
+    (personagemID.trim() === '')? <Vazio/> :
 
     <div className='it-container'>
 

@@ -13,15 +13,19 @@ import BtnSalvarForm from '../../components/btnsalvarform';
 
 function Caracteristicas(){
   
+  const personagemID    = localStorage.getItem('RF@personagemID');  
   const [lstCaracteristica, setCaracteristica] = useState([]);
+  const [lstAnotacao, setLstAnotacao] = useState([]);
   const [loading, setLoading] = useState(true);
   const {personagem} = useContext(AuthContext);
 
   /* modal */
   const [isOpen, setIsOpen] = useState(false);
   const [titulo, setTitulo] = useState('');
-  const [descricao, setDescricao] = useState('');
-  const [idCaracteristica, setIdCaracteristica] = useState('');
+  const [idCaracteristica, setIdCaracteristica]   = useState('');
+  const [descricao, setDescricao]                 = useState('');
+  const [tipo, setTipo]                           = useState('0');
+  
 
   async function buscar(){
     const q = query(collection(db, "tb_caracteristica"), where("ca_idpersonagem", "==", personagem.pe_id.trim()));
@@ -39,53 +43,117 @@ function Caracteristicas(){
       lista.sort((a, b)=> a.ca_nome > b.ca_nome);
   
       setCaracteristica(lista);
+
+      buscarAnatoca();
     } catch (error) {
       toast.error('Erro ao carregar caracteristica'+error); 
     }
     
   }
 
-  useEffect(()=>{
-    buscar();
+  async function buscarAnatoca() {
+
+    const q = query(collection(db, "tb_anotacao"), where("an_idpersonagem", "==", personagem.pe_id.trim()));
+    const querySnapshot = await getDocs(q); 
+    let lista = [];
+
+    try {
+      querySnapshot.forEach((doc)=>{
+        lista.push({
+          an_id: doc.id.trim(),
+          an_descricao : doc.data().an_descricao.trim(),
+          an_titulo  : doc.data().an_titulo .trim(),
+          // an_data: doc.data().an_data.trim(),
+          // an_idpersonagem : doc.data().an_idpersonagem.trim(),
+        })
+      });
+      // lista.sort((a, b)=> a.ca_nome > b.ca_nome);
+  
+      setLstAnotacao(lista);
+    } catch (error) {
+      toast.error('Erro ao carregar anotação'+error); 
+    }
+    
+  }
+  useEffect(()=>{    
+    if(personagemID.trim() !== '')
+      buscar();
+
     setLoading(false);
   },[]);
 
   async function onSalvar(e){
     e.preventDefault();
 
-    if((titulo.trim() !== '') && (descricao.trim() !== '')){
+    if((titulo.trim() !== '') && (descricao.trim() !== '') && (tipo !== '0' )){
 
-      if(idCaracteristica.trim() === ''){     // inserir
-        await addDoc(collection(db, 'tb_caracteristica'),{
-          ca_idpersonagem: personagem.pe_id.trim(),
-          ca_nome: titulo.trim(),
-          ca_descricao: descricao.trim(),
-        })
-        .then( () =>{
-          onFecharModal();
-          buscar();
-        })
-        .catch((error)=>{
-          console.log('Erro ao inserir; '+error);
-          toast.error('Erro ao inserir');
-        });
-      }
-      else{                                     //editar
-        const docRef = doc(db, "tb_caracteristica", idCaracteristica);
-          await updateDoc(docRef, {
+      if(tipo === '2'){
+        if(idCaracteristica.trim() === ''){     // inserir
+          await addDoc(collection(db, 'tb_caracteristica'),{
+            ca_idpersonagem: personagem.pe_id.trim(),
             ca_nome: titulo.trim(),
             ca_descricao: descricao.trim(),
-          }
-        )
-        .then(()=>{
-          onFecharModal();
-          buscar();
-        })
-        .catch((error)=>{
-          console.log('Erro ao editar: '+error);
-          toast.error('Erro ao editar');
-        });
+          })
+          .then( () =>{
+            onFecharModal();
+            buscar();
+          })
+          .catch((error)=>{
+            console.log('Erro ao inserir; '+error);
+            toast.error('Erro ao inserir');
+          });
+        }
+        else{                                     //editar
+          const docRef = doc(db, "tb_caracteristica", idCaracteristica);
+            await updateDoc(docRef, {
+              ca_nome: titulo.trim(),
+              ca_descricao: descricao.trim(),
+            }
+          )
+          .then(()=>{
+            onFecharModal();
+            buscar();
+          })
+          .catch((error)=>{
+            console.log('Erro ao editar: '+error);
+            toast.error('Erro ao editar');
+          });
+        }
       }
+      else{
+        if(idCaracteristica.trim() === ''){     // inserir
+          await addDoc(collection(db, 'tb_anotacao'),{
+            an_idpersonagem: personagem.pe_id.trim(),
+            an_titulo: titulo.trim(),
+            an_descricao: descricao.trim(),
+          })
+          .then( () =>{
+            onFecharModal();
+            buscar();
+          })
+          .catch((error)=>{
+            console.log('Erro ao inserir; '+error);
+            toast.error('Erro ao inserir');
+          });
+        }
+        else{                                     //editar
+          const docRef = doc(db, "tb_caracteristica", idCaracteristica);
+            await updateDoc(docRef, {
+              ca_nome: titulo.trim(),
+              ca_descricao: descricao.trim(),
+            }
+          )
+          .then(()=>{
+            onFecharModal();
+            buscar();
+          })
+          .catch((error)=>{
+            console.log('Erro ao editar: '+error);
+            toast.error('Erro ao editar');
+          });
+        }
+      }
+      
       
     }
     else  
@@ -114,6 +182,26 @@ function Caracteristicas(){
   
   }
 
+  function onEditarAn(item){
+    setTitulo(item.an_titulo.trim());
+    setDescricao(item.an_anotacao.trim());
+    setIdCaracteristica(item.an_id.trim());
+    setIsOpen(true);
+  }
+
+  async function onExcluirAn(id) {
+
+    const docRef = doc(db, "tb_anotacao", id);
+    await deleteDoc(docRef)
+    .then(()=>{
+      buscar();
+    })
+    .catch((error)=>{
+      toast.error('Erro ao excluir');
+      console.log('erro ao buscar '+error);
+    });  
+  
+  }
   function onFecharModal(){
     setTitulo('');
     setDescricao('');
@@ -125,13 +213,13 @@ function Caracteristicas(){
     return <div>carregand...</div>
 
   return(
-    personagem === null? <Vazio/> :
+    (personagemID.trim() === '')? <Vazio/> :
     <div className='cr_container'>
 
       <div className='cr_proficiencias'>
         <div className='cr_titulo'>
           <strong>Proficiencias</strong>
-          <hr/>
+          <hr key='linhaproficiencia'/>
         </div>
         <ul className='cr_lista'>
           <Tile id='Força' titulo='Força'>
@@ -204,7 +292,7 @@ function Caracteristicas(){
       <div className='cr_caracteristicas'>
         <div className='cr_titulo'>
           <strong>Caracteristicas</strong>
-          <hr/>
+          <hr key='linhacaracteristica'/>
         </div>
         <ul className='cr_lista'>
           {
@@ -215,6 +303,28 @@ function Caracteristicas(){
                     descricao={item.ca_descricao} 
                     excluir={ ()=>{onExcluir(item.ca_id)} } 
                     editar={ ()=>{onEditar(item)} }
+                  />
+                </Tile>
+              );
+            })
+          }
+        </ul>
+      </div>
+
+      <div className='cr_caracteristicas'>
+        <div className='cr_titulo'>
+          <strong>Anotação</strong>
+          <hr key='linhaanotacao'/>
+        </div>
+        <ul className='cr_lista'>
+          {
+            lstAnotacao.map((item)=>{
+              return(
+                <Tile id={item.an_id} titulo={item.an_titulo }>
+                  <TileCaracteristica 
+                    descricao={item.an_descricao} 
+                    excluir={ ()=>{onExcluirAn(item.an_id)} } 
+                    editar={ ()=>{onEditarAn(item)} }
                   />
                 </Tile>
               );
@@ -240,6 +350,13 @@ function Caracteristicas(){
               <div className='mca_div-edit'>
                 <label>Descrição</label>
                 <textarea className='mca_edit' placeholder='Digite uma descrição' value={descricao} onChange={(e)=>{setDescricao(e.target.value)}}/>
+              </div>
+              <div className='mca_div-edit'>
+                <select className='mca_sel' value={tipo} onChange={(e)=>{setTipo(e.target.value)}}>
+                  <option value='0'>Tipo</option>
+                  <option value='1'>Anotação</option>
+                  <option value='2'>Caracteristicas</option>
+                </select>
               </div>
               <div className='mca_botoes'>
                 <button className='mca_btn-cancelar' type='button' onClick={()=>{onFecharModal()}}>Cancelar</button>

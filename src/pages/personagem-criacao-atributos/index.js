@@ -5,6 +5,7 @@ import BtnSalvarForm from '../../components/btnsalvarform';
 import { toast } from 'react-toastify';
 import {db} from '../../services/firebaseConnection';
 import {doc, updateDoc} from 'firebase/firestore';
+import { exibirBarras } from '../../utils';
 
 function PersonagenCriacaoAtributos(){
 
@@ -27,6 +28,10 @@ function PersonagenCriacaoAtributos(){
   useEffect(()=>{
     const data = localStorage.getItem("RF@personagem-criado");
     setPersonagemCriado(JSON.parse(data));
+
+    window.onpopstate = () => {
+      exibirBarras();
+    };
   }, []);
 
   async function onAvancar(e){

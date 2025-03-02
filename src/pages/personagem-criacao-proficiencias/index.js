@@ -43,6 +43,11 @@ function PersonagemCriacaoProficiencia() {
   useEffect(()=>{
     const data = localStorage.getItem("RF@personagem-criado");
     setPersonagemCriado(JSON.parse(data));
+
+    window.onpopstate = () => {
+      exibirBarras();
+    };
+    
   }, []);
 
   async function onAvancar(e){

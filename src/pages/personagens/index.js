@@ -11,13 +11,14 @@ import BtnAdicionar from '../../components/btnadicionar';
 import {useNavigate} from 'react-router-dom';
 
 function Personagens(){
-
-  const {personagem}    = useContext(AuthContext);
+  
+  const personagemID    = localStorage.getItem('RF@personagemID');  
   const [lista, setLista] = useState([]);
   const {usuario} = useContext(AuthContext);  
   const {onSingOut} = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const [nomeJogador, setNomeJogador] = useState('');
 
   async function buscar(){
       
@@ -42,10 +43,11 @@ function Personagens(){
         })
       });
       
-      listaPost.sort((a, b)=> {
-        if(a.pe_id === personagem.pe_id.trim()) return -1;
-        if(b.pe_id === personagem.pe_id.trim()) return 1;
-      });
+      if(personagemID.trim() !== '')
+        listaPost.sort((a, b)=> {
+          if(a.pe_id === personagemID.trim()) return -1;
+          if(b.pe_id === personagemID.trim()) return 1;
+        });
       setLista(listaPost);
     } 
     catch (error) {
@@ -53,16 +55,35 @@ function Personagens(){
       toast.error('Erro ao efetuar busca');
     }
     
-    setLoading(false);
+    buscarJogador();
     
+  }
+
+  async function buscarJogador() {
+    try {
+      const q = query(collection(db, "tb_jogador"), where("jo_idlogin", "==", usuario?.uid.trim()));
+      const querySnapshot = await getDocs(q);
+
+      querySnapshot.forEach((doc)=>{
+        setNomeJogador(doc.data().jo_nome);
+      });
+      
+    } 
+    catch (error) {
+      console.log('Erro ao efetuar busca: '+error);
+      toast.error('Erro ao efetuar busca');
+    }
+    
+    setLoading(false);
   }
 
   useEffect(()=>{
     buscar();
-  },[personagem, usuario]);
+  },[]);
 
   async function onDeslogar() {
     await onSingOut();
+    navigate('/login', {replace:true});
   }
 
   function onEditar(item){
@@ -79,6 +100,11 @@ function Personagens(){
       toast.error('Erro ao excluir');
       console.log('erro ao buscar '+error);
     });  
+  }
+
+  function onSelecionar(id){
+    localStorage.setItem('RF@personagemID', id); 
+    navigate('/', {replace:true});
   }
 
   if(loading)
@@ -98,8 +124,8 @@ function Personagens(){
               return(
                 <Tile id={item.pe_id} titulo={item.pe_nome} >
                   <TilePersonagem
-                    puso={item.pe_id === personagem.pe_id.trim()}
-                    pclasse='Patrulheiro'
+                    pid={item.pe_id}
+                    pclasse={item.pe_raca}
                     praca={item.pe_raca}
                     psubclasse={item.pe_subclasse}
                     psubraca={item.pe_subraca}
@@ -110,6 +136,7 @@ function Personagens(){
                     pcatotal={item.pe_catotal}
                     excluir={ ()=>{onExcluir(item.pe_id)} } 
                     editar={ ()=>{onEditar(item)} }
+                    selecionar={ ()=>{onSelecionar(item.pe_id)}}
                   /> 
                 </Tile>
               );
@@ -117,10 +144,10 @@ function Personagens(){
           }
         </ul>
       </div>
-      <Tile id={usuario.uid.trim()} titulo={'Usuário'} >
+      <Tile id={usuario?.uid.trim()} titulo={'Usuário'} >
         <div className='pr_usuario'>
-          <label>Gabriel</label>
-          <label>e-mail: {usuario.email}</label>
+          <label>{nomeJogador}</label>
+          <label>e-mail: {usuario?.email}</label>
           
           <button className='pr_bt-deslogar' onClick={onDeslogar}>
             <img className='pr_img-deslogar' src={logout} alt='Deslogar'/>

@@ -10,12 +10,12 @@ function TileVida(props){
 
   function incrementar(){
     let vida = vidaatual;
-    if(vidaatual < vidabase)
+    if(vidaatual < vidabase.current)
       ++vida;
 
     setVidaAtual(vida);
-
-    props.incrementar(vidaatual);
+  
+    props.incrementar(vida);
   }  
 
   function decrementar(){
@@ -32,15 +32,22 @@ function TileVida(props){
     setVidaAtual(lvida);
     setVidaTemp(lvidaTemp);
 
-    props.decrementar(vidaatual, vidatemp);
+    props.decrementar(lvida, lvidaTemp);
   }
 
   function usarDado(e){
-    setDadoUsado(e.target.value)
+    if(e.target.value !== ''){
+      setDadoUsado(e.target.value)
+      props.usarDado(e.target.value);
+    }
+    
   }
   
   function setarVidaTemp(e){
-    setVidaTemp(e.target.value)
+    if(e.target.value !== ''){
+      setVidaTemp(e.target.value)
+      props.vidaTemp(e.target.value);
+    }
   }
 
   return(

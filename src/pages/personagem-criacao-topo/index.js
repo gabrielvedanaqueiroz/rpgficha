@@ -82,10 +82,6 @@ function PersonagenCriacaoTopo(){
     valido = valido && (optRaca !== '');
     valido = valido && (optClasse !== '');
 
-    console.log(lnome);
-    console.log(optRaca);
-    console.log(optClasse);
-
     if(valido){
       await addDoc(collection(db, 'tb_personagem'),{
         pe_idjogador      : usuario?.uid.trim(),

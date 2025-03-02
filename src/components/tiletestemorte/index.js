@@ -21,6 +21,26 @@ function TileTesteMorte(props){
       ...prev,
       [name]: checked,
     }));
+
+    let s1, s2, s3 = false;
+    switch (name){
+      case 'option1': 
+        s1 = checked;
+        s2 = chkSucesso.option2;
+        s3 = chkSucesso.option3;
+      break;
+      case 'option2': 
+        s2 = checked;
+        s1 = chkSucesso.option1;
+        s3 = chkSucesso.option3;
+      break;
+      case 'option3': 
+        s3 = checked;
+        s1 = chkSucesso.option1;
+        s2 = chkSucesso.option2;
+      break;
+    }
+    props.sucesso(s1, s2, s3);
   };
 
   const onChanceFalha = (event) => {
@@ -29,6 +49,27 @@ function TileTesteMorte(props){
       ...prev,
       [name]: checked,
     }));
+
+    let f1, f2, f3 = false;
+    switch (name){
+      case 'option1': 
+        f1 = checked;
+        f2 = chkFalha.option2;
+        f3 = chkFalha.option3;
+      break;
+      case 'option2': 
+        f2 = checked;
+        f1 = chkFalha.option1;
+        f3 = chkFalha.option3;
+      break;
+      case 'option3': 
+        f3 = checked;
+        f1 = chkFalha.option1;
+        f2 = chkFalha.option2;
+      break;
+    }
+
+    props.falha(f1, f2, f3);
   };
 
   return(

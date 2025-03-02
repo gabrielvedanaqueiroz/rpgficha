@@ -206,3 +206,13 @@
   margin-bottom: 2px;
   background-color: #F8cc27;
 }
+
+.mca_sel{
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  font-size: 16px;
+  border-radius: 8px; /* Cantos arredondados */
+  padding: 10px 15px; /* Espaçamento interno */
+  outline: none; /* Remove o contorno padrão ao focar */
+  transition: all 0.3s ease-in-out; /* Suaviza transições */
+}

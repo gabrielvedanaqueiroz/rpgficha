@@ -12,8 +12,9 @@ import Vazio from '../../components/vazio';
 
 function Magias(){
   
+  const personagemID    = localStorage.getItem('RF@personagemID');  
   const {personagem}    = useContext(AuthContext);
-  const [lista, setLista] = useState([]);
+  const [lista, setLista]     = useState([]);
   const [loading, setLoading] = useState(true);
 
   /* modal */
@@ -58,8 +59,9 @@ function Magias(){
   }
 
   useEffect(()=>{
-
-    buscar();
+    
+    if(personagemID.trim() !== '')
+      buscar();
 
     setLoading(false);
   },[]);
@@ -173,7 +175,7 @@ function Magias(){
   }
 
   return(
-    personagem === null ? <Vazio/> :
+    (personagemID.trim() === '') ? <Vazio/> :
 
     <div className='mg-container'>  
 
@@ -198,7 +200,7 @@ function Magias(){
         </div>
         <div className='mg-titulo'>
           <strong>Magias Preparadas</strong>
-          <hr/>
+          <hr key='linhaprepadara'/>
         </div>
         <ul>
           {
@@ -233,7 +235,7 @@ function Magias(){
 
         <div className='mg-titulo'>
           <strong>Magias Conhecidas</strong>
-          <hr/>
+          <hr key='linhaconhecida'/>
         </div>
         <ul>
           {

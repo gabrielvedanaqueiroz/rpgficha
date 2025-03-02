@@ -1,6 +1,6 @@
 import './ficha.css';
 import {db} from '../../services/firebaseConnection';
-import {doc, getDoc, query, where, collection, getDocs} from 'firebase/firestore';
+import {doc, getDoc, query, where, collection, getDocs, updateDoc} from 'firebase/firestore';
 import { useEffect, useState, useContext } from 'react';
 import {exibirBarras} from '../../utils';
 import {toast} from 'react-toastify';
@@ -30,7 +30,7 @@ function Ficha(){
   const [magiaID, setMagiaID] = useState('');
 
   useEffect(()=>{
-
+    
     exibirBarras();
 
     async function buscar() {
@@ -38,8 +38,6 @@ function Ficha(){
       const ref = doc(db, 'tb_personagem', personagemID.trim());     //presetando pra efetuar a busca por id
       await getDoc(ref)                                       //executar busca    
       .then((snapshot) =>{
-
-          // console.log(snapshot.data());
 
           if(snapshot.exists){
 
@@ -171,32 +169,93 @@ function Ficha(){
       }
     }
 
-    buscar();
+    if(personagemID.trim() !== '')
+      buscar();
+    else
+      setLoading(false);
 
-  },[personagem]);
+  },[ ]);
 
   function onAddAtaque(){
     setShowModalAtaque(true);
   }
 
-  function incrementar(vidaatual){
-    console.log(vidaatual); 
+  async function incrementar(vidaatual){
     personagem.pe_vidaatual = vidaatual;
     //salvar banco 
+
+    const docRef = doc(db, "tb_personagem", personagem.pe_id.trim());
+    await updateDoc(docRef, {
+      pe_vidaatual: vidaatual,
+    });
   }
 
-  function decrementar(vidaatual, vidatemp){
-    console.log(vidaatual); console.log(vidatemp);
+  async function decrementar(vidaatual, vidatemp){
     personagem.pe_vidaatual = vidaatual;
     personagem.pe_vidatemp  = vidatemp;
     //salvar banco 
+
+    const docRef = doc(db, "tb_personagem", personagem.pe_id.trim());
+    await updateDoc(docRef, {
+      pe_vidaatual: vidaatual,
+      pe_vidatemp: vidatemp,
+    });
   }
+
+  async function vidaTemp(vidatemp) {
+    personagem.pe_vidatemp  = vidatemp;
+    //salvar banco 
+
+    const docRef = doc(db, "tb_personagem", personagem.pe_id.trim());
+    await updateDoc(docRef, {
+      pe_vidatemp: vidatemp,
+    });
+  }
+
+  async function usarDado(dadousado) {
+    personagem.pe_vidadadousado  = dadousado;
+    //salvar banco 
+
+    const docRef = doc(db, "tb_personagem", personagem.pe_id.trim());
+    await updateDoc(docRef, {
+      pe_vidadadousado: dadousado,
+    });
+  }
+
+  async function falha(f1, f2, f3) {
+    personagem.pe_tcmfalha1  = f1;
+    personagem.pe_tcmfalha2  = f2;
+    personagem.pe_tcmfalha3  = f3;
+    //salvar banco 
+
+    const docRef = doc(db, "tb_personagem", personagem.pe_id.trim());
+    await updateDoc(docRef, {
+      pe_tcmfalha1: f1,
+      pe_tcmfalha2: f2,
+      pe_tcmfalha3: f3,
+    });
+  }
+
+  async function sucesso(s1, s2, s3) {
+    personagem.pe_tcmsucesso1  = s1;
+    personagem.pe_tcmsucesso2  = s2;
+    personagem.pe_tcmsucesso3  = s3;
+    //salvar banco 
+
+    const docRef = doc(db, "tb_personagem", personagem.pe_id.trim());
+    await updateDoc(docRef, {
+      pe_tcmsucesso1: s1,
+      pe_tcmsucesso2: s2,
+      pe_tcmsucesso3: s3,
+    });
+  }
+
  
   if(loading)
-    return <div>carregand...</div>
+    return <div>carregand...</div> 
   
   return(
-    personagemID === ''? <Vazio/> :
+    (personagemID.trim() === '')? <Vazio/> :
     <div className='fi-container'>
       <div className='fi-cabecalho'>
         <div className='fi-cb-esquerda'>
@@ -257,6 +316,8 @@ function Ficha(){
             pe_vidadados={personagem.pe_vidadado}
             incrementar={(vidaatual)=>{  incrementar(vidaatual) }}
             decrementar={(vidaatual, vidatemp)=>{  decrementar(vidaatual, vidatemp);  }}
+            vidaTemp={(vidatemp) =>{ vidaTemp(vidatemp) }}
+            usarDado={(dadousado) => {usarDado(dadousado)}}
           />
 
           <TileTesteMorte 
@@ -266,6 +327,8 @@ function Ficha(){
             pe_tcmsucesso1={personagem.pe_tcmsucesso1}
             pe_tcmsucesso2={personagem.pe_tcmsucesso2}
             pe_tcmsucesso3={personagem.pe_tcmsucesso3}
+            falha={(f1, f2, f3)=>{falha(f1, f2, f3)}}
+            sucesso={(s1, s2, s3)=>{sucesso(s1, s2, s3)}}
           />
           
         </div>
