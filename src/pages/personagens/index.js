@@ -28,19 +28,20 @@ function Personagens(){
       let listaPost = [];
 
       querySnapshot.forEach((doc)=>{
-        listaPost.push({
-          pe_id: doc.id.trim(),
-          pe_nome: doc.data().pe_nome.trim(),
-          pe_nivel: doc.data().pe_nivel,
-          pe_catotal: doc.data().pe_catotal,
-          pe_vidaatual: doc.data().pe_vidaatual,
-          pe_raca: doc.data().pe_raca.trim(),
-          pe_subraca: doc.data().pe_subraca.trim(),
-          pe_classe: doc.data().pe_classe.trim(),
-          pe_subclasse: doc.data().pe_subclasse.trim(),      
-          pe_tendencia: doc.data().pe_tendencia.trim(),      
-          pe_antecedente: doc.data().pe_antecedente.trim(),
-        })
+        if(doc.exists)
+          listaPost.push({
+            pe_id: doc.id.trim(),
+            pe_nome: doc.data().pe_nome.trim(),
+            pe_nivel: doc.data().pe_nivel,
+            pe_catotal: doc.data().pe_catotal,
+            pe_vidaatual: doc.data().pe_vidaatual,
+            pe_raca: doc.data().pe_raca.trim(),
+            pe_subraca: doc.data().pe_subraca.trim(),
+            pe_classe: doc.data().pe_classe.trim(),
+            pe_subclasse: doc.data().pe_subclasse.trim(),      
+            pe_tendencia: doc.data().pe_tendencia.trim(),      
+            pe_antecedente: doc.data().pe_antecedente.trim(),
+          })
       });
       
       // if(personagemID !== null)
