@@ -32,9 +32,9 @@ function Ficha(){
   const [lstMagia, setLstMagia] = useState([]);
   const [magiaID, setMagiaID] = useState('');
 
-  async function buscar() {
+  async function buscar(aID) {
 
-    const ref = doc(db, 'tb_personagem', personagemID.trim());     //presetando pra efetuar a busca por id
+    const ref = doc(db, 'tb_personagem', aID.trim());     //presetando pra efetuar a busca por id
     await getDoc(ref)                                       //executar busca    
     .then((snapshot) =>{
 
@@ -119,7 +119,7 @@ function Ficha(){
   }
 
   async function buscarAtaque() {
-    const q = query(collection(db, "tb_ataque"), where("at_idpersonagem", "==", personagemID.trim()));
+    const q = query(collection(db, "tb_ataque"), where("at_idpersonagem", "==", personagem.pe_id.trim()));
     const querySnapshot = await getDocs(q); 
     let lista = [];
 
@@ -145,7 +145,7 @@ function Ficha(){
 
   async function buscarMagia() {
     const q = query(collection(db, "tb_magia"),
-     where("mg_idpersonagem", "==", personagemID.trim()),
+     where("mg_idpersonagem", "==", personagem.pe_id.trim()),
      where("mg_preparada", "==", true)
     );
     const querySnapshot = await getDocs(q); 
@@ -193,7 +193,7 @@ function Ficha(){
     }
 
     if(temPersonagemId)
-      buscar();
+      buscar(id);
     else
       setLoading(false);
 
