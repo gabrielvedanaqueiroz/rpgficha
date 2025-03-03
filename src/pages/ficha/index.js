@@ -194,6 +194,7 @@ function Ficha(){
     else
       setLoading(false);
 
+    console.log('f');
     console.log(temPersonagem);
     console.log(temPersonagemId);
 

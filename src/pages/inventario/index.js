@@ -60,6 +60,10 @@ function Inventario(){
       buscar();
 
     setLoading(false);
+
+    console.log('i');
+    console.log(temPersonagem);
+    console.log(temPersonagemId);
   },[]);
 
   async function onExcluir(id){

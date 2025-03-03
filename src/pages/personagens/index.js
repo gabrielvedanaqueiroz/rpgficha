@@ -95,6 +95,9 @@ function Personagens(){
     }
 
     buscar();
+
+    console.log('p');
+    console.log(temPersonagemId);
   },[]);
 
   async function onDeslogar() {

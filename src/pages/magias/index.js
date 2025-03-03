@@ -73,6 +73,10 @@ function Magias(){
       buscar();
 
     setLoading(false);
+
+    console.log('m');
+    console.log(temPersonagem);
+    console.log(temPersonagemId);
   },[]);
 
   if(loading)
