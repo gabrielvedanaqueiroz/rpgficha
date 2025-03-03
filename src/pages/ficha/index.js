@@ -32,11 +32,12 @@ function Ficha(){
   useEffect(()=>{
     
     exibirBarras();
-    
-    setPersonagemId(localStorage.getItem('RF@personagemID'));
-    console.log(personagemID);
+    let id = localStorage.getItem('RF@personagemID');
+    console.log(id);
     if(personagemID === null)
       setPersonagemId('');
+    else  
+      setPersonagemId(id);
 
     async function buscar() {
 
