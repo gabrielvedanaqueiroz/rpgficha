@@ -18,7 +18,7 @@ import Vazio from '../../components/vazio/index.js';
 
 function Ficha(){
 
-  let semPersonagem, semPersonagemId = true;//trocar
+  let temPersonagem, temPersonagemId = true;//trocar
   
   const [personagemID, setPersonagemId] = useState('');  //rastrear o mudar
   const {personagem}    = useContext(AuthContext);  
@@ -37,10 +37,14 @@ function Ficha(){
     exibirBarras();
     let id = localStorage.getItem('RF@personagemID');
    
-    semPersonagemId = (id === null);
+    temPersonagemId = (id !== null);
 
-    if(!semPersonagemId)
-      setPersonagemId(id);
+    if(temPersonagemId){ //se nao ta nulo mas pode nao ter valor
+      temPersonagemId = (temPersonagemId.length > 0);
+
+      if(temPersonagemId)
+        setPersonagemId(id);
+    }
 
     async function buscar() {
 
@@ -49,8 +53,8 @@ function Ficha(){
       .then((snapshot) =>{
 
           if(snapshot.exists){
-            
-            semPersonagem = false;
+
+            temPersonagem = true;
 
             let personagem = new Personagem(
               snapshot.id.trim(),                    //id do documento fica separado no nodo do documento
@@ -184,7 +188,7 @@ function Ficha(){
       }
     }
 
-    if(!semPersonagemId)
+    if(temPersonagemId)
       buscar();
     else
       setLoading(false);
@@ -269,7 +273,7 @@ function Ficha(){
     return <div>carregand...</div> 
   
   return(
-    (semPersonagemId && semPersonagem)? <Vazio/> :
+    ((!temPersonagemId) && (!temPersonagem))? <Vazio/> :
     <div className='fi-container'>
       <div className='fi-cabecalho'>
         <div className='fi-cb-esquerda'>
