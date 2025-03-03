@@ -34,6 +34,7 @@ function Ficha(){
 
   async function buscar(aID) {
 
+    console.log(aID);
     const ref = doc(db, 'tb_personagem', aID.trim());     //presetando pra efetuar a busca por id
     await getDoc(ref)                                       //executar busca    
     .then((snapshot) =>{
