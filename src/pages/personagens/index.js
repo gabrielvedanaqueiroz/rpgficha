@@ -135,7 +135,7 @@ function Personagens(){
       <div className='pr_personagens'>
         <div className='pr_titulo'>
           <strong>Personagens</strong>
-          <hr/>
+          <hr key='linhapersonagens'/>
         </div>
         <ul className='cr_lista'>
           {

@@ -34,14 +34,15 @@ function Ficha(){
 
   async function buscar(aID) {
 
-    console.log(aID);
+    let LPersonagem;
+
     const ref = doc(db, 'tb_personagem', aID.trim());     //presetando pra efetuar a busca por id
     await getDoc(ref)                                       //executar busca    
     .then((snapshot) =>{
 
         if(snapshot.exists){
 
-          let LPersonagem = new Personagem(
+          LPersonagem = new Personagem(
             snapshot.id.trim(),                    //id do documento fica separado no nodo do documento
             snapshot.data().pe_nome.trim(),        //pegar dados, ficam armazenados em data()
             snapshot.data().pe_subclasse.trim(), 
@@ -56,68 +57,65 @@ function Ficha(){
             snapshot.data().pe_vidatemp, 
             snapshot.data().pe_experiencia, 
             snapshot.data().pe_bproficiencia, 
-            // snapshot.data().pe_forca, 
-            // snapshot.data().pe_destreza, 
-            // snapshot.data().pe_constituicao, 
-            // snapshot.data().pe_inteligencia, 
-            // snapshot.data().pe_sabedoria, 
-            // snapshot.data().pe_carisma, 
-            // snapshot.data().pe_cabase, 
-            // snapshot.data().pe_catotal, 
-            // snapshot.data().pe_movimento,
-            // snapshot.data().pe_idclasse,
-            // snapshot.data().pe_idraca,
-            // snapshot.data().pe_vidadado,
-            // snapshot.data().pe_vidadadousado,
-            // snapshot.data().pe_tcmfalha1,
-            // snapshot.data().pe_tcmfalha2,
-            // snapshot.data().pe_tcmfalha3,
-            // snapshot.data().pe_tcmsucesso1,
-            // snapshot.data().pe_tcmsucesso2,
-            // snapshot.data().pe_tcmsucesso3,
-            // snapshot.data().pe_sgforca,
-            // snapshot.data().pe_sgdestreza,
-            // snapshot.data().pe_sgconstituicao,
-            // snapshot.data().pe_sginteligencia,
-            // snapshot.data().pe_sgsabedoria,
-            // snapshot.data().pe_sgcarisma,
-            // snapshot.data().pe_proacrobacia,
-            // snapshot.data().pe_proarcanismo,
-            // snapshot.data().pe_proatletismo,
-            // snapshot.data().pe_proatuacao,
-            // snapshot.data().pe_problefar,
-            // snapshot.data().pe_profurtividade,
-            // snapshot.data().pe_prohistoria,
-            // snapshot.data().pe_prointimidacao,
-            // snapshot.data().pe_prointuicao,
-            // snapshot.data().pe_proinvestigacao,
-            // snapshot.data().pe_prolidaranimais,
-            // snapshot.data().pe_promedicina,
-            // snapshot.data().pe_pronatureza,
-            // snapshot.data().pe_propercepcao,
-            // snapshot.data().pe_propersuacao,
-            // snapshot.data().pe_proprestidigitacao,
-            // snapshot.data().pe_prosobrevivencia,
-            // snapshot.data().pe_proreligiao,
-            // snapshot.data().pe_idhabilidadeconjuracao,
+            snapshot.data().pe_forca, 
+            snapshot.data().pe_destreza, 
+            snapshot.data().pe_constituicao, 
+            snapshot.data().pe_inteligencia, 
+            snapshot.data().pe_sabedoria, 
+            snapshot.data().pe_carisma, 
+            snapshot.data().pe_cabase, 
+            snapshot.data().pe_catotal, 
+            snapshot.data().pe_movimento,
+            snapshot.data().pe_idclasse,
+            snapshot.data().pe_idraca,
+            snapshot.data().pe_vidadado,
+            snapshot.data().pe_vidadadousado,
+            snapshot.data().pe_tcmfalha1,
+            snapshot.data().pe_tcmfalha2,
+            snapshot.data().pe_tcmfalha3,
+            snapshot.data().pe_tcmsucesso1,
+            snapshot.data().pe_tcmsucesso2,
+            snapshot.data().pe_tcmsucesso3,
+            snapshot.data().pe_sgforca,
+            snapshot.data().pe_sgdestreza,
+            snapshot.data().pe_sgconstituicao,
+            snapshot.data().pe_sginteligencia,
+            snapshot.data().pe_sgsabedoria,
+            snapshot.data().pe_sgcarisma,
+            snapshot.data().pe_proacrobacia,
+            snapshot.data().pe_proarcanismo,
+            snapshot.data().pe_proatletismo,
+            snapshot.data().pe_proatuacao,
+            snapshot.data().pe_problefar,
+            snapshot.data().pe_profurtividade,
+            snapshot.data().pe_prohistoria,
+            snapshot.data().pe_prointimidacao,
+            snapshot.data().pe_prointuicao,
+            snapshot.data().pe_proinvestigacao,
+            snapshot.data().pe_prolidaranimais,
+            snapshot.data().pe_promedicina,
+            snapshot.data().pe_pronatureza,
+            snapshot.data().pe_propercepcao,
+            snapshot.data().pe_propersuacao,
+            snapshot.data().pe_proprestidigitacao,
+            snapshot.data().pe_prosobrevivencia,
+            snapshot.data().pe_proreligiao,
+            snapshot.data().pe_idhabilidadeconjuracao,
           ); 
 
           setPersonagem(LPersonagem);
-          
-          temPersonagem = personagem !== null;
-          console.log(personagem);
-
           buscarAtaque(aID);
-          buscarMagia(aID);
         }
+
+        temPersonagem = LPersonagem !== null;
         
     })
     .catch((error) => {
       console.log('Erro ao efetuar busca: '+error);
       toast.error('Erro ao efetuar busca');
-    })
     
-    setLoading(false);
+      setLoading(false);
+    })
   }
 
   async function buscarAtaque(aID) {
@@ -142,7 +140,10 @@ function Ficha(){
       setLstAtaque(lista);
     } catch (error) {
       toast.error('Erro ao carregar caracteristica'+error); 
+      setLoading(false);
     }
+
+    buscarMagia(aID);
   }
 
   async function buscarMagia(aID) {
@@ -171,8 +172,11 @@ function Ficha(){
         lista.sort((a, b)=> a.mg_nivel > b.mg_nivel);
   
       setLstMagia(lista);
+    
+      setLoading(false);
     } catch (error) {
       toast.error('Erro ao carregar caracteristica'+error); 
+      setLoading(false);
     }
   }
 
@@ -193,14 +197,10 @@ function Ficha(){
 
     if(temPersonagemId)
       buscar(id);
-    else
-      setLoading(false);
-
+  
     console.log('f');
-    console.log(temPersonagem);
-    console.log(temPersonagemId);
 
-  },[personagemID]);
+  },[]);
 
   function onAddAtaque(){
     setShowModalAtaque(true);
@@ -280,7 +280,7 @@ function Ficha(){
     return <div>carregand...</div> 
   
   return(
-    ((!temPersonagemId) && (!temPersonagem))? <Vazio/> :
+ 
     <div className='fi-container'>
       <div className='fi-cabecalho'>
         <div className='fi-cb-esquerda'>
