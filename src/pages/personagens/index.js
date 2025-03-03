@@ -88,7 +88,7 @@ function Personagens(){
     temPersonagemId = (id !== null);
 
     if(temPersonagemId){ //se nao ta nulo mas pode nao ter valor
-      temPersonagemId = (temPersonagemId.length > 0);
+      temPersonagemId = (id.length > 0);
 
       if(temPersonagemId)
         setPersonagemId(id);
