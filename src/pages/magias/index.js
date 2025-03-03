@@ -64,8 +64,10 @@ function Magias(){
         lista.sort((a, b)=> a.mg_nivel > b.mg_nivel);
     
         setLista(lista);
+        setLoading(false);
       } catch (error) {
         toast.error('Erro ao carregar magias'+error); 
+        setLoading(false);
       }
       
     }
@@ -76,8 +78,8 @@ function Magias(){
       tempId = (id.length > 0);
     if(tempId)
       buscar(id);
-
-    setLoading(false);
+    else
+      setLoading(false);
 
     // console.log('m');
   },[lista]);
