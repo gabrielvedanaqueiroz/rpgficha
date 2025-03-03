@@ -91,7 +91,6 @@ function Magias(){
     const docRef = doc(db, "tb_magia", id);
     await deleteDoc(docRef)
     .then(()=>{
-      // buscar();
     })
     .catch((error)=>{
       toast.error('Erro ao excluir');

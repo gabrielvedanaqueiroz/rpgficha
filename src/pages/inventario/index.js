@@ -75,7 +75,6 @@ function Inventario(){
     const docRef = doc(db, "tb_inventario", id);
     await deleteDoc(docRef)
     .then(()=>{
-      // buscar();
     })
     .catch((error)=>{
       toast.error('Erro ao excluir');
@@ -111,7 +110,6 @@ function Inventario(){
         })
         .then( () =>{
           onFecharModal();
-          // buscar();
         })
         .catch((error)=>{
           console.log('Erro ao inserir; '+error);
@@ -127,7 +125,6 @@ function Inventario(){
         )
         .then(()=>{
           onFecharModal();
-          // buscar();
         })
         .catch((error)=>{
           console.log('Erro ao editar: '+error);

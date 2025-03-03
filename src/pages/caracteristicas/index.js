@@ -116,7 +116,6 @@ function Caracteristicas(){
           })
           .then( () =>{
             onFecharModal();
-            // buscar(personagem.pe_id.trim());
           })
           .catch((error)=>{
             console.log('Erro ao inserir; '+error);
@@ -132,7 +131,6 @@ function Caracteristicas(){
           )
           .then(()=>{
             onFecharModal();
-            // buscar();
           })
           .catch((error)=>{
             console.log('Erro ao editar: '+error);
@@ -149,7 +147,6 @@ function Caracteristicas(){
           })
           .then( () =>{
             onFecharModal();
-            // buscar();
           })
           .catch((error)=>{
             console.log('Erro ao inserir; '+error);
@@ -165,7 +162,6 @@ function Caracteristicas(){
           )
           .then(()=>{
             onFecharModal();
-            // buscar();
           })
           .catch((error)=>{
             console.log('Erro ao editar: '+error);
@@ -193,7 +189,6 @@ function Caracteristicas(){
     const docRef = doc(db, "tb_caracteristica", id);
     await deleteDoc(docRef)
     .then(()=>{
-      // buscar();
     })
     .catch((error)=>{
       toast.error('Erro ao excluir');
@@ -214,7 +209,6 @@ function Caracteristicas(){
     const docRef = doc(db, "tb_anotacao", id);
     await deleteDoc(docRef)
     .then(()=>{
-      // buscar();
     })
     .catch((error)=>{
       toast.error('Erro ao excluir');
