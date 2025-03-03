@@ -33,10 +33,8 @@ function Ficha(){
     
     exibirBarras();
     let id = localStorage.getItem('RF@personagemID');
-    console.log(id);
-    if(personagemID === null)
-      setPersonagemId('');
-    else  
+   
+    if(id !== null)
       setPersonagemId(id);
 
     async function buscar() {
@@ -264,7 +262,7 @@ function Ficha(){
     return <div>carregand...</div> 
   
   return(
-    (personagemID === null)? <Vazio/> :
+    (personagemID === '')? <Vazio/> :
     <div className='fi-container'>
       <div className='fi-cabecalho'>
         <div className='fi-cb-esquerda'>
