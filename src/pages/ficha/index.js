@@ -32,10 +32,152 @@ function Ficha(){
   const [lstMagia, setLstMagia] = useState([]);
   const [magiaID, setMagiaID] = useState('');
 
+  async function buscar() {
+
+    const ref = doc(db, 'tb_personagem', personagemID.trim());     //presetando pra efetuar a busca por id
+    await getDoc(ref)                                       //executar busca    
+    .then((snapshot) =>{
+
+        if(snapshot.exists){
+
+          let personagem = new Personagem(
+            snapshot.id.trim(),                    //id do documento fica separado no nodo do documento
+            snapshot.data().pe_nome.trim(),        //pegar dados, ficam armazenados em data()
+            snapshot.data().pe_subclasse.trim(), 
+            snapshot.data().pe_classe.trim(), 
+            snapshot.data().pe_raca.trim(), 
+            snapshot.data().pe_subraca.trim(), 
+            snapshot.data().pe_nivel, 
+            snapshot.data().pe_antecedente.trim(), 
+            snapshot.data().pe_tendencia.trim(), 
+            snapshot.data().pe_vidabase, 
+            snapshot.data().pe_vidaatual, 
+            snapshot.data().pe_vidatemp, 
+            snapshot.data().pe_experiencia, 
+            snapshot.data().pe_bproficiencia, 
+            snapshot.data().pe_forca, 
+            snapshot.data().pe_destreza, 
+            snapshot.data().pe_constituicao, 
+            snapshot.data().pe_inteligencia, 
+            snapshot.data().pe_sabedoria, 
+            snapshot.data().pe_carisma, 
+            snapshot.data().pe_cabase, 
+            snapshot.data().pe_catotal, 
+            snapshot.data().pe_movimento,
+            snapshot.data().pe_idclasse,
+            snapshot.data().pe_idraca,
+            snapshot.data().pe_vidadado,
+            snapshot.data().pe_vidadadousado,
+            snapshot.data().pe_tcmfalha1,
+            snapshot.data().pe_tcmfalha2,
+            snapshot.data().pe_tcmfalha3,
+            snapshot.data().pe_tcmsucesso1,
+            snapshot.data().pe_tcmsucesso2,
+            snapshot.data().pe_tcmsucesso3,
+            snapshot.data().pe_sgforca,
+            snapshot.data().pe_sgdestreza,
+            snapshot.data().pe_sgconstituicao,
+            snapshot.data().pe_sginteligencia,
+            snapshot.data().pe_sgsabedoria,
+            snapshot.data().pe_sgcarisma,
+            snapshot.data().pe_proacrobacia,
+            snapshot.data().pe_proarcanismo,
+            snapshot.data().pe_proatletismo,
+            snapshot.data().pe_proatuacao,
+            snapshot.data().pe_problefar,
+            snapshot.data().pe_profurtividade,
+            snapshot.data().pe_prohistoria,
+            snapshot.data().pe_prointimidacao,
+            snapshot.data().pe_prointuicao,
+            snapshot.data().pe_proinvestigacao,
+            snapshot.data().pe_prolidaranimais,
+            snapshot.data().pe_promedicina,
+            snapshot.data().pe_pronatureza,
+            snapshot.data().pe_propercepcao,
+            snapshot.data().pe_propersuacao,
+            snapshot.data().pe_proprestidigitacao,
+            snapshot.data().pe_prosobrevivencia,
+            snapshot.data().pe_proreligiao,
+            snapshot.data().pe_idhabilidadeconjuracao,
+          ); 
+
+          setPersonagem(personagem);
+          
+          temPersonagem = personagem !== null;
+
+          buscarAtaque();
+          buscarMagia();
+        }
+        
+    })
+    .catch((error) => {
+      console.log('Erro ao efetuar busca: '+error);
+      toast.error('Erro ao efetuar busca');
+    })
+    
+    setLoading(false);
+  }
+
+  async function buscarAtaque() {
+    const q = query(collection(db, "tb_ataque"), where("at_idpersonagem", "==", personagemID.trim()));
+    const querySnapshot = await getDocs(q); 
+    let lista = [];
+
+    try {
+      querySnapshot.forEach((doc)=>{
+
+        if(doc.exists)
+          lista.push({
+            at_idpersonagem: doc.id.trim(),
+            at_descricao: doc.data().at_descricao.trim(),
+            at_alcance: doc.data().at_alcance.trim(),
+            at_bonus: doc.data().at_bonus,
+            at_dano: doc.data().at_dano.trim(),
+            at_tipo: doc.data().at_tipo.trim(),
+          })
+      });
+  
+      setLstAtaque(lista);
+    } catch (error) {
+      toast.error('Erro ao carregar caracteristica'+error); 
+    }
+  }
+
+  async function buscarMagia() {
+    const q = query(collection(db, "tb_magia"),
+     where("mg_idpersonagem", "==", personagemID.trim()),
+     where("mg_preparada", "==", true)
+    );
+    const querySnapshot = await getDocs(q); 
+    let lista = [];
+
+    try {
+      querySnapshot.forEach((doc)=>{
+        if(doc.exists)
+          lista.push({
+            mg_id: doc.id.trim(),
+            mg_nome: doc.data().mg_nome.trim(),
+            mg_alcance: doc.data().mg_alcance.trim(),
+            mg_duracao: doc.data().mg_duracao.trim(),
+            mg_dano: doc.data().mg_dano.trim(),
+            mg_nivel: doc.data().mg_nivel,
+            mg_tempoconjuracao: doc.data().mg_tempoconjuracao.trim()
+          })
+      });
+
+      if(lista.length > 0)
+        lista.sort((a, b)=> a.mg_nivel > b.mg_nivel);
+  
+      setLstMagia(lista);
+    } catch (error) {
+      toast.error('Erro ao carregar caracteristica'+error); 
+    }
+  }
+
   useEffect(()=>{
     
-    
     exibirBarras();
+    
     let id = localStorage.getItem('RF@personagemID');
    
     temPersonagemId = (id !== null);
@@ -50,148 +192,6 @@ function Ficha(){
       console.log(personagemID);
     }
 
-    async function buscar() {
-
-      const ref = doc(db, 'tb_personagem', personagemID.trim());     //presetando pra efetuar a busca por id
-      await getDoc(ref)                                       //executar busca    
-      .then((snapshot) =>{
-
-          if(snapshot.exists){
-
-            let personagem = new Personagem(
-              snapshot.id.trim(),                    //id do documento fica separado no nodo do documento
-              snapshot.data().pe_nome.trim(),        //pegar dados, ficam armazenados em data()
-              snapshot.data().pe_subclasse.trim(), 
-              snapshot.data().pe_classe.trim(), 
-              snapshot.data().pe_raca.trim(), 
-              snapshot.data().pe_subraca.trim(), 
-              snapshot.data().pe_nivel, 
-              snapshot.data().pe_antecedente.trim(), 
-              snapshot.data().pe_tendencia.trim(), 
-              snapshot.data().pe_vidabase, 
-              snapshot.data().pe_vidaatual, 
-              snapshot.data().pe_vidatemp, 
-              snapshot.data().pe_experiencia, 
-              snapshot.data().pe_bproficiencia, 
-              snapshot.data().pe_forca, 
-              snapshot.data().pe_destreza, 
-              snapshot.data().pe_constituicao, 
-              snapshot.data().pe_inteligencia, 
-              snapshot.data().pe_sabedoria, 
-              snapshot.data().pe_carisma, 
-              snapshot.data().pe_cabase, 
-              snapshot.data().pe_catotal, 
-              snapshot.data().pe_movimento,
-              snapshot.data().pe_idclasse,
-              snapshot.data().pe_idraca,
-              snapshot.data().pe_vidadado,
-              snapshot.data().pe_vidadadousado,
-              snapshot.data().pe_tcmfalha1,
-              snapshot.data().pe_tcmfalha2,
-              snapshot.data().pe_tcmfalha3,
-              snapshot.data().pe_tcmsucesso1,
-              snapshot.data().pe_tcmsucesso2,
-              snapshot.data().pe_tcmsucesso3,
-              snapshot.data().pe_sgforca,
-              snapshot.data().pe_sgdestreza,
-              snapshot.data().pe_sgconstituicao,
-              snapshot.data().pe_sginteligencia,
-              snapshot.data().pe_sgsabedoria,
-              snapshot.data().pe_sgcarisma,
-              snapshot.data().pe_proacrobacia,
-              snapshot.data().pe_proarcanismo,
-              snapshot.data().pe_proatletismo,
-              snapshot.data().pe_proatuacao,
-              snapshot.data().pe_problefar,
-              snapshot.data().pe_profurtividade,
-              snapshot.data().pe_prohistoria,
-              snapshot.data().pe_prointimidacao,
-              snapshot.data().pe_prointuicao,
-              snapshot.data().pe_proinvestigacao,
-              snapshot.data().pe_prolidaranimais,
-              snapshot.data().pe_promedicina,
-              snapshot.data().pe_pronatureza,
-              snapshot.data().pe_propercepcao,
-              snapshot.data().pe_propersuacao,
-              snapshot.data().pe_proprestidigitacao,
-              snapshot.data().pe_prosobrevivencia,
-              snapshot.data().pe_proreligiao,
-              snapshot.data().pe_idhabilidadeconjuracao,
-            ); 
-
-            setPersonagem(personagem);
-            
-            temPersonagem = personagem !== null;
-  
-            buscarAtaque();
-            buscarMagia();
-          }
-          
-      })
-      .catch((error) => {
-        console.log('Erro ao efetuar busca: '+error);
-        toast.error('Erro ao efetuar busca');
-      })
-      
-      setLoading(false);
-    }
-
-    async function buscarAtaque() {
-      const q = query(collection(db, "tb_ataque"), where("at_idpersonagem", "==", personagemID.trim()));
-      const querySnapshot = await getDocs(q); 
-      let lista = [];
-  
-      try {
-        querySnapshot.forEach((doc)=>{
-
-          if(doc.exists)
-            lista.push({
-              at_idpersonagem: doc.id.trim(),
-              at_descricao: doc.data().at_descricao.trim(),
-              at_alcance: doc.data().at_alcance.trim(),
-              at_bonus: doc.data().at_bonus,
-              at_dano: doc.data().at_dano.trim(),
-              at_tipo: doc.data().at_tipo.trim(),
-            })
-        });
-    
-        setLstAtaque(lista);
-      } catch (error) {
-        toast.error('Erro ao carregar caracteristica'+error); 
-      }
-    }
-
-    async function buscarMagia() {
-      const q = query(collection(db, "tb_magia"),
-       where("mg_idpersonagem", "==", personagemID.trim()),
-       where("mg_preparada", "==", true)
-      );
-      const querySnapshot = await getDocs(q); 
-      let lista = [];
-  
-      try {
-        querySnapshot.forEach((doc)=>{
-          if(doc.exists)
-            lista.push({
-              mg_id: doc.id.trim(),
-              mg_nome: doc.data().mg_nome.trim(),
-              mg_alcance: doc.data().mg_alcance.trim(),
-              mg_duracao: doc.data().mg_duracao.trim(),
-              mg_dano: doc.data().mg_dano.trim(),
-              mg_nivel: doc.data().mg_nivel,
-              mg_tempoconjuracao: doc.data().mg_tempoconjuracao.trim()
-            })
-        });
-
-        if(lista.length > 0)
-          lista.sort((a, b)=> a.mg_nivel > b.mg_nivel);
-    
-        setLstMagia(lista);
-      } catch (error) {
-        toast.error('Erro ao carregar caracteristica'+error); 
-      }
-    }
-
     if(temPersonagemId)
       buscar();
     else
@@ -201,7 +201,7 @@ function Ficha(){
     console.log(temPersonagem);
     console.log(temPersonagemId);
 
-  },[personagemID ]);
+  },[personagemID]);
 
   function onAddAtaque(){
     setShowModalAtaque(true);
