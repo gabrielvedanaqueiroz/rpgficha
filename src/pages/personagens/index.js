@@ -12,7 +12,7 @@ import {useNavigate} from 'react-router-dom';
 
 function Personagens(){
   
-  const personagemID    = localStorage.getItem('RF@personagemID');  
+  const personagemID    = localStorage.getItem('RF@personagemID');  //rastrear o mudar
   const [lista, setLista] = useState([]);
   const {usuario} = useContext(AuthContext);  
   const {onSingOut} = useContext(AuthContext);
@@ -43,14 +43,14 @@ function Personagens(){
         })
       });
       
-      if(personagemID !== null)
-        listaPost.sort((a, b)=> {
-          if(a.pe_id === personagemID.trim()) return -1;
-          if(b.pe_id === personagemID.trim()) return 1;
-        });
+      // if(personagemID !== null)
+      //   listaPost.sort((a, b)=> {
+      //     if(a.pe_id === personagemID.trim()) return -1;
+      //     if(b.pe_id === personagemID.trim()) return 1;
+      //   });
       setLista(listaPost);
     } 
-    catch (error) {
+    catch(error) {
       console.log('Erro ao efetuar busca: '+error);
       toast.error('Erro ao efetuar busca');
     }
