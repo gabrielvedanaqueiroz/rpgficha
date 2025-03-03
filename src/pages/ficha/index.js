@@ -1,7 +1,7 @@
 import './ficha.css';
 import {db} from '../../services/firebaseConnection';
 import {doc, query, where, collection, getDocs, updateDoc} from 'firebase/firestore';
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext, useRef } from 'react';
 import {exibirBarras, buscarPersonagem} from '../../utils';
 import {toast} from 'react-toastify';
 import img_classe from '../../res/logo.svg';
@@ -17,9 +17,9 @@ import Vazio from '../../components/vazio/index.js';
 
 function Ficha(){
 
-  let temPersonagem   = false;
-  let temPersonagemId = false;
-  let personagem      = null;
+  let temPersonagem   = useRef(false);;
+  let temPersonagemId = useRef(false);
+  let personagem      = useRef();
   
   // const {personagem, setPersonagem}    = useContext(AuthContext);  
 
@@ -203,7 +203,7 @@ function Ficha(){
     return(<div>carregand...</div>); 
   
   return(
-    ((!temPersonagem) || (!temPersonagemId))? <Vazio/>:
+    (!temPersonagem)? <Vazio/>:
     <div className='fi-container'>
       <div className='fi-cabecalho'>
         <div className='fi-cb-esquerda'>
