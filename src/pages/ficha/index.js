@@ -34,6 +34,7 @@ function Ficha(){
     exibirBarras();
     
     setPersonagemId(localStorage.getItem('RF@personagemID'));
+    console.log(personagemID);
     if(personagemID === null)
       setPersonagemId('');
 

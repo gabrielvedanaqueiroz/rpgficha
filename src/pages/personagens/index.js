@@ -43,7 +43,7 @@ function Personagens(){
         })
       });
       
-      if(personagemID.trim() !== '')
+      if(personagemID !== null)
         listaPost.sort((a, b)=> {
           if(a.pe_id === personagemID.trim()) return -1;
           if(b.pe_id === personagemID.trim()) return 1;
