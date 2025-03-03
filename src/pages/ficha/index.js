@@ -41,7 +41,7 @@ function Ficha(){
 
         if(snapshot.exists){
 
-          let personagem = new Personagem(
+          let LPersonagem = new Personagem(
             snapshot.id.trim(),                    //id do documento fica separado no nodo do documento
             snapshot.data().pe_nome.trim(),        //pegar dados, ficam armazenados em data()
             snapshot.data().pe_subclasse.trim(), 
@@ -102,9 +102,10 @@ function Ficha(){
             // snapshot.data().pe_idhabilidadeconjuracao,
           ); 
 
-          setPersonagem(personagem);
+          setPersonagem(LPersonagem);
           
           temPersonagem = personagem !== null;
+          console.log(personagem);
 
           buscarAtaque(aID);
           buscarMagia(aID);
