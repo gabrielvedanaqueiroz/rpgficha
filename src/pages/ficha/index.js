@@ -200,7 +200,7 @@ function Ficha(){
     console.log(temPersonagem);
     console.log(temPersonagemId);
 
-  },[ ]);
+  },[personagemID ]);
 
   function onAddAtaque(){
     setShowModalAtaque(true);
