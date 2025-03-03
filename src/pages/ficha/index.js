@@ -17,12 +17,10 @@ import Vazio from '../../components/vazio/index.js';
 
 function Ficha(){
 
-  let temPersonagem   = useRef(false);;
-  let temPersonagemId = useRef(false);
-  let personagem      = useRef();
+  const [temPersonagem, setTemPersonagem] = useState(false);
+  const [temPersonagemId, setTemPersonagemId] = useState(false);
+  const [personagem, setPersonagem] = useState({});
   
-  // const {personagem, setPersonagem}    = useContext(AuthContext);  
-
   const [loading, setLoading] = useState(true);
   const [showModalAtaque, setShowModalAtaque] = useState(false);
   const [showModalMagia, setShowModalMagia] = useState(false);
@@ -30,100 +28,104 @@ function Ficha(){
   const [lstMagia, setLstMagia] = useState([]);
   const [magiaID, setMagiaID] = useState('');
 
-
-  async function buscar(aID) {
-
-    personagem = await buscarPersonagem(aID);
-    temPersonagem = personagem !== null;
-
-    if(temPersonagem)
-      buscarAtaque(aID);
-    
-  }
-
-  async function buscarAtaque(aID) {
-    
-    const q = query(collection(db, "tb_ataque"), where("at_idpersonagem", "==", aID.trim()));
-    const querySnapshot = await getDocs(q); 
-    let lista = [];
-
-    try {
-      querySnapshot.forEach((doc)=>{
-
-        if(doc.exists)
-          lista.push({
-            at_idpersonagem: doc.id.trim(),
-            at_descricao: doc.data().at_descricao.trim(),
-            at_alcance: doc.data().at_alcance.trim(),
-            at_bonus: doc.data().at_bonus,
-            at_dano: doc.data().at_dano.trim(),
-            at_tipo: doc.data().at_tipo.trim(),
-          })
-      });
-  
-      setLstAtaque(lista);
-    } catch (error) {
-      toast.error('Erro ao carregar caracteristica'+error); 
-      setLoading(false);
-    }
-
-    buscarMagia(aID);
-  }
-
-  async function buscarMagia(aID) {
-        
-    const q = query(collection(db, "tb_magia"),
-     where("mg_idpersonagem", "==", aID.trim()),
-     where("mg_preparada", "==", true)
-    );
-    const querySnapshot = await getDocs(q); 
-    let lista = [];
-
-    try {
-      querySnapshot.forEach((doc)=>{
-        if(doc.exists)
-          lista.push({
-            mg_id: doc.id.trim(),
-            mg_nome: doc.data().mg_nome.trim(),
-            mg_alcance: doc.data().mg_alcance.trim(),
-            mg_duracao: doc.data().mg_duracao.trim(),
-            mg_dano: doc.data().mg_dano.trim(),
-            mg_nivel: doc.data().mg_nivel,
-            mg_tempoconjuracao: doc.data().mg_tempoconjuracao.trim()
-          })
-      });
-
-      if(lista.length > 0)
-        lista.sort((a, b)=> a.mg_nivel > b.mg_nivel);
-  
-      setLstMagia(lista);
-    
-      setLoading(false);
-    } catch (error) {
-      toast.error('Erro ao carregar caracteristica'+error); 
-      setLoading(false);
-    }
-  }
-
   useEffect(()=>{
     
     exibirBarras();
+
+    async function buscar(aID) {
+
+      let pers = await buscarPersonagem(aID);
+      setPersonagem(pers);
+
+      let temP = pers !== null;
+
+      setTemPersonagem(temP);
+  
+      if(temP)
+        buscarAtaque(aID);
+      
+    }
+
+    async function buscarAtaque(aID) {
     
+      const q = query(collection(db, "tb_ataque"), where("at_idpersonagem", "==", aID.trim()));
+      const querySnapshot = await getDocs(q); 
+      let lista = [];
+  
+      try {
+        querySnapshot.forEach((doc)=>{
+  
+          if(doc.exists)
+            lista.push({
+              at_idpersonagem: doc.id.trim(),
+              at_descricao: doc.data().at_descricao.trim(),
+              at_alcance: doc.data().at_alcance.trim(),
+              at_bonus: doc.data().at_bonus,
+              at_dano: doc.data().at_dano.trim(),
+              at_tipo: doc.data().at_tipo.trim(),
+            })
+        });
+    
+        setLstAtaque(lista);
+      } catch (error) {
+        toast.error('Erro ao carregar caracteristica'+error); 
+        setLoading(false);
+      }
+  
+      buscarMagia(aID);
+    }
+  
+    async function buscarMagia(aID) {
+          
+      const q = query(collection(db, "tb_magia"),
+       where("mg_idpersonagem", "==", aID.trim()),
+       where("mg_preparada", "==", true)
+      );
+      const querySnapshot = await getDocs(q); 
+      let lista = [];
+  
+      try {
+        querySnapshot.forEach((doc)=>{
+          if(doc.exists)
+            lista.push({
+              mg_id: doc.id.trim(),
+              mg_nome: doc.data().mg_nome.trim(),
+              mg_alcance: doc.data().mg_alcance.trim(),
+              mg_duracao: doc.data().mg_duracao.trim(),
+              mg_dano: doc.data().mg_dano.trim(),
+              mg_nivel: doc.data().mg_nivel,
+              mg_tempoconjuracao: doc.data().mg_tempoconjuracao.trim()
+            })
+        });
+  
+        if(lista.length > 0)
+          lista.sort((a, b)=> a.mg_nivel > b.mg_nivel);
+    
+        setLstMagia(lista);
+      
+        setLoading(false);
+      } catch (error) {
+        toast.error('Erro ao carregar caracteristica'+error); 
+        setLoading(false);
+      }
+    }
+
     let id = localStorage.getItem('RF@personagemID');
    
-    temPersonagemId = (id !== null);
+    let tempId = (id !== null)
+    setTemPersonagemId(tempId);
 
-    if(temPersonagemId) //se nao ta nulo mas pode nao ter valor
-      temPersonagemId = (id.length > 0);
+    if(tempId) //se nao ta nulo mas pode nao ter valor
+    tempId = (id.length > 0);
   
-    if(temPersonagemId)
+    if(tempId)
       buscar(id);
     else  
       setLoading(false);
   
     console.log('f');
 
-  },[]);
+  },[temPersonagem, temPersonagemId, personagem]);
 
   function onAddAtaque(){
     setShowModalAtaque(true);
