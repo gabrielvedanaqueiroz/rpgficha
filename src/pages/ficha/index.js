@@ -18,7 +18,7 @@ import Vazio from '../../components/vazio/index.js';
 
 function Ficha(){
 
-  const personagemID    = localStorage.getItem('RF@personagemID');  
+  const [personagemID, setPersonagemId] = useState('');  
   const {personagem}    = useContext(AuthContext);  
   const {setPersonagem} = useContext(AuthContext);  
 
@@ -32,6 +32,10 @@ function Ficha(){
   useEffect(()=>{
     
     exibirBarras();
+    
+    setPersonagemId(localStorage.getItem('RF@personagemID'));
+    if(personagemID === null)
+      setPersonagemId('');
 
     async function buscar() {
 
