@@ -18,10 +18,10 @@ import Vazio from '../../components/vazio/index.js';
 
 function Ficha(){
 
-  let temPersonagem = false;
-  let temPersonagemId = false;//trocar
+  let temPersonagem   = false;
+  let temPersonagemId = false;
   
-  const [personagemID, setPersonagemId] = useState('');  //rastrear o mudar
+  const [personagemID, setPersonagemId] = useState('');  
   const {personagem}    = useContext(AuthContext);  
   const {setPersonagem} = useContext(AuthContext);  
 

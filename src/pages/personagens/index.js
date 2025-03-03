@@ -12,7 +12,9 @@ import {useNavigate} from 'react-router-dom';
 
 function Personagens(){
   
-  const personagemID    = localStorage.getItem('RF@personagemID');  //rastrear o mudar
+  let temPersonagemId = false;
+
+  const [personagemID, setPersonagemId] = useState('');  
   const [lista, setLista] = useState([]);
   const {usuario} = useContext(AuthContext);  
   const {onSingOut} = useContext(AuthContext);
@@ -44,15 +46,15 @@ function Personagens(){
           })
       });
       
-      // if(personagemID !== null)
-      //   listaPost.sort((a, b)=> {
-      //     if(a.pe_id === personagemID.trim()) return -1;
-      //     if(b.pe_id === personagemID.trim()) return 1;
-      //   });
+      if(temPersonagemId)
+        listaPost.sort((a, b)=> {
+          if(a.pe_id === personagemID.trim()) return -1;
+          if(b.pe_id === personagemID.trim()) return 1;
+      });
       setLista(listaPost);
     } 
     catch(error) {
-      // console.log('Erro ao efetuar busca: '+error);
+      console.log('Erro ao efetuar busca: '+error);
       toast.error('Erro ao efetuar busca');
     }
     
@@ -61,6 +63,18 @@ function Personagens(){
   }
 
   async function buscarJogador() {
+    
+    let id = localStorage.getItem('RF@personagemID');
+   
+    temPersonagemId = (id !== null);
+
+    if(temPersonagemId){ //se nao ta nulo mas pode nao ter valor
+      temPersonagemId = (temPersonagemId.length > 0);
+
+      if(temPersonagemId)
+        setPersonagemId(id);
+    }
+
     try {
       const q = query(collection(db, "tb_jogador"), where("jo_idlogin", "==", usuario?.uid.trim()));
       const querySnapshot = await getDocs(q);
