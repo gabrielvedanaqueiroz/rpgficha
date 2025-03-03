@@ -262,7 +262,7 @@ function Ficha(){
     return <div>carregand...</div> 
   
   return(
-    (personagem === null)? <Vazio/> :
+    (personagemID === null)? <Vazio/> :
     <div className='fi-container'>
       <div className='fi-cabecalho'>
         <div className='fi-cb-esquerda'>
