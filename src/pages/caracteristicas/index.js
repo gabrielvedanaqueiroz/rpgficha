@@ -13,8 +13,8 @@ import BtnSalvarForm from '../../components/btnsalvarform';
 
 function Caracteristicas(){
   
-  let temPersonagem   = false;
   let temPersonagemId = false;
+  let temPersonagem   = false;
     
   const [lstCaracteristica, setCaracteristica] = useState([]);
   const [lstAnotacao, setLstAnotacao] = useState([]);
@@ -27,9 +27,9 @@ function Caracteristicas(){
   const [idCaracteristica, setIdCaracteristica]   = useState('');
   const [descricao, setDescricao]                 = useState('');
   const [tipo, setTipo]                           = useState('0');
-  
 
   async function buscar(){
+
     const q = query(collection(db, "tb_caracteristica"), where("ca_idpersonagem", "==", personagem.pe_id.trim()));
     const querySnapshot = await getDocs(q); 
     let lista = [];
@@ -46,14 +46,15 @@ function Caracteristicas(){
   
       setCaracteristica(lista);
 
-      buscarAnatoca();
+      buscarAnatocao();
     } catch (error) {
       toast.error('Erro ao carregar caracteristica'+error); 
+      setLoading(false);
     }
     
   }
 
-  async function buscarAnatoca() {
+  async function buscarAnatocao() {
 
     const q = query(collection(db, "tb_anotacao"), where("an_idpersonagem", "==", personagem.pe_id.trim()));
     const querySnapshot = await getDocs(q); 
@@ -72,8 +73,10 @@ function Caracteristicas(){
       lista.sort((a, b)=> a.ca_nome > b.ca_nome);
   
       setLstAnotacao(lista);
+      setLoading(false);
     } catch (error) {
       toast.error('Erro ao carregar anotação'+error); 
+      setLoading(false);
     }
     
   }
@@ -83,17 +86,19 @@ function Caracteristicas(){
     let id = localStorage.getItem('RF@personagemID');
    
     temPersonagemId = (id !== null);
-
+  
     if(temPersonagemId) //se nao ta nulo mas pode nao ter valor
-      temPersonagemId = (temPersonagemId.length > 0);
+      temPersonagemId = (id.length > 0);
     
     if(temPersonagemId)
       buscar();
+    else
+      setLoading(false);
 
-    console.log(temPersonagem);
-    console.log(temPersonagemId);
+    temPersonagem = personagem !== null;
 
-    setLoading(false);
+    console.log('c');
+
   },[]);
 
   async function onSalvar(e){
@@ -228,7 +233,7 @@ function Caracteristicas(){
     return <div>carregand...</div>
 
   return(
-    ((!temPersonagemId) && (!temPersonagem))? <Vazio/> :
+    (temPersonagem === false)? <Vazio/> :
     <div className='cr_container'>
 
       <div className='cr_proficiencias'>

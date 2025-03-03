@@ -74,6 +74,8 @@ function Magias(){
 
     setLoading(false);
 
+    temPersonagem = personagem !== null;
+
     console.log('m');
     console.log(temPersonagem);
     console.log(temPersonagemId);
@@ -188,7 +190,7 @@ function Magias(){
   }
 
   return(
-    ((!temPersonagemId) && (!temPersonagem))? <Vazio/> :
+    (temPersonagem === false)? <Vazio/> :
     <div className='mg-container'>  
       <div>
         <div className='mg_cabecalho'>

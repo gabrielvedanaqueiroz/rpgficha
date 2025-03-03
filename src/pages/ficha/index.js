@@ -1,12 +1,11 @@
 import './ficha.css';
 import {db} from '../../services/firebaseConnection';
-import {doc, getDoc, query, where, collection, getDocs, updateDoc} from 'firebase/firestore';
+import {doc, query, where, collection, getDocs, updateDoc} from 'firebase/firestore';
 import { useEffect, useState, useContext } from 'react';
-import {exibirBarras} from '../../utils';
+import {exibirBarras, buscarPersonagem} from '../../utils';
 import {toast} from 'react-toastify';
 import img_classe from '../../res/logo.svg';
 import Tile from '../../components/tile';
-import Personagem from '../../utils/personagem.js'
 import TileFiAtaque from '../../components/tilefiataque';
 import TileFiMagia from '../../components/tilefimagia';
 import ModalFiAtaque from '../../components/modalfiataque/index.js';
@@ -20,10 +19,9 @@ function Ficha(){
 
   let temPersonagem   = false;
   let temPersonagemId = false;
+  let personagem      = null;
   
-  const [personagemID, setPersonagemId] = useState('');  
-  const {personagem}    = useContext(AuthContext);  
-  const {setPersonagem} = useContext(AuthContext);  
+  // const {personagem, setPersonagem}    = useContext(AuthContext);  
 
   const [loading, setLoading] = useState(true);
   const [showModalAtaque, setShowModalAtaque] = useState(false);
@@ -32,93 +30,19 @@ function Ficha(){
   const [lstMagia, setLstMagia] = useState([]);
   const [magiaID, setMagiaID] = useState('');
 
+
   async function buscar(aID) {
 
-    let LPersonagem;
+    personagem = await buscarPersonagem(aID);
+    temPersonagem = personagem !== null;
 
-    const ref = doc(db, 'tb_personagem', aID.trim());     //presetando pra efetuar a busca por id
-    await getDoc(ref)                                       //executar busca    
-    .then((snapshot) =>{
-
-        if(snapshot.exists){
-
-          LPersonagem = new Personagem(
-            snapshot.id.trim(),                    //id do documento fica separado no nodo do documento
-            snapshot.data().pe_nome.trim(),        //pegar dados, ficam armazenados em data()
-            snapshot.data().pe_subclasse.trim(), 
-            snapshot.data().pe_classe.trim(), 
-            snapshot.data().pe_raca.trim(), 
-            snapshot.data().pe_subraca.trim(), 
-            snapshot.data().pe_nivel, 
-            snapshot.data().pe_antecedente.trim(), 
-            snapshot.data().pe_tendencia.trim(), 
-            snapshot.data().pe_vidabase, 
-            snapshot.data().pe_vidaatual, 
-            snapshot.data().pe_vidatemp, 
-            snapshot.data().pe_experiencia, 
-            snapshot.data().pe_bproficiencia, 
-            snapshot.data().pe_forca, 
-            snapshot.data().pe_destreza, 
-            snapshot.data().pe_constituicao, 
-            snapshot.data().pe_inteligencia, 
-            snapshot.data().pe_sabedoria, 
-            snapshot.data().pe_carisma, 
-            snapshot.data().pe_cabase, 
-            snapshot.data().pe_catotal, 
-            snapshot.data().pe_movimento,
-            snapshot.data().pe_idclasse,
-            snapshot.data().pe_idraca,
-            snapshot.data().pe_vidadado,
-            snapshot.data().pe_vidadadousado,
-            snapshot.data().pe_tcmfalha1,
-            snapshot.data().pe_tcmfalha2,
-            snapshot.data().pe_tcmfalha3,
-            snapshot.data().pe_tcmsucesso1,
-            snapshot.data().pe_tcmsucesso2,
-            snapshot.data().pe_tcmsucesso3,
-            snapshot.data().pe_sgforca,
-            snapshot.data().pe_sgdestreza,
-            snapshot.data().pe_sgconstituicao,
-            snapshot.data().pe_sginteligencia,
-            snapshot.data().pe_sgsabedoria,
-            snapshot.data().pe_sgcarisma,
-            snapshot.data().pe_proacrobacia,
-            snapshot.data().pe_proarcanismo,
-            snapshot.data().pe_proatletismo,
-            snapshot.data().pe_proatuacao,
-            snapshot.data().pe_problefar,
-            snapshot.data().pe_profurtividade,
-            snapshot.data().pe_prohistoria,
-            snapshot.data().pe_prointimidacao,
-            snapshot.data().pe_prointuicao,
-            snapshot.data().pe_proinvestigacao,
-            snapshot.data().pe_prolidaranimais,
-            snapshot.data().pe_promedicina,
-            snapshot.data().pe_pronatureza,
-            snapshot.data().pe_propercepcao,
-            snapshot.data().pe_propersuacao,
-            snapshot.data().pe_proprestidigitacao,
-            snapshot.data().pe_prosobrevivencia,
-            snapshot.data().pe_proreligiao,
-            snapshot.data().pe_idhabilidadeconjuracao,
-          ); 
-
-          setPersonagem(LPersonagem);
-          buscarAtaque(aID);
-        }
-
-        temPersonagem = LPersonagem !== null;
-        
-    })
-    .catch((error) => {
-      console.log('Erro ao efetuar busca: '+error);
-      toast.error('Erro ao efetuar busca');
+    if(temPersonagem)
+      buscarAtaque(aID);
     
-      setLoading(false);
-    })
   }
 
   async function buscarAtaque(aID) {
+    
     const q = query(collection(db, "tb_ataque"), where("at_idpersonagem", "==", aID.trim()));
     const querySnapshot = await getDocs(q); 
     let lista = [];
@@ -147,6 +71,7 @@ function Ficha(){
   }
 
   async function buscarMagia(aID) {
+        
     const q = query(collection(db, "tb_magia"),
      where("mg_idpersonagem", "==", aID.trim()),
      where("mg_preparada", "==", true)
@@ -188,15 +113,13 @@ function Ficha(){
    
     temPersonagemId = (id !== null);
 
-    if(temPersonagemId){ //se nao ta nulo mas pode nao ter valor
+    if(temPersonagemId) //se nao ta nulo mas pode nao ter valor
       temPersonagemId = (id.length > 0);
-
-      if(temPersonagemId)
-        setPersonagemId(id);
-    }
-
+  
     if(temPersonagemId)
       buscar(id);
+    else  
+      setLoading(false);
   
     console.log('f');
 
@@ -277,10 +200,10 @@ function Ficha(){
   }
  
   if(loading)
-    return <div>carregand...</div> 
+    return(<div>carregand...</div>); 
   
   return(
- 
+    ((!temPersonagem) || (!temPersonagemId))? <Vazio/>:
     <div className='fi-container'>
       <div className='fi-cabecalho'>
         <div className='fi-cb-esquerda'>
@@ -525,7 +448,7 @@ function Ficha(){
         </div>
       </div>
 
-      { showModalAtaque ? <ModalFiAtaque onOcultar={(()=>{setShowModalAtaque(false)})} personagemID={personagemID}/> :<div/>} 
+      { showModalAtaque ? <ModalFiAtaque onOcultar={(()=>{setShowModalAtaque(false)})} personagemID={personagem.pe_id.trim()}/> :<div/>} 
       { showModalMagia ? <ModalFiMagia onOcultar={(()=>{setShowModalMagia(false)})} mg_id={magiaID}/> :<div/>} 
     </div>
   )

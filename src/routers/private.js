@@ -5,9 +5,11 @@ import { AuthContext } from '../utils/auth';
 function Private({children}){
 
   const {onCheckLogin, signed, loadingAuth} = useContext(AuthContext);
-
+  
   useEffect(()=>{
+
     onCheckLogin();
+    
   }, []);
 
   if(loadingAuth){
@@ -17,6 +19,7 @@ function Private({children}){
   if(!signed){
     return <Navigate to='/login' />
   }
+  
   return children;
 }
 

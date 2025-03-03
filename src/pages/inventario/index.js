@@ -26,6 +26,7 @@ function Inventario(){
   const [idItem, setIdItem] = useState('');
 
   async function buscar(){
+
     const q = query(collection(db, "tb_inventario"), where("in_idpersonagem", "==", personagem.pe_id.trim()));
     const querySnapshot = await getDocs(q); 
     let lista = [];
@@ -41,8 +42,11 @@ function Inventario(){
       lista.sort((a, b)=> a.in_nome > b.in_nome);
   
       setLista(lista);
+      
+      setLoading(false);
     } catch (error) {
       toast.error('Erro ao carregar inventario'+error); 
+      setLoading(false);
     }
     
   }
@@ -58,8 +62,10 @@ function Inventario(){
 
     if(temPersonagemId)
       buscar();
+    else
+      setLoading(false);
 
-    setLoading(false);
+    temPersonagem = personagem !== null;
 
     console.log('i');
     console.log(temPersonagem);
@@ -141,11 +147,9 @@ function Inventario(){
 
   return(
 
-    ((!temPersonagemId) && (!temPersonagem))? <Vazio/> :
+    (temPersonagem === false)? <Vazio/> :
     <div className='it-container'>
-
       <div>
-
         <div className='it-titulo'>
           <strong>Inventário</strong>
           <hr/>
