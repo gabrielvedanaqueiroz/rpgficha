@@ -94,7 +94,6 @@ function Personagens(){
         setPersonagemId(id);
     }
 
-    
     buscar();
   },[]);
 

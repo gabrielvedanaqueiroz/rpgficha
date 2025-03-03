@@ -12,7 +12,10 @@ import { AuthContext } from '../../utils/auth';
 
 function Inventario(){
 
-  const personagemID    = localStorage.getItem('RF@personagemID');  
+  let temPersonagem   = false;
+  let temPersonagemId = false;
+  
+  const [personagemID, setPersonagemId] = useState('');   
   const {personagem} = useContext(AuthContext);
   const [lista, setLista] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -47,7 +50,18 @@ function Inventario(){
 
   useEffect(()=>{
 
-    if(personagemID.trim() !== '')
+    let id = localStorage.getItem('RF@personagemID');
+   
+    temPersonagemId = (id !== null);
+
+    if(temPersonagemId){ //se nao ta nulo mas pode nao ter valor
+      temPersonagemId = (temPersonagemId.length > 0);
+
+      if(temPersonagemId)
+        setPersonagemId(id);
+    }
+
+    if(temPersonagemId)
       buscar();
 
     setLoading(false);
@@ -128,7 +142,7 @@ function Inventario(){
 
   return(
 
-    (personagemID.trim() === '')? <Vazio/> :
+    ((!temPersonagemId) && (!temPersonagem))? <Vazio/> :
 
     <div className='it-container'>
 

@@ -15,8 +15,7 @@ function Caracteristicas(){
   
   let temPersonagem   = false;
   let temPersonagemId = false;
-  
-  const [personagemID, setPersonagemId] = useState('');  
+    
   const [lstCaracteristica, setCaracteristica] = useState([]);
   const [lstAnotacao, setLstAnotacao] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -85,13 +84,9 @@ function Caracteristicas(){
    
     temPersonagemId = (id !== null);
 
-    if(temPersonagemId){ //se nao ta nulo mas pode nao ter valor
+    if(temPersonagemId) //se nao ta nulo mas pode nao ter valor
       temPersonagemId = (temPersonagemId.length > 0);
-
-      if(temPersonagemId)
-        setPersonagemId(id);
-    }
-
+    
     if(temPersonagemId)
       buscar();
 
