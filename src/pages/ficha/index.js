@@ -106,8 +106,8 @@ function Ficha(){
           
           temPersonagem = personagem !== null;
 
-          buscarAtaque();
-          buscarMagia();
+          buscarAtaque(aID);
+          buscarMagia(aID);
         }
         
     })
@@ -119,8 +119,8 @@ function Ficha(){
     setLoading(false);
   }
 
-  async function buscarAtaque() {
-    const q = query(collection(db, "tb_ataque"), where("at_idpersonagem", "==", personagem.pe_id.trim()));
+  async function buscarAtaque(aID) {
+    const q = query(collection(db, "tb_ataque"), where("at_idpersonagem", "==", aID.trim()));
     const querySnapshot = await getDocs(q); 
     let lista = [];
 
@@ -144,9 +144,9 @@ function Ficha(){
     }
   }
 
-  async function buscarMagia() {
+  async function buscarMagia(aID) {
     const q = query(collection(db, "tb_magia"),
-     where("mg_idpersonagem", "==", personagem.pe_id.trim()),
+     where("mg_idpersonagem", "==", aID.trim()),
      where("mg_preparada", "==", true)
     );
     const querySnapshot = await getDocs(q); 
@@ -188,9 +188,6 @@ function Ficha(){
 
       if(temPersonagemId)
         setPersonagemId(id);
-
-      console.log(id);
-      console.log(personagemID);
     }
 
     if(temPersonagemId)
