@@ -257,7 +257,6 @@ function Ficha(){
       pe_tcmsucesso3: s3,
     });
   }
-
  
   if(loading)
     return <div>carregand...</div> 
