@@ -164,7 +164,8 @@ function Ficha(){
             })
         });
 
-        lista.sort((a, b)=> a.mg_nivel > b.mg_nivel);
+        if(lista.length > 0)
+          lista.sort((a, b)=> a.mg_nivel > b.mg_nivel);
     
         setLstMagia(lista);
       } catch (error) {
