@@ -64,17 +64,6 @@ function Personagens(){
 
   async function buscarJogador() {
     
-    let id = localStorage.getItem('RF@personagemID');
-   
-    temPersonagemId = (id !== null);
-
-    if(temPersonagemId){ //se nao ta nulo mas pode nao ter valor
-      temPersonagemId = (temPersonagemId.length > 0);
-
-      if(temPersonagemId)
-        setPersonagemId(id);
-    }
-
     try {
       const q = query(collection(db, "tb_jogador"), where("jo_idlogin", "==", usuario?.uid.trim()));
       const querySnapshot = await getDocs(q);
@@ -93,6 +82,19 @@ function Personagens(){
   }
 
   useEffect(()=>{
+
+    let id = localStorage.getItem('RF@personagemID');
+   
+    temPersonagemId = (id !== null);
+
+    if(temPersonagemId){ //se nao ta nulo mas pode nao ter valor
+      temPersonagemId = (temPersonagemId.length > 0);
+
+      if(temPersonagemId)
+        setPersonagemId(id);
+    }
+
+    
     buscar();
   },[]);
 
