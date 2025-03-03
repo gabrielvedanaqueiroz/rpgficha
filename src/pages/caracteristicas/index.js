@@ -13,7 +13,10 @@ import BtnSalvarForm from '../../components/btnsalvarform';
 
 function Caracteristicas(){
   
-  const personagemID    = localStorage.getItem('RF@personagemID');  
+  let temPersonagem   = false;
+  let temPersonagemId = false;
+  
+  const [personagemID, setPersonagemId] = useState('');  
   const [lstCaracteristica, setCaracteristica] = useState([]);
   const [lstAnotacao, setLstAnotacao] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -75,8 +78,21 @@ function Caracteristicas(){
     }
     
   }
+
   useEffect(()=>{    
-    if(personagemID.trim() !== '')
+
+    let id = localStorage.getItem('RF@personagemID');
+   
+    temPersonagemId = (id !== null);
+
+    if(temPersonagemId){ //se nao ta nulo mas pode nao ter valor
+      temPersonagemId = (temPersonagemId.length > 0);
+
+      if(temPersonagemId)
+        setPersonagemId(id);
+    }
+
+    if(temPersonagemId)
       buscar();
 
     setLoading(false);
@@ -202,6 +218,7 @@ function Caracteristicas(){
     });  
   
   }
+
   function onFecharModal(){
     setTitulo('');
     setDescricao('');
@@ -213,7 +230,7 @@ function Caracteristicas(){
     return <div>carregand...</div>
 
   return(
-    (personagemID.trim() === '')? <Vazio/> :
+    ((!temPersonagemId) && (!temPersonagem))? <Vazio/> :
     <div className='cr_container'>
 
       <div className='cr_proficiencias'>
