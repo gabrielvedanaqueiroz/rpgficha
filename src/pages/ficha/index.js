@@ -45,6 +45,8 @@ function Ficha(){
 
       if(temPersonagemId)
         setPersonagemId(id);
+
+      console.log(personagemID);
     }
 
     async function buscar() {
