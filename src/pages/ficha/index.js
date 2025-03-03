@@ -31,6 +31,7 @@ function Ficha(){
 
   useEffect(()=>{
     
+    let semPersonagem, semVarPersonagem = true;//trocar
     exibirBarras();
     let id = localStorage.getItem('RF@personagemID');
    
