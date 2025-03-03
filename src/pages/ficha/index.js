@@ -193,6 +193,9 @@ function Ficha(){
     else
       setLoading(false);
 
+    console.log(temPersonagem);
+    console.log(temPersonagemId);
+
   },[ ]);
 
   function onAddAtaque(){
