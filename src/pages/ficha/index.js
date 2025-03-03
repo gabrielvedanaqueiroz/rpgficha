@@ -1,7 +1,7 @@
 import './ficha.css';
 import {db} from '../../services/firebaseConnection';
 import {doc, query, where, collection, getDocs, updateDoc} from 'firebase/firestore';
-import { useEffect, useState, useContext, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import {exibirBarras, buscarPersonagem} from '../../utils';
 import {toast} from 'react-toastify';
 import img_classe from '../../res/logo.svg';
@@ -12,13 +12,11 @@ import ModalFiAtaque from '../../components/modalfiataque/index.js';
 import ModalFiMagia from '../../components/modalfimagia';
 import TileVida from '../../components/tilevida/';
 import TileTesteMorte from '../../components/tiletestemorte/index.js';
-import { AuthContext } from '../../utils/auth';
 import Vazio from '../../components/vazio/index.js';
 
 function Ficha(){
 
   const [temPersonagem, setTemPersonagem] = useState(false);
-  const [temPersonagemId, setTemPersonagemId] = useState(false);
   const [personagem, setPersonagem] = useState({});
   
   const [loading, setLoading] = useState(true);
@@ -111,21 +109,18 @@ function Ficha(){
     }
 
     let id = localStorage.getItem('RF@personagemID');
-   
-    let tempId = (id !== null)
-    setTemPersonagemId(tempId);
-
+    let tempId = (id !== null);
     if(tempId) //se nao ta nulo mas pode nao ter valor
-    tempId = (id.length > 0);
+      tempId = (id.length > 0);
   
     if(tempId)
       buscar(id);
     else  
       setLoading(false);
   
-    console.log('f');
+    // console.log('f');
 
-  },[temPersonagem, temPersonagemId, personagem]);
+  },[lstAtaque]);
 
   function onAddAtaque(){
     setShowModalAtaque(true);

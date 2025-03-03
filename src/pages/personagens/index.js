@@ -19,8 +19,9 @@ function Personagens(){
   const {usuario} = useContext(AuthContext);  
   const {onSingOut} = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
   const [nomeJogador, setNomeJogador] = useState('');
+  
+  const navigate = useNavigate();
 
   async function buscar(){
       

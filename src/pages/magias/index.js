@@ -1,21 +1,21 @@
 import './magias.css';
 import Tile from '../../components/tile';
 import BtnAdicionar from '../../components/btnadicionar';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import {db} from '../../services/firebaseConnection';
 import {collection, query, where, getDocs, addDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import TileMagia from '../../components/tilemagia';
 import BtnSalvarForm from '../../components/btnsalvarform';
-import {AuthContext} from '../../utils/auth';
 import Vazio from '../../components/vazio';
+import {buscarPersonagem} from '../../utils';
 
 function Magias(){
   
-  let temPersonagem   = false;
-  let temPersonagemId = false;
+  const [temPersonagem, setTemPersonagem] = useState(false);
+  const [temPersonagemId, setTemPersonagemId] = useState(false);
+  const [personagem, setPersonagem] = useState({});
 
-  const {personagem}    = useContext(AuthContext);
   const [lista, setLista]     = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -31,55 +31,56 @@ function Magias(){
   const [tempoconjuracao, setTempoConjuracao] = useState('');
   const [idMagia, setIdMagia]                 = useState('');
   
-  async function buscar(){
-    const q = query(collection(db, "tb_magia"), where("mg_idpersonagem", "==", personagem.pe_id.trim()));
-    const querySnapshot = await getDocs(q); 
-    let lista = [];
-
-    try {
-      querySnapshot.forEach((doc)=>{
-        lista.push({
-          mg_id: doc.id.trim(),
-          mg_nome: doc.data().mg_nome.trim(),
-          mg_descricao: doc.data().mg_descricao.trim(),
-          mg_alcance: doc.data().mg_alcance.trim(),
-          mg_componentes: doc.data().mg_componentes.trim(),
-          mg_dano: doc.data().mg_dano.trim(),
-          mg_duracao: doc.data().mg_duracao.trim(),
-          mg_nivel: doc.data().mg_nivel,
-          mg_preparada: doc.data().mg_preparada,
-          mg_tempoconjuracao: doc.data().mg_tempoconjuracao.trim(),
-        })
-      });
-      lista.sort((a, b)=> a.mg_nivel > b.mg_nivel);
-  
-      setLista(lista);
-    } catch (error) {
-      toast.error('Erro ao carregar magias'+error); 
-    }
-    
-  }
-
   useEffect(()=>{
     
+    async function buscar(aID){
+
+      let pers = await buscarPersonagem(aID);
+      setPersonagem(pers);
+
+      let temP = pers !== null;
+
+      setTemPersonagem(temP);
+      
+      const q = query(collection(db, "tb_magia"), where("mg_idpersonagem", "==", aID.trim()));
+      const querySnapshot = await getDocs(q); 
+      let lista = [];
+  
+      try {
+        querySnapshot.forEach((doc)=>{
+          lista.push({
+            mg_id: doc.id.trim(),
+            mg_nome: doc.data().mg_nome.trim(),
+            mg_descricao: doc.data().mg_descricao.trim(),
+            mg_alcance: doc.data().mg_alcance.trim(),
+            mg_componentes: doc.data().mg_componentes.trim(),
+            mg_dano: doc.data().mg_dano.trim(),
+            mg_duracao: doc.data().mg_duracao.trim(),
+            mg_nivel: doc.data().mg_nivel,
+            mg_preparada: doc.data().mg_preparada,
+            mg_tempoconjuracao: doc.data().mg_tempoconjuracao.trim(),
+          })
+        });
+        lista.sort((a, b)=> a.mg_nivel > b.mg_nivel);
+    
+        setLista(lista);
+      } catch (error) {
+        toast.error('Erro ao carregar magias'+error); 
+      }
+      
+    }
+
     let id = localStorage.getItem('RF@personagemID');
-   
-    temPersonagemId = (id !== null);
-
-    if(temPersonagemId) //se nao ta nulo mas pode nao ter valor
-      temPersonagemId = (id.length > 0);
-
-    if(temPersonagemId)
-      buscar();
+    let tempId = (id !== null)
+    if(tempId) //se nao ta nulo mas pode nao ter valor
+      tempId = (id.length > 0);
+    if(tempId)
+      buscar(id);
 
     setLoading(false);
 
-    temPersonagem = personagem !== null;
-
-    console.log('m');
-    console.log(temPersonagem);
-    console.log(temPersonagemId);
-  },[]);
+    // console.log('m');
+  },[lista]);
 
   if(loading)
     return <div>carregand...</div>
@@ -88,7 +89,7 @@ function Magias(){
     const docRef = doc(db, "tb_magia", id);
     await deleteDoc(docRef)
     .then(()=>{
-      buscar();
+      // buscar();
     })
     .catch((error)=>{
       toast.error('Erro ao excluir');
@@ -102,7 +103,6 @@ function Magias(){
       mg_preparada: !preparada,
     })
     .then(()=>{
-      buscar();
     })
     .catch((error)=>{
       console.log('Erro ao editar: '+error);
@@ -141,7 +141,6 @@ function Magias(){
         })
         .then( () =>{
           onFecharModal();
-          buscar();
         })
         .catch((error)=>{
           console.log('Erro ao inserir; '+error);
@@ -164,7 +163,6 @@ function Magias(){
         )
         .then(()=>{
           onFecharModal();
-          buscar();
         })
         .catch((error)=>{
           console.log('Erro ao editar: '+error);
@@ -189,8 +187,11 @@ function Magias(){
     setIsOpen(false);
   }
 
+  if(loading)
+    return <div>carregand...</div>
+
   return(
-    (temPersonagem === false)? <Vazio/> :
+    (!temPersonagem)? <Vazio/> :
     <div className='mg-container'>  
       <div>
         <div className='mg_cabecalho'>

@@ -7,19 +7,18 @@ import {toast} from 'react-toastify';
 import TileCaracteristica from '../../components/tilecaracteristica';
 import TileProficiencia from '../../components/tileproficiencia';
 import BtnAdicionar from '../../components/btnadicionar';
-import { AuthContext } from '../../utils/auth';
 import Vazio from '../../components/vazio';
 import BtnSalvarForm from '../../components/btnsalvarform';
+import {buscarPersonagem} from '../../utils';
 
 function Caracteristicas(){
   
-  let temPersonagemId = false;
-  let temPersonagem   = false;
+  const [temPersonagem, setTemPersonagem] = useState(false);
+  const [personagem, setPersonagem] = useState({});
     
   const [lstCaracteristica, setCaracteristica] = useState([]);
   const [lstAnotacao, setLstAnotacao] = useState([]);
   const [loading, setLoading] = useState(true);
-  const {personagem} = useContext(AuthContext);
 
   /* modal */
   const [isOpen, setIsOpen] = useState(false);
@@ -28,78 +27,80 @@ function Caracteristicas(){
   const [descricao, setDescricao]                 = useState('');
   const [tipo, setTipo]                           = useState('0');
 
-  async function buscar(){
-
-    const q = query(collection(db, "tb_caracteristica"), where("ca_idpersonagem", "==", personagem.pe_id.trim()));
-    const querySnapshot = await getDocs(q); 
-    let lista = [];
-
-    try {
-      querySnapshot.forEach((doc)=>{
-        lista.push({
-          ca_id: doc.id.trim(),
-          ca_nome: doc.data().ca_nome.trim(),
-          ca_descricao: doc.data().ca_descricao.trim(),
-        })
-      });
-      lista.sort((a, b)=> a.ca_nome > b.ca_nome);
-  
-      setCaracteristica(lista);
-
-      buscarAnatocao();
-    } catch (error) {
-      toast.error('Erro ao carregar caracteristica'+error); 
-      setLoading(false);
-    }
-    
-  }
-
-  async function buscarAnatocao() {
-
-    const q = query(collection(db, "tb_anotacao"), where("an_idpersonagem", "==", personagem.pe_id.trim()));
-    const querySnapshot = await getDocs(q); 
-    let lista = [];
-
-    try {
-      querySnapshot.forEach((doc)=>{
-        lista.push({
-          an_id: doc.id.trim(),
-          an_descricao : doc.data().an_descricao.trim(),
-          an_titulo  : doc.data().an_titulo .trim(),
-          // an_data: doc.data().an_data.trim(),
-          // an_idpersonagem : doc.data().an_idpersonagem.trim(),
-        })
-      });
-      lista.sort((a, b)=> a.ca_nome > b.ca_nome);
-  
-      setLstAnotacao(lista);
-      setLoading(false);
-    } catch (error) {
-      toast.error('Erro ao carregar anotação'+error); 
-      setLoading(false);
-    }
-    
-  }
-
   useEffect(()=>{    
 
-    let id = localStorage.getItem('RF@personagemID');
-   
-    temPersonagemId = (id !== null);
+    async function buscar(aID){
+
+      let pers = await buscarPersonagem(aID);
+      setPersonagem(pers);
+
+      let temP = pers !== null;
+
+      setTemPersonagem(temP);
+
+      const q = query(collection(db, "tb_caracteristica"), where("ca_idpersonagem", "==", aID.trim()));
+      const querySnapshot = await getDocs(q); 
+      let lista = [];
   
-    if(temPersonagemId) //se nao ta nulo mas pode nao ter valor
-      temPersonagemId = (id.length > 0);
+      try {
+        querySnapshot.forEach((doc)=>{
+          lista.push({
+            ca_id: doc.id.trim(),
+            ca_nome: doc.data().ca_nome.trim(),
+            ca_descricao: doc.data().ca_descricao.trim(),
+          })
+        });
+        lista.sort((a, b)=> a.ca_nome > b.ca_nome);
     
-    if(temPersonagemId)
-      buscar();
+        setCaracteristica(lista);
+  
+        buscarAnatocao(aID);
+      } catch (error) {
+        toast.error('Erro ao carregar caracteristica'+error); 
+        setLoading(false);
+      }
+      
+    }
+
+    async function buscarAnatocao(aID) {
+
+      const q = query(collection(db, "tb_anotacao"), where("an_idpersonagem", "==", aID.trim()));
+      const querySnapshot = await getDocs(q); 
+      let lista = [];
+  
+      try {
+        querySnapshot.forEach((doc)=>{
+          lista.push({
+            an_id: doc.id.trim(),
+            an_descricao : doc.data().an_descricao.trim(),
+            an_titulo  : doc.data().an_titulo .trim(),
+            // an_data: doc.data().an_data.trim(),
+            // an_idpersonagem : doc.data().an_idpersonagem.trim(),
+          })
+        });
+        lista.sort((a, b)=> a.ca_nome > b.ca_nome);
+    
+        setLstAnotacao(lista);
+        setLoading(false);
+      } catch (error) {
+        toast.error('Erro ao carregar anotação'+error); 
+        setLoading(false);
+      }
+      
+    }
+
+    let id = localStorage.getItem('RF@personagemID');
+    let tempId = (id !== null);
+    if(tempId) //se nao ta nulo mas pode nao ter valor
+      tempId = (id.length > 0);
+    if(tempId)
+      buscar(id);
     else
       setLoading(false);
 
-    temPersonagem = personagem !== null;
+    // console.log('c');
 
-    console.log('c');
-
-  },[]);
+  },[lstCaracteristica, lstAnotacao]);
 
   async function onSalvar(e){
     e.preventDefault();
@@ -115,7 +116,7 @@ function Caracteristicas(){
           })
           .then( () =>{
             onFecharModal();
-            buscar();
+            // buscar(personagem.pe_id.trim());
           })
           .catch((error)=>{
             console.log('Erro ao inserir; '+error);
@@ -131,7 +132,7 @@ function Caracteristicas(){
           )
           .then(()=>{
             onFecharModal();
-            buscar();
+            // buscar();
           })
           .catch((error)=>{
             console.log('Erro ao editar: '+error);
@@ -148,7 +149,7 @@ function Caracteristicas(){
           })
           .then( () =>{
             onFecharModal();
-            buscar();
+            // buscar();
           })
           .catch((error)=>{
             console.log('Erro ao inserir; '+error);
@@ -164,7 +165,7 @@ function Caracteristicas(){
           )
           .then(()=>{
             onFecharModal();
-            buscar();
+            // buscar();
           })
           .catch((error)=>{
             console.log('Erro ao editar: '+error);
@@ -192,7 +193,7 @@ function Caracteristicas(){
     const docRef = doc(db, "tb_caracteristica", id);
     await deleteDoc(docRef)
     .then(()=>{
-      buscar();
+      // buscar();
     })
     .catch((error)=>{
       toast.error('Erro ao excluir');
@@ -213,7 +214,7 @@ function Caracteristicas(){
     const docRef = doc(db, "tb_anotacao", id);
     await deleteDoc(docRef)
     .then(()=>{
-      buscar();
+      // buscar();
     })
     .catch((error)=>{
       toast.error('Erro ao excluir');
@@ -233,7 +234,7 @@ function Caracteristicas(){
     return <div>carregand...</div>
 
   return(
-    (temPersonagem === false)? <Vazio/> :
+    (!temPersonagem)? <Vazio/>:
     <div className='cr_container'>
 
       <div className='cr_proficiencias'>

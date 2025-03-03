@@ -1,6 +1,6 @@
 import './inventario.css';
 import Tile from '../../components/tile';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import {db} from '../../services/firebaseConnection';
 import {collection, query, where, getDocs, addDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
@@ -8,14 +8,13 @@ import BtnAdicionar from '../../components/btnadicionar';
 import TileCaracteristica from '../../components/tilecaracteristica';
 import Vazio from '../../components/vazio';
 import BtnSalvarForm from '../../components/btnsalvarform';
-import { AuthContext } from '../../utils/auth';
+import {buscarPersonagem} from '../../utils';
 
 function Inventario(){
 
-  let temPersonagem   = false;
-  let temPersonagemId = false;
-  
-  const {personagem} = useContext(AuthContext);
+  const [temPersonagem, setTemPersonagem] = useState(false);
+  const [personagem, setPersonagem] = useState({});
+
   const [lista, setLista] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -25,58 +24,58 @@ function Inventario(){
   const [descricao, setDescricao] = useState('');
   const [idItem, setIdItem] = useState('');
 
-  async function buscar(){
-
-    const q = query(collection(db, "tb_inventario"), where("in_idpersonagem", "==", personagem.pe_id.trim()));
-    const querySnapshot = await getDocs(q); 
-    let lista = [];
-
-    try {
-      querySnapshot.forEach((doc)=>{
-        lista.push({
-          in_id: doc.id.trim(),
-          in_nome: doc.data().in_nome.trim(),
-          in_descricao: doc.data().in_descricao.trim(),
-        })
-      });
-      lista.sort((a, b)=> a.in_nome > b.in_nome);
-  
-      setLista(lista);
-      
-      setLoading(false);
-    } catch (error) {
-      toast.error('Erro ao carregar inventario'+error); 
-      setLoading(false);
-    }
-    
-  }
-
   useEffect(()=>{
 
+    async function buscar(aID){
+
+      let pers = await buscarPersonagem(aID);
+      setPersonagem(pers);
+
+      let temP = pers !== null;
+
+      setTemPersonagem(temP);
+
+      const q = query(collection(db, "tb_inventario"), where("in_idpersonagem", "==", aID.trim()));
+      const querySnapshot = await getDocs(q); 
+      let lista = [];
+  
+      try {
+        querySnapshot.forEach((doc)=>{
+          lista.push({
+            in_id: doc.id.trim(),
+            in_nome: doc.data().in_nome.trim(),
+            in_descricao: doc.data().in_descricao.trim(),
+          })
+        });
+        lista.sort((a, b)=> a.in_nome > b.in_nome);
+    
+        setLista(lista);
+        
+        setLoading(false);
+      } catch (error) {
+        toast.error('Erro ao carregar inventario'+error); 
+        setLoading(false);
+      }
+      
+    }
+
     let id = localStorage.getItem('RF@personagemID');
-   
-    temPersonagemId = (id !== null);
-
-    if(temPersonagemId) //se nao ta nulo mas pode nao ter valor
-      temPersonagemId = (id.length > 0);
-
-    if(temPersonagemId)
-      buscar();
+    let tempId = (id !== null);
+    if(tempId) //se nao ta nulo mas pode nao ter valor
+      tempId = (id.length > 0);
+    if(tempId)
+      buscar(id);
     else
       setLoading(false);
 
-    temPersonagem = personagem !== null;
-
-    console.log('i');
-    console.log(temPersonagem);
-    console.log(temPersonagemId);
-  },[]);
+    // console.log('i');
+  },[lista]);
 
   async function onExcluir(id){
     const docRef = doc(db, "tb_inventario", id);
     await deleteDoc(docRef)
     .then(()=>{
-      buscar();
+      // buscar();
     })
     .catch((error)=>{
       toast.error('Erro ao excluir');
@@ -112,7 +111,7 @@ function Inventario(){
         })
         .then( () =>{
           onFecharModal();
-          buscar();
+          // buscar();
         })
         .catch((error)=>{
           console.log('Erro ao inserir; '+error);
@@ -128,7 +127,7 @@ function Inventario(){
         )
         .then(()=>{
           onFecharModal();
-          buscar();
+          // buscar();
         })
         .catch((error)=>{
           console.log('Erro ao editar: '+error);
@@ -146,8 +145,7 @@ function Inventario(){
     return <div>carregand...</div>
 
   return(
-
-    (temPersonagem === false)? <Vazio/> :
+    (!temPersonagem)? <Vazio/>:
     <div className='it-container'>
       <div>
         <div className='it-titulo'>
