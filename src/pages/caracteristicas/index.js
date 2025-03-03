@@ -70,7 +70,7 @@ function Caracteristicas(){
           // an_idpersonagem : doc.data().an_idpersonagem.trim(),
         })
       });
-      // lista.sort((a, b)=> a.ca_nome > b.ca_nome);
+      lista.sort((a, b)=> a.ca_nome > b.ca_nome);
   
       setLstAnotacao(lista);
     } catch (error) {
@@ -94,6 +94,9 @@ function Caracteristicas(){
 
     if(temPersonagemId)
       buscar();
+
+    console.log(temPersonagem);
+    console.log(temPersonagemId);
 
     setLoading(false);
   },[]);
