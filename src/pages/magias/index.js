@@ -12,7 +12,9 @@ import Vazio from '../../components/vazio';
 
 function Magias(){
   
-  const personagemID    = localStorage.getItem('RF@personagemID');  
+  let temPersonagem   = false;
+  let temPersonagemId = false;
+
   const {personagem}    = useContext(AuthContext);
   const [lista, setLista]     = useState([]);
   const [loading, setLoading] = useState(true);
@@ -60,7 +62,14 @@ function Magias(){
 
   useEffect(()=>{
     
-    if(personagemID.trim() !== '')
+    let id = localStorage.getItem('RF@personagemID');
+   
+    temPersonagemId = (id !== null);
+
+    if(temPersonagemId) //se nao ta nulo mas pode nao ter valor
+      temPersonagemId = (temPersonagemId.length > 0);
+
+    if(temPersonagemId)
       buscar();
 
     setLoading(false);
@@ -175,10 +184,8 @@ function Magias(){
   }
 
   return(
-    (personagemID.trim() === '') ? <Vazio/> :
-
+    ((!temPersonagemId) && (!temPersonagem))? <Vazio/> :
     <div className='mg-container'>  
-
       <div>
         <div className='mg_cabecalho'>
           <div className='mg_cb-item'>

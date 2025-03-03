@@ -15,7 +15,6 @@ function Inventario(){
   let temPersonagem   = false;
   let temPersonagemId = false;
   
-  const [personagemID, setPersonagemId] = useState('');   
   const {personagem} = useContext(AuthContext);
   const [lista, setLista] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -54,12 +53,8 @@ function Inventario(){
    
     temPersonagemId = (id !== null);
 
-    if(temPersonagemId){ //se nao ta nulo mas pode nao ter valor
+    if(temPersonagemId) //se nao ta nulo mas pode nao ter valor
       temPersonagemId = (temPersonagemId.length > 0);
-
-      if(temPersonagemId)
-        setPersonagemId(id);
-    }
 
     if(temPersonagemId)
       buscar();
@@ -143,7 +138,6 @@ function Inventario(){
   return(
 
     ((!temPersonagemId) && (!temPersonagem))? <Vazio/> :
-
     <div className='it-container'>
 
       <div>
