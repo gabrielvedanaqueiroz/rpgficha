@@ -124,14 +124,16 @@ function Ficha(){
   
       try {
         querySnapshot.forEach((doc)=>{
-          lista.push({
-            at_idpersonagem: doc.id.trim(),
-            at_descricao: doc.data().at_descricao.trim(),
-            at_alcance: doc.data().at_alcance.trim(),
-            at_bonus: doc.data().at_bonus,
-            at_dano: doc.data().at_dano.trim(),
-            at_tipo: doc.data().at_tipo.trim(),
-          })
+
+          if(doc.exists)
+            lista.push({
+              at_idpersonagem: doc.id.trim(),
+              at_descricao: doc.data().at_descricao.trim(),
+              at_alcance: doc.data().at_alcance.trim(),
+              at_bonus: doc.data().at_bonus,
+              at_dano: doc.data().at_dano.trim(),
+              at_tipo: doc.data().at_tipo.trim(),
+            })
         });
     
         setLstAtaque(lista);
@@ -150,15 +152,16 @@ function Ficha(){
   
       try {
         querySnapshot.forEach((doc)=>{
-          lista.push({
-            mg_id: doc.id.trim(),
-            mg_nome: doc.data().mg_nome.trim(),
-            mg_alcance: doc.data().mg_alcance.trim(),
-            mg_duracao: doc.data().mg_duracao.trim(),
-            mg_dano: doc.data().mg_dano.trim(),
-            mg_nivel: doc.data().mg_nivel,
-            mg_tempoconjuracao: doc.data().mg_tempoconjuracao.trim()
-          })
+          if(doc.exists)
+            lista.push({
+              mg_id: doc.id.trim(),
+              mg_nome: doc.data().mg_nome.trim(),
+              mg_alcance: doc.data().mg_alcance.trim(),
+              mg_duracao: doc.data().mg_duracao.trim(),
+              mg_dano: doc.data().mg_dano.trim(),
+              mg_nivel: doc.data().mg_nivel,
+              mg_tempoconjuracao: doc.data().mg_tempoconjuracao.trim()
+            })
         });
 
         lista.sort((a, b)=> a.mg_nivel > b.mg_nivel);
