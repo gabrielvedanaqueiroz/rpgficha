@@ -15,8 +15,7 @@ function Login(){
   const {onSingIn} = useContext(AuthContext);
 
   useEffect(()=>{
-    ocultarBarras();
-  
+    ocultarBarras();  
   },[]);
   
   async function onLogin(e) {
