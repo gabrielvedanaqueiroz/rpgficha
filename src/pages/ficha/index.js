@@ -2,7 +2,7 @@ import './ficha.css';
 import {db} from '../../services/firebaseConnection';
 import {doc, query, where, collection, getDocs, updateDoc} from 'firebase/firestore';
 import { useEffect, useState, useContext } from 'react';
-import {exibirBarras, buscarPersonagem, buscarPersonagemAtivo} from '../../utils';
+import {exibirBarras, buscarPersonagemAtivo} from '../../utils';
 import {toast} from 'react-toastify';
 import img_classe from '../../res/logo.svg';
 import Tile from '../../components/tile';
@@ -30,6 +30,9 @@ function Ficha(){
 
   useEffect(()=>{
     
+    // const apiKey = process.env.REACT_APP_OUTRA;
+    // console.log(apiKey);
+
     exibirBarras();
 
     async function buscar() {
@@ -114,17 +117,7 @@ function Ficha(){
       }
     }
 
-    // let id = localStorage.getItem('RF@personagemID');
-    // let tempId = (id !== null);
-    // if(tempId) //se nao ta nulo mas pode nao ter valor
-    //   tempId = (id.length > 0);
-  
-    // if(tempId)
-      buscar();
-    // else  
-    //   setLoading(false);
-  
-    // console.log('f');
+    buscar();
 
   },[lstAtaque]);
 

@@ -5,12 +5,12 @@ import { getAuth } from 'firebase/auth'
 
 const firebaseConfig = {
 
-  apiKey: "AIzaSyDlQ5xeVccXnyRZLfgcumTjESb8i4sC9-c",
-  authDomain: "rpgficha-3f22d.firebaseapp.com",
-  projectId: "rpgficha-3f22d",
-  storageBucket: "rpgficha-3f22d.firebasestorage.app",
-  messagingSenderId: "61510694513",
-  appId: "1:61510694513:web:dcacb125f54036d6fc4dd0"
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
 
 };
 

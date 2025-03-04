@@ -1,6 +1,6 @@
 import './caracteristicas.css';
 import Tile from '../../components/tile';
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import {db} from '../../services/firebaseConnection';
 import {collection, query, where, getDocs, addDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import {toast} from 'react-toastify';

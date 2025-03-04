@@ -98,7 +98,7 @@ function Personagens(){
 
     buscar();
 
-    console.log('p');
+    // console.log('p');
   },[lista]);
 
   async function onDeslogar() {
