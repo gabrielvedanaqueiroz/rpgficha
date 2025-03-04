@@ -1,6 +1,6 @@
 
 import {db} from '../services/firebaseConnection';
-import {doc, getDoc} from 'firebase/firestore';
+import {doc, getDoc, query, getDocs, collection, where} from 'firebase/firestore';
 import Personagem from '../utils/personagem.js'
 import {toast} from 'react-toastify';
 
@@ -371,6 +371,86 @@ export const jRacas = [
     ]
   }
 ];
+
+export async function buscarPersonagemAtivo(aID){
+
+  let LPersonagem = null;
+  const q = query(collection(db, "tb_personagem"), 
+    where("pe_idjogador", "==", aID.trim()),
+    where("pe_ativo", "==", true)
+  );
+  const querySnapshot = await getDocs(q); 
+  try {
+    querySnapshot.forEach((snapshot)=>{
+      LPersonagem = new Personagem(
+        snapshot.id.trim(),                    //id do documento fica separado no nodo do documento
+        snapshot.data().pe_nome.trim(),        //pegar dados, ficam armazenados em data()
+        snapshot.data().pe_subclasse.trim(), 
+        snapshot.data().pe_classe.trim(), 
+        snapshot.data().pe_raca.trim(), 
+        snapshot.data().pe_subraca.trim(), 
+        snapshot.data().pe_nivel, 
+        snapshot.data().pe_antecedente.trim(), 
+        snapshot.data().pe_tendencia.trim(), 
+        snapshot.data().pe_vidabase, 
+        snapshot.data().pe_vidaatual, 
+        snapshot.data().pe_vidatemp, 
+        snapshot.data().pe_experiencia, 
+        snapshot.data().pe_bproficiencia, 
+        snapshot.data().pe_forca, 
+        snapshot.data().pe_destreza, 
+        snapshot.data().pe_constituicao, 
+        snapshot.data().pe_inteligencia, 
+        snapshot.data().pe_sabedoria, 
+        snapshot.data().pe_carisma, 
+        snapshot.data().pe_cabase, 
+        snapshot.data().pe_catotal, 
+        snapshot.data().pe_movimento,
+        snapshot.data().pe_idclasse,
+        snapshot.data().pe_idraca,
+        snapshot.data().pe_vidadado,
+        snapshot.data().pe_vidadadousado,
+        snapshot.data().pe_tcmfalha1,
+        snapshot.data().pe_tcmfalha2,
+        snapshot.data().pe_tcmfalha3,
+        snapshot.data().pe_tcmsucesso1,
+        snapshot.data().pe_tcmsucesso2,
+        snapshot.data().pe_tcmsucesso3,
+        snapshot.data().pe_sgforca,
+        snapshot.data().pe_sgdestreza,
+        snapshot.data().pe_sgconstituicao,
+        snapshot.data().pe_sginteligencia,
+        snapshot.data().pe_sgsabedoria,
+        snapshot.data().pe_sgcarisma,
+        snapshot.data().pe_proacrobacia,
+        snapshot.data().pe_proarcanismo,
+        snapshot.data().pe_proatletismo,
+        snapshot.data().pe_proatuacao,
+        snapshot.data().pe_problefar,
+        snapshot.data().pe_profurtividade,
+        snapshot.data().pe_prohistoria,
+        snapshot.data().pe_prointimidacao,
+        snapshot.data().pe_prointuicao,
+        snapshot.data().pe_proinvestigacao,
+        snapshot.data().pe_prolidaranimais,
+        snapshot.data().pe_promedicina,
+        snapshot.data().pe_pronatureza,
+        snapshot.data().pe_propercepcao,
+        snapshot.data().pe_propersuacao,
+        snapshot.data().pe_proprestidigitacao,
+        snapshot.data().pe_prosobrevivencia,
+        snapshot.data().pe_proreligiao,
+        snapshot.data().pe_idhabilidadeconjuracao,
+      ); 
+    });    
+  } catch (error) {
+    toast.error('Erro ao carregar personagem ativo '+error); 
+    console.log('Erro ao carregar personagem ativo '+error); 
+    
+  }
+  
+  return LPersonagem;
+}
 
 export async function buscarPersonagem(aID){
  

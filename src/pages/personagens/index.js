@@ -25,16 +25,6 @@ function Personagens(){
 
   useEffect(()=>{
 
-    // let id = localStorage.getItem('RF@personagemID');
-   
-    // setTemPersonagemId(id !== null);
-
-    // if(temPersonagemId){ //se nao ta nulo mas pode nao ter valor
-    //   setTemPersonagemId(id.length > 0);
-
-    //   if(temPersonagemId)
-    //     setPersonagemId(id);
-    // }
     async function buscar(){
       
       let LId = '';

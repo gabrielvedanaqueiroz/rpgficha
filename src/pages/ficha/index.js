@@ -1,8 +1,8 @@
 import './ficha.css';
 import {db} from '../../services/firebaseConnection';
 import {doc, query, where, collection, getDocs, updateDoc} from 'firebase/firestore';
-import { useEffect, useState } from 'react';
-import {exibirBarras, buscarPersonagem} from '../../utils';
+import { useEffect, useState, useContext } from 'react';
+import {exibirBarras, buscarPersonagem, buscarPersonagemAtivo} from '../../utils';
 import {toast} from 'react-toastify';
 import img_classe from '../../res/logo.svg';
 import Tile from '../../components/tile';
@@ -13,11 +13,13 @@ import ModalFiMagia from '../../components/modalfimagia';
 import TileVida from '../../components/tilevida/';
 import TileTesteMorte from '../../components/tiletestemorte/index.js';
 import Vazio from '../../components/vazio/index.js';
+import { AuthContext } from '../../utils/auth.js';
 
 function Ficha(){
 
   const [temPersonagem, setTemPersonagem] = useState(false);
   const [personagem, setPersonagem] = useState({});
+  const {usuario} = useContext(AuthContext); 
   
   const [loading, setLoading] = useState(true);
   const [showModalAtaque, setShowModalAtaque] = useState(false);
@@ -30,17 +32,21 @@ function Ficha(){
     
     exibirBarras();
 
-    async function buscar(aID) {
+    async function buscar() {
 
-      let pers = await buscarPersonagem(aID);
+      let pers = await buscarPersonagemAtivo(usuario?.uid.trim());
       setPersonagem(pers);
 
       let temP = pers !== null;
 
       setTemPersonagem(temP);
   
-      if(temP)
-        buscarAtaque(aID);
+      if(temP){
+        localStorage.setItem('RF@personagemID', pers.pe_id.trim());
+        buscarAtaque(pers.pe_id.trim());
+      }
+      else
+        setLoading(false);
       
     }
 
@@ -108,15 +114,15 @@ function Ficha(){
       }
     }
 
-    let id = localStorage.getItem('RF@personagemID');
-    let tempId = (id !== null);
-    if(tempId) //se nao ta nulo mas pode nao ter valor
-      tempId = (id.length > 0);
+    // let id = localStorage.getItem('RF@personagemID');
+    // let tempId = (id !== null);
+    // if(tempId) //se nao ta nulo mas pode nao ter valor
+    //   tempId = (id.length > 0);
   
-    if(tempId)
-      buscar(id);
-    else  
-      setLoading(false);
+    // if(tempId)
+      buscar();
+    // else  
+    //   setLoading(false);
   
     // console.log('f');
 
