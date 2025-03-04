@@ -1,11 +1,9 @@
 
 personagem
   editar
-tirar o personagem ativo do localstorage e deixar no firebase
-apenas o ficha pode salvar no firestore assim que ele obter o id ativo
-
+unboxing do primeiro uso 
 responsividade da tela
-esconder chave firebase
+
 excluir ataques
 tile deslize suave
 
