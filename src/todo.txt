@@ -1,10 +1,6 @@
 
 personagem
   editar
-  upar (
-    abrir uma nova pagina
-    navegar para o lado em grupo de interesses;
-  )
-  ajustar width da subraca  subclasse
+tirar o personagem ativo do localstorage e deixar no firebase
 
 tile deslize suave

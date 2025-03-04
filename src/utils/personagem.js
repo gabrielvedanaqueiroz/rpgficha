@@ -203,11 +203,15 @@ export default class Personagem{
   }
   
   getClasse(){
-    return this.pe_classe + ' ' + this.pe_subclasse;
+    let aux = this.pe_classe + ' ' + this.pe_subclasse;
+    aux = aux.slice(0, 23);
+    return aux;
   }
   
   getRaca(){
-    return this.pe_raca + ' ' + this.pe_subraca;
+    let aux = this.pe_raca + ' ' + this.pe_subraca;
+    aux = aux.slice(0, 20);
+    return aux;
   }
 
   getIniciativa(){
