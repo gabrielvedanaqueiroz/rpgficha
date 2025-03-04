@@ -11,8 +11,6 @@ function AuthProvider({children}){
   const [signed, setSigned] = useState(false);
   const [usuario, setUsuarioInterno] = useState(null);
   const [loadingAuth, setLoadingAuth] = useState(false);
-  const [personagem, setPersonagemInterno] = useState({});
-  const [personagemId, setPersonagemIdInterno] = useState('');
 
   useEffect(()=>{
     const LUsuario  = localStorage.getItem('RF@detailUser');
@@ -82,7 +80,6 @@ function AuthProvider({children}){
 
   const onSingOut = async()=>{
     localStorage.setItem('RF@detailUser', JSON.stringify({}));
-    setPersonagem(null);
     await signOut(auth);  //metodo pra deslogar do firebase authentication
   }
 
@@ -119,7 +116,6 @@ function AuthProvider({children}){
       onSalvarJogador(userCredential.user.uid, nome, ()=>{
         setLoadingAuth(false);
         localStorage.setItem('RF@detailUser', JSON.stringify(userData));
-        setUsuarioInterno(userData);
       });  
       
       return true;
@@ -155,25 +151,13 @@ function AuthProvider({children}){
     });
   }
 
-  function setPersonagem(aPersonagem){
-    setPersonagemInterno(aPersonagem);
-  }
-
-  function setPersonagemId(aPersonagemId){
-    setPersonagemIdInterno(aPersonagemId);
-  }
-
   return(
     <AuthContext.Provider
       value={{
         signed,
         usuario,
-        personagem,
-        personagemId,
-        setPersonagemId,
         loadingAuth,
         setUsuario,
-        setPersonagem,
         onSingIn, 
         onSingOut,
         onCriarUsuario,

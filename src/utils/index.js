@@ -262,6 +262,113 @@ export const jRacas = [
     "rc_sub": [
         "Sem sub-raças"
     ]
+  },
+
+  {
+    "rc_id": 10,
+    "rc_descricao": "Aasimar",
+    "rc_movimento": 6,
+    "rc_sub": [
+        "Protetor",
+        "Flagelador",
+		    "Caído"
+    ]
+  },
+  {
+    "rc_id": 11,
+    "rc_descricao": "Firbolg",
+    "rc_movimento": 6,
+    "rc_sub": [
+        "Sem sub-raças"
+    ]
+  },
+  {
+    "rc_id": 12,
+    "rc_descricao": "Golias",
+    "rc_movimento": 6,
+    "rc_sub": [
+        "Sem sub-raças"
+    ]
+  },
+  {
+    "rc_id": 13,
+    "rc_descricao": "Kenku",
+    "rc_movimento": 6,
+    "rc_sub": [
+        "Sem sub-raças"
+    ]
+  },
+  {
+    "rc_id": 14,
+    "rc_descricao": "Povo Lagarto",
+    "rc_movimento": 6,
+    "rc_sub": [
+        "Sem sub-raças"
+    ]
+  },
+  {
+    "rc_id": 15,
+    "rc_descricao": "Tabaxi",
+    "rc_movimento": 6,
+    "rc_sub": [
+        "Sem sub-raças"
+    ]
+  },
+  {
+    "rc_id": 16,
+    "rc_descricao": "Tritão",
+    "rc_movimento": 6,
+    "rc_sub": [
+        "Sem sub-raças"
+    ]
+  },
+  {
+    "rc_id": 17,
+    "rc_descricao": "Bugbear",
+    "rc_movimento": 6,
+    "rc_sub": [
+        "Sem sub-raças"
+    ]
+  },
+  {
+    "rc_id": 18,
+    "rc_descricao": "Goblin",
+    "rc_movimento": 6,
+    "rc_sub": [
+        "Sem sub-raças"
+    ]
+  },
+  {
+    "rc_id": 19,
+    "rc_descricao": "Hobgoblin",
+    "rc_movimento": 6,
+    "rc_sub": [
+        "Sem sub-raças"
+    ]
+  },
+  {
+    "rc_id": 20,
+    "rc_descricao": "Kobolds",
+    "rc_movimento": 6,
+    "rc_sub": [
+        "Sem sub-raças"
+    ]
+  },
+  {
+    "rc_id": 21,
+    "rc_descricao": "Orc",
+    "rc_movimento": 6,
+    "rc_sub": [
+        "Sem sub-raças"
+    ]
+  },
+  {
+    "rc_id": 22,
+    "rc_descricao": "Yuan-ti Puro Sangue",
+    "rc_movimento": 6,
+    "rc_sub": [
+        "Sem sub-raças"
+    ]
   }
 ];
 
