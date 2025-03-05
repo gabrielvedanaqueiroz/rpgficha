@@ -73,7 +73,7 @@ function Caracteristicas(){
           lista.push({
             an_id: doc.id.trim(),
             an_descricao : doc.data().an_descricao.trim(),
-            an_titulo  : doc.data().an_titulo .trim(),
+            an_titulo  : doc.data().an_titulo.trim(),
             an_data: doc.data().an_data,
           })
         });
@@ -205,7 +205,7 @@ function Caracteristicas(){
 
   function onEditarAn(item){
     setTitulo(item.an_titulo.trim());
-    setDescricao(item.an_descricao .trim());
+    setDescricao(item.an_descricao.trim());
     setIdCaracteristica(item.an_id.trim());
     setTipo('1');
     setIsOpen(true);
