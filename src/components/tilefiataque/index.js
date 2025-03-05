@@ -1,4 +1,5 @@
 import './tilefiataque.css';
+import excluir from '../../res/delete.svg';
 
 function TileFiAtaque(props){
 
@@ -9,6 +10,9 @@ function TileFiAtaque(props){
       <span className='tai-bonus'>{props.at_bonus?props.at_bonus:'Bonus'}</span>
       <span className='tai-dano'>{props.at_dano?props.at_dano:'Dano'}</span>
       <span className='tai-tipo'>{props.at_tipo?props.at_tipo:'Tipo'}</span>
+      <div>
+        {props.at_id !== 'atxpto'?<img className='tai-excluir' src={excluir} onClick={()=>{props.excluir()}}/>:<div/>}  
+      </div>
     </div>
   )
 }

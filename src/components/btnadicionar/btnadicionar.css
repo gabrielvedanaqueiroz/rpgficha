@@ -1,12 +1,11 @@
-
-
 .bta-div-rodape-botao{
-  width: 100%;
+  width:120px;
   height: auto;
   position: fixed;
   bottom: 63px;
   display: flex;
   justify-content: center;
+  align-self:center;
 }
 
 .bta-bt-adicionar{

@@ -1,6 +1,6 @@
 import './ficha.css';
 import {db} from '../../services/firebaseConnection';
-import {doc, query, where, collection, getDocs, updateDoc} from 'firebase/firestore';
+import {doc, query, where, collection, getDocs, updateDoc, deleteDoc} from 'firebase/firestore';
 import { useEffect, useState, useContext } from 'react';
 import {exibirBarras, buscarPersonagemAtivo} from '../../utils';
 import {toast} from 'react-toastify';
@@ -30,9 +30,6 @@ function Ficha(){
 
   useEffect(()=>{
     
-    // const apiKey = process.env.REACT_APP_OUTRA;
-    // console.log(apiKey);
-
     exibirBarras();
 
     async function buscar() {
@@ -64,7 +61,8 @@ function Ficha(){
   
           if(doc.exists)
             lista.push({
-              at_idpersonagem: doc.id.trim(),
+              at_id: doc.id.trim(),
+              at_idpersonagem: doc.data().at_idpersonagem.trim(),
               at_descricao: doc.data().at_descricao.trim(),
               at_alcance: doc.data().at_alcance.trim(),
               at_bonus: doc.data().at_bonus,
@@ -193,6 +191,19 @@ function Ficha(){
       pe_tcmsucesso2: s2,
       pe_tcmsucesso3: s3,
     });
+  }
+
+  async function onExcluirAtaque(aId) {
+
+    const docRef = doc(db, "tb_ataque", aId);
+    await deleteDoc(docRef)
+    .then(()=>{
+    })
+    .catch((error)=>{
+      toast.error('Erro ao excluir');
+      console.log('erro ao buscar '+error);
+    }); 
+    
   }
  
   if(loading)
@@ -406,6 +417,7 @@ function Ficha(){
                       at_bonus={item.at_bonus} 
                       at_dano={item.at_dano} 
                       at_tipo={item.at_tipo} 
+                      excluir={()=>{ onExcluirAtaque(item.at_id)}}
                     />
                   );  
                 })

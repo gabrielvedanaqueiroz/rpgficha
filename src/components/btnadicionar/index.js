@@ -1,7 +1,6 @@
 import './btnadicionar.css';
 import expandir_mais from '../../res/expandir_mais.svg';
 
-
 function BtnAdicionar(props){
 
   return(

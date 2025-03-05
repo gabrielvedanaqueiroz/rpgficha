@@ -3,7 +3,6 @@
   flex-direction: column;
   height: 100%;
   padding: 8px;
-  /* margin-bottom: 55px; */
   padding-bottom: 55px;
   max-width: 500px;
 }
@@ -150,17 +149,6 @@
   margin: 8px;
   border-radius: 4px;
   color: #fff;
-  font-size: 18px;
-}
-
-.mca_btn-salvar{
-  text-decoration: none;
-  background: #F8cc27;
-  border: 0px;
-  padding: 8px;
-  margin-top: 8px;
-  margin-bottom: 8px;
-  border-radius: 4px;
   font-size: 18px;
 }
 

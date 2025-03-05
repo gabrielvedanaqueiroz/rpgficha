@@ -21,7 +21,7 @@
   width: 400px;
   background-color: #fff;
   border-radius: 4px;
-  margin-top: 16px;
+  margin-top: 45px;
 }
 
 .mii_titulo{
@@ -70,14 +70,3 @@
   color: #fff;
   font-size: 18px;
 }
-
-/* .mii_btn-salvar{
-  text-decoration: none;
-  background: #F8cc27;
-  border: 0px;
-  padding: 8px;
-  margin-top: 8px;
-  margin-bottom: 8px;
-  border-radius: 4px;
-  font-size: 18px;
-  } */

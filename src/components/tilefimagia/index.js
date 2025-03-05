@@ -14,7 +14,7 @@ function TileFiMagia(props){
       <span className='tmi-tempo'>{props.mg_tempoconjuracao?props.mg_tempoconjuracao:'Tempo'}</span>
       <span className='tmi-nivel'>{props.mg_nivel?props.mg_nivel:'Nivel'}</span>
       <span className='tmi-dano'>{props.mg_dano?props.mg_dano:'Dano'}</span>
-      <span className='tmi-tipo'>{props.mg_duracao?props.mg_duracao:'Duração'}</span>
+      <span className='tmi-duracao'>{props.mg_duracao?props.mg_duracao:'Duração'}</span>
     </div>
   )
 }

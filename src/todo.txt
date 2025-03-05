@@ -4,7 +4,6 @@ personagem
 unboxing do primeiro uso 
 responsividade da tela
 
-excluir ataques
 tile deslize suave
 
 

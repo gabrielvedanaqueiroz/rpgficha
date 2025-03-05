@@ -3,7 +3,7 @@ import editar from '../../res/edit.svg';
 import excluir from '../../res/delete.svg';
 
 function TileCaracteristica(props){
-  /*Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consectetur, ipsum eget elementum sagittis, velit sem facilisis tortor, nec sodales neque sem eget elit. Vivamus sed magna nisl. */
+  
   return(
     
     <div className='cai-container'>

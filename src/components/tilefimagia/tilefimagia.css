@@ -19,15 +19,30 @@
 }
 
 .tmi-nome{
-  width: 28%;
+  width: 30%;
+  display: inline-block; /* Necessário para largura funcionar */
+  max-width: 30%; /* Ajuste conforme necessário */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 } 
 
 .tmi-alcance{
   width: 18%;
+  display: inline-block; 
+  max-width: 18%; 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .tmi-tempo{
-  width: 18%;
+  width: 15%;  
+  display: inline-block; 
+  max-width: 15%; 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .tmi-nivel{
@@ -38,7 +53,12 @@
   width: 10%;
 }
 
-.tmi-tipo{
-  width: auto;
+.tmi-duracao{
+  width: 15%;  
+  display: inline-block; 
+  max-width: 15%; 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 

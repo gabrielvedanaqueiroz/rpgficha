@@ -2,14 +2,14 @@ import './caracteristicas.css';
 import Tile from '../../components/tile';
 import { useEffect, useState } from 'react';
 import {db} from '../../services/firebaseConnection';
-import {collection, query, where, getDocs, addDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
+import {collection, query, where, getDocs, addDoc, doc, updateDoc, deleteDoc, serverTimestamp  } from 'firebase/firestore';
 import {toast} from 'react-toastify';
 import TileCaracteristica from '../../components/tilecaracteristica';
 import TileProficiencia from '../../components/tileproficiencia';
 import BtnAdicionar from '../../components/btnadicionar';
 import Vazio from '../../components/vazio';
 import BtnSalvarForm from '../../components/btnsalvarform';
-import {buscarPersonagem} from '../../utils';
+import {buscarPersonagem, getData} from '../../utils';
 
 function Caracteristicas(){
   
@@ -23,7 +23,7 @@ function Caracteristicas(){
   /* modal */
   const [isOpen, setIsOpen] = useState(false);
   const [titulo, setTitulo] = useState('');
-  const [idCaracteristica, setIdCaracteristica]   = useState('');
+  const [idAux, setIdCaracteristica]   = useState('');
   const [descricao, setDescricao]                 = useState('');
   const [tipo, setTipo]                           = useState('0');
 
@@ -74,11 +74,17 @@ function Caracteristicas(){
             an_id: doc.id.trim(),
             an_descricao : doc.data().an_descricao.trim(),
             an_titulo  : doc.data().an_titulo .trim(),
-            // an_data: doc.data().an_data.trim(),
-            // an_idpersonagem : doc.data().an_idpersonagem.trim(),
+            an_data: doc.data().an_data,
           })
         });
-        lista.sort((a, b)=> a.ca_nome > b.ca_nome);
+        lista.sort((a, b)=> {
+
+          if((b.an_data - a.an_data) !== 0)
+            return b.an_data - a.an_data
+          else
+            return a.ca_nome > b.ca_nome
+
+        });
     
         setLstAnotacao(lista);
         setLoading(false);
@@ -98,8 +104,6 @@ function Caracteristicas(){
     else
       setLoading(false);
 
-    // console.log('c');
-
   },[lstCaracteristica, lstAnotacao]);
 
   async function onSalvar(e){
@@ -108,7 +112,7 @@ function Caracteristicas(){
     if((titulo.trim() !== '') && (descricao.trim() !== '') && (tipo !== '0' )){
 
       if(tipo === '2'){
-        if(idCaracteristica.trim() === ''){     // inserir
+        if(idAux.trim() === ''){     // inserir
           await addDoc(collection(db, 'tb_caracteristica'),{
             ca_idpersonagem: personagem.pe_id.trim(),
             ca_nome: titulo.trim(),
@@ -123,7 +127,7 @@ function Caracteristicas(){
           });
         }
         else{                                     //editar
-          const docRef = doc(db, "tb_caracteristica", idCaracteristica);
+          const docRef = doc(db, "tb_caracteristica", idAux);
             await updateDoc(docRef, {
               ca_nome: titulo.trim(),
               ca_descricao: descricao.trim(),
@@ -139,11 +143,12 @@ function Caracteristicas(){
         }
       }
       else{
-        if(idCaracteristica.trim() === ''){     // inserir
+        if(idAux.trim() === ''){     // inserir
           await addDoc(collection(db, 'tb_anotacao'),{
             an_idpersonagem: personagem.pe_id.trim(),
             an_titulo: titulo.trim(),
             an_descricao: descricao.trim(),
+            an_data: serverTimestamp(),
           })
           .then( () =>{
             onFecharModal();
@@ -154,10 +159,10 @@ function Caracteristicas(){
           });
         }
         else{                                     //editar
-          const docRef = doc(db, "tb_caracteristica", idCaracteristica);
+          const docRef = doc(db, "tb_anotacao", idAux);
             await updateDoc(docRef, {
-              ca_nome: titulo.trim(),
-              ca_descricao: descricao.trim(),
+              an_titulo: titulo.trim(),
+              an_descricao: descricao.trim(),
             }
           )
           .then(()=>{
@@ -170,10 +175,10 @@ function Caracteristicas(){
         }
       }
       
-      
     }
     else  
       toast.error('Campo obrigatorio não preenchido');
+
     
   }
 
@@ -181,6 +186,7 @@ function Caracteristicas(){
     setTitulo(item.ca_nome.trim());
     setDescricao(item.ca_descricao.trim());
     setIdCaracteristica(item.ca_id.trim());
+    setTipo('2');
     setIsOpen(true);
   }
 
@@ -199,8 +205,9 @@ function Caracteristicas(){
 
   function onEditarAn(item){
     setTitulo(item.an_titulo.trim());
-    setDescricao(item.an_anotacao.trim());
+    setDescricao(item.an_descricao .trim());
     setIdCaracteristica(item.an_id.trim());
+    setTipo('1');
     setIsOpen(true);
   }
 
@@ -221,6 +228,7 @@ function Caracteristicas(){
     setTitulo('');
     setDescricao('');
     setIdCaracteristica('');
+    setTipo('');
     setIsOpen(false)
   }
 
@@ -335,7 +343,7 @@ function Caracteristicas(){
           {
             lstAnotacao.map((item)=>{
               return(
-                <Tile id={item.an_id} titulo={item.an_titulo }>
+                <Tile id={item.an_id} titulo={ (`${item.an_titulo} - ${getData(item.an_data)}`) }>
                   <TileCaracteristica 
                     descricao={item.an_descricao} 
                     excluir={ ()=>{onExcluirAn(item.an_id)} } 

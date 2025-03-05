@@ -534,18 +534,41 @@ export async function buscarPersonagem(aID){
     return LPersonagem;
 }
 
-export function getData(){
+export function getData(aData){
 
-  const formattedDate = new Intl.DateTimeFormat("pt-BR", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-  }).format(new Date());
+  // const formattedDate = new Intl.DateTimeFormat("pt-BR", {
+  //   year: "numeric",
+  //   month: "numeric",
+  //   day: "numeric",
+  //   hour: "2-digit",
+  //   minute: "2-digit",
+  //   second: "2-digit",
+  // }).format(new Date());
   
-  console.log(formattedDate); 
+  // console.log(formattedDate); 
 
-  
+  // const dataAtual = new Date();
+  // console.log(dataAtual); // Exibe a data completa no console
+
+  // const dataFormatada = new Date().toLocaleDateString("pt-BR");
+  // console.log(dataFormatada); // Exemplo de saída: 05/03/2025
+
+
+  let dataFormatada = '';
+  const timestamp = aData; // Pega o timestamp do Firestore
+
+  if (timestamp) {
+    const data = timestamp.toDate(); // Converte para Date
+    dataFormatada = data.toLocaleString("pt-BR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit"
+    });
+
+  }
+
+  return dataFormatada; 
+
 }

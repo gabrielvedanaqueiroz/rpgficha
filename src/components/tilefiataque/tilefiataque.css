@@ -16,22 +16,53 @@
   font-size: 14px;
   margin-left: 2px;
 }
+
+.ta-container div{
+  margin: 0 4px 0 8px;
+  width: 15px;
+}
+
 .tai-nome{
-  width: 32%;
+  width: 30%;
+  align-items: start;
+  display: inline-block; /* Necessário para largura funcionar */
+  max-width: 30%; /* Ajuste conforme necessário */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 } 
 
-.tai-bonus{
+ .tai-bonus{
   width: 12%;
+  align-items: start;
 }
 
 .tai-dano{
-  width: 12%;
+  width: 10%;
+  align-items: start;
 }
 
 .tai-tipo{
-  width: auto;
-}
+  width: 18%;
+  align-items: start;
+  display: inline-block; 
+  max-width: 18%; 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+} 
 
 .tai-alcance{
   width: 25%;
+  align-items: start;
+  display: inline-block; 
+  max-width: 25%; 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tai-excluir{
+  height: 20px;
+  cursor: pointer;
 }
