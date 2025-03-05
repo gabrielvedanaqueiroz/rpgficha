@@ -235,8 +235,8 @@ export const jRacas = [
     "rc_descricao": "Gnomo",
     "rc_movimento": 5,
     "rc_sub": [
-        "Gnomo da Floresta",
-        "Gnomo das Rochas"
+        "da Floresta",
+        "das Rochas"
     ]
   },
   {
@@ -535,24 +535,6 @@ export async function buscarPersonagem(aID){
 }
 
 export function getData(aData){
-
-  // const formattedDate = new Intl.DateTimeFormat("pt-BR", {
-  //   year: "numeric",
-  //   month: "numeric",
-  //   day: "numeric",
-  //   hour: "2-digit",
-  //   minute: "2-digit",
-  //   second: "2-digit",
-  // }).format(new Date());
-  
-  // console.log(formattedDate); 
-
-  // const dataAtual = new Date();
-  // console.log(dataAtual); // Exibe a data completa no console
-
-  // const dataFormatada = new Date().toLocaleDateString("pt-BR");
-  // console.log(dataFormatada); // Exemplo de saída: 05/03/2025
-
 
   let dataFormatada = '';
   const timestamp = aData; // Pega o timestamp do Firestore

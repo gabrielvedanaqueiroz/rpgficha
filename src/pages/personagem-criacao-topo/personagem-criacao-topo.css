@@ -31,12 +31,15 @@
 }
 
 .pct_div-rodape-botao{
-  width: 100%;
   height: auto;
   position: fixed;
-  bottom: 63px;
+  bottom: 200px;
   display: flex;
+  right: 16px ;
   justify-content: center;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2); /* X, Y, desfoque, cor */
+  background-color: #F8cc27;
+  border-radius: 8px;
 }
 .pct_form{
   display: flex;
