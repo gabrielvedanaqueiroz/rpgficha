@@ -554,3 +554,12 @@ export function getData(aData){
   return dataFormatada; 
 
 }
+
+export function getIDPersonagem(){
+  let id = localStorage.getItem('RF@personagemID');
+  let tempId = (id !== null);
+  if(tempId) //se nao ta nulo mas pode nao ter valor
+    tempId = (id.length > 0);
+  
+  return [id, tempId];
+}

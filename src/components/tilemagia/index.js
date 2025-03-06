@@ -24,6 +24,7 @@ function TiteTelaMagia(props){
       <div className='ttm_botoes'>
         <img src={excluir} className='ttm_btn'  alt='excluir' onClick={()=>{props.excluir()}}/>
         <img src={editar} className='ttm_btn' alt='editar' onClick={()=>{props.editar()}}/>
+        <div className='pri_separador-vert'/>
         <img src={preparar} className='ttm_btn'  alt='preparar' onClick={()=>{props.preparar()}}/>
       </div>
     </div>

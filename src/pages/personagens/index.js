@@ -110,6 +110,10 @@ function Personagens(){
     alert('EM CONSTRUÇÃO');
   }
 
+  function onUpar(id){
+    alert('EM CONSTRUÇÃO');
+  }
+
   async function onExcluir(id){
     const docRef = doc(db, "tb_personagem", id);
     await deleteDoc(docRef)
@@ -180,6 +184,7 @@ function Personagens(){
                     excluir={ ()=>{onExcluir(item.pe_id)} } 
                     editar={ ()=>{onEditar(item)} }
                     selecionar={ ()=>{onSelecionar(item.pe_id)}}
+                    upar={ ()=>{onUpar(item.pe_id)}}
                   /> 
                 </Tile>
               );

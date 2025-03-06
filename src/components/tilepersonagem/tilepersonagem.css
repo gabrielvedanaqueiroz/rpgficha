@@ -154,3 +154,10 @@
   width: auto;
   background-color: black;
 }
+
+.pri_separador-vert{
+  width: 1px;
+  height: 100%;
+  background-color: #9c9595;
+  margin-left: 8px;
+}

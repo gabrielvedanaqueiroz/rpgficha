@@ -2,14 +2,14 @@ import './caracteristicas.css';
 import Tile from '../../components/tile';
 import { useEffect, useState } from 'react';
 import {db} from '../../services/firebaseConnection';
-import {collection, query, where, getDocs, addDoc, doc, updateDoc, deleteDoc, serverTimestamp  } from 'firebase/firestore';
+import {collection, query, where, getDocs, addDoc, doc, updateDoc, deleteDoc, serverTimestamp } from 'firebase/firestore';
 import {toast} from 'react-toastify';
 import TileCaracteristica from '../../components/tilecaracteristica';
 import TileProficiencia from '../../components/tileproficiencia';
 import BtnAdicionar from '../../components/btnadicionar';
 import Vazio from '../../components/vazio';
 import BtnSalvarForm from '../../components/btnsalvarform';
-import {buscarPersonagem, getData} from '../../utils';
+import {buscarPersonagem, getData, getIDPersonagem} from '../../utils';
 
 function Caracteristicas(){
   
@@ -95,10 +95,7 @@ function Caracteristicas(){
       
     }
 
-    let id = localStorage.getItem('RF@personagemID');
-    let tempId = (id !== null);
-    if(tempId) //se nao ta nulo mas pode nao ter valor
-      tempId = (id.length > 0);
+    const [id, tempId] = getIDPersonagem();
     if(tempId)
       buscar(id);
     else

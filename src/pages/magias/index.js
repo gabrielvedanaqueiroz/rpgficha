@@ -8,12 +8,11 @@ import { toast } from 'react-toastify';
 import TileMagia from '../../components/tilemagia';
 import BtnSalvarForm from '../../components/btnsalvarform';
 import Vazio from '../../components/vazio';
-import {buscarPersonagem} from '../../utils';
+import {buscarPersonagem, getIDPersonagem} from '../../utils';
 
 function Magias(){
   
   const [temPersonagem, setTemPersonagem] = useState(false);
-  const [temPersonagemId, setTemPersonagemId] = useState(false);
   const [personagem, setPersonagem] = useState({});
 
   const [lista, setLista]     = useState([]);
@@ -72,10 +71,7 @@ function Magias(){
       
     }
 
-    let id = localStorage.getItem('RF@personagemID');
-    let tempId = (id !== null)
-    if(tempId) //se nao ta nulo mas pode nao ter valor
-      tempId = (id.length > 0);
+    const [id, tempId] = getIDPersonagem();
     if(tempId)
       buscar(id);
     else

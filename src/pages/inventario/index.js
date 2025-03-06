@@ -8,7 +8,7 @@ import BtnAdicionar from '../../components/btnadicionar';
 import TileCaracteristica from '../../components/tilecaracteristica';
 import Vazio from '../../components/vazio';
 import BtnSalvarForm from '../../components/btnsalvarform';
-import {buscarPersonagem} from '../../utils';
+import {buscarPersonagem, getIDPersonagem} from '../../utils';
 
 function Inventario(){
 
@@ -59,10 +59,7 @@ function Inventario(){
       
     }
 
-    let id = localStorage.getItem('RF@personagemID');
-    let tempId = (id !== null);
-    if(tempId) //se nao ta nulo mas pode nao ter valor
-      tempId = (id.length > 0);
+    const [id, tempId] = getIDPersonagem();
     if(tempId)
       buscar(id);
     else
