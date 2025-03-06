@@ -15,6 +15,8 @@ import TileTesteMorte from '../../components/tiletestemorte/index.js';
 import Vazio from '../../components/vazio/index.js';
 import { AuthContext } from '../../utils/auth.js';
 
+import Loading from '../../components/loading/index.js';
+
 function Ficha(){
 
   const [temPersonagem, setTemPersonagem] = useState(false);
@@ -207,7 +209,7 @@ function Ficha(){
   }
  
   if(loading)
-    return(<div>carregand...</div>); 
+    return(<Loading/>); 
   
   return(
     (!temPersonagem)? <Vazio/>:

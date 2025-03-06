@@ -9,6 +9,7 @@ import logout from '../../res/logout.svg';
 import TilePersonagem from '../../components/tilepersonagem';
 import BtnAdicionar from '../../components/btnadicionar';
 import {useNavigate} from 'react-router-dom';
+import Loading from '../../components/loading/index.js';
 
 function Personagens(){
   
@@ -155,7 +156,7 @@ function Personagens(){
   }
 
   if(loading)
-    return <div>carregand...</div>
+    return(<Loading/>); 
 
   return(
     <div className='pr_container'>

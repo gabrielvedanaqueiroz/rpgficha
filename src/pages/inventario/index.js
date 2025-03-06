@@ -9,6 +9,7 @@ import TileCaracteristica from '../../components/tilecaracteristica';
 import Vazio from '../../components/vazio';
 import BtnSalvarForm from '../../components/btnsalvarform';
 import {buscarPersonagem, getIDPersonagem} from '../../utils';
+import Loading from '../../components/loading/index.js';
 
 function Inventario(){
 
@@ -136,7 +137,7 @@ function Inventario(){
   }
 
   if(loading)
-    return <div>carregand...</div>
+    return(<Loading/>); 
 
   return(
     (!temPersonagem)? <Vazio/>:

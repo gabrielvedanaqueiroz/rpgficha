@@ -9,6 +9,7 @@ import TileMagia from '../../components/tilemagia';
 import BtnSalvarForm from '../../components/btnsalvarform';
 import Vazio from '../../components/vazio';
 import {buscarPersonagem, getIDPersonagem} from '../../utils';
+import Loading from '../../components/loading/index.js';
 
 function Magias(){
   
@@ -81,7 +82,7 @@ function Magias(){
   },[lista]);
 
   if(loading)
-    return <div>carregand...</div>
+    return(<Loading/>); 
 
   async function onExcluir(id){
     const docRef = doc(db, "tb_magia", id);
@@ -185,7 +186,7 @@ function Magias(){
   }
 
   if(loading)
-    return <div>carregand...</div>
+    return(<Loading/>); 
 
   return(
     (!temPersonagem)? <Vazio/> :

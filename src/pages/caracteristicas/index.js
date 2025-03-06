@@ -10,6 +10,7 @@ import BtnAdicionar from '../../components/btnadicionar';
 import Vazio from '../../components/vazio';
 import BtnSalvarForm from '../../components/btnsalvarform';
 import {buscarPersonagem, getData, getIDPersonagem} from '../../utils';
+import Loading from '../../components/loading/index.js';
 
 function Caracteristicas(){
   
@@ -230,7 +231,7 @@ function Caracteristicas(){
   }
 
   if(loading)
-    return <div>carregand...</div>
+    return(<Loading/>); 
 
   return(
     (!temPersonagem)? <Vazio/>:

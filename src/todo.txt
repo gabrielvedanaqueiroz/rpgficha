@@ -2,17 +2,14 @@
 personagem
   editar
   upar(
-    aumentar nivel (aumetomatico)
-    upar habilidade 
-    aumenta vida
-    aumenta dado de vida (aumetomatico)
-    ganha pericias
+    aumentar nivel  (automatico)
+    upar habilidade (jogador)
+    aumenta vida    (jogador)
+    ganha pericias  (fica a cargo do usuario escolher mais)
     caracteristicas (fica a cargo do usuario depois)
   )
 unboxing do primeiro uso 
 responsividade da tela
-
-fazer um carregando-esqueleto
 
 tilevida
   uso de dados verificar se nao for maior que o nivel
