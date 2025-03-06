@@ -50,7 +50,7 @@ function PersonagenCriacaoTopo(){
 
     const classe = jClasses.find((c) => c.cl_descricao === aClasse);
     setListaSubClasse(classe ? classe.cl_sub : []);
-    setDadoVida('1'+classe.cl_dado_vida);
+    setDadoVida(classe.cl_dado_vida);
     setVidaNv1(classe.cl_vida_nivel_1);
     setCABase(classe.cl_cabase);
     setIdClasse(classe.cl_id);

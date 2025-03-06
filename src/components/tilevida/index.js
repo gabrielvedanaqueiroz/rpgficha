@@ -37,6 +37,8 @@ function TileVida(props){
 
   function usarDado(e){
     if(e.target.value !== ''){
+
+      //verificar se nao for maior que o nivel
       setDadoUsado(e.target.value)
       props.usarDado(e.target.value);
     }

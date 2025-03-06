@@ -268,7 +268,7 @@ function Ficha(){
             pe_vidatemp={personagem.pe_vidatemp}
             pe_vidabase={personagem.pe_vidabase}
             pe_vidadadousado={personagem.pe_vidadadousado}
-            pe_vidadados={personagem.pe_vidadado}
+            pe_vidadados={personagem.getVidaDadoMax()}
             incrementar={(vidaatual)=>{  incrementar(vidaatual) }}
             decrementar={(vidaatual, vidatemp)=>{  decrementar(vidaatual, vidatemp);  }}
             vidaTemp={(vidatemp) =>{ vidaTemp(vidatemp) }}

@@ -198,8 +198,8 @@ export default class Personagem{
     return this.#onModificador(this.pe_carisma) + (aProficiente?this.pe_bproficiencia:0);
   }
 
-  getVida(){
-    return (this.pe_vidaatual + this.pe_vidatemp);
+  getVidaDadoMax(){
+    return this.pe_nivel + this.pe_vidadado;
   }
   
   getClasse(){

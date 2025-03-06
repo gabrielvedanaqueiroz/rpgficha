@@ -5,8 +5,9 @@ import caracteristicas from '../../res/caracteristica.svg';
 import personagem from '../../res/personagem.svg';
 import inventario from '../../res/inventario.svg';
 import magias from '../../res/magia.svg';
+import {memo} from 'react';
 
-function Footer(){
+export const Footer = memo(()=>{
 
   return(
     <footer className='ft_bottom-bar'> 
@@ -29,6 +30,6 @@ function Footer(){
       </Link>
     </footer>
   );
-}
+});
 
 export default Footer;
