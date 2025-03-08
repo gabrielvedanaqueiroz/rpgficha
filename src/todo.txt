@@ -1,7 +1,5 @@
 ficha
   adicionar xp  
-magias
-  puxar json
   
 personagem
   editar

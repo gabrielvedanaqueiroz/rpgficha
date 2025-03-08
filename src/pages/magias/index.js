@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import TileMagia from '../../components/tilemagia';
 import BtnSalvarForm from '../../components/btnsalvarform';
 import Vazio from '../../components/vazio';
-import {buscarPersonagem, getIDPersonagem} from '../../utils';
+import {buscarPersonagem, getIDPersonagem, jMagias} from '../../utils';
 import Loading from '../../components/loading/index.js';
 
 function Magias(){
@@ -18,6 +18,9 @@ function Magias(){
 
   const [lista, setLista]     = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const [items, setItems] = useState([]);
+  const [lstMagiasFiltradas, setlstMagiasFiltradas] = useState([]);
 
   /* modal */
   const [isOpen, setIsOpen]                   = useState(false);
@@ -78,11 +81,10 @@ function Magias(){
     else
       setLoading(false);
 
+    setItems(jMagias);
+
     // console.log('m');
   },[lista]);
-
-  if(loading)
-    return(<Loading/>); 
 
   async function onExcluir(id){
     const docRef = doc(db, "tb_magia", id);
@@ -184,6 +186,20 @@ function Magias(){
     setTempoConjuracao('');
     setIsOpen(false);
   }
+
+  const onFiltrarMagia = (aValue) => {
+    const value = aValue;
+    if (value.trim() === "") {
+      setlstMagiasFiltradas([]);
+    } else {
+      setlstMagiasFiltradas(
+        items.filter((item) =>
+          item.name.toLowerCase().includes(value.toLowerCase())
+        )
+      );
+    }
+  };
+
 
   if(loading)
     return(<Loading/>); 
@@ -288,13 +304,49 @@ function Magias(){
               <strong >Magia</strong>
             </div>
             <form className='mmg_form' action={onSalvar}>
+
               <div className='mmg_div-edit'>
                 <label>Nome</label>
-                <input className='mmg_edit' value={nome} onChange={(e)=>{setNome(e.target.value)}}/>
+                <div className='mmg_div-busca'>
+                  <input className='mmg_edit' type='text' placeholder="Localizar Magia..." value={nome} 
+                    onChange={
+                      (e)=>{
+                        setNome(e.target.value);
+                        onFiltrarMagia(e.target.value);
+                      }
+                    } 
+                  />
+                  
+                  {lstMagiasFiltradas.length > 0 && (
+                    <ul className="mmg_lista-busca">
+                      {lstMagiasFiltradas.map((item) => (
+                        <li className='mmg_lista-busca-item'
+                          key={item.name}
+                          onClick={() => {
+                            setNome(item.display_name);
+                            setNivel(item.level);
+                            setDescricao(item.description);
+                            setDano('0');
+                            setAlcance(item.range);
+                            setTempoConjuracao(item.cast_time);
+                            setDuracao(item.duration);
+                            setComponentes(item.components);
+                            setlstMagiasFiltradas([]);
+                          }}
+                        >
+                          <h4>{item.display_name}<br/></h4>
+                          {item.cast_time}, {item.school}
+                          <hr/>
+                        </li>
+                      ))}
+                    </ul>
+                    
+                  )}
+                </div>
               </div>
               <div className='mmg_div-edit'>
                 <label>Descrição</label>
-                <textarea className='mmg_edit' value={descricao} onChange={(e)=>{setDescricao(e.target.value)}}/>
+                <textarea className='mmg_textarea' value={descricao} onChange={(e)=>{setDescricao(e.target.value)}}/>
               </div>
               <div className='mmg_div-3coluna'>
                 <div className='mmg_div-edit'>
