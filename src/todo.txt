@@ -1,4 +1,8 @@
-
+ficha
+  adicionar xp  
+magias
+  puxar json
+  
 personagem
   editar
   upar(
@@ -8,6 +12,7 @@ personagem
     ganha pericias  (fica a cargo do usuario escolher mais)
     caracteristicas (fica a cargo do usuario depois)
   )
+
 unboxing do primeiro uso 
 responsividade da tela
 

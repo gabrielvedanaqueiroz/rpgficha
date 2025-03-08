@@ -5,6 +5,7 @@ Instale os pacotes necessários:
 `npm install firebase`
 `npm install react-router-dom`
 `npm install --save react-toastify`
+`npm install react-loading-skeleton`
 
 ## 📦 Tecnologias Utilizadas
 
@@ -12,13 +13,14 @@ Instale os pacotes necessários:
 - **react-toastify** (Notificações)  
 - **firebase** (Banco de dados)  
 - **react-router-dom** (Navegação)  
+- **skeleton** (loading)
 
 📌 Funcionalidades
     • 📜 Login, credenciais firebase 
     • ❤️ Controle de ficha de personagem
     • 📜 Varios personagens por jogador
     • 🔔 Notificações visíveis de erros do sistema ou erros de cadastros
-    • 📜 Cadastrar Ataques, Magias, Caracteristicas
+    • 📜 Cadastrar Ataques, Magias, Caracteristicas, Anotações
 
 # Descrição 
 
@@ -29,6 +31,7 @@ Instale os pacotes necessários:
  ├── 📂 components     # Componentes reutilizáveis
  ├── 📂 pages          # Páginas da aplicação
  ├── 📂 services       # Conexão com Firebase
+ ├── 📂 res            # Imagens
  ├── 📜 App.js         # Arquivo principal
  ├── 📜 index.js       # Ponto de entrada
 
