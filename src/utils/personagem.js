@@ -126,6 +126,10 @@ export default class Personagem{
     return Math.ceil(modificador);
   }
 
+  getCATotal(){
+    return this.pe_cabase;
+  }
+
   getModForca() {
     return this.#onModificador(this.pe_forca)
   }

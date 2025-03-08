@@ -353,7 +353,7 @@ function Ficha(){
             </div> 
 
             <div className='fi-cd-div-flag'>
-              <span>{personagem.pe_catotal}</span>
+              <span>{personagem.getCATotal()}</span>
               <div className='fi-separador2'/>
               <label>CA</label>
             </div> 
