@@ -108,3 +108,15 @@ function ModalXP(props){
 }
 
 export default ModalXP;
+
+// function atualizarProgresso(porcentagem) {
+  //   let graus = (porcentagem / 100) * 360;
+  //   document.querySelector('.progress-circle').style.background = 
+  //     `conic-gradient(red 0deg ${graus}deg, lightgray ${graus}deg 360deg)`;
+  // }  
+
+
+   {/* <div>
+          xp
+          <div class="progress-circle"/>
+        </div> */}

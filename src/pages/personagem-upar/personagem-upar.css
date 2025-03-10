@@ -7,27 +7,6 @@
   justify-content: center;
 }
 
-.progress-circle {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  background: conic-gradient(red 0deg 162deg, lightgray 162deg 360deg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;  
-}
-
-/* Criar um círculo interno para dar o efeito de borda */
-.progress-circle::before {
-  content: "";
-  width: 90px;
-  height: 90px;
-  background-color: white;
-  border-radius: 50%;
-  position: absolute;
-} 
-
 .pup_div-rodape-botao{
   height: auto;
   position: fixed;

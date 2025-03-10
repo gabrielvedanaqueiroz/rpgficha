@@ -1,5 +1,5 @@
 import './personagem-upar.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import BtnSalvarForm from '../../components/btnsalvarform';
 import { ocultarBarras, exibirBarras, buscarPersonagem } from '../../utils';
 import { useNavigate } from 'react-router-dom';
@@ -7,6 +7,25 @@ import Loading from '../../components/loading/index.js';
 
 function PersonagemUpar(){
 
+  const proacrobacia = useRef(false);
+  const proarcanismo = useRef(false);
+  const proatletismo = useRef(false);
+  const proatuacao = useRef(false);
+  const problefar = useRef(false);
+  const profurtividade = useRef(false);
+  const prohistoria = useRef(false);
+  const prointimidacao = useRef(false);
+  const prointuicao = useRef(false);
+  const proinvestigacao = useRef(false);
+  const prolidaranimais = useRef(false);
+  const promedicina = useRef(false);
+  const pronatureza = useRef(false);
+  const propersuasao = useRef(false);
+  const proprestidigitacao = useRef(false);
+  const propercepcao = useRef(false);
+  const proreligiao = useRef(false);
+  const prosobrevivencia = useRef(false);
+  
   const [personagem, setPersonagem] = useState({});
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -25,8 +44,6 @@ function PersonagemUpar(){
       exibirBarras();
     };
 
-    // Exemplo: Atualizar para x%
-    // atualizarProgresso(75);
     ocultarBarras();
 
     buscar();
@@ -39,12 +56,7 @@ function PersonagemUpar(){
     navigate('/', {replace:true}); 
   }
 
-  // function atualizarProgresso(porcentagem) {
-  //   let graus = (porcentagem / 100) * 360;
-  //   document.querySelector('.progress-circle').style.background = 
-  //     `conic-gradient(red 0deg ${graus}deg, lightgray ${graus}deg 360deg)`;
-  // }  
-
+  
   if(loading)
     return <Loading/>
 
@@ -62,6 +74,79 @@ function PersonagemUpar(){
         <div>
           atributos
           <hr/>
+          <div>
+            <input type="checkbox" ref={proacrobacia} checked disabled/>
+            <label>Acrobacia <span className='pcp-atrib'>(Destreza)</span></label>
+          </div>
+          <div>
+            <input type="checkbox" ref={proarcanismo}/>
+            <label>Arcanismo <span className='pcp-atrib'>(Sabedoria)</span></label>
+          </div>
+          <div>
+            <input type="checkbox" ref={proatletismo}/>
+            <label>Atletismo <span className='pcp-atrib'>(Força)</span></label>
+          </div>
+          <div>
+            <input type="checkbox" ref={proatuacao}/>
+            <label>Atuação <span className='pcp-atrib'>(Carisma)</span></label>
+          </div>
+          <div>
+            <input type="checkbox" ref={problefar}/>
+            <label>Blefar <span className='pcp-atrib'>(Carisma)</span></label>
+          </div>
+          <div>
+            <input type="checkbox" ref={profurtividade}/>
+            <label>Furtividade <span className='pcp-atrib'>(Destreza)</span></label>
+          </div>
+          <div>
+            <input type="checkbox" ref={prohistoria}/>
+            <label>História <span className='pcp-atrib'>(Inteligência)</span></label>
+          </div>
+          <div>
+            <input type="checkbox" ref={prointimidacao}/>
+            <label>Intimidação <span className='pcp-atrib'>(Carisma)</span></label>
+          </div>
+          <div>
+            <input type="checkbox" ref={prointuicao}/>
+            <label>Intuição <span className='pcp-atrib'>(Sabedoria)</span></label>
+          </div>
+          <div>
+            <input type="checkbox" ref={proinvestigacao}/>
+            <label>Investigação <span className='pcp-atrib'>(Inteligência)</span></label>
+          </div>
+          <div>
+            <input type="checkbox" ref={prolidaranimais}/>
+            <label>Lidar com animais <span className='pcp-atrib'>(Sabedoria)</span></label>
+          </div>
+          <div>
+            <input type="checkbox" ref={promedicina}/>
+            <label>Medicina <span className='pcp-atrib'>(Sabedoria)</span></label>
+          </div>
+          <div>
+            <input type="checkbox" ref={pronatureza}/>
+            <label>Natureza <span className='pcp-atrib'>(Inteligência)</span></label>
+          </div>
+          <div>
+            <input type="checkbox" ref={propersuasao}/>
+            <label>Persuasão <span className='pcp-atrib'>(Carisma)</span></label>
+          </div>
+          <div>
+            <input type="checkbox" ref={proprestidigitacao}/>
+            <label>Prestidigitação <span className='pcp-atrib'>(Destreza)</span></label>
+          </div>
+          <div>
+            <input type="checkbox" ref={propercepcao}/>
+            <label>Percepção <span className='pcp-atrib'>(Sabedoria)</span></label>
+          </div>
+          <div>
+            <input type="checkbox" ref={proreligiao}/>
+            <label>Religião <span className='pcp-atrib'>(Inteligência)</span></label>
+          </div>
+          <div>
+            <input type="checkbox" ref={prosobrevivencia}/>
+            <label>Sobrevivência <span className='pcp-atrib'>(Sabedoria)</span></label>
+          </div>
+        
         </div>
 
         <div>
@@ -75,15 +160,7 @@ function PersonagemUpar(){
           <BtnSalvarForm esperando='Upando...' inicial='Upar'/>
         </div>
       </form>
-
-      {/* <div>
-          xp
-          <div class="progress-circle"/>
-        </div> */}
     </div>
-
-
-
   );
 
 }
