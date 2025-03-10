@@ -5,6 +5,7 @@ import { useEffect, useState, useContext } from 'react';
 import {exibirBarras, buscarPersonagemAtivo} from '../../utils';
 import {toast} from 'react-toastify';
 import img_classe from '../../res/logo.svg';
+import upar from '../../res/up.svg';
 import Tile from '../../components/tile';
 import TileFiAtaque from '../../components/tilefiataque';
 import TileFiMagia from '../../components/tilefimagia';
@@ -14,6 +15,7 @@ import TileVida from '../../components/tilevida/';
 import TileTesteMorte from '../../components/tiletestemorte/index.js';
 import Vazio from '../../components/vazio/index.js';
 import { AuthContext } from '../../utils/auth.js';
+import {useNavigate} from 'react-router-dom';
 
 import Loading from '../../components/loading/index.js';
 
@@ -29,6 +31,8 @@ function Ficha(){
   const [lstAtaque, setLstAtaque] = useState([]);
   const [lstMagia, setLstMagia] = useState([]);
   const [magiaID, setMagiaID] = useState('');
+
+  const navigate = useNavigate();
 
   useEffect(()=>{
     
@@ -242,7 +246,15 @@ function Ficha(){
         
         <div className='fi-cb-direita'>
           <div className='fi-textos'>
-            <strong>Nivel {personagem.pe_nivel}</strong>
+            <strong>Nivel {personagem.pe_nivel} 
+              {personagem.podeUpar()? 
+               <img className='fi-cb-img-upar' src={upar} alt='subir de nível' onClick={ ()=>{ 
+                  localStorage.setItem('RF@personagemID-upar', personagem.pe_id);
+                  navigate('personagem-upar', {replace:false}); 
+                } }/>: 
+               ''
+              }
+            </strong>
             <div className='fi-separador'/>
             <strong className='fi-cbe-linhasecundaria'>{personagem.pe_antecedente}</strong>
             <strong className='fi-cbe-linhasecundaria'>{personagem.pe_tendencia}</strong>

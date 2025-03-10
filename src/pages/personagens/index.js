@@ -112,7 +112,8 @@ function Personagens(){
   }
 
   function onUpar(id){
-    alert('EM CONSTRUÇÃO');
+    localStorage.setItem('RF@personagemID-upar', id);
+    navigate('personagem-upar', {replace:false});
   }
 
   async function onExcluir(id){
@@ -186,6 +187,8 @@ function Personagens(){
                     editar={ ()=>{onEditar(item)} }
                     selecionar={ ()=>{onSelecionar(item.pe_id)}}
                     upar={ ()=>{onUpar(item.pe_id)}}
+                    podeUpar={true}
+                    // podeUpar={item.podeUpar()}
                   /> 
                 </Tile>
               );

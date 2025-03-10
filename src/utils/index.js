@@ -372,7 +372,7 @@ export const jRacas = [
   }
 ];
 
-export const jMagias =[
+export const jMagias = [
   {
       "name": "amizade",
       "level": 0,

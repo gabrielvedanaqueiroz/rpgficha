@@ -121,6 +121,36 @@ export default class Personagem{
 
   }
 
+  XPNivel = [
+    {"nv": 1, "xp": 0, "proficiencia": 2},
+    {"nv": 2, "xp": 300, "proficiencia": 2},
+    {"nv": 3, "xp": 900, "proficiencia": 2},
+    {"nv": 4, "xp": 2700, "proficiencia": 2},
+    {"nv": 5, "xp": 6500, "proficiencia": 3},
+    {"nv": 6, "xp": 14000, "proficiencia": 3},
+    {"nv": 7, "xp": 23000, "proficiencia": 3},
+    {"nv": 8, "xp": 34000, "proficiencia": 3},
+    {"nv": 9, "xp": 48000, "proficiencia": 4},
+    {"nv": 10, "xp": 64000, "proficiencia": 4},
+    {"nv": 11, "xp": 85000, "proficiencia": 4},
+    {"nv": 12, "xp": 100000, "proficiencia": 4},
+    {"nv": 13, "xp": 120000, "proficiencia": 5},
+    {"nv": 14, "xp": 140000, "proficiencia": 5},
+    {"nv": 15, "xp": 165000, "proficiencia": 5},
+    {"nv": 16, "xp": 195000, "proficiencia": 5},
+    {"nv": 17, "xp": 225000, "proficiencia": 6},
+    {"nv": 18, "xp": 265000, "proficiencia": 6},
+    {"nv": 19, "xp": 305000, "proficiencia": 6},
+    {"nv": 20, "xp": 355000, "proficiencia": 6},
+  ]
+
+  podeUpar(){
+    let xp  = this.XPNivel[this.pe_nivel].xp;
+    let nv  = this.XPNivel[this.pe_nivel].nv;
+       
+    return (this.pe_experiencia >= xp) && (this.pe_nivel < nv);
+  }
+
   #onModificador(aValor){
     let modificador = (aValor - 10) / 2;
     return Math.ceil(modificador);
@@ -282,5 +312,6 @@ export default class Personagem{
     }
     return url;
   }
+  
   
 }

@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import {db} from '../../services/firebaseConnection';
 import {collection, addDoc} from 'firebase/firestore';
 import { AuthContext } from '../../utils/auth';
+import Loading from '../../components/loading/index.js';
 
 function PersonagenCriacaoTopo(){
 
@@ -128,7 +129,7 @@ function PersonagenCriacaoTopo(){
   }
 
   if(loading)
-    return <div>carregand...</div>
+    return(<Loading/>); 
 
   return(
     <div className='pct_container'>

@@ -43,7 +43,7 @@ function TilePersonagem(props){
         <img src={excluir} className='pri_btn'  alt='excluir' onClick={()=>{props.excluir()}}/>
         <img src={editar} className='pri_btn' alt='editar' onClick={()=>{props.editar()}}/>
         <div className='pri_separador-vert'/>
-        <img src={up} className='pri_btn' alt='subir de nível' onClick={()=>{props.upar()} }/>
+        {props.podeUpar? <img src={up} className='pri_btn' alt='subir de nível' onClick={()=>{props.upar()} }/>: ''}
         <img src={selecionar} className='pri_btn' alt='selecionar' onClick={()=>{props.selecionar()} }/>
       </div>
     </div>
