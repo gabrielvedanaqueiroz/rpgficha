@@ -251,3 +251,13 @@
   width: 17px;
   margin-left: 8px;
 }
+
+.fi-cd-btnxp{
+  border: none;
+  background-color: none;
+  color: #F8cc27;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+}

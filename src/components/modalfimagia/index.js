@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { db } from '../../services/firebaseConnection';
 import {doc, getDoc} from 'firebase/firestore';
 import { toast } from 'react-toastify';
+import Loading from '../loading';
 
 function ModalFiMagia(props){
 
@@ -47,13 +48,12 @@ function ModalFiMagia(props){
   }
 
   if(loading)
-    return;
+    return <Loading/>;
 
   return(
     <div>
       <div className="overlay">
         <div className='mai_container'>
-          { (loading?<div>carregand..</div>:
           <div>
             <div className='mai_titulo'>
               <strong>Magia Preparada</strong>
@@ -70,7 +70,7 @@ function ModalFiMagia(props){
               <label>Componentes: {magia.mg_componentes}</label>
               <label>Duração: {magia.mg_duracao}</label>
             </div>
-          </div>) }
+          </div>
         </div>
       </div>
     </div>

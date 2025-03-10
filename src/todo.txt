@@ -1,5 +1,3 @@
-ficha
-  adicionar xp  
   
 personagem
   editar

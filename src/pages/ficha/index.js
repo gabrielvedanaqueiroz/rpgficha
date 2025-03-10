@@ -16,8 +16,8 @@ import TileTesteMorte from '../../components/tiletestemorte/index.js';
 import Vazio from '../../components/vazio/index.js';
 import { AuthContext } from '../../utils/auth.js';
 import {useNavigate} from 'react-router-dom';
-
 import Loading from '../../components/loading/index.js';
+import ModalXP from '../../components/modalxp/index.js';
 
 function Ficha(){
 
@@ -28,6 +28,7 @@ function Ficha(){
   const [loading, setLoading] = useState(true);
   const [showModalAtaque, setShowModalAtaque] = useState(false);
   const [showModalMagia, setShowModalMagia] = useState(false);
+  const [showModalXP, setShowModalXP] = useState(false);
   const [lstAtaque, setLstAtaque] = useState([]);
   const [lstMagia, setLstMagia] = useState([]);
   const [magiaID, setMagiaID] = useState('');
@@ -212,6 +213,10 @@ function Ficha(){
     
   }
  
+  function onXP() {
+    setShowModalXP(true);
+  }
+
   if(loading)
     return(<Loading/>); 
   
@@ -266,9 +271,11 @@ function Ficha(){
               <label>B Proficiência</label>
             </div>
             <div class="fi-cd-div-flag">
+              <button className='fi-cd-btnxp' onClick={onXP}>
               <span>{personagem.pe_experiencia}</span>
               <div className='fi-separador2'/>
-              <label>Experiência</label>
+              <label>Experiência +</label>
+              </button>
             </div>
           </div>
         </div>
@@ -472,6 +479,7 @@ function Ficha(){
 
       { showModalAtaque ? <ModalFiAtaque onOcultar={(()=>{setShowModalAtaque(false)})} personagemID={personagem.pe_id.trim()}/> :<div/>} 
       { showModalMagia ? <ModalFiMagia onOcultar={(()=>{setShowModalMagia(false)})} mg_id={magiaID}/> :<div/>} 
+      { showModalXP ? <ModalXP onOcultar={(()=>{setShowModalXP(false)})} pe_id={personagem.pe_id} pe_xp={personagem.pe_experiencia} pe_nivel={personagem.pe_nivel}/> :<div/>} 
     </div>
   )
 }

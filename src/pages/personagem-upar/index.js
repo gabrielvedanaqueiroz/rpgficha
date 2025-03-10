@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
 import './personagem-upar.css';
+import { useEffect, useState } from 'react';
 import BtnSalvarForm from '../../components/btnsalvarform';
 import { ocultarBarras, exibirBarras, buscarPersonagem } from '../../utils';
 import { useNavigate } from 'react-router-dom';
