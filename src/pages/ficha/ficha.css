@@ -28,7 +28,13 @@
 }
 
 .fi-cbe-linhasecundaria{
-  font-size: 12px;
+  font-size: 12px;  
+  width: 100%;
+  max-width: 100%; /* Ajuste conforme necessário */
+  display: inline-block; /* Necessário para largura funcionar */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
 }
 
 .fi-cb-flag{

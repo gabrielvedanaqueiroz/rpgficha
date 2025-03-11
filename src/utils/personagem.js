@@ -132,7 +132,7 @@ export default class Personagem{
 
   #onModificador(aValor){
     let modificador = (aValor - 10) / 2;
-    return Math.ceil(modificador);
+    return Math.floor(modificador);
   }
 
   getCATotal(){
@@ -217,13 +217,13 @@ export default class Personagem{
   
   getClasse(){
     let aux = this.pe_classe + ' ' + this.pe_subclasse;
-    aux = aux.slice(0, 23);
+    // aux = aux.slice(0, 23);
     return aux;
   }
   
   getRaca(){
     let aux = this.pe_raca + ' ' + this.pe_subraca;
-    aux = aux.slice(0, 20);
+    // aux = aux.slice(0, 20);
     return aux;
   }
 
@@ -270,11 +270,11 @@ export default class Personagem{
   }
 
   getCDMagia(){
-    return  8 + this.pe_bproficiencia + this.#getSelModificadorMagia();;
+    return  8 + this.pe_bproficiencia + this.#getSelModificadorMagia();
   }
 
   getBonusMagia(){
-    return  this.pe_bproficiencia + this.#getSelModificadorMagia();;
+    return  this.pe_bproficiencia + this.#getSelModificadorMagia();
   }
 
   //metodo para mostrar uma imagem dependendo da classe do personagem

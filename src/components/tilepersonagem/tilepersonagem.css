@@ -106,16 +106,16 @@
 
 .pri-linha-1{
   font-size: 16px;
-  width: 100%;
-  max-width: 100%;
+  width: 80%;
+  max-width: 80%;
   word-wrap: break-word; /* Quebra palavras longas */
   overflow-wrap: break-word; /* Alternativa para compatibilidade */
 }
 
 .pri-linha-2{
   font-size: 14px;
-  width: 100%;
-  max-width: 100%;
+  width: 90%;
+  max-width: 90%;
   word-wrap: break-word; /* Quebra palavras longas */
   overflow-wrap: break-word; /* Alternativa para compatibilidade */
 }

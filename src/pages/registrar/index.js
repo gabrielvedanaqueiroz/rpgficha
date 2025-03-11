@@ -13,7 +13,7 @@ function Login(){
   const senha = useRef('');
   const nome  = useRef('');
   const navigate = useNavigate();
-  const {onCriarUsuario, loadingAuth} = useContext(AuthContext);
+  const {onCriarUsuario} = useContext(AuthContext);
   
   useEffect(()=>{
     ocultarBarras();    

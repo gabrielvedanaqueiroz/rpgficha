@@ -116,7 +116,7 @@ export default ModalXP;
   // }  
 
 
-   {/* <div>
-          xp
-          <div class="progress-circle"/>
-        </div> */}
+    // <div>
+    //       xp
+    //       <div class="progress-circle"/>
+    //     </div> 

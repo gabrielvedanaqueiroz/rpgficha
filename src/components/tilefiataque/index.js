@@ -11,7 +11,7 @@ function TileFiAtaque(props){
       <span className='tai-dano'>{props.at_dano?props.at_dano:'Dano'}</span>
       <span className='tai-tipo'>{props.at_tipo?props.at_tipo:'Tipo'}</span>
       <div>
-        {props.at_id !== 'atxpto'?<img className='tai-excluir' src={excluir} onClick={()=>{props.excluir()}}/>:<div/>}  
+        {props.at_id !== 'atxpto'?<img className='tai-excluir' src={excluir} alt='excluir ataque' onClick={()=>{props.excluir()}}/>:<div/>}  
       </div>
     </div>
   )
