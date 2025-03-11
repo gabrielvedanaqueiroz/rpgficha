@@ -66,7 +66,8 @@ function PersonagenCriacaoAtributos(){
           pe_vidaatual: (personagemCriado.vidaNv1 + modCostituicao),
           pe_vidatemp: 0,
           pe_vidadadousado: 0,
-          pe_cabase: (personagemCriado.CABase  + modDestreza + modCostituicao),
+          pe_cabase: (personagemCriado.CABase  + modCostituicao),
+          pe_catotal: (personagemCriado.CABase  + modCostituicao),
         }
       )
       .then(()=>{

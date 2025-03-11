@@ -16,8 +16,9 @@ import TileTesteMorte from '../../components/tiletestemorte/index.js';
 import Vazio from '../../components/vazio/index.js';
 import { AuthContext } from '../../utils/auth.js';
 import {useNavigate} from 'react-router-dom';
-import Loading from '../../components/loading/index.js';
-import ModalXP from '../../components/modalxp/index.js';
+import Loading from '../../components/loading';
+import ModalXP from '../../components/modalxp';
+import ModalCA from '../../components/modalca';
 
 function Ficha(){
 
@@ -29,6 +30,8 @@ function Ficha(){
   const [showModalAtaque, setShowModalAtaque] = useState(false);
   const [showModalMagia, setShowModalMagia] = useState(false);
   const [showModalXP, setShowModalXP] = useState(false);
+  const [showModalCA, setShowModalCA] = useState(false);
+
   const [lstAtaque, setLstAtaque] = useState([]);
   const [lstMagia, setLstMagia] = useState([]);
   const [magiaID, setMagiaID] = useState('');
@@ -217,6 +220,10 @@ function Ficha(){
     setShowModalXP(true);
   }
 
+  function onCA(){
+    setShowModalCA(true);
+  }
+
   if(loading)
     return(<Loading/>); 
   
@@ -272,9 +279,9 @@ function Ficha(){
             </div>
             <div class="fi-cd-div-flag">
               <button className='fi-cd-btnxp' onClick={onXP}>
-              <span>{personagem.pe_experiencia}</span>
-              <div className='fi-separador2'/>
-              <label>Experiência +</label>
+                <span>{personagem.pe_experiencia}</span>
+                <div className='fi-separador2'/>
+                <label>Experiência +</label>
               </button>
             </div>
           </div>
@@ -372,9 +379,11 @@ function Ficha(){
             </div> 
 
             <div className='fi-cd-div-flag'>
-              <span>{personagem.getCATotal()}</span>
-              <div className='fi-separador2'/>
-              <label>CA</label>
+              <button className='fi-cd-btnxp' onClick={onCA}>
+                <span>{personagem.pe_catotal}</span>
+                <div className='fi-separador2'/>
+                <label>CA +</label>
+              </button>
             </div> 
 
           </div>
@@ -480,6 +489,7 @@ function Ficha(){
       { showModalAtaque ? <ModalFiAtaque onOcultar={(()=>{setShowModalAtaque(false)})} personagemID={personagem.pe_id.trim()}/> :<div/>} 
       { showModalMagia ? <ModalFiMagia onOcultar={(()=>{setShowModalMagia(false)})} mg_id={magiaID}/> :<div/>} 
       { showModalXP ? <ModalXP onOcultar={(()=>{setShowModalXP(false)})} pe_id={personagem.pe_id} pe_xp={personagem.pe_experiencia} pe_nivel={personagem.pe_nivel}/> :<div/>} 
+      { showModalCA ? <ModalCA onOcultar={(()=>{setShowModalCA(false)})} pe_id={personagem.pe_id} pe_cabase={personagem.pe_cabase} pe_catotal={personagem.pe_catotal}/> :<div/>} 
     </div>
   )
 }

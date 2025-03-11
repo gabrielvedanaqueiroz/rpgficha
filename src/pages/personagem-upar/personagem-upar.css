@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 8px;
+  padding: 16px;
   max-width: 500px;
   justify-content: center;
 }
@@ -17,6 +17,30 @@
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2); /* X, Y, desfoque, cor */
   background-color: #F8cc27;
   border-radius: 8px;
+}
+
+.pup_div-espacamento{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pup_div-espacamento-item{
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  width: 120px;
+  align-items: center;
+}
+
+.pup_div-espacamento-item label{
+  width: 10%;
+}
+
+.pup_img{
+  height: 25px;
+  transform: rotate(90deg);
 }
 
 .pup_form{
@@ -34,14 +58,46 @@
   width: 100%;
 }
 
-.pup_form select, option{
-  border: none;
-  padding: 8px 8px; /* Espaçamento interno */
-  font-size: 16px; /* Tamanho da fonte */
-  outline: none; /* Remove o contorno padrão ao focar */
-  transition: all 0.3s ease-in-out; /* Suaviza transições */
+.pup_edit-top{
   width: 100%;
   background-color: white;
+  padding: 8px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin-top: 8px;
+  margin-bottom: 2px;
+}
+
+.pup_edit-bottom{
+  width: 100%;
+  background-color: white;
+  padding: 8px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin-top: 2px;
+  margin-bottom: 8px;
+}
+
+.pup_edit-centro{
+  width: 100%;
+  background-color: white;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.pup_div-prof{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.pup_div-prof input{
+  width: 14px;
+  margin-right: 8px;
+}
+
+.pup-atrib{
+  font-size: 12px;
 }
 
 
