@@ -195,17 +195,17 @@ function PersonagemCriacaoProficiencia() {
             <label>Natureza <span className='pcp-atrib'>(Inteligência)</span></label>
           </div>
           <div>
+            <input type="checkbox" ref={propercepcao}/>
+            <label>Percepção <span className='pcp-atrib'>(Sabedoria)</span></label>
+          </div>
+          <div>
             <input type="checkbox" ref={propersuasao}/>
             <label>Persuasão <span className='pcp-atrib'>(Carisma)</span></label>
           </div>
           <div>
             <input type="checkbox" ref={proprestidigitacao}/>
             <label>Prestidigitação <span className='pcp-atrib'>(Destreza)</span></label>
-          </div>
-          <div>
-            <input type="checkbox" ref={propercepcao}/>
-            <label>Percepção <span className='pcp-atrib'>(Sabedoria)</span></label>
-          </div>
+          </div>          
           <div>
             <input type="checkbox" ref={proreligiao}/>
             <label>Religião <span className='pcp-atrib'>(Inteligência)</span></label>
