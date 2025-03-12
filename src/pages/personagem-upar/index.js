@@ -75,7 +75,7 @@ function PersonagemUpar(){
 
     buscar();
 
-  }, [personagem]);
+  }, []);
 
   async function onUpar(e){
 
@@ -85,39 +85,39 @@ function PersonagemUpar(){
     console.log('arca->'+uparcanismo);
     console.log('persu->'+uppersuasao);
 
-    const docRef = doc(db, "tb_personagem", personagem.pe_id.trim());
-      await updateDoc(docRef, {
-          pe_proacrobacia: upacrobacia,
-          pe_proarcanismo: uparcanismo,
-          pe_proatletismo: upatletismo,
-          pe_proatuacao: upatuacao,
-          pe_problefar: upblefar,
-          pe_profurtividade: upfurtividade,
-          pe_prohistoria: uphistoria,
-          pe_prointimidacao: upintimidacao,
-          pe_prointuicao: upintuicao,
-          pe_proinvestigacao: upinvestigacao,
-          pe_prolidaranimais: uplidaranimais,
-          pe_promedicina: upmedicina,
-          pe_pronatureza: upnatureza,
-          // pe_propersuasao: propersuasao,
-          pe_proprestidigitacao: upprestidigitacao,
-          pe_propercepcao: uppercepcao,
-          pe_proreligiao: upreligiao,
-          pe_prosobrevivencia: upsobrevivencia,
-          // pe_nivel: personagem.pe_nivel+1,
-          pe_vidabase: vida,
+    // const docRef = doc(db, "tb_personagem", personagem.pe_id.trim());
+    //   await updateDoc(docRef, {
+    //       pe_proacrobacia: upacrobacia,
+    //       pe_proarcanismo: uparcanismo,
+    //       pe_proatletismo: upatletismo,
+    //       pe_proatuacao: upatuacao,
+    //       pe_problefar: upblefar,
+    //       pe_profurtividade: upfurtividade,
+    //       pe_prohistoria: uphistoria,
+    //       pe_prointimidacao: upintimidacao,
+    //       pe_prointuicao: upintuicao,
+    //       pe_proinvestigacao: upinvestigacao,
+    //       pe_prolidaranimais: uplidaranimais,
+    //       pe_promedicina: upmedicina,
+    //       pe_pronatureza: upnatureza,
+    //       // pe_propersuasao: propersuasao,
+    //       pe_proprestidigitacao: upprestidigitacao,
+    //       pe_propercepcao: uppercepcao,
+    //       pe_proreligiao: upreligiao,
+    //       pe_prosobrevivencia: upsobrevivencia,
+    //       // pe_nivel: personagem.pe_nivel+1,
+    //       pe_vidabase: vida,
 
-      })
-      .then( () =>{
-        exibirBarras();
-        localStorage.setItem('RF@personagemID-upar', '');
-        navigate('/', {replace:true});
-      })
-      .catch((error)=>{
-        console.log('Erro ao Upar; '+error);
-        toast.error('Erro ao Upar');
-      });    
+    //   })
+    //   .then( () =>{
+    //     exibirBarras();
+    //     localStorage.setItem('RF@personagemID-upar', '');
+    //     navigate('/', {replace:true});
+    //   })
+    //   .catch((error)=>{
+    //     console.log('Erro ao Upar; '+error);
+    //     toast.error('Erro ao Upar');
+    //   });    
 
   }
   
@@ -160,15 +160,16 @@ function PersonagemUpar(){
           <div className='pup_div-prof'>
             {upacrobacia? 
               <input type="checkbox" value={upacrobacia} defaultChecked disabled/>:
-              <input type="checkbox" value={upacrobacia} onChange={(e)=>{setProAcrobacia(e.target.checked)}} />
+              <input type="checkbox" value={upacrobacia} onChange={()=>{setProAcrobacia(!upacrobacia)}} />
             }
             <label>Acrobacia <span className='pup-atrib'>(Destreza)</span></label>
           </div>
           <div className='pup_div-prof'>
             {uparcanismo? 
-              <input type="checkbox" value={uparcanismo} defaultChecked disabled/>: 
-              <input type="checkbox" value={uparcanismo} onChange={(e)=>{ setProArcanismo(e.target.checked) }} />
+              <input type="checkbox" value={uparcanismo} defaultChecked disabled/>:
+              <input type="checkbox" value={uparcanismo} onChange={()=>{setProArcanismo(!uparcanismo)}} />
             }
+
             <label>Arcanismo <span className='pup-atrib'>(Sabedoria)</span></label>
           </div>
           <div className='pup_div-prof'>
