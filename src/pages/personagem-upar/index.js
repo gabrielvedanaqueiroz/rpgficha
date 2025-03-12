@@ -5,28 +5,32 @@ import { ocultarBarras, exibirBarras, buscarPersonagem } from '../../utils';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../../components/loading/';
 import upar from '../../res/up.svg'
+import {db} from '../../services/firebaseConnection';
+import {doc, updateDoc} from 'firebase/firestore';
+import { toast } from 'react-toastify';
 
 function PersonagemUpar(){
 
   const [vida, setVida] = useState(0);
-  const [proacrobacia, setProacrobacia] = useState(false);
-  const [proarcanismo, setProarcanismo] = useState(false);
-  const [proatletismo, setProatletismo] = useState(false);
-  const [proatuacao, setProatuacao] = useState(false);
-  const [problefar, setProblefar] = useState(false);
-  const [profurtividade, setProfurtividade] = useState(false);
-  const [prohistoria,setProhistoria] = useState(false);
-  const [prointimidacao, setProintimidacao] = useState(false);
-  const [prointuicao, setProintuicao] = useState(false);
-  const [proinvestigacao, setProinvestigacao] = useState(false);
-  const [prolidaranimais, setProlidaranimais] = useState(false);
-  const [promedicina, setPromedicina] = useState(false);
-  const [pronatureza, setPronatureza] = useState(false);
-  const [propersuasao, setPropersuasao] = useState(false);
-  const [proprestidigitacao, setProprestidigitacao] = useState(false);
-  const [propercepcao, setPropercepcao] = useState(false);
-  const [proreligiao, setProreligiao] = useState(false);
-  const [prosobrevivencia, setProsobrevivencia] = useState(false);
+
+  const [upacrobacia, setProAcrobacia] = useState(false);
+  const [uparcanismo, setProArcanismo] = useState(false);
+  const [upatletismo, setProAtletismo] = useState(false);
+  const [upatuacao, setProAtuacao]  = useState(false);
+  const [upblefar, setProBlefar] = useState(false);
+  const [upfurtividade, setProFurtividade] = useState(false);
+  const [uphistoria, setProHistoria] = useState(false);
+  const [upintimidacao, setProIntimidacao] = useState(false);
+  const [upintuicao, setProIntuicao] = useState(false);
+  const [upinvestigacao, setProInvestigacao] = useState(false);
+  const [uplidaranimais, setProLidarAnimais] = useState(false);
+  const [upmedicina, setProMedicina] = useState(false);
+  const [upnatureza, setProNatureza] = useState(false);
+  const [uppersuasao, setProPersuasao] = useState(false);
+  const [upprestidigitacao, setProPrestidigitacao] = useState(false);
+  const [uppercepcao, setProPercepcao] = useState(false);
+  const [upreligiao, setProReligiao] = useState(false);
+  const [upsobrevivencia, setProSobrevivencia] = useState(false);
   
   const [personagem, setPersonagem] = useState({});
   const [loading, setLoading] = useState(true);
@@ -36,9 +40,31 @@ function PersonagemUpar(){
   
     async function buscar() {
       let id = localStorage.getItem('RF@personagemID-upar');
-      let per = await buscarPersonagem(id);
-      setPersonagem(per);      
-      setLoading(false);
+      await buscarPersonagem(id).then((per)=>{
+        setPersonagem(per);    
+      
+        setProAcrobacia(per.pe_proacrobacia); 
+        setProArcanismo(per.pe_proarcanismo); 
+        setProAtletismo(per.pe_proatletismo); 
+        setProAtuacao(per.pe_proatuacao); 
+        setProBlefar(per.pe_problefar); 
+        setProFurtividade(per.pe_profurtividade); 
+        setProHistoria(per.pe_prohistoria); 
+        setProIntimidacao(per.pe_prointimidacao); 
+        setProIntuicao(per.pe_prointuicao); 
+        setProInvestigacao(per.pe_proinvestigacao); 
+        setProLidarAnimais(per.pe_prolidaranimais); 
+        setProMedicina(per.pe_promedicina); 
+        setProNatureza(per.pe_pronatureza); 
+        setProPersuasao(per.pe_propersuasao); 
+        setProPrestidigitacao(per.pe_proprestidigitacao); 
+        setProPercepcao(per.pe_propercepcao); 
+        setProReligiao(per.pe_proreligiao); 
+        setProSobrevivencia(per.pe_prosobrevivencia); 
+  
+        setLoading(false);
+      });      
+      
     }
     
     window.onpopstate = () => {
@@ -49,15 +75,50 @@ function PersonagemUpar(){
 
     buscar();
 
-  }, []);
+  }, [personagem]);
 
-  function onUpar(e){
+  async function onUpar(e){
+
     e.preventDefault();
 
-    console.log(proacrobacia);
-    console.log(proarcanismo);
-    localStorage.setItem('RF@personagemID-upar', '');
-    // navigate('/', {replace:true}); 
+    console.log('acro->'+upacrobacia);
+    console.log('arca->'+uparcanismo);
+    console.log('persu->'+uppersuasao);
+
+    const docRef = doc(db, "tb_personagem", personagem.pe_id.trim());
+      await updateDoc(docRef, {
+          pe_proacrobacia: proacrobacia,
+          pe_proarcanismo: proarcanismo,
+          pe_proatletismo: proatletismo,
+          pe_proatuacao: proatuacao,
+          pe_problefar: problefar,
+          pe_profurtividade: profurtividade,
+          pe_prohistoria: prohistoria,
+          pe_prointimidacao: prointimidacao,
+          pe_prointuicao: prointuicao,
+          pe_proinvestigacao: proinvestigacao,
+          pe_prolidaranimais: prolidaranimais,
+          pe_promedicina: promedicina,
+          pe_pronatureza: pronatureza,
+          // pe_propersuasao: propersuasao,
+          pe_proprestidigitacao: proprestidigitacao,
+          pe_propercepcao: propercepcao,
+          pe_proreligiao: proreligiao,
+          pe_prosobrevivencia: prosobrevivencia,
+          // pe_nivel: personagem.pe_nivel+1,
+          pe_vidabase: vida,
+
+      })
+      .then( () =>{
+        exibirBarras();
+        localStorage.setItem('RF@personagemID-upar', '');
+        navigate('/', {replace:true});
+      })
+      .catch((error)=>{
+        console.log('Erro ao Upar; '+error);
+        toast.error('Erro ao Upar');
+      });    
+
   }
   
   if(loading)
@@ -97,76 +158,129 @@ function PersonagemUpar(){
         <div className='pup_edit-centro'>
           <strong>Pericias</strong>
           <div className='pup_div-prof'>
-            <input type="checkbox" value={proacrobacia} onChange={(e)=>{setProacrobacia(e.target.value)}}/>
+            {upacrobacia? 
+              <input type="checkbox" value={upacrobacia} defaultChecked disabled/>:
+              <input type="checkbox" value={upacrobacia} onChange={(e)=>{setProAcrobacia(e.target.checked)}} />
+            }
             <label>Acrobacia <span className='pup-atrib'>(Destreza)</span></label>
           </div>
           <div className='pup_div-prof'>
-            <input type="checkbox" value={proarcanismo} onChange={(e)=>{setProarcanismo(e.target.value)}}/>
+            {uparcanismo? 
+              <input type="checkbox" value={uparcanismo} defaultChecked disabled/>: 
+              <input type="checkbox" value={uparcanismo} onChange={(e)=>{ setProArcanismo(e.target.checked) }} />
+            }
             <label>Arcanismo <span className='pup-atrib'>(Sabedoria)</span></label>
           </div>
           <div className='pup_div-prof'>
-            <input type="checkbox" value={proatletismo} onChange={(e)=>{setProatletismo(e.target.value)}}/>
+            {upatletismo? 
+              <input type="checkbox" value={upatletismo} defaultChecked disabled/>:
+              <input type="checkbox" value={upatletismo} onChange={(e)=>{setProAtletismo(e.target.checked)}} />
+            }
             <label>Atletismo <span className='pup-atrib'>(Força)</span></label>
           </div>
           <div className='pup_div-prof'>
-            <input type="checkbox" value={proatuacao} onChange={(e)=>{setProatuacao(e.target.value)}}/>
+            {upatuacao? 
+              <input type="checkbox" value={upatuacao} defaultChecked disabled/>: 
+              <input type="checkbox" value={upatuacao} onChange={(e)=>{setProAtuacao(e.target.checked)}} />
+            }
             <label>Atuação <span className='pup-atrib'>(Carisma)</span></label>
           </div>
           <div className='pup_div-prof'>
-            <input type="checkbox" value={problefar} onChange={(e)=>{setProblefar(e.target.value)}}/>
+            {upblefar? 
+              <input type="checkbox" value={upblefar} defaultChecked disabled/>: 
+              <input type="checkbox" value={upblefar} onChange={(e)=>{setProBlefar(e.target.checked)}} 
+            />}
             <label>Blefar <span className='pup-atrib'>(Carisma)</span></label>
           </div>
           <div className='pup_div-prof'>
-            <input type="checkbox" value={profurtividade} onChange={(e)=>{setProfurtividade(e.target.value)}}/>
+            {upfurtividade? 
+              <input type="checkbox" value={upfurtividade} defaultChecked disabled/>: 
+              <input type="checkbox" value={upfurtividade} onChange={(e)=>{setProFurtividade(e.target.checked)}} />
+            }
             <label>Furtividade <span className='pup-atrib'>(Destreza)</span></label>
           </div>
           <div className='pup_div-prof'>
-            <input type="checkbox" value={prohistoria} onChange={(e)=>{setProhistoria(e.target.value)}}/>
+            {uphistoria? 
+              <input type="checkbox" value={uphistoria} defaultChecked disabled/>: 
+              <input type="checkbox" value={uphistoria} onChange={(e)=>{setProHistoria(e.target.checked)}} />
+            }
             <label>História <span className='pup-atrib'>(Inteligência)</span></label>
           </div>
           <div className='pup_div-prof'>
-            <input type="checkbox" value={prointimidacao} onChange={(e)=>{setProintimidacao(e.target.value)}}/>
+            {upintimidacao? 
+              <input type="checkbox" value={upintimidacao} defaultChecked disabled/>: 
+              <input type="checkbox" value={upintimidacao} onChange={(e)=>{setProIntimidacao(e.target.checked)}} />
+            }
             <label>Intimidação <span className='pup-atrib'>(Carisma)</span></label>
           </div>
           <div className='pup_div-prof'>
-            <input type="checkbox" value={prointuicao} onChange={(e)=>{setProintuicao(e.target.value)}}/>
+            {upintuicao? 
+              <input type="checkbox" value={upintuicao} defaultChecked disabled/>: 
+              <input type="checkbox" value={upintuicao} onChange={(e)=>{setProIntuicao(e.target.checked)}} />
+            }
             <label>Intuição <span className='pup-atrib'>(Sabedoria)</span></label>
           </div>
           <div className='pup_div-prof'>
-            <input type="checkbox" value={proinvestigacao} onChange={(e)=>{setProinvestigacao(e.target.value)}}/>
+            {upinvestigacao? 
+              <input type="checkbox" value={upinvestigacao} defaultChecked disabled/>: 
+              <input type="checkbox" value={upinvestigacao} onChange={(e)=>{setProInvestigacao(e.target.checked)}} />
+            }
             <label>Investigação <span className='pup-atrib'>(Inteligência)</span></label>
           </div>
           <div className='pup_div-prof'>
-            <input type="checkbox" value={prolidaranimais} onChange={(e)=>{setProlidaranimais(e.target.value)}}/>
+            {uplidaranimais? 
+              <input type="checkbox" value={uplidaranimais} defaultChecked disabled/>: 
+              <input type="checkbox" value={uplidaranimais} onChange={(e)=>{setProLidarAnimais(e.target.checked)}} />
+            }
             <label>Lidar com animais <span className='pup-atrib'>(Sabedoria)</span></label>
           </div>
           <div className='pup_div-prof'>
-            <input type="checkbox" value={promedicina} onChange={(e)=>{setPromedicina(e.target.value)}}/>
+            {upmedicina? 
+              <input type="checkbox" value={upmedicina} defaultChecked disabled/>: 
+              <input type="checkbox" value={upmedicina} onChange={(e)=>{setProMedicina(e.target.checked)}} />
+            }
             <label>Medicina <span className='pup-atrib'>(Sabedoria)</span></label>
           </div>
           <div className='pup_div-prof'>
-            <input type="checkbox" value={pronatureza} onChange={(e)=>{setPronatureza(e.target.value)}}/>
+            {upnatureza? 
+              <input type="checkbox" value={upnatureza} defaultChecked disabled/>: 
+              <input type="checkbox" value={upnatureza} onChange={(e)=>{setProNatureza(e.target.checked)}} />
+            }
             <label>Natureza <span className='pup-atrib'>(Inteligência)</span></label>
           </div>
           <div className='pup_div-prof'>
-          <input type="checkbox" value={propersuasao} onChange={(e)=>{setPropersuasao(e.target.value)}}/>
+            {uppersuasao? 
+              <input type="checkbox" value={uppersuasao} defaultChecked disabled/>: 
+              <input type="checkbox" value={uppersuasao} onChange={(e)=>{setProPersuasao(e.target.checked)}} />
+            }
             <label>Persuasão <span className='pup-atrib'>(Carisma)</span></label>
           </div>
           <div className='pup_div-prof'>
-            <input type="checkbox" value={proprestidigitacao} onChange={(e)=>{setProprestidigitacao(e.target.value)}} />
+            {upprestidigitacao? 
+              <input type="checkbox" value={upprestidigitacao} defaultChecked disabled/>: 
+              <input type="checkbox" value={upprestidigitacao} onChange={(e)=>{setProPrestidigitacao(e.target.checked)}} />
+            }
             <label>Prestidigitação <span className='pup-atrib'>(Destreza)</span></label>
           </div>
           <div className='pup_div-prof'>
-            <input type="checkbox" value={propercepcao} onChange={(e)=>{setPropercepcao(e.target.value)}} />
+            {uppercepcao? 
+              <input type="checkbox" value={uppercepcao} chedefaultChecked disabledcked/>: 
+              <input type="checkbox" value={uppercepcao} onChange={(e)=>{setProPercepcao(e.target.checked)}} />
+            }
             <label>Percepção <span className='pup-atrib'>(Sabedoria)</span></label>
           </div>
           <div className='pup_div-prof'>
-            <input type="checkbox" value={proreligiao} onChange={(e)=>{setProreligiao(e.target.value)}}/>
+            {upreligiao? 
+              <input type="checkbox" value={upreligiao} defaultChecked disabled/>: 
+              <input type="checkbox" value={upreligiao} onChange={(e)=>{setProReligiao(e.target.checked)}} />
+            }
             <label>Religião <span className='pup-atrib'>(Inteligência)</span></label>
           </div>
           <div className='pup_div-prof'>
-            {/* {(prosobrevivencia ? <input type="checkbox" value={prosobrevivencia} checked disabled/> : <input type="checkbox" value={prosobrevivencia} onChange={(e)=>{setProsobrevivencia(e.target.value)}}/>)} */}
-            <input type="checkbox" value={prosobrevivencia} onChange={(e)=>{setProsobrevivencia(e.target.value)}}/>
+            {upsobrevivencia? 
+              <input type="checkbox" value={upsobrevivencia} defaultChecked disabled/>: 
+              <input type="checkbox" value={upsobrevivencia} onChange={(e)=>{setProSobrevivencia(e.target.checked)}} />
+            }
             <label>Sobrevivência <span className='pup-atrib'>(Sabedoria)</span></label>
           </div>
         
