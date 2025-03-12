@@ -56,10 +56,10 @@ export default class Personagem{
     pe_promedicina,
     pe_pronatureza,
     pe_propercepcao,
-    pe_propersuacao,
     pe_proprestidigitacao,
     pe_prosobrevivencia,
     pe_proreligiao,
+    pe_propersusao,
     pe_idhabilidadeconjuracao,
   ){
     this.pe_id = pe_id;
@@ -115,12 +115,11 @@ export default class Personagem{
     this.pe_promedicina = pe_promedicina;
     this.pe_pronatureza = pe_pronatureza;
     this.pe_propercepcao = pe_propercepcao;
-    this.pe_propersuacao = pe_propersuacao;
     this.pe_proprestidigitacao = pe_proprestidigitacao;
     this.pe_prosobrevivencia = pe_prosobrevivencia;
     this.pe_proreligiao = pe_proreligiao;
+    this.pe_propersusao = pe_propersusao;
     this.pe_idhabilidadeconjuracao = pe_idhabilidadeconjuracao;
-
   }
   
   podeUpar(){

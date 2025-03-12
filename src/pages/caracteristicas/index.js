@@ -299,7 +299,7 @@ function Caracteristicas(){
               <TileProficiencia titulo='Atuação' valor={personagem.getProCarisma(personagem.pe_proatuacao)}  proficiente={personagem.pe_proatuacao}/>
               <TileProficiencia titulo='Blefar' valor={personagem.getProCarisma(personagem.pe_problefar)}  proficiente={personagem.pe_problefar}/>
               <TileProficiencia titulo='Intimidação' valor={personagem.getProCarisma(personagem.pe_prointimidacao)}  proficiente={personagem.pe_prointimidacao}/>             
-              <TileProficiencia titulo='Persuasão' valor={personagem.getProCarisma(personagem.pe_propersuacao)}  proficiente={personagem.pe_propersuacao}/>                
+              <TileProficiencia titulo='Persuasão' valor={personagem.getProCarisma(personagem.pe_propersusao)}  proficiente={personagem.pe_propersusao}/>                
             </div>
             <div class="ca-cd-div-flag">
               <span>{personagem.getModCarisma()}</span>

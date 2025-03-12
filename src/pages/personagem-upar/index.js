@@ -85,39 +85,39 @@ function PersonagemUpar(){
     console.log('uppersu->  '+uppersuasao);
     console.log('perso->    '+personagem.pe_propersuasao);
 
-    const docRef = doc(db, "tb_personagem", personagem.pe_id.trim());
-      await updateDoc(docRef, {
-          pe_proacrobacia: personagem.pe_proacrobacia,
-          pe_proarcanismo: personagem.pe_proarcanismo,
-          pe_proatletismo: personagem.pe_proatletismo,
-          pe_proatuacao: personagem.pe_proatuacao,
-          pe_problefar: personagem.pe_problefar,
-          pe_profurtividade: personagem.pe_profurtividade,
-          pe_prohistoria: personagem.pe_prohistoria,
-          pe_prointimidacao: personagem.pe_prointimidacao,
-          pe_prointuicao:personagem.pe_prointuicao,
-          pe_proinvestigacao: personagem.pe_proinvestigacao,
-          pe_prolidaranimais: personagem.pe_prolidaranimais,
-          pe_promedicina: personagem.pe_promedicina,
-          pe_pronatureza: personagem.pe_pronatureza,
-          pe_propercepcao: personagem.pe_propercepcao,
-          // pe_propersuasao: personagem.pe_propersuasao,
-          pe_proprestidigitacao: personagem.pe_proprestidigitacao,
-          pe_proreligiao: personagem.pe_proreligiao,
-          pe_prosobrevivencia: personagem.pe_prosobrevivencia,
-          pe_nivel: personagem.pe_nivel+1,
-          pe_vidabase: vida,
+    // const docRef = doc(db, "tb_personagem", personagem.pe_id.trim());
+    //   await updateDoc(docRef, {
+    //       pe_proacrobacia: personagem.pe_proacrobacia,
+    //       pe_proarcanismo: personagem.pe_proarcanismo,
+    //       pe_proatletismo: personagem.pe_proatletismo,
+    //       pe_proatuacao: personagem.pe_proatuacao,
+    //       pe_problefar: personagem.pe_problefar,
+    //       pe_profurtividade: personagem.pe_profurtividade,
+    //       pe_prohistoria: personagem.pe_prohistoria,
+    //       pe_prointimidacao: personagem.pe_prointimidacao,
+    //       pe_prointuicao:personagem.pe_prointuicao,
+    //       pe_proinvestigacao: personagem.pe_proinvestigacao,
+    //       pe_prolidaranimais: personagem.pe_prolidaranimais,
+    //       pe_promedicina: personagem.pe_promedicina,
+    //       pe_pronatureza: personagem.pe_pronatureza,
+    //       pe_propercepcao: personagem.pe_propercepcao,
+    //       // pe_propersuasao: personagem.pe_propersuasao,
+    //       pe_proprestidigitacao: personagem.pe_proprestidigitacao,
+    //       pe_proreligiao: personagem.pe_proreligiao,
+    //       pe_prosobrevivencia: personagem.pe_prosobrevivencia,
+    //       pe_nivel: personagem.pe_nivel+1,
+    //       pe_vidabase: vida,
 
-      })
-      .then( () =>{
-        exibirBarras();
-        localStorage.setItem('RF@personagemID-upar', '');
-        navigate('/', {replace:true});
-      })
-      .catch((error)=>{
-        console.log('Erro ao Upar; '+error);
-        toast.error('Erro ao Upar');
-      });    
+    //   })
+    //   .then( () =>{
+    //     exibirBarras();
+    //     localStorage.setItem('RF@personagemID-upar', '');
+    //     navigate('/', {replace:true});
+    //   })
+    //   .catch((error)=>{
+    //     console.log('Erro ao Upar; '+error);
+    //     toast.error('Erro ao Upar');
+    //   });    
 
   }
   

@@ -4433,10 +4433,10 @@ export async function buscarPersonagemAtivo(aID){
         snapshot.data().pe_promedicina,
         snapshot.data().pe_pronatureza,
         snapshot.data().pe_propercepcao,
-        snapshot.data().pe_propersuacao,
         snapshot.data().pe_proprestidigitacao,
         snapshot.data().pe_prosobrevivencia,
         snapshot.data().pe_proreligiao,
+        snapshot.data().pe_propersucao,
         snapshot.data().pe_idhabilidadeconjuracao,
       ); 
     });    
@@ -4513,10 +4513,10 @@ export async function buscarPersonagem(aID){
           snapshot.data().pe_promedicina,
           snapshot.data().pe_pronatureza,
           snapshot.data().pe_propercepcao,
-          snapshot.data().pe_propersuacao,
           snapshot.data().pe_proprestidigitacao,
           snapshot.data().pe_prosobrevivencia,
           snapshot.data().pe_proreligiao,
+          snapshot.data().pe_propersusao,
           snapshot.data().pe_idhabilidadeconjuracao,
         ); 
 
