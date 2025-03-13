@@ -4,7 +4,7 @@ personagem
   upar(
     aumentar nivel  (automatico)
     upar habilidade (jogador)
-  
+    Ajuste o Bônus de Proficiência (automatico)
     ganha pericias  (fica a cargo do usuario escolher mais)
     caracteristicas (fica a cargo do usuario depois)
   )

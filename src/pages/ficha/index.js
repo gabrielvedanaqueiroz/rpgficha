@@ -4,7 +4,6 @@ import {doc, query, where, collection, getDocs, updateDoc, deleteDoc} from 'fire
 import { useEffect, useState, useContext } from 'react';
 import {exibirBarras, buscarPersonagemAtivo} from '../../utils';
 import {toast} from 'react-toastify';
-import img_classe from '../../res/logo.svg';
 import upar from '../../res/up.svg';
 import Tile from '../../components/tile';
 import TileFiAtaque from '../../components/tilefiataque';
@@ -253,7 +252,7 @@ function Ficha(){
           </div>
 
         <div className='fi-cb-imgclasse'>
-          <img src={img_classe} alt='Forasteiro'/>
+          <img src={personagem.getImagem()} alt={personagem.pe_classe}/>
         </div>
         
         <div className='fi-cb-direita'>
