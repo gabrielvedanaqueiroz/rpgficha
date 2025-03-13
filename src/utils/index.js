@@ -35,16 +35,16 @@ export const jClasses = [
     "cl_vida_nivel_1": 12,
     "cl_cabase": 10,
     "cl_sub": ["Caminho do Berserker", "Caminho do Guerreiro Totêmico"],
+
     "cl_sginicial": [1,3],  //indicie dentre as 6 habilidades
-    "cl_proinicial": [1,2], //indice entre todas proficiencias
+    "cl_proqnt": 2, //quantidade que pode escolher das pericias
+    "cl_proinicial": [11,3, 8, 13, 14, 18], //indice entre todas pericias
     "cl_aumentoatrib": [4, 8, 12, 16],
     "cl_up":[
         {2:["Ataque Descuidado", "Sentido de Perigo"]},
         {3:["Caminho Primitivo"]},
         {4:[{"Furia":3}]},
     ],
-    
-    "cl_up5":["Ataque Extra", "Movimento Rápido", {"furia":4, "bonusproficiencia": 3}]
   },
   {
     "cl_id": 2,
@@ -53,7 +53,17 @@ export const jClasses = [
     "cl_dado_vida": "d8",
     "cl_vida_nivel_1": 8,
     "cl_cabase": 11,
-    "cl_sub": ["Colégio do Conhecimento", "Colégio do Valor"]
+    "cl_sub": ["Colégio do Conhecimento", "Colégio do Valor"],
+
+    "cl_sginicial": [2, 6],  //indicie dentre as 6 habilidades
+    "cl_proqnt": 3,
+    "cl_proinicial": [], //indice entre todas pericias
+    "cl_aumentoatrib": [4, 8, 12, 16],
+    "cl_up":[
+        {2:[]},
+        {3:[]},
+        {4:[]},
+    ],
   },
   {
     "cl_id": 3,
@@ -62,7 +72,17 @@ export const jClasses = [
     "cl_dado_vida": "d8",
     "cl_vida_nivel_1": 8,
     "cl_cabase": 11,
-    "cl_sub": ["Arquifada", "O Grande Antigo", "O Senhor Imortal"]
+    "cl_sub": ["Arquifada", "O Grande Antigo", "O Senhor Imortal"],
+
+    "cl_sginicial": [5, 6],  //indicie dentre as 6 habilidades
+    "cl_proqnt": 2,
+    "cl_proinicial": [2, 5, 7, 8, 10, 13, 17], //indice entre todas pericias
+    "cl_aumentoatrib": [4, 8, 12, 16],
+    "cl_up":[
+        {2:[]},
+        {3:[]},
+        {4:[]},
+    ],
   },
   {
     "cl_id": 4,
@@ -79,7 +99,17 @@ export const jClasses = [
       "Domínio da Tempestade",
       "Domínio do Engano",
       "Domínio da Guerra"
-    ]
+    ],
+
+    "cl_sginicial": [5, 6],  //indicie dentre as 6 habilidades
+    "cl_proqnt": 2,
+    "cl_proinicial": [7, 9, 12, 15, 17], //indice entre todas pericias
+    "cl_aumentoatrib": [4, 8, 12, 16],
+    "cl_up":[
+        {2:[]},
+        {3:[]},
+        {4:[]},
+    ],
   },
   {
     "cl_id": 5,
@@ -88,7 +118,17 @@ export const jClasses = [
     "cl_dado_vida": "d8",
     "cl_vida_nivel_1": 8,
     "cl_cabase": 12,
-    "cl_sub": ["Círculo da Terra", "Círculo da Lua"]
+    "cl_sub": ["Círculo da Terra", "Círculo da Lua"],
+
+    "cl_sginicial": [4, 5],  //indicie dentre as 6 habilidades
+    "cl_proqnt": 2,
+    "cl_proinicial": [2, 11, 9, 12, 13, 14, 17, 18], //indice entre todas pericias
+    "cl_aumentoatrib": [4, 8, 12, 16],
+    "cl_up":[
+        {2:[]},
+        {3:[]},
+        {4:[]},
+    ],
   },
   {
     "cl_id": 6,
@@ -97,7 +137,17 @@ export const jClasses = [
     "cl_dado_vida": "d6",
     "cl_vida_nivel_1": 6,
     "cl_cabase": 10,
-    "cl_sub": ["Linhagem Dracônica", "Magia Selvagem"]
+    "cl_sub": ["Linhagem Dracônica", "Magia Selvagem"],
+
+    "cl_sginicial": [3, 6],  //indicie dentre as 6 habilidades
+    "cl_proqnt": 2,
+    "cl_proinicial": [2, 5, 8, 9, 15, 17], //indice entre todas pericias
+    "cl_aumentoatrib": [4, 8, 12, 16],
+    "cl_up":[
+        {2:[]},
+        {3:[]},
+        {4:[]},
+    ],
   },
   {
     "cl_id": 7,
@@ -110,7 +160,17 @@ export const jClasses = [
       "Arquétipo do Campeão",
       "Arquétipo do Mestre de Batalha",
       "Arquétipo do Cavaleiro Arcano"
-    ]
+    ],
+
+    "cl_sginicial": [1, 3],  //indicie dentre as 6 habilidades
+    "cl_proqnt": 2,
+    "cl_proinicial": [1, 11, 3, 7, 9, 8, 14, 18], //indice entre todas pericias
+    "cl_aumentoatrib": [4, 8, 12, 16],
+    "cl_up":[
+        {2:[]},
+        {3:[]},
+        {4:[]},
+    ],
   },
   {
     "cl_id": 8,
@@ -123,7 +183,17 @@ export const jClasses = [
       "Tradição do Ladrão",
       "Tradição do Assassino",
       "Tradição do Trapaceiro Arcano"
-    ]
+    ],
+
+    "cl_sginicial": [3, 4],  //indicie dentre as 6 habilidades
+    "cl_proqnt": 4,
+    "cl_proinicial": [1, 3, 4, 5, 6, 8, 9, 10, 14, 15, 16], //indice entre todas pericias
+    "cl_aumentoatrib": [4, 8, 12, 16],
+    "cl_up":[
+        {2:[]},
+        {3:[]},
+        {4:[]},
+    ],
   },
   {
     "cl_id": 9,
@@ -141,7 +211,17 @@ export const jClasses = [
       "Escola de Transmutação",
       "Escola de Conjuração",
       "Escola de Encantamento"
-    ]
+    ],
+
+    "cl_sginicial": [3, 5],  //indicie dentre as 6 habilidades
+    "cl_proqnt": 2,
+    "cl_proinicial": [2, 7, 9, 10, 12, 17], //indice entre todas pericias
+    "cl_aumentoatrib": [4, 8, 12, 16],
+    "cl_up":[
+        {2:[]},
+        {3:[]},
+        {4:[]},
+    ],
   },
   {
     "cl_id": 10,
@@ -154,7 +234,17 @@ export const jClasses = [
       "Caminho da Mão Aberta",
       "Caminho da Sombra",
       "Caminho dos Quatro Elementos"
-    ]
+    ],
+
+    "cl_sginicial": [1, 2],  //indicie dentre as 6 habilidades
+    "cl_proqnt": 2,
+    "cl_proinicial": [1, 3, 6, 7, 9, 17], //indice entre todas pericias
+    "cl_aumentoatrib": [4, 8, 12, 16],
+    "cl_up":[
+        {2:[]},
+        {3:[]},
+        {4:[]},
+    ],
   },
   {
     "cl_id": 11,
@@ -167,7 +257,17 @@ export const jClasses = [
       "Juramento de Devoção",
       "Juramento dos Anciões",
       "Juramento da Vingança"
-    ]
+    ],
+
+    "cl_sginicial": [5, 6],  //indicie dentre as 6 habilidades
+    "cl_proqnt": 2,
+    "cl_proinicial": [3, 9, 8, 12, 15, 17], //indice entre todas pericias
+    "cl_aumentoatrib": [4, 8, 12, 16],
+    "cl_up":[
+        {2:[]},
+        {3:[]},
+        {4:[]},
+    ],
   },
   {
     "cl_id": 12,
@@ -176,7 +276,17 @@ export const jClasses = [
     "cl_dado_vida": "d10",
     "cl_vida_nivel_1": 10,
     "cl_cabase": 14,
-    "cl_sub": ["Conclave do Caçador", "Conclave Mestre das Feras"]
+    "cl_sub": ["Conclave do Caçador", "Conclave Mestre das Feras"],
+    
+    "cl_sginicial": [1, 2],  //indicie dentre as 6 habilidades
+    "cl_proqnt": 3,
+    "cl_proinicial": [11, 3, 6, 9, 10, 13, 14, 18], //indice entre todas pericias
+    "cl_aumentoatrib": [4, 8, 12, 16],
+    "cl_up":[
+        {2:[]},
+        {3:[]},
+        {4:[]},
+    ],
   }
 ];
 
