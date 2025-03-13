@@ -1,10 +1,10 @@
   
 personagem
-  editar
+
   upar(
     aumentar nivel  (automatico)
     upar habilidade (jogador)
-    aumenta vida    (jogador)
+  
     ganha pericias  (fica a cargo do usuario escolher mais)
     caracteristicas (fica a cargo do usuario depois)
   )
