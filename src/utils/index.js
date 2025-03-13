@@ -35,10 +35,15 @@ export const jClasses = [
     "cl_vida_nivel_1": 12,
     "cl_cabase": 10,
     "cl_sub": ["Caminho do Berserker", "Caminho do Guerreiro Totêmico"],
-
-    "cl_up2":["Ataque Descuidado", "Sentido de Perigo"],
-    "cl_up3":["Caminho Primitivo", {"furia":3}],
-    "cl_up4":["Incremento no Valor de Habilidade"],
+    "cl_sginicial": [1,3],  //indicie dentre as 6 habilidades
+    "cl_proinicial": [1,2], //indice entre todas proficiencias
+    "cl_aumentoatrib": [4, 8, 12, 16],
+    "cl_up":[
+        {2:["Ataque Descuidado", "Sentido de Perigo"]},
+        {3:["Caminho Primitivo"]},
+        {4:[{"Furia":3}]},
+    ],
+    
     "cl_up5":["Ataque Extra", "Movimento Rápido", {"furia":4, "bonusproficiencia": 3}]
   },
   {
