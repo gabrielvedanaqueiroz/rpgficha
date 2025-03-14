@@ -8,6 +8,8 @@ import upar from '../../res/up.svg'
 import {db} from '../../services/firebaseConnection';
 import {doc, updateDoc} from 'firebase/firestore';
 import { toast } from 'react-toastify';
+import expandir_mais from '../../res/expandir_mais.svg';
+import expandir_menos from '../../res/expandir_menos.svg';
 
 function PersonagemUpar(){
 
@@ -33,6 +35,15 @@ function PersonagemUpar(){
   const [upreligiao, setProReligiao]                = useState(false);
   const [upsobrevivencia, setProSobrevivencia]      = useState(false);
   
+  const [habForca, setHabForca]               = useState(0);
+  const [habDestreza, setHabDestreza]         = useState(0);
+  const [habConstituicao, setHabConstituicao] = useState(0);
+  const [habInteligencia, setHabInteligencia] = useState(0);
+  const [habSabedoria, setHabSabedoria]       = useState(0);
+  const [habCarisma, setHabCarisma]           = useState(0);
+
+  const [qntHab, setQntHab] = useState(0);
+  const [exibirHabilidades, setExibirHabilidades]   = useState(false);
   
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -63,6 +74,9 @@ function PersonagemUpar(){
         setProReligiao(per.pe_proreligiao); 
         setProSobrevivencia(per.pe_prosobrevivencia); 
   
+        let exibirHab = ((per.pe_nivel === 3) || (per.pe_nivel === 7) || (per.pe_nivel === 15) || (per.pe_nivel === 17));
+        setExibirHabilidades(exibirHab);
+
         setLoading(false);
       });      
       
@@ -78,46 +92,88 @@ function PersonagemUpar(){
 
   }, []);
 
-  async function onUpar(e){
+  function getForca(){
+    return Number(personagem.pe_forca) + habForca;
+  }
 
-    e.preventDefault();
+  function getDestreza(){
+    return Number(personagem.pe_destreza) + habDestreza;
+  }
 
-    console.log('uppersu->  '+uppersuasao);
-    console.log('perso->    '+personagem.pe_propersuasao);
+  function getConstituicao(){
+    return Number(personagem.pe_constituicao) + habConstituicao;
+  }
 
-    // const docRef = doc(db, "tb_personagem", personagem.pe_id.trim());
-    //   await updateDoc(docRef, {
-    //       pe_proacrobacia: personagem.pe_proacrobacia,
-    //       pe_proarcanismo: personagem.pe_proarcanismo,
-    //       pe_proatletismo: personagem.pe_proatletismo,
-    //       pe_proatuacao: personagem.pe_proatuacao,
-    //       pe_problefar: personagem.pe_problefar,
-    //       pe_profurtividade: personagem.pe_profurtividade,
-    //       pe_prohistoria: personagem.pe_prohistoria,
-    //       pe_prointimidacao: personagem.pe_prointimidacao,
-    //       pe_prointuicao:personagem.pe_prointuicao,
-    //       pe_proinvestigacao: personagem.pe_proinvestigacao,
-    //       pe_prolidaranimais: personagem.pe_prolidaranimais,
-    //       pe_promedicina: personagem.pe_promedicina,
-    //       pe_pronatureza: personagem.pe_pronatureza,
-    //       pe_propercepcao: personagem.pe_propercepcao,
-    //       // pe_propersuasao: personagem.pe_propersuasao,
-    //       pe_proprestidigitacao: personagem.pe_proprestidigitacao,
-    //       pe_proreligiao: personagem.pe_proreligiao,
-    //       pe_prosobrevivencia: personagem.pe_prosobrevivencia,
-    //       pe_nivel: personagem.pe_nivel+1,
-    //       pe_vidabase: vida,
+  function getSabedoria(){
+    return Number(personagem.pe_sabedoria) + habSabedoria;
+  }
 
-    //   })
-    //   .then( () =>{
-    //     exibirBarras();
-    //     localStorage.setItem('RF@personagemID-upar', '');
-    //     navigate('/', {replace:true});
-    //   })
-    //   .catch((error)=>{
-    //     console.log('Erro ao Upar; '+error);
-    //     toast.error('Erro ao Upar');
-    //   });    
+  function getInteligencia(){
+    return Number(personagem.pe_inteligencia) + habInteligencia;
+  }
+
+  function getCarisma(){
+    return Number(personagem.pe_carisma) + habCarisma;
+  }
+
+  function onAumentar(aValor){
+    let h = Number(aValor);
+    setQntHab(qntHab+1);
+    return (h + 1); 
+  }
+
+  function onDiminuir(aValor){
+    let h = Number(aValor);
+    setQntHab(qntHab-1);
+    return (h - 1); 
+  }
+
+  async function onUpar(){
+
+    // e.preventDefault();
+
+    // console.log('uppersu->  '+uppersuasao);
+    // console.log('perso->    '+personagem.pe_propersuasao);
+
+    const docRef = doc(db, "tb_personagem", personagem.pe_id.trim());
+      await updateDoc(docRef, {
+          // pe_proacrobacia: personagem.pe_proacrobacia,
+          // pe_proarcanismo: personagem.pe_proarcanismo,
+          // pe_proatletismo: personagem.pe_proatletismo,
+          // pe_proatuacao: personagem.pe_proatuacao,
+          // pe_problefar: personagem.pe_problefar,
+          // pe_profurtividade: personagem.pe_profurtividade,
+          // pe_prohistoria: personagem.pe_prohistoria,
+          // pe_prointimidacao: personagem.pe_prointimidacao,
+          // pe_prointuicao:personagem.pe_prointuicao,
+          // pe_proinvestigacao: personagem.pe_proinvestigacao,
+          // pe_prolidaranimais: personagem.pe_prolidaranimais,
+          // pe_promedicina: personagem.pe_promedicina,
+          // pe_pronatureza: personagem.pe_pronatureza,
+          // pe_propercepcao: personagem.pe_propercepcao,
+          // pe_propersuasao: personagem.pe_propersuasao,
+          // pe_proprestidigitacao: personagem.pe_proprestidigitacao,
+          // pe_proreligiao: personagem.pe_proreligiao,
+          // pe_prosobrevivencia: personagem.pe_prosobrevivencia,
+          pe_nivel: personagem.pe_nivel+1,
+          pe_vidabase: vida,
+          pe_forca: Number(personagem.pe_forca) + habForca,
+          pe_destreza: Number(personagem.pe_destreza) + habDestreza,
+          pe_constituicao: Number(personagem.pe_constituicao) + habConstituicao,
+          pe_inteligencia: Number(personagem.pe_inteligencia) + habInteligencia,
+          pe_sabedoria: Number(personagem.pe_sabedoria) + habSabedoria,
+          pe_carisma: Number(personagem.pe_carisma) + habCarisma,
+
+      })
+      .then( () =>{
+        exibirBarras();
+        localStorage.setItem('RF@personagemID-upar', '');
+        navigate('/', {replace:true});
+      })
+      .catch((error)=>{
+        console.log('Erro ao Upar; '+error);
+        toast.error('Erro ao Upar');
+      });    
 
   }
   
@@ -126,7 +182,8 @@ function PersonagemUpar(){
 
   return(
     <div className='pup_container'>
-      
+      <div><h3>Upar Personagem </h3><hr/></div>
+
       <div className='pup_edit-centro'>
         <strong>{personagem.pe_nome}</strong><br/>
         {personagem.getRaca()}<br/>
@@ -142,7 +199,7 @@ function PersonagemUpar(){
           </div>
         </div>
       </div>
-      <form className='pup_form' onSubmit={onUpar}>
+      <form className='pup_form' action={onUpar}>
 
         <div className='pup_edit-bottom'>
           <div className='pup_div-espacamento'>
@@ -155,7 +212,123 @@ function PersonagemUpar(){
           </div>   
         </div>
 
-        <div className='pup_edit-centro'>
+        {exibirHabilidades?
+          <div>
+
+            <div className='pup_edit-top'>
+              <strong>Pontos disponivel {2-qntHab}</strong><br/>
+              <div className='pup_div-espacamento'>
+                <label>Força</label>
+                <div className='pup_div-espacamento-item'>
+                  <label>{ getForca() }</label> /
+                  <img className='pup_img-hab' src={expandir_mais} alt='aumentar' onClick={()=>{
+                    if(qntHab !== 2 )
+                      setHabForca(onAumentar(habForca));
+                  }}/>
+                  {habForca}
+                  <img className='pup_img-hab' src={expandir_menos} alt='diminuir' onClick={()=>{
+                    if(habForca > 0 )
+                      setHabForca(onDiminuir(habForca));
+                  }}/>
+                </div>
+              </div>
+            </div>
+
+            <div className='pup_edit-centro'>
+              <div className='pup_div-espacamento'>
+                <label>Destreza</label>
+                <div className='pup_div-espacamento-item'>
+                  <label>{getDestreza()}</label>  /
+                  <img className='pup_img-hab' src={expandir_mais} alt='aumentar'onClick={()=>{
+                    if(qntHab !== 2 )
+                      setHabDestreza(onAumentar(habDestreza));
+                  }}/>
+                  {habDestreza}
+                  <img className='pup_img-hab' src={expandir_menos} alt='diminuir' onClick={()=>{
+                    if(habDestreza > 0 )
+                      setHabDestreza(onDiminuir(habDestreza));
+                  }}/> 
+                </div>
+              </div>
+            </div>
+
+            <div className='pup_edit-centro'>
+              <div className='pup_div-espacamento'>
+                <label>Constituição</label>
+                <div className='pup_div-espacamento-item'>
+                  <label>{getConstituicao()}</label> /
+                  <img className='pup_img-hab' src={expandir_mais} alt='aumentar'onClick={()=>{
+                    if(qntHab !== 2 )
+                      setHabConstituicao(onAumentar(habConstituicao));
+                  }}/>
+                  {habConstituicao}
+                  <img className='pup_img-hab' src={expandir_menos} alt='diminuir' onClick={()=>{
+                    if(habConstituicao > 0 )
+                      setHabConstituicao(onDiminuir(habConstituicao));
+                  }}/>
+                </div>
+              </div>
+            </div>
+
+            <div className='pup_edit-centro'>
+              <div className='pup_div-espacamento'>
+                <label>Inteligência</label>
+                <div className='pup_div-espacamento-item'>
+                  <label>{getInteligencia()}</label> /
+                  <img className='pup_img-hab' src={expandir_mais} alt='aumentar'onClick={()=>{
+                    if(qntHab !== 2 )
+                      setHabInteligencia(onAumentar(habInteligencia));
+                  }}/>
+                  {habInteligencia}
+                  <img className='pup_img-hab' src={expandir_menos} alt='diminuir' onClick={()=>{
+                    if(habInteligencia > 0 )
+                      setHabInteligencia(onDiminuir(habInteligencia));
+                  }}/>
+                </div>
+              </div>
+            </div>
+
+            <div className='pup_edit-centro'>
+              <div className='pup_div-espacamento'>
+                <label>Sabedoria</label>
+                <div className='pup_div-espacamento-item'>
+                  <label>{getSabedoria()}</label>  /
+                  <img className='pup_img-hab' src={expandir_mais} alt='aumentar'onClick={()=>{
+                    if(qntHab !== 2 )
+                      setHabSabedoria(onAumentar(habSabedoria));
+                  }}/>
+                  {habSabedoria}
+                  <img className='pup_img-hab' src={expandir_menos} alt='diminuir' onClick={()=>{
+                    if(habSabedoria > 0 )
+                      setHabSabedoria(onDiminuir(habSabedoria));
+                  }}/> 
+                </div>
+              </div>
+            </div>
+
+            <div className='pup_edit-bottom'>
+              <div className='pup_div-espacamento'>
+                <label>Carisma</label>
+                <div className='pup_div-espacamento-item'>
+                  <label>{getCarisma()}</label> /
+                  <img className='pup_img-hab' src={expandir_mais} alt='aumentar'onClick={()=>{
+                    if(qntHab !== 2 )
+                      setHabCarisma(onAumentar(habCarisma));
+                  }}/>
+                  {habCarisma}
+                  <img className='pup_img-hab' src={expandir_menos} alt='diminuir' onClick={()=>{
+                    if(habCarisma > 0 )
+                      setHabCarisma(onDiminuir(habCarisma));
+                  }}/>
+                </div>
+              </div>
+            </div>
+
+          </div>:
+          <div/>
+        }
+
+        {/* <div className='pup_edit-centro'>
           <strong>Pericias</strong>
           <div className='pup_div-prof'>
             
@@ -289,7 +462,7 @@ function PersonagemUpar(){
             <label>Sobrevivência <span className='pup-atrib'>(Sabedoria)</span></label>
           </div>
         
-        </div>
+        </div> */}
 
         <div className='pup_div-rodape-botao'>
           <BtnSalvarForm esperando='Upando...' inicial='Upar'/>

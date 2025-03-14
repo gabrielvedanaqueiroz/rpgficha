@@ -276,6 +276,9 @@ export default class Personagem{
     return  this.pe_bproficiencia + this.#getSelModificadorMagia();
   }
 
+  getPercepcaoPassiva(){
+    return 10 + this.#onModificador(this.pe_sabedoria) + (this.pe_propercepcao? this.pe_bproficiencia: 0); 
+  }
   //metodo para mostrar uma imagem dependendo da classe do personagem
   getImagem(){
     let url = '';

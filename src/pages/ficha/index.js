@@ -372,7 +372,7 @@ function Ficha(){
           <div className='fi-outras'>
 
             <div className='fi-cd-div-percepcao'>
-              <span>12</span>
+              <span>{personagem.getPercepcaoPassiva()}</span>
               <div className='fi-separador2'/>
               <label>Percepção passiva</label>
             </div> 

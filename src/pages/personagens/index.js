@@ -113,7 +113,7 @@ function Personagens(){
 
   function onUpar(id){
     localStorage.setItem('RF@personagemID-upar', id);
-    navigate('personagem-upar', {replace:false});
+    navigate('/personagem-upar', {replace:false});
   }
 
   async function onExcluir(id){
@@ -130,7 +130,6 @@ function Personagens(){
 
   async function onSelecionar(id){
     localStorage.setItem('RF@personagemID', id); 
-    navigate('/', {replace:true});
 
     if(temPersonagemId){ 
 
@@ -161,7 +160,6 @@ function Personagens(){
 
   return(
     <div className='pr_container'>
-
       <div className='pr_personagens'>
         <div className='pr_titulo'>
           <strong>Personagens</strong>
