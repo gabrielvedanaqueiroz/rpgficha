@@ -7,29 +7,6 @@
   justify-content: center;
 }
 
-.pcp_titulo{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 20px;
-  color: #ea541c;
-  font-size: 25px;
-  justify-content: space-between;
-}
-
-.pcp_titulo strong{
-  width: 80%;
-  margin-right: 8px;
-}
-
-.pcp_titulo hr{
-  width: 55%;
-  height: 1px;
-  margin-left: 4px;
-  margin-top: 4px;
-  border-color: #ea541c;
-}
-
 .pcp_div-rodape-botao{
   height: auto;
   position: fixed;

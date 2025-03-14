@@ -4,6 +4,7 @@ import excluir from '../../res/delete.svg';
 import personagem from '../../res/personagem.svg';
 import selecionar from '../../res/preparar.svg';
 import up from '../../res/up.svg';
+import { getImagem } from '../../utils';
 
 function TilePersonagem(props){
   return(
@@ -11,7 +12,7 @@ function TilePersonagem(props){
     <div className='pri-container'>
       <div className='pri_texto'>
         <div className='pri_div-esquerda'>
-          <img className='pri_img-esquerda' src={personagem} alt='personagem'/>
+          <img className='pri_img-esquerda' src={getImagem(props.pidclasse)} alt='personagem'/>
         </div>
         <div className='pri_div-centro'>
           <span className='pri-linha-1'>{props.pclasse} - {props.psubclasse}</span>

@@ -1,19 +1,6 @@
-  
-personagem
-
-  upar(
-    aumentar nivel  (automatico)
-    upar habilidade (jogador)
-    Ajuste o Bônus de Proficiência (automatico)
-    ganha pericias  (fica a cargo do usuario escolher mais)
-    caracteristicas (fica a cargo do usuario depois)
-  )
 
 unboxing do primeiro uso 
 responsividade da tela
-
-tilevida
-  uso de dados verificar se nao for maior que o nivel
 
 tile deslize suave
 

@@ -1,0 +1,22 @@
+
+.t25-titulo{
+  gap: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 20px;
+  color: #ea541c;
+  font-size: 25px;
+  justify-content: space-between;
+}
+
+.t25-titulo strong{
+  white-space: nowrap; /* Impede quebra de linha */
+  flex-shrink: 0; /* Impede que o <strong> diminua de tamanho */
+}
+
+.t25-titulo hr{
+  width: 100%;
+  height: 1px;
+  border-color: #ea541c;
+}

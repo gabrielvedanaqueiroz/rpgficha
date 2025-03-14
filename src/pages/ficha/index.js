@@ -2,17 +2,17 @@ import './ficha.css';
 import {db} from '../../services/firebaseConnection';
 import {doc, query, where, collection, getDocs, updateDoc, deleteDoc} from 'firebase/firestore';
 import { useEffect, useState, useContext } from 'react';
-import {exibirBarras, buscarPersonagemAtivo} from '../../utils';
+import {exibirBarras, buscarPersonagemAtivo, getImagem} from '../../utils';
 import {toast} from 'react-toastify';
 import upar from '../../res/up.svg';
 import Tile from '../../components/tile';
 import TileFiAtaque from '../../components/tilefiataque';
 import TileFiMagia from '../../components/tilefimagia';
-import ModalFiAtaque from '../../components/modalfiataque/index.js';
+import ModalFiAtaque from '../../components/modalfiataque/';
 import ModalFiMagia from '../../components/modalfimagia';
 import TileVida from '../../components/tilevida/';
-import TileTesteMorte from '../../components/tiletestemorte/index.js';
-import Vazio from '../../components/vazio/index.js';
+import TileTesteMorte from '../../components/tiletestemorte/';
+import Vazio from '../../components/vazio/';
 import { AuthContext } from '../../utils/auth.js';
 import {useNavigate} from 'react-router-dom';
 import Loading from '../../components/loading';
@@ -252,7 +252,7 @@ function Ficha(){
           </div>
 
         <div className='fi-cb-imgclasse'>
-          <img src={personagem.getImagem()} alt={personagem.pe_classe}/>
+          <img src={getImagem(personagem.pe_idclasse)} alt={personagem.pe_classe}/>
         </div>
         
         <div className='fi-cb-direita'>

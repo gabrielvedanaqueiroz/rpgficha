@@ -9,7 +9,8 @@ import TileCaracteristica from '../../components/tilecaracteristica';
 import Vazio from '../../components/vazio';
 import BtnSalvarForm from '../../components/btnsalvarform';
 import {buscarPersonagem, getIDPersonagem} from '../../utils';
-import Loading from '../../components/loading/index.js';
+import Loading from '../../components/loading/';
+import Titulo from '../../components/titulo';
 
 function Inventario(){
 
@@ -143,10 +144,7 @@ function Inventario(){
     (!temPersonagem)? <Vazio/>:
     <div className='it-container'>
       <div>
-        <div className='it-titulo'>
-          <strong>Inventário</strong>
-          <hr/>
-        </div>
+        <Titulo titulo='Inventário'/>
         <ul>
           {
             lista.map((item)=>{

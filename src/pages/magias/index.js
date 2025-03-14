@@ -9,7 +9,8 @@ import TileMagia from '../../components/tilemagia';
 import BtnSalvarForm from '../../components/btnsalvarform';
 import Vazio from '../../components/vazio';
 import {buscarPersonagem, getIDPersonagem, jMagias} from '../../utils';
-import Loading from '../../components/loading/index.js';
+import Loading from '../../components/loading/';
+import Titulo from '../../components/titulo';
 
 function Magias(){
   
@@ -226,10 +227,8 @@ function Magias(){
             <strong>{personagem.getBonusMagia()}</strong>
           </div>
         </div>
-        <div className='mg-titulo'>
-          <strong>Magias Preparadas</strong>
-          <hr key='linhaprepadara'/>
-        </div>
+
+        <Titulo titulo='Magias Preparadas'/>
         <ul>
           {
             lista.map((item)=>{
@@ -260,11 +259,7 @@ function Magias(){
       </div>
 
       <div>
-
-        <div className='mg-titulo'>
-          <strong>Magias Conhecidas</strong>
-          <hr key='linhaconhecida'/>
-        </div>
+        <Titulo titulo='Magias Conhecidas'/>
         <ul>
           {
             lista.map((item)=>{

@@ -7,6 +7,7 @@ import {db} from '../../services/firebaseConnection';
 import {doc, updateDoc} from 'firebase/firestore';
 import { exibirBarras, jClasses } from '../../utils';
 import Loading from '../../components/loading';
+import Titulo25 from '../../components/titulo25';
 
 function PersonagemCriacaoProficiencia() {
 
@@ -69,11 +70,8 @@ function PersonagemCriacaoProficiencia() {
     
     let LClasse = jClasses.find((c) => c.cl_id === per.idclasse);
     setClasse(LClasse);
-    // console.log('cl_proinicial '+ LClasse.cl_proinicial);
-    // console.log('cl_sginicial '+ LClasse.cl_sginicial);
 
     LClasse.cl_proinicial.map((num, index)=>{
-      // console.log('cl_proinicial '+ index + ' -> ' + num);
       switch (num) {
         case 1: setVisAcrobacia(true); break;
         case 2: setVisArcanismo(true); break;
@@ -97,7 +95,6 @@ function PersonagemCriacaoProficiencia() {
     });
 
     LClasse.cl_sginicial.map((num, index)=>{
-      // console.log('cl_sginicial '+ index + ' -> ' + num);
       switch (num) {
         case 1: setSGForca(true);break;
         case 2: setSGDestreza(true);break;
@@ -182,13 +179,11 @@ function PersonagemCriacaoProficiencia() {
 
   return(
     <div className='pcp_container'>
-      <div className='pct_titulo'>
-        <strong>Criação de Personagem</strong>
-        <hr/>
-      </div>
+      <Titulo25 titulo='Criação de Personagem'/>
+      <span>Escolha suas pericias</span>
+      
       <form className='pcp_form' onSubmit={onAvancar}>
         <div className='pcp_edit-mid'>
-          <strong>Escolha suas pericias</strong><br/>
           <p>Escolha {classe.cl_proqnt} dentre elas ({qntPericia})</p><br/>
           <div style={{ display: visacrobacia ? "block" : "none" }}>
             <input type="checkbox" ref={proacrobacia} onChange={()=>{ 

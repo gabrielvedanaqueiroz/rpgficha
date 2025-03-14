@@ -11,24 +11,6 @@
   margin-bottom: 8px;
 }
 
-.pr_titulo{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  justify-items: center;
-  color: #ea541c;
-  margin-bottom: 4px;
-}
-
-.pr_titulo hr{
-  width: 100%;
-  height: 1px;
-  margin-left: 4px;
-  margin-top: 4px;
-  border-color: #ea541c;
-}
-
 .pr_div-rodape-botao{
   width: 100%;
   height: auto;

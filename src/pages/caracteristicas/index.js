@@ -11,6 +11,7 @@ import Vazio from '../../components/vazio';
 import BtnSalvarForm from '../../components/btnsalvarform';
 import {buscarPersonagem, getData, getIDPersonagem} from '../../utils';
 import Loading from '../../components/loading/index.js';
+import Titulo from '../../components/titulo/index.js';
 
 function Caracteristicas(){
   
@@ -238,10 +239,8 @@ function Caracteristicas(){
     <div className='cr_container'>
 
       <div className='cr_proficiencias'>
-        <div className='cr_titulo'>
-          <strong>Proficiencias</strong>
-          <hr key='linhaproficiencia'/>
-        </div>
+
+        <Titulo titulo='Pericias'/>
         <ul className='cr_lista'>
           <Tile id='Força' titulo='Força'>
             <div className='cr-proficiencia'>
@@ -267,6 +266,7 @@ function Caracteristicas(){
             </div>
           </Tile>
           <Tile id='Inteligência' titulo='Inteligência'> 
+            
             <div className='cr-proficiencia'>
               <TileProficiencia titulo='Arcanismo' valor={personagem.getProInteligencia(personagem.pe_proarcanismo)}  proficiente={personagem.pe_proarcanismo}/>
               <TileProficiencia titulo='Historia' valor={personagem.getProInteligencia(personagem.pe_prohistoria)}  proficiente={personagem.pe_prohistoria}/>
@@ -274,11 +274,13 @@ function Caracteristicas(){
               <TileProficiencia titulo='Natureza' valor={personagem.getProInteligencia(personagem.pe_pronatureza)}  proficiente={personagem.pe_pronatureza}/>             
               <TileProficiencia titulo='Religião' valor={personagem.getProInteligencia(personagem.pe_proreligiao)}  proficiente={personagem.pe_proreligiao}/>             
             </div>
+            
             <div class="ca-cd-div-flag">
               <span>{personagem.getModInteligencia()}</span>
               <div className='ca-separador2'/>
               <label>{personagem.pe_inteligencia}</label>
             </div>
+
           </Tile>
           <Tile id='Sabedoria' titulo='Sabedoria'>
             <div className='cr-proficiencia'>
@@ -311,10 +313,8 @@ function Caracteristicas(){
       </div>
 
       <div className='cr_caracteristicas'>
-        <div className='cr_titulo'>
-          <strong>Caracteristicas</strong>
-          <hr key='linhacaracteristica'/>
-        </div>
+
+        <Titulo titulo='Caracteristicas'/>
         <ul className='cr_lista'>
           {
             lstCaracteristica.map((item)=>{
@@ -333,10 +333,8 @@ function Caracteristicas(){
       </div>
 
       <div className='cr_caracteristicas'>
-        <div className='cr_titulo'>
-          <strong>Anotação</strong>
-          <hr key='linhaanotacao'/>
-        </div>
+
+        <Titulo titulo='Anotações'/>
         <ul className='cr_lista'>
           {
             lstAnotacao.map((item)=>{

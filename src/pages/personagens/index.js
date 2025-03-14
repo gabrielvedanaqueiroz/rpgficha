@@ -8,8 +8,10 @@ import { AuthContext } from '../../utils/auth';
 import logout from '../../res/logout.svg';
 import TilePersonagem from '../../components/tilepersonagem';
 import BtnAdicionar from '../../components/btnadicionar';
-import {useNavigate} from 'react-router-dom';
-import Loading from '../../components/loading/index.js';
+import {data, useNavigate} from 'react-router-dom';
+import Loading from '../../components/loading/';
+import Titulo from '../../components/titulo';
+import { jXPNivel } from '../../utils';
 
 function Personagens(){
   
@@ -23,6 +25,15 @@ function Personagens(){
   const [nomeJogador, setNomeJogador] = useState('');
   
   const navigate = useNavigate();
+
+  function podeUpar(aNivel, aXP){
+   
+    let xp  = jXPNivel[aNivel].xp;
+    let nv  = jXPNivel[aNivel].nv;
+
+    return (aXP >= xp) && (aNivel < nv);
+    
+  }
 
   useEffect(()=>{
 
@@ -50,6 +61,8 @@ function Personagens(){
               pe_tendencia: doc.data().pe_tendencia.trim(),      
               pe_antecedente: doc.data().pe_antecedente.trim(),
               pe_ativo : doc.data().pe_ativo,
+              pe_experiencia : doc.data().pe_experiencia,
+              pe_idclasse: doc.data().pe_idclasse,
             });
   
             if(doc.data().pe_ativo===true){
@@ -161,10 +174,7 @@ function Personagens(){
   return(
     <div className='pr_container'>
       <div className='pr_personagens'>
-        <div className='pr_titulo'>
-          <strong>Personagens</strong>
-          <hr key='linhapersonagens'/>
-        </div>
+        <Titulo titulo='Personagens'/>
         <ul className='cr_lista'>
           {
             lista.map((item)=>{
@@ -181,12 +191,12 @@ function Personagens(){
                     pantecedente={item.pe_antecedente}
                     ptendencia={item.pe_tendencia}
                     pcatotal={item.pe_catotal}
+                    pidclasse={item.pe_idclasse}
                     excluir={ ()=>{onExcluir(item.pe_id)} } 
                     editar={ ()=>{onEditar(item)} }
                     selecionar={ ()=>{onSelecionar(item.pe_id)}}
                     upar={ ()=>{onUpar(item.pe_id)}}
-                    podeUpar={true}
-                    // podeUpar={item.podeUpar()}
+                    podeUpar={podeUpar(item.pe_nivel, item.pe_experiencia)}
                   /> 
                 </Tile>
               );

@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import {db} from '../../services/firebaseConnection';
 import {doc, updateDoc} from 'firebase/firestore';
 import { exibirBarras } from '../../utils';
+import Titulo25 from '../../components/titulo25';
 
 function PersonagenCriacaoAtributos(){
 
@@ -122,11 +123,8 @@ function PersonagenCriacaoAtributos(){
 
   return(
     <div className='pca_container'>
-      <div className='pca_titulo'>
-        <strong>Criação de Personagem</strong>
-        <hr/>
-      </div>
-      <span>Definendo seus atributos</span>
+      <Titulo25 titulo='Criação de Personagem'/>
+      <span>Definindo seus atributos</span>
       
       <form className='pca_form' onSubmit={onAvancar}>
         <div className='pca_edit-top'>

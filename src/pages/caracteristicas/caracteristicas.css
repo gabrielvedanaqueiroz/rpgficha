@@ -11,24 +11,6 @@
   margin-bottom: 8px;
 }
 
-.cr_titulo{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  justify-items: center;
-  color: #ea541c;
-  margin-bottom: 4px;
-}
-
-.cr_titulo hr{
-  width: 100%;
-  height: 1px;
-  margin-left: 4px;
-  margin-top: 4px;
-  border-color: #ea541c;
-}
-
 .cr_div-rodape-botao{
   width: 100%;
   height: auto;
@@ -155,9 +137,8 @@
 .cr-proficiencia{
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 75%;
   border-right: 1px solid black;
-  margin-bottom: 4px;
   padding-right: 8px;
 }
 
@@ -174,10 +155,8 @@
   align-items: center;
   justify-items: center;
   justify-content: center;
-  margin-left: 4px;
-  margin-right: 4px;
   position: relative;
-  left: 15%;
+  left: calc(25% - 75px - 10px);
 }
 
 .ca-cd-div-flag span{

@@ -49,7 +49,7 @@
   width: 60px;
   border-color: #ea541c;
   border-radius: 30px;
-  border-style: dashed;
+  border: 1px solid;
   align-items: center;
   justify-items: center;
   display: flex;
@@ -60,6 +60,7 @@
 .pri_img-esquerda{
   height: 55px;
   width: 55px;
+  filter: brightness(0);
 }
 
 .pri_div-nivel{

@@ -8,6 +8,7 @@ import {db} from '../../services/firebaseConnection';
 import {collection, addDoc} from 'firebase/firestore';
 import { AuthContext } from '../../utils/auth';
 import Loading from '../../components/loading/index.js';
+import Titulo25 from '../../components/titulo25';
 
 function PersonagenCriacaoTopo(){
 
@@ -133,10 +134,8 @@ function PersonagenCriacaoTopo(){
 
   return(
     <div className='pct_container'>
-      <div className='pct_titulo'>
-        <strong>Criação de Personagem</strong>
-        <hr/>
-      </div>
+
+      <Titulo25 titulo='Criação de Personagem'/>
       <span>Vamos a criação</span>
       
       <form className='pct_form' onSubmit={onAvancar}>
