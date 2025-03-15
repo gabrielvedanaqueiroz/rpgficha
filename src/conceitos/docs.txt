@@ -8,6 +8,5 @@ COR:
   filter: invert(40%) sepia(100%) saturate(500%) hue-rotate(-10deg); laranja 
   filter: invert(75%) sepia(100%) saturate(300%) hue-rotate(5deg);
 
-
 Usei a organizacao do firebase em 3 niveis e organizei conceitualmente as tabelas dessa forma:
 tabela/id/registro
