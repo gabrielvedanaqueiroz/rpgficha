@@ -5,7 +5,7 @@ import {memo} from 'react';
 export const Header = memo(()=>{
   return(
     <header> 
-      <img className='hd_icone' src={logo} alt='organizador'/>
+      <img className='hd_icone' src={logo} alt='RPGFicha'/>
       <label className='hd_titulo'>RPGFicha</label>
     </header>
   ); 
