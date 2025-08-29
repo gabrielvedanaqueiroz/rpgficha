@@ -29,6 +29,9 @@ function ModalFiMagia(props){
               mg_tempoconjuracao: snapshot.data().mg_tempoconjuracao.trim(),
               mg_componentes: snapshot.data().mg_componentes.trim(),
               mg_duracao: snapshot.data().mg_duracao.trim(),
+              mg_material: snapshot.data()?.mg_material.trim(),
+              mg_ritual: snapshot.data().mg_ritual,
+              mg_concentracao: snapshot.data().mg_concentracao,
           });
         }
       })
@@ -68,7 +71,10 @@ function ModalFiMagia(props){
               <label>Tempo: {magia.mg_tempoconjuracao}</label>
               <label>Alcance: {magia.mg_alcance}</label>
               <label>Componentes: {magia.mg_componentes}</label>
+              {magia.mg_material && <label>Material: {magia.mg_material}</label>}              
               <label>Duração: {magia.mg_duracao}</label>
+              {magia.mg_concentracao && <label>Concentração</label>} 
+              {magia.mg_ritual && <label>Ritual</label>}               
             </div>
           </div>
         </div>

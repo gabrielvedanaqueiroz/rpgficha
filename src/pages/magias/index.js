@@ -34,6 +34,9 @@ function Magias(){
   const [nome, setNome]                       = useState('');
   const [tempoconjuracao, setTempoConjuracao] = useState('');
   const [idMagia, setIdMagia]                 = useState('');
+  const [material, setMaterial]               = useState('');
+  const [concentracao, setConcentracao]       = useState(false);
+  const [ritual, setRitual]                   = useState(false);
   
   useEffect(()=>{
     
@@ -63,6 +66,9 @@ function Magias(){
             mg_nivel: doc.data().mg_nivel,
             mg_preparada: doc.data().mg_preparada,
             mg_tempoconjuracao: doc.data().mg_tempoconjuracao.trim(),
+            mg_material: doc.data().mg_material?.trim(),
+            mg_ritual: doc.data().mg_ritual,
+            mg_concentracao: doc.data().mg_concentracao,
           })
         });
         lista.sort((a, b)=> a.mg_nivel > b.mg_nivel);
@@ -139,6 +145,9 @@ function Magias(){
           mg_nivel: nivel,
           mg_nome: nome.trim(),
           mg_tempoconjuracao: tempoconjuracao.trim(),
+          mg_concentracao: concentracao,
+          mg_ritual: ritual,
+          mg_material: material.trim(),
         })
         .then( () =>{
           onFecharModal();
@@ -245,6 +254,9 @@ function Magias(){
                       mg_componentes={item.mg_componentes} 
                       mg_duracao={item.mg_duracao} 
                       mg_preparada={item.mg_preparada} 
+                      mg_material={item.mg_material}
+                      mg_ritual={item.mg_ritual}
+                      mg_concentracao={item.mg_concentracao}
                       excluir={ ()=>{ onExcluir(item.mg_id) }} 
                       preparar={()=>{ onPreparar(item.mg_id, item.mg_preparada) }}
                       editar={()=>{ onEditar(item) }} 
@@ -276,6 +288,9 @@ function Magias(){
                     mg_componentes={item.mg_componentes} 
                     mg_duracao={item.mg_duracao} 
                     mg_preparada={item.mg_preparada} 
+                    mg_material={item.mg_material}
+                    mg_ritual={item.mg_ritual}
+                    mg_concentracao={item.mg_concentracao}
                     excluir={ ()=>{ onExcluir(item.mg_id) }} 
                     preparar={()=>{ onPreparar(item.mg_id, item.mg_preparada) }}
                     editar={()=>{ onEditar(item) }} 
@@ -326,6 +341,9 @@ function Magias(){
                             setTempoConjuracao(item.cast_time);
                             setDuracao(item.duration);
                             setComponentes(item.components);
+                            setConcentracao(item.requires_concentration);
+                            setRitual(item.is_ritual);
+                            setMaterial(item.material);
                             setlstMagiasFiltradas([]);
                           }}
                         >
@@ -367,9 +385,23 @@ function Magias(){
                   <input className='mmg_edit' value={duracao} onChange={(e)=>{setDuracao(e.target.value)}}/>
                 </div>
               </div>
+              <div className='mmg_div-3coluna'>
+                <div className='mmg_div-edit'>
+                  <label>Componentes</label>
+                  <input className='mmg_edit' value={componentes} onChange={(e)=>{setComponentes(e.target.value)}}/>
+                </div>
+                <div className='mmg_div-checkbox'>
+                  <input type='checkbox' value={concentracao} onChange={(e)=>{setConcentracao(e.target.checked)}}/>
+                  <label>Concentração</label>
+                </div>
+                <div className='mmg_div-checkbox'>
+                  <input type='checkbox' value={ritual} onChange={(e)=>{setRitual(e.target.checked)}}/>
+                  <label>Ritual</label>
+                </div>
+              </div>
               <div className='mmg_div-edit'>
-                <label>Componentes</label>
-                <input className='mmg_edit' value={componentes} onChange={(e)=>{setComponentes(e.target.value)}}/>
+                <label>Material</label>
+                <input className='mmg_edit' value={material} onChange={(e)=>{setMaterial(e.target.value)}}/>
               </div>
               
               <div className='mmg_botoes'>

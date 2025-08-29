@@ -120,12 +120,22 @@
   font-size: 16px; /* Tamanho da fonte */
   outline: none; /* Remove o contorno padrão ao focar */
   transition: all 0.3s ease-in-out; /* Suaviza transições */
-  height: 150px;
+  height: 100px;
 }
 
 .mmg_textarea:focus {
   border-color: rgba(216, 13, 13, 0.4); /* Cor do contorno ao focar */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Efeito de leve sombra */
+}
+
+.mmg_div-checkbox{
+  display: flex;
+  width: 100%;
+  height: 65px;
+  margin: 8px;
+  align-items: center;
+  padding-top: 25px;
+  gap: 4px;
 }
 
 .mmg_botoes{

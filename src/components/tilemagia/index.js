@@ -3,7 +3,6 @@ import editar from '../../res/edit.svg';
 import excluir from '../../res/delete.svg';
 import preparar from '../../res/preparar.svg';
 
-
 function TiteTelaMagia(props){
 
   return(
@@ -13,7 +12,10 @@ function TiteTelaMagia(props){
       <label>Tempo: {props.mg_tempoconjuracao} </label>
       <label>Alcance: {props.mg_alcance} </label>
       <label>Componentes: {props.mg_componentes} </label>
+      {props.mg_material && <label>Material: {props.mg_material}</label>}     
       <label>Duração: {props.mg_duracao} </label>
+      {props.mg_concentracao && <label>Concentração</label>} 
+      {props.mg_ritual && <label>Ritual</label>}  
 
       {
         props.mg_preparada?

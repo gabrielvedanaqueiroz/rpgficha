@@ -1,5 +1,6 @@
 
 unboxing do primeiro uso 
+colocar id da campanha na criacao
 responsividade da tela
 
 tile deslize suave
