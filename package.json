@@ -16,6 +16,7 @@
     "react-dom": "19.2.3",
     "react-hook-form": "^7.71.0",
     "react-icons": "^5.5.0",
+    "react-loading-skeleton": "^3.5.0",
     "react-toastify": "^11.0.5",
     "zod": "^4.3.5"
   },
