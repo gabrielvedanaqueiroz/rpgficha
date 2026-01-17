@@ -16,7 +16,10 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "RPGFicha",
-  description: "Gerenciador de ficha de RPG",
+  description: "Ficha RPG, para jogadores organizarem suas fichas e personagens, Ficha de RPG (D&D 5e 2014)",
+  themeColor: '#F8cc27',
+  authors:[{name:'Gabriel Vedaa Queiroz', url:'https://github.com/gabrielvedanaqueiroz/gabrielvedanaqueiroz'},],
+   keywords:['rpg', 'dungeons and dragons', 'dnd', 'dungeons', 'dragons', 'd20'],
 };
 
 export default function RootLayout({
@@ -25,7 +28,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="pt-br">
+      <meta name="theme-color" content="#F8cc27" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
