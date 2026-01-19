@@ -1,3 +1,37 @@
+# Em Construção
+# Pré-requisitos
+Instale os pacotes necessários:
+
+`npm install firebase`
+`npm install --save react-toastify`
+`npm install react-loading-skeleton`
+
+## 📦 Tecnologias Utilizadas
+
+- **Next** ⚛️
+- **react-toastify** (Notificações)  
+- **firebase** (Banco de dados)  
+- **skeleton** (loading)
+- **zod** (Zod)
+- **react-hook-form** (padronizacao)
+- **react-icons** (icones)
+
+
+📌 Funcionalidades
+    • 📜 Login, credenciais firebase 
+    • ❤️ Controle de ficha de personagem
+    • 📜 Varios personagens por jogador
+    • 🔔 Notificações visíveis de erros do sistema ou erros de cadastros
+    • 📜 Cadastrar Ataques, Magias, Caracteristicas, Anotações
+
+# Descrição 
+
+ Ficha RPG, para jogadores organizarem suas fichas e personagens, Ficha de RPG (D&D 5e 2014) 
+
+
+# anotações do Next
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
