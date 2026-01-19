@@ -17,7 +17,7 @@ export default function ModalBase({title, children, view, onClose}: ModalBasePro
       
       <div className="w-screen flex flex-col h-screen fixed top-0 left-0 z-50 gap-2 py-10 px-4"> 
         
-        <div className="flex flex-col w-full bg-white shadow-lg rounded-lg">
+        <div className="flex flex-col w-full bg-[#f5f4f4] shadow-lg rounded-lg">
 
           <div className="flex justify-between items-center bg-black rounded-t-lg text-white p-2 w-full">
             <strong className="w-full">{title}</strong>
