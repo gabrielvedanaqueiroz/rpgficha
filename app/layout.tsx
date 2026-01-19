@@ -17,9 +17,8 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "RPGFicha",
   description: "Ficha RPG, para jogadores organizarem suas fichas e personagens, Ficha de RPG (D&D 5e 2014)",
-  themeColor: '#F8cc27',
   authors:[{name:'Gabriel Vedaa Queiroz', url:'https://github.com/gabrielvedanaqueiroz/gabrielvedanaqueiroz'},],
-   keywords:['rpg', 'dungeons and dragons', 'dnd', 'dungeons', 'dragons', 'd20'],
+  keywords:['rpg', 'dungeons and dragons', 'dnd', 'dungeons', 'dragons', 'd20'],
 };
 
 export default function RootLayout({

@@ -17,7 +17,7 @@ import { useJogadorGet } from "@/hooks/jogador";
 
 export default function Personagens(){
 
-  const router = useRouter();
+  const router      = useRouter();
   const {onSingOut} = useContext(AuthContext);
 
   const [temPersonagemId, setTemPersonagemId] = useState<boolean>(false);
@@ -25,7 +25,9 @@ export default function Personagens(){
   const [userId, setUserId]                   = useState<string>('');  
 
   const {data : jogador, isLoading: isLoadingJogador, isError: isErroJodador}  = useJogadorGet(userId);
-  const {data, isLoading, isError, refetch} = usePersonagemGet(personagemID);
+  const {data, isLoading, isError, refetch} = usePersonagemGet(userId);
+ 
+  console.log('jogador'+jogador);
   
   useEffect(()=>{
     let id  = localStorage.getItem('RF@personagemID'); 

@@ -3,6 +3,7 @@
 import { AuthContext } from "@/utils/auth";
 import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FaDiceD20, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { toast } from "react-toastify";
 
@@ -14,7 +15,7 @@ export default function Registar(){
   const [senha, setSenha]     = useState<string>('');
   const [nome, setNome]       = useState<string>('');
 
-  const {onCriarUsuario}      = useContext(AuthContext);
+  const {onCriarUsuario, loadingAuth}      = useContext(AuthContext);
   const router = useRouter();
 
   async function onLogin(e: React.MouseEvent<HTMLButtonElement>) {
@@ -78,7 +79,14 @@ export default function Registar(){
         </div>
 
         <button type="submit" className="flex bg-amber-600 text-white py-2 px-3 rounded justify-center items-center" onClick={onLogin}>
-          Criar
+            {
+              loadingAuth
+              ? <div className="flex gap-2 justify-center items-center">
+                  <AiOutlineLoading3Quarters size={18} className="animate-spin"/> 
+                  <label>Criando...</label>  
+                </div> 
+              : 'Criar'
+            }
         </button>
       </form>
       

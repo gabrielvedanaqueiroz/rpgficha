@@ -36,9 +36,9 @@ export default function CardPersonagemItem( { personagem, ativo, onEditar, onExc
   }
 
   return(
-    <li key={ personagem.pe_id}>
+    <li key={personagem.pe_id}>
       <Card>
-        <div className="flex flex-col gap-2 w-full">
+        <div key={personagem.pe_id} className="flex flex-col gap-2 w-full">
           
           {/* cabeçalho */}
           <section className="flex gap-2 items-center">

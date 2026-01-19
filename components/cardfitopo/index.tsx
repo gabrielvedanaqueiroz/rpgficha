@@ -26,11 +26,11 @@ function CardFiTopo({personagem, isLoading}: CardFiTopoProps){
     setShowXP(true);
   }
 
-  function onCloseXP(){
+  function onCloseExp(){
     setShowXP(false);
   }
 
-  async function onSalvarXP(aValor:number){
+  async function onSalvarExp(aValor:number){
     
     if (personagem) {
       personagem.pe_experiencia = aValor;
@@ -158,9 +158,9 @@ function CardFiTopo({personagem, isLoading}: CardFiTopoProps){
  
     isLoading
       ? loading()
-      : <section className="flex w-full h-36 bg-(--cprimary) shadow-lg md:px-96">
+      : <section className="flex w-full h-fit bg-(--cprimary) shadow-lg md:px-96">
       
-      <div className="flex w-2/5 p-2 flex-col text-xs gap-1 ">
+      <div className="flex w-2/5 p-2 flex-col text-xs gap-1">
 
         <div className="flex flex-col w-full h-fit text-xs">
           <strong className="text-sm w-full border-b-2">{personagem?.pe_nome}</strong>
@@ -189,7 +189,8 @@ function CardFiTopo({personagem, isLoading}: CardFiTopoProps){
         </div>
 
       </div>
-      <div className="flex w-2/5 p-2 flex-col text-xs gap-1">
+
+      <div className="flex w-2/5 p-2 flex-col text-xs gap-1 justify-between">
 
         <div className="flex flex-col w-full h-fit text-xs">
           <div className="flex text-sm w-full border-b-2 items-center gap-2">
@@ -216,7 +217,7 @@ function CardFiTopo({personagem, isLoading}: CardFiTopoProps){
 
       </div>
 
-      {showXP ? <ModalXPEdit xp={personagem?.pe_experiencia} nivel={personagem?.pe_nivel} onClose={onCloseXP} onSalvar={onSalvarXP}/> : <></>}
+      {showXP ? <ModalXPEdit xp={personagem?.pe_experiencia} nivel={personagem?.pe_nivel} onClose={onCloseExp} onSalvar={onSalvarExp}/> : <></>}
       {showUpar ? <ModalUpar personagem={personagem} onClose={onCloseUpar} onSalvar={onSalvarUpar}/> : <></>}
     </section>
     

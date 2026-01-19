@@ -2,7 +2,7 @@
 
 import { JogadorProps } from "@/classes/jogador";
 import { db } from "@/services/firebaseConnection";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 export function useJogadorGet(aIDLogin: string) {
@@ -18,7 +18,7 @@ export function useJogadorGet(aIDLogin: string) {
 
     try {
       const q = query( collection(db, "tb_jogador"),  where("jo_idlogin", "==", aIDLogin.trim()) );
-
+      
       const querySnapshot = await getDocs(q);
       const lista: JogadorProps[] = [];
 
@@ -32,6 +32,20 @@ export function useJogadorGet(aIDLogin: string) {
       });
 
       setData(lista[0]);
+
+      // const ref = doc(db, "tb_jogador", aIDLogin.trim());
+      // const snapshot = await getDoc(ref);
+      // let item: JogadorProps ;
+      // if (snapshot.exists()) {
+      //   item = {
+      //     jo_id: snapshot.id,
+      //     jo_nome: snapshot.data().jo_email.trim(),
+      //     jo_idlogin: snapshot.data().jo_idlogin.trim(),
+      //     jo_email: snapshot.data().jo_email.trim(),
+      //   };
+
+      //   setData(item);
+      // }
 
     } catch {
       setIsError(true);

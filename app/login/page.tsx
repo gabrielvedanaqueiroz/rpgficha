@@ -5,6 +5,7 @@ import { FaDiceD20, FaRegEye, FaRegEyeSlash  } from "react-icons/fa";
 import {AuthContext} from "@/utils/auth";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 export default function Login(){
 
@@ -13,7 +14,7 @@ export default function Login(){
   const [email, setEmail]    = useState<string>('');
   const [senha, setSenha]    = useState<string>('');
 
-  const {onSingIn} = useContext(AuthContext);
+  const {onSingIn, loadingAuth} = useContext(AuthContext);
   const router = useRouter();
 
   async function onLogin(e: React.MouseEvent<HTMLButtonElement>) {
@@ -25,6 +26,10 @@ export default function Login(){
     if((lemail.trim() !== '') && (lsenha.trim() !== '')){
       await onSingIn(lemail.trim(), lsenha.trim()).then((resultado)=>{
         if(resultado){
+
+          localStorage.setItem('RF@personagemID', ''); 
+          localStorage.setItem('RF@RF@personagemID-upar', ''); 
+          
           router.replace('/');
         }
       });
@@ -65,7 +70,14 @@ export default function Login(){
         </div>
 
         <button type="submit" className="flex bg-amber-600 text-white py-2 px-3 rounded justify-center items-center" onClick={onLogin}>
-          Acessar
+          {
+            loadingAuth
+            ? <div className="flex gap-2 justify-center items-center">
+                <AiOutlineLoading3Quarters size={18} className="animate-spin"/> 
+                <label>Acessando...</label>  
+              </div> 
+            : 'Acessar'
+          }
         </button>
       </form>
 
