@@ -177,11 +177,10 @@ export default function ModalUpar({ personagem, onClose, onSalvar}:ModalUparProp
     
     setVida(Number(personagem?.pe_vidabase));
   
-    // let exibirHab = ((persoangem?.pe_nivel === 3) || (persoangem?.pe_nivel === 7) || (persoangem?.pe_nivel === 15) || (persoangem?.pe_nivel === 17));
     const exibirHab = [3, 7, 15, 17].includes(personagem?.pe_nivel ?? 1);
     setExibirHabilidades(exibirHab);
 
-    let bpro = jXPNivel[personagem?.pe_nivel+1].proficiencia;
+    let bpro: number = jXPNivel[Number(personagem?.pe_nivel)].proficiencia;
     setExibirBProficiencia((bpro > personagem?.pe_bproficiencia));
     setBProficiencia(bpro);
 
@@ -215,7 +214,7 @@ export default function ModalUpar({ personagem, onClose, onSalvar}:ModalUparProp
         {/* nivel e vida */}
         <section className="flex flex-col gap-1 w-full">
           
-          <div className="flex w-full bg-amber-200 p-3 rounded-t-lg shadow-md gap-2 items-center justify-between">
+          <div className="flex w-full bg-white p-3 rounded-t-lg shadow-md gap-2 items-center justify-between">
             <label className="w-full">Nível</label>
 
             <div className="flex items-center gap-2 w-40 justify-between">
@@ -227,7 +226,7 @@ export default function ModalUpar({ personagem, onClose, onSalvar}:ModalUparProp
 
           {
             exibirSubClasse 
-            ? <div className="flex w-full bg-amber-200 p-3 rounded shadow-md gap-2 items-center justify-between">
+            ? <div className="flex w-full bg-white p-3 rounded shadow-md gap-2 items-center justify-between">
               <select className="flex w-full" value={subclasse} onChange={(e)=>{setSubclasse(e.target.value)}}>
                 <option key={0} value={''}>Selecione uma Subclasse</option>
                 {listaSubClasse.map((item, index)=>(
@@ -238,7 +237,7 @@ export default function ModalUpar({ personagem, onClose, onSalvar}:ModalUparProp
             :<></>
           }
           
-          <div className="flex w-full bg-amber-200 p-3 rounded-b-lg shadow-md gap-2 items-center justify-between">
+          <div className="flex w-full bg-white p-3 rounded-b-lg shadow-md gap-2 items-center justify-between">
             <label className="w-full">Vida</label>
 
             <div className="flex items-center gap-2 w-40">
@@ -263,7 +262,7 @@ export default function ModalUpar({ personagem, onClose, onSalvar}:ModalUparProp
           ? <section className="flex flex-col gap-1 w-full">
               <strong>Pontos disponível: {2-qntHab}</strong><br/>
 
-              <div className="flex w-full bg-amber-200 p-3 rounded-t-lg shadow-md gap-2 items-center justify-between">
+              <div className="flex w-full bg-white p-3 rounded-t-lg shadow-md gap-2 items-center justify-between">
                 <label>Força</label>
 
                 <div className="flex items-center gap-2 justify-between w-fit">
@@ -279,7 +278,7 @@ export default function ModalUpar({ personagem, onClose, onSalvar}:ModalUparProp
                   </div>
               </div>
 
-              <div className="flex w-full bg-amber-200 p-3 rounded-lg shadow-md gap-2 items-center justify-between">
+              <div className="flex w-full bg-white p-3 rounded-lg shadow-md gap-2 items-center justify-between">
                 <label>Destreza</label>
 
                 <div className="flex items-center gap-2 justify-between w-fit">
@@ -295,7 +294,7 @@ export default function ModalUpar({ personagem, onClose, onSalvar}:ModalUparProp
                   </div>
               </div>
 
-              <div className="flex w-full bg-amber-200 p-3 rounded-lg shadow-md gap-2 items-center justify-between">
+              <div className="flex w-full bg-white p-3 rounded-lg shadow-md gap-2 items-center justify-between">
                 <label>Constituição</label>
 
                 <div className="flex items-center gap-2 justify-between w-fit">
@@ -311,7 +310,7 @@ export default function ModalUpar({ personagem, onClose, onSalvar}:ModalUparProp
                   </div>
               </div>
 
-              <div className="flex w-full bg-amber-200 p-3 rounded-lg shadow-md gap-2 items-center justify-between">
+              <div className="flex w-full bg-white p-3 rounded-lg shadow-md gap-2 items-center justify-between">
                 <label>Inteligência</label>
 
                 <div className="flex items-center gap-2 justify-between w-fit">
@@ -327,7 +326,7 @@ export default function ModalUpar({ personagem, onClose, onSalvar}:ModalUparProp
                   </div>
               </div>
 
-              <div className="flex w-full bg-amber-200 p-3 rounded-lg shadow-md gap-2 items-center justify-between">
+              <div className="flex w-full bg-white p-3 rounded-lg shadow-md gap-2 items-center justify-between">
                 <label>Sabedoria</label>
 
                 <div className="flex items-center gap-2 justify-between w-fit">
@@ -343,7 +342,7 @@ export default function ModalUpar({ personagem, onClose, onSalvar}:ModalUparProp
                   </div>
               </div>
 
-              <div className="flex w-full bg-amber-200 p-3 rounded-b-lg shadow-md gap-2 items-center justify-between">
+              <div className="flex w-full bg-white p-3 rounded-b-lg shadow-md gap-2 items-center justify-between">
                 <label>Carisma</label>
 
                 <div className="flex items-center gap-2 justify-between w-fit">
@@ -365,7 +364,7 @@ export default function ModalUpar({ personagem, onClose, onSalvar}:ModalUparProp
 
         {/* proficiencia */}
         {exibirBProficiencia ?
-          <div className="flex w-full bg-amber-200 p-3 rounded-lg shadow-lg gap-2 items-center justify-between">
+          <div className="flex w-full bg-white p-3 rounded-lg shadow-lg gap-2 items-center justify-between">
             <label className="w-full">Bônus Proficiência</label>
 
             <div className="flex items-center gap-2 w-40">

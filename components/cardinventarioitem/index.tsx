@@ -29,7 +29,7 @@ export default function CardInventarioItem({item, onEditar, onExcluir}:CardInven
   }
 
   return(
-    <li key={item.in_id}>
+    <li>
       <Card>
         <div className="flex flex-col gap-2 w-full">
           

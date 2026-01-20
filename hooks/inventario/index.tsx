@@ -11,7 +11,11 @@ export function useInventarioGet(aIDPersonagem: string) {
   const [isError, setIsError] = useState(false);
 
   async function refetch() {
-    if (!aIDPersonagem) return;
+    if (!aIDPersonagem){      
+      setIsLoading(false);
+      setIsError(false);
+      return;
+    }      
 
     setIsLoading(true);
     setIsError(false);

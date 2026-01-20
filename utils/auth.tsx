@@ -1,10 +1,11 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import { toast } from "react-toastify";
 import { signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, onAuthStateChanged, updateProfile } from 'firebase/auth';
 import { auth, db } from "@/services/firebaseConnection";
 import { addDoc, collection } from "firebase/firestore";
+import { useRouter } from "next/navigation";
 
 type AuthUser = {
   id: string;
@@ -13,11 +14,13 @@ type AuthUser = {
 };
 
 type AuthContextData = {
+  signed: boolean;
   usuario: AuthUser | null;
   loadingAuth: boolean;
   onSingIn: (email: string, senha: string) => Promise<boolean>;
   onSingOut: () => void;
   onCriarUsuario: (email: string, senha: string, nome: string) => Promise<boolean>;
+  onCheckLogin: ()=> void;
 };
 
 type AuthProviderProps = {
@@ -33,6 +36,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [signed, setSigned]           = useState<boolean>(false);
   const [usuario, setUsuarioInterno]  = useState<AuthUser| null>(null);
   const [loadingAuth, setLoadingAuth] = useState<boolean>(false);  
+
+  const router = useRouter();
+
+  useEffect(()=>{
+    onCheckLogin();
+  }, []);
 
   async function onSingIn(email : string, senha: string){
     setLoadingAuth(true);
@@ -153,17 +162,39 @@ export function AuthProvider({ children }: AuthProviderProps) {
     })
   }
 
+  async function onCheckLogin(){
+    return onAuthStateChanged(auth, (user)=>{
+        
+      if(user){
+        const userData ={
+          uid: user.uid,
+          email: user.email,
+        }
+        
+        localStorage.setItem('RF@detailUser', JSON.stringify(userData));
+        
+        setSigned(true);
+        setLoadingAuth(false);
+      }
+      else{        
+        router.replace('/login');
+        setLoadingAuth(false);
+      }
+
+    });
+  }
+
   return(
     <AuthContext.Provider
       value={{
-        // signed,
+        signed,
         usuario,
         loadingAuth,
         // setUsuario,
         onSingIn, 
         onSingOut,
         onCriarUsuario,
-        // onCheckLogin,
+        onCheckLogin,
       }}
     >
       {children}

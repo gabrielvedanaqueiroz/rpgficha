@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import SemPersonagem from "@/components/sempersonagem";
 
 export default function Caracteristicas(){
   
@@ -129,67 +130,77 @@ export default function Caracteristicas(){
   return(
     <PageBase title="Características">      
 
-      <section className="flex w-full h-fit flex-col pt-2">
+     {personagem ? (
+        <section className="flex w-full h-fit flex-col">
+          {/* pericias */}
+          <section className="flex w-full h-fit flex-col pt-2">
     
-        <div className="flex w-full gap-2 items-center">
-          <strong className="text-orange-600  whitespace-nowrap">Pericias</strong>
-          <div className="h-0.5 flex-1 bg-amber-600 rounded-lg"/>
-        </div>
-          {
-            isLoadingPer
-            ? <Skeleton height={150}/>          
-            : isErrorPer
-              ? 'erro'
-              : <CardCapericia personagem={personagem}/>
-          }
-      </section>
+            <div className="flex w-full gap-2 items-center">
+              <strong className="text-orange-600  whitespace-nowrap">Pericias</strong>
+              <div className="h-0.5 flex-1 bg-amber-600 rounded-lg"/>
+            </div>
+              {
+                isLoadingPer
+                ? <Skeleton height={150}/>          
+                : isErrorPer
+                  ? 'erro'
+                  : <CardCapericia personagem={personagem}/>
+              }
+          </section>
 
-      <section className="flex w-full h-fit flex-col pt-2">
+          {/* caracteristicas */}
+          <section className="flex w-full h-fit flex-col pt-2">
 
-        <div className="flex w-full gap-2 items-center">
-          <strong className="text-orange-600  whitespace-nowrap">Características</strong>
-          <div className="h-0.5 flex-1 bg-amber-600 rounded-lg"/>
-        </div>
-          
-        <ul className="flex flex-col gap-1">
-          {
-            isLoadingCar
-            ? <Skeleton height={150}/>
-            : lstCaracteristica.map((item)=>(
-              <CardCaracteristicaItem item={item} onEditar={onEditarCar} onExcluir={onExcluirCar}/>
-            ))
-          }
-        </ul>
+            <div className="flex w-full gap-2 items-center">
+              <strong className="text-orange-600  whitespace-nowrap">Características</strong>
+              <div className="h-0.5 flex-1 bg-amber-600 rounded-lg"/>
+            </div>
+              
+            <ul className="flex flex-col gap-1">
+              {
+                isLoadingCar
+                ? <Skeleton height={150}/>
+                : lstCaracteristica.map((item)=>(
+                  <CardCaracteristicaItem key={item.ca_id} item={item} onEditar={onEditarCar} onExcluir={onExcluirCar}/>
+                ))
+              }
+            </ul>
 
-      </section>
+          </section>
 
-      <section className="flex w-full h-fit flex-col pt-2">
+          {/* anotacao */}
+          <section className="flex w-full h-fit flex-col pt-2">
 
-        <div className="flex w-full gap-2 items-center">
-          <strong className="text-orange-600  whitespace-nowrap">Anotações</strong>
-          <div className="h-0.5 flex-1 bg-amber-600 rounded-lg"/>
-        </div>
-          
-        <ul className="flex flex-col gap-1">
-          {
-            isLoadingAno
-            ? <Skeleton height={150}/>
-            : lstAnotacao.map((item)=>(
-              <CardCaAnotacaoItem item={item} onEditar={onEditarAno} onExcluir={onExcluirAno}/>
-            ))
-          }
-        </ul>
+            <div className="flex w-full gap-2 items-center">
+              <strong className="text-orange-600  whitespace-nowrap">Anotações</strong>
+              <div className="h-0.5 flex-1 bg-amber-600 rounded-lg"/>
+            </div>
+              
+            <ul className="flex flex-col gap-1">
+              {
+                isLoadingAno
+                ? <Skeleton height={150}/>
+                : lstAnotacao.map((item)=>(
+                  <CardCaAnotacaoItem key={item.an_id} item={item} onEditar={onEditarAno} onExcluir={onExcluirAno}/>
+                ))
+              }
+            </ul>
 
-      </section>
+          </section>
 
-      <section className="z-50 flex bottom-0 w-full pt-2 relative h-14">
-        <button className="flex p-2 bg-orange-600 rounded-lg shadow-lg absolute right-0 text-amber-300"
-        onClick={onAdicionar}>
-          Adicionar
-        </button>
-      </section>
+          {/* botao */}
+          <section className="z-50 flex bottom-0 w-full pt-2 relative h-14">
+            <button className="flex p-2 bg-orange-600 rounded-lg shadow-lg absolute right-0 text-amber-300"
+            onClick={onAdicionar}>
+              Adicionar
+            </button>
+          </section>
 
-      {showAdd && <ModallCaracteristicaAdd item={itemSelCar} tipoReg={tipoReg} onSalvar={onSalvar} onClose={()=>setShowAdd(false)} /> }
+          {showAdd && <ModallCaracteristicaAdd item={itemSelCar} tipoReg={tipoReg} onSalvar={onSalvar} onClose={()=>setShowAdd(false)} /> }
+        </section>
+        )  : <SemPersonagem/>
+      }
+      
     </PageBase>
   )
 }

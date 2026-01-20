@@ -20,25 +20,29 @@ export default function Personagens(){
   const router      = useRouter();
   const {onSingOut} = useContext(AuthContext);
 
-  const [temPersonagemId, setTemPersonagemId] = useState<boolean>(false);
   const [personagemID, setPersonagemId]       = useState<string>('');  
-  const [userId, setUserId]                   = useState<string>('');  
-
-  const {data : jogador, isLoading: isLoadingJogador, isError: isErroJodador}  = useJogadorGet(userId);
-  const {data, isLoading, isError, refetch} = usePersonagemGet(userId);
- 
-  console.log('jogador'+jogador);
   
+  const [joId, setJoId]       = useState<string>('');
+  const [joNome, setJoNome]   = useState<string>('');
+  const [joEmail, setJoEmail] = useState<string>('');
+
+  const {data : jogador, isLoading: isLoadingJogador, isError: isErroJodador}  = useJogadorGet(joId);
+  const {data, isLoading, isError, refetch} = usePersonagemGet(joId);
+ 
+
   useEffect(()=>{
-    let id  = localStorage.getItem('RF@personagemID'); 
-    let usuarioData  = localStorage.getItem('RF@detailUser'); 
+    let id            = localStorage.getItem('RF@personagemID'); 
+    let usuarioData   = localStorage.getItem('RF@detailUser'); 
 
     if (usuarioData) {
       const data = JSON.parse(usuarioData);
-      setUserId(data.uid);
+  
+      setJoNome(data.nome);
+      setJoEmail(data.email);
+      setJoId(data.uid);
+
     }
 
-    setTemPersonagemId(!id);
     setPersonagemId(id||'');
   },[]);
 
@@ -65,10 +69,10 @@ export default function Personagens(){
   async function onAtivar(id:string){
     localStorage.setItem('RF@personagemID', id); 
 
-    if(temPersonagemId){ 
+    if(personagemID){ 
 
       // primeiro fazer um updateDoc no personagemID pode ja ter um ativo
-      const docAtivo = doc(db, "tb_personagem", personagemID || "");
+      const docAtivo = doc(db, "tb_personagem", personagemID);
       await updateDoc(docAtivo, {
           pe_ativo: false,
         }
@@ -109,7 +113,7 @@ export default function Personagens(){
             : isError 
               ? 'erro'
               : data?.map((item)=>(
-                <CardPersonagemItem personagem={item} ativo={item.pe_id === personagemID} onEditar={onEditar} onExcluir={onExcluir} onAtivar={onAtivar}/>      
+                <CardPersonagemItem key={item?.pe_id} personagem={item} ativo={item.pe_id === personagemID} onEditar={onEditar} onExcluir={onExcluir} onAtivar={onAtivar}/>      
               ))
           }     
         </ul>
@@ -122,7 +126,7 @@ export default function Personagens(){
           <div className="h-0.5 flex-1 bg-amber-600 rounded-lg"/>
         </div>
 
-        <CardPeUsuarioItem id={jogador?.jo_id} usuario={jogador?.jo_nome} email={jogador?.jo_email} onDeslogar={onDeslogar}/> 
+        <CardPeUsuarioItem id={joId} usuario={jogador?.jo_nome} email={joEmail} onDeslogar={onDeslogar}/> 
         
       </section> 
 

@@ -32,7 +32,7 @@ export const jClasses = [
 
     "cl_sginicial": [1,3],  //indicie dentre as 6 habilidades
     "cl_proqnt": 2, //quantidade que pode escolher das pericias
-    "cl_proinicial": [11,3, 8, 13, 14, 18], //indice entre todas pericias
+    "cl_proinicial": [11, 3, 8, 13, 14, 18], //indice entre todas pericias
     "cl_aumentoatrib": [4, 8, 12, 16],
     "cl_up":[
         {2:["Ataque Descuidado", "Sentido de Perigo"]},
@@ -51,7 +51,7 @@ export const jClasses = [
 
     "cl_sginicial": [2, 6],  //indicie dentre as 6 habilidades
     "cl_proqnt": 3,
-    "cl_proinicial": [], //indice entre todas pericias
+    "cl_proinicial": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18], //indice entre todas pericias
     "cl_aumentoatrib": [4, 8, 12, 16],
     "cl_up":[
         {2:[]},
@@ -5633,4 +5633,8 @@ export function getImagem(aIdClasse){
       break;
   }
   return url;
+}
+
+export function generateId() {
+  return `${Date.now()}-${Math.floor(Math.random() * 1e6)}`;
 }

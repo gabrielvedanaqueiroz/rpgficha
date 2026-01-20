@@ -29,7 +29,7 @@ export default function CardCaracteristicaItem({item, onEditar, onExcluir}:CardC
   }
   
   return(
-    <li key={'ca_'+item.ca_id}>
+    <li>
       <Card>
         <div className="flex flex-col gap-2 w-full">
           

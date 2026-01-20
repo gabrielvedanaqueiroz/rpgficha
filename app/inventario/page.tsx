@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import SemPersonagem from "@/components/sempersonagem";
 
 export default function Inventario(){
     
@@ -73,31 +74,38 @@ export default function Inventario(){
   return(
     <PageBase title="Inventário">      
 
-      <section className="flex w-full h-fit flex-col pt-2">
+      {IdPersonagem ? (
+        <section className="flex w-full h-fit flex-col">
+          <section className="flex w-full h-fit flex-col pt-2">
           
-        <ul className="flex flex-col gap-1">
-          {
-            isLoading
-            ? <Skeleton height={150}/>
-            :  isError 
-              ? 'erro...'
-              : data.map((item)=>(
-                <CardInventarioItem item={item} onEditar={onEditar} onExcluir={onExcluir}/>
-              ))
-          }
-          
-        </ul>
+            <ul className="flex flex-col gap-1">
+              {
+                isLoading
+                ? <Skeleton height={150}/>
+                :  isError 
+                  ? 'erro...'
+                  : data.map((item)=>(
+                    <CardInventarioItem key={item.in_id} item={item} onEditar={onEditar} onExcluir={onExcluir}/>
+                  ))
+              }
+              
+            </ul>
 
-      </section>
+          </section>
 
-      <section className="z-50 flex bottom-0 w-full pt-2 relative h-14">
-        <button className="flex p-2 bg-orange-600 rounded-lg shadow-lg absolute right-0 text-amber-300"
-        onClick={onAdicionar}>
-          Adicionar
-        </button>
-      </section>
+          <section className="z-50 flex bottom-0 w-full pt-2 relative h-14">
+            <button className="flex p-2 bg-orange-600 rounded-lg shadow-lg absolute right-0 text-amber-300"
+            onClick={onAdicionar}>
+              Adicionar
+            </button>
+          </section>
 
-      {showAdd && <ModalInventarioAdd item={itemSel} onSalvar={onSalvar} onClose={()=>setShowAdd(false)} /> }
+          {showAdd && <ModalInventarioAdd item={itemSel} onSalvar={onSalvar} onClose={()=>setShowAdd(false)} /> }
+        
+        </section>
+        ): <SemPersonagem/>
+      }
+
     </PageBase>
   )
 }

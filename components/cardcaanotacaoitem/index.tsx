@@ -30,7 +30,7 @@ export default function CardCaAnotacaoItem({item, onEditar, onExcluir}:CardCaAno
   }
 
   return(
-    <li key={'an_'+item.an_id}>
+    <li>
       <Card>
         <div className="flex flex-col gap-2 w-full">
           

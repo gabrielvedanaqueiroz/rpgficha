@@ -11,17 +11,42 @@ import Headerbar from "@/components/headerbar";
 import { usePersonagemByIdGet } from "@/hooks/personagem";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import SemPersonagem from "@/components/sempersonagem";
+import { AuthContext } from "@/utils/auth";
 
 export default function Home() {
 
+  // validar login
+
   const [IdPersonagem, setIdPersonagem] = useState<string>(''); 
-  const {data, isLoading, isError} = usePersonagemByIdGet(IdPersonagem); 
+  const {data, isLoading, isError}      = usePersonagemByIdGet(IdPersonagem); 
+  
+  // const {onCheckLogin, signed} = useContext(AuthContext);
   
   useEffect(()=>{
+    // onCheckLogin();
+
     let id = localStorage.getItem('RF@personagemID') || '';
     setIdPersonagem(id);
   }, []);
+
+  function loading(){
+    return(
+      <div className="flex flex-col p-2 gap-2 md:px-96">
+        <Skeleton height={150}/>
+        <Skeleton height={150}/>
+        <Skeleton height={150}/>
+        <Skeleton height={50}/>
+        <Skeleton height={50}/>
+      </div>
+    )
+  }
+
+  // if(!signed)
+  //   console.log('abrir tel de login')
+  // else
+  //   console.log('nao abrir tel de login')  
 
   return (
     <main>
@@ -30,29 +55,32 @@ export default function Home() {
       <section className="flex flex-col gap-1 h-fit pb-14">
 
         {/* cabeçalho */}
-        <CardFiTopo personagem={data} isLoading={isLoading}/>
+        {isLoading 
+          ? <CardFiTopo personagem={data} isLoading={isLoading}/> 
+          : data && <CardFiTopo personagem={data} isLoading={isLoading}/> 
+        }
+        
         {
           isLoading 
-          ? <div className="flex flex-col p-2 gap-2 md:px-96">
-              <Skeleton height={150}/>
-              <Skeleton height={150}/>
-              <Skeleton height={150}/>
-              <Skeleton height={50}/>
-              <Skeleton height={50}/>
-            </div>
-          : <section className="flex flex-col p-2 gap-2 md:px-96 px-3">
+          ? loading()
+          : 
+            data 
+            ?(
+              <section className="flex flex-col p-2 gap-2 md:px-96 px-3">
 
-              <CardFiVida personagem={data}/>
+                <CardFiVida personagem={data}/>
 
-              <CardFiSalvaGuarda personagem={data}/>
+                <CardFiSalvaGuarda personagem={data}/>
 
-              <CardFiHabilidade personagem={data}/>
+                <CardFiHabilidade personagem={data}/>
 
-              <CardFiAtaque IdPersonagem={data?.pe_id}/>
+                <CardFiAtaque IdPersonagem={data?.pe_id}/>
 
-              <CardFiMagia IdPersonagem={data?.pe_id}/>
+                <CardFiMagia IdPersonagem={data?.pe_id}/>
 
-            </section>
+              </section>
+            )            
+            : <SemPersonagem/>
         }
         
       </section>

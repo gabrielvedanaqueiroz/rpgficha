@@ -38,7 +38,7 @@ export default function CardMagiaItem({item, isCategKnown = false, onEditar, onE
   }
 
   return(
-    <li key={item.mg_id}>
+    <li>
       <Card>
         <div className="flex flex-col gap-2 w-full">
           

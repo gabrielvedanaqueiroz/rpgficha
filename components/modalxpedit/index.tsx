@@ -12,7 +12,7 @@ interface ModalXPEditProps{
 export default function ModalXPEdit({xp, nivel, onClose, onSalvar}: ModalXPEditProps){
 
   let lxpnivel = jXPNivel[nivel].xp;
-  const [novoValor, setNovoValor] = useState<number>(xp);
+  const [novoValor, setNovoValor] = useState<number>(0);
   const soma = xp + novoValor;
   const xplimite   = lxpnivel;
   const percentual = Math.min((soma / xplimite) * 100, 100);
@@ -42,7 +42,6 @@ export default function ModalXPEdit({xp, nivel, onClose, onSalvar}: ModalXPEditP
             <label>Próximo Nível:</label>
             <label>
               {nivel + 1}
-              {/* <span>({percentual}%)</span> */}
             </label>
           </div>              
 
@@ -59,7 +58,7 @@ export default function ModalXPEdit({xp, nivel, onClose, onSalvar}: ModalXPEditP
             type="number"
             placeholder=" "
             value={novoValor}
-            onChange={(e)=>{setNovoValor( !e.target.value ? xp : Number(e.target.value))}}
+            onChange={(e)=>{setNovoValor( !e.target.value ? 0 : Number(e.target.value))}}
             className="peer w-full bg-transparent border-0 border-b-2 min-h-9
             border-gray-400 focus:border-blue-500 mb-1.5 mt-1.5
               focus:outline-none transition-colors"/>

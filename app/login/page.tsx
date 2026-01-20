@@ -26,10 +26,6 @@ export default function Login(){
     if((lemail.trim() !== '') && (lsenha.trim() !== '')){
       await onSingIn(lemail.trim(), lsenha.trim()).then((resultado)=>{
         if(resultado){
-
-          localStorage.setItem('RF@personagemID', ''); 
-          localStorage.setItem('RF@RF@personagemID-upar', ''); 
-          
           router.replace('/');
         }
       });

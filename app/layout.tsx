@@ -21,11 +21,7 @@ export const metadata: Metadata = {
   keywords:['rpg', 'dungeons and dragons', 'dnd', 'dungeons', 'dragons', 'd20'],
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{children: React.ReactNode}>) {
   return (
     <html lang="pt-br">
       <meta name="theme-color" content="#F8cc27" />

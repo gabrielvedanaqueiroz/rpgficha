@@ -13,13 +13,14 @@ import { toast } from "react-toastify";
 import { usePersonagemByIdGet } from "@/hooks/personagem";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import SemPersonagem from "@/components/sempersonagem";
 
 export default function Magias(){
 
   const [IdPersonagem, setIdPersonagem] = useState<string>(''); 
   
-  const {data: personagem} = usePersonagemByIdGet(IdPersonagem);
-  const {data, listaPrep, isLoading, isError, refetch} = useMagiaGet(IdPersonagem);
+  const {data: personagem}                              = usePersonagemByIdGet(IdPersonagem);
+  const {data, listaPrep, isLoading, isError, refetch}  = useMagiaGet(IdPersonagem);
  
   const [showAdd, setShowAdd] = useState<boolean>(false);
   const [itemSel, setItemSel] = useState<MagiaProps>();
@@ -115,76 +116,88 @@ export default function Magias(){
   return(
     <PageBase title="Magias">
 
-      <section className="flex w-full h-fit flex-col pt-2">
+      {personagem ? (
+        <section className="flex w-full h-fit flex-col">
+
+          <section className="flex w-full h-fit flex-col pt-2">
         
-        <Card>
-          <div className="flex w-full h-12">
-            <section className="flex flex-col w-1/3 h-full justify-center items-center border-r">
-              <label className="flex text-[10px] w-full justify-center">Habilidade de Conjuração</label>
-              <strong className="text-sm"> { !personagem ? <Skeleton width={100}/>: personagem?.getHabilidadeConjuracao()}  </strong>
-            </section>
-            <section className="flex flex-col w-1/3 h-full justify-center items-center border-r">
-            <label className="flex text-[10px] w-full justify-center">CD de Resistencia magia</label>
-              <strong className="text-sm">{ !personagem ? <Skeleton width={100}/>: personagem?.getCDMagia()}</strong>
-            </section>
-            <section className="flex flex-col w-1/3 h-full justify-center items-center">
-              <label className="flex text-[10px] w-full justify-center">Bônus de ataque de magia</label>
-              <strong className="text-sm">{ !personagem ? <Skeleton width={100}/>:personagem?.getBonusMagia()}</strong>
-            </section>
-          </div>
-        </Card>
+            {/* topo */}
+            <Card>
+              <div className="flex w-full h-12">
+                <section className="flex flex-col w-1/3 h-full justify-center items-center border-r">
+                  <label className="flex text-[10px] w-full justify-center">Habilidade de Conjuração</label>
+                  <strong className="text-sm"> { !personagem ? <Skeleton width={100}/>: personagem?.getHabilidadeConjuracao()}  </strong>
+                </section>
+                <section className="flex flex-col w-1/3 h-full justify-center items-center border-r">
+                <label className="flex text-[10px] w-full justify-center">CD de Resistencia magia</label>
+                  <strong className="text-sm">{ !personagem ? <Skeleton width={100}/>: personagem?.getCDMagia()}</strong>
+                </section>
+                <section className="flex flex-col w-1/3 h-full justify-center items-center">
+                  <label className="flex text-[10px] w-full justify-center">Bônus de ataque de magia</label>
+                  <strong className="text-sm">{ !personagem ? <Skeleton width={100}/>:personagem?.getBonusMagia()}</strong>
+                </section>
+              </div>
+            </Card>
 
-        <section className="flex w-full h-fit flex-col pt-2">
-          
-          <div className="flex w-full gap-2 items-center">
-            <strong className="text-orange-600  whitespace-nowrap">Magias Preparadas</strong>
-            <div className="h-0.5 flex-1 bg-amber-600 rounded-lg"/>
-          </div>
+            {/* preparadas */}
+            <section className="flex w-full h-fit flex-col pt-2">
+              
+              <div className="flex w-full gap-2 items-center">
+                <strong className="text-orange-600  whitespace-nowrap">Magias Preparadas</strong>
+                <div className="h-0.5 flex-1 bg-amber-600 rounded-lg"/>
+              </div>
 
-          <ul className="flex flex-col gap-1">
-            {
-              isLoading
-              ? <Skeleton height={150}/>
-              : isError 
-                ?<div>erro...</div>
-                : listaPrep.map((item)=>(
-                    <CardMagiaItem item={item} onEditar={onEditar} onExcluir={onExcluir} onPreparar={onPreparar}/>
+              <ul className="flex flex-col gap-1">
+                {
+                  isLoading
+                  ? <Skeleton height={150}/>
+                  : isError 
+                    ?<div>erro...</div>
+                    : listaPrep.map((item)=>(
+                        <CardMagiaItem key={item.mg_id} item={item} onEditar={onEditar} onExcluir={onExcluir} onPreparar={onPreparar}/>
+                      ))
+                }    
+              </ul>
+
+            </section>
+
+            {/* conhecidas */}
+            <section className="flex w-full h-fit flex-col pt-2">
+              
+              <div className="flex w-full gap-2 items-center">
+                <strong className="text-orange-600  whitespace-nowrap">Magias Conhecidas</strong>
+                <div className="h-0.5 flex-1 bg-amber-600 rounded-lg"/>
+              </div>
+
+              <ul className="flex flex-col gap-1">
+                {
+                  isLoading
+                  ? <Skeleton height={150}/>
+                  :data.map((item)=>(
+                    <CardMagiaItem key={item.mg_id} item={item} isCategKnown onEditar={onEditar} onExcluir={onExcluir} onPreparar={onPreparar}/>
+                
                   ))
-            }    
-          </ul>
+                }
+              
+              </ul>
+            </section>
+            
+          </section>
 
-        </section>
+          {/* botao */}
+          <section className="z-50 flex bottom-0 w-full pt-2 relative h-14">
+            <button className="flex p-2 bg-orange-600 rounded-lg shadow-lg absolute right-0 text-amber-300"
+            onClick={onAdicionar}>
+              Adicionar
+            </button>
+          </section>
 
-        <section className="flex w-full h-fit flex-col pt-2">
-          
-          <div className="flex w-full gap-2 items-center">
-            <strong className="text-orange-600  whitespace-nowrap">Magias Conhecidas</strong>
-            <div className="h-0.5 flex-1 bg-amber-600 rounded-lg"/>
-          </div>
-
-          <ul className="flex flex-col gap-1">
-            {
-              isLoading
-              ? <Skeleton height={150}/>
-              :data.map((item)=>(
-                <CardMagiaItem item={item} isCategKnown onEditar={onEditar} onExcluir={onExcluir} onPreparar={onPreparar}/>
-             
-              ))
-            }
-          
-          </ul>
+          {showAdd && <ModalMagiaAdd item={itemSel} onSalvar={onSalvar} onClose={()=>setShowAdd(false)} /> }
+      
         </section>
         
-      </section>
+      ) : <SemPersonagem/>}
 
-      <section className="z-50 flex bottom-0 w-full pt-2 relative h-14">
-        <button className="flex p-2 bg-orange-600 rounded-lg shadow-lg absolute right-0 text-amber-300"
-        onClick={onAdicionar}>
-          Adicionar
-        </button>
-      </section>
-
-      {showAdd && <ModalMagiaAdd item={itemSel} onSalvar={onSalvar} onClose={()=>setShowAdd(false)} /> }
     </PageBase>
   )
 }

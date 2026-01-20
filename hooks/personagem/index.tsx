@@ -12,7 +12,11 @@ export function usePersonagemByIdGet(aIdPersonagem:string){
   const [isError, setIsError] = useState(false);
   
   async function refetch() {
-    if (!aIdPersonagem) return;
+    if (!aIdPersonagem) {      
+      setIsLoading(false);
+      setIsError(false);
+      return;
+    }      
 
     setIsLoading(true);
     setIsError(false);
