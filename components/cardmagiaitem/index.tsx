@@ -48,7 +48,7 @@ export default function CardMagiaItem({item, isCategKnown = false, onEditar, onE
             <div className="flex flex-col w-full">
               <strong>{item.mg_nome}</strong>
               <div className="flex gap-2 items-center justify-between">
-                <label className="text-xs">Nv: {item.mg_nivel.toString()}</label>
+                <label className="text-xs">Nv: { item.mg_nivel === 0? 'Truque': item.mg_nivel.toString()}</label>
                 {
                   isCategKnown 
                   ? (item.mg_preparada? <strong className="text-xs bg-green-800 py-0.5 px-1 rounded text-white">Preparada</strong>:<></>)
