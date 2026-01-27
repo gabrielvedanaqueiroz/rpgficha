@@ -114,14 +114,18 @@ export default function CardFiVida({personagem}: CardFiVidaProps){
       let LValor = Number(e.target.value);
 
       if(personagem){
-        setVidaTemp(LValor);
-        personagem.pe_vidatemp  = LValor;
 
-        //salvar banco 
-        const docRef = doc(db, "tb_personagem", personagem.pe_id.trim());
-        await updateDoc(docRef, {
-          pe_vidatemp: LValor,
-        });
+        if(LValor >= 0){
+          setVidaTemp(LValor);
+          personagem.pe_vidatemp  = LValor;
+
+          //salvar banco 
+          const docRef = doc(db, "tb_personagem", personagem.pe_id.trim());
+          await updateDoc(docRef, {
+            pe_vidatemp: LValor,
+          });
+        }
+        
       }
     }    
     

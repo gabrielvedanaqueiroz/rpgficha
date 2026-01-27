@@ -22,7 +22,7 @@ export default function CardFiMagia({IdPersonagem}: CardFiMagiaProps){
 
   const router = useRouter();
       
-  function onExpadirRecolher(){
+  function onClickExpadirRecolher(){
     setExpandir(!expandir);
   }
  
@@ -56,9 +56,9 @@ export default function CardFiMagia({IdPersonagem}: CardFiMagiaProps){
       <div className="flex flex-col gap-0.5 w-full overflow-hidden">
 
         <div className="flex items-center w-full">
-          <strong className="w-full">Magias preparadas</strong>
+          <strong className="w-full" onClick={onClickExpadirRecolher}>Magias preparadas</strong>
           
-          <button onClick={onExpadirRecolher}>
+          <button onClick={onClickExpadirRecolher}>
             {expandir ? <FaMinus size={12}/> : <FaPlus size={12}/>}
           </button>
         </div>

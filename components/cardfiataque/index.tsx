@@ -22,7 +22,7 @@ export default function CardFiAtaque({IdPersonagem}: CardFiAtaqueProps){
 
   const {data, isLoading, isError, refetch}  = useAtaqueGet(IdPersonagem);
   
-  function onExpadirRecolher(){
+  function onClickExpadirRecolher(){
     setExpandir(!expandir);
   }
 
@@ -81,8 +81,8 @@ export default function CardFiAtaque({IdPersonagem}: CardFiAtaqueProps){
       <div className="flex flex-col gap-0.5 w-full overflow-hidden">
 
         <div className="flex items-center w-full">
-          <strong className="w-full">Ataques</strong>
-         <button onClick={onExpadirRecolher}>
+          <strong className="w-full" onClick={onClickExpadirRecolher}>Ataques</strong>
+         <button onClick={onClickExpadirRecolher}>
             {expandir ? <FaMinus size={12}/> : <FaPlus size={12}/>}
           </button>
         </div>

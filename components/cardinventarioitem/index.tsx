@@ -36,12 +36,12 @@ export default function CardInventarioItem({item, onEditar, onExcluir}:CardInven
           {/* cabeçalho */}
           <section className="flex gap-2 items-center">
             
-            <strong className="flex w-full">
+            <strong className="flex w-full" onClick={onClickExpadirRecolher}>
               {item.in_nome}              
             </strong>
 
             <button onClick={onClickExpadirRecolher}>
-              {expandir ? <FaMinus size={10}/> : <FaPlus size={10}/>  }
+              {expandir ? <FaMinus size={12}/> : <FaPlus size={12}/>  }
             </button>
           </section>
 

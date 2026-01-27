@@ -16,7 +16,7 @@ export default function CardPeUsuarioItem({id, usuario, email, onDeslogar}: Card
 
   const [expandir, setExpandir] = useState<boolean>(false);
   
-  function onExpadirRecolher(){
+  function onClickExpadirRecolher(){
     setExpandir(!expandir);
   }
 
@@ -31,12 +31,12 @@ export default function CardPeUsuarioItem({id, usuario, email, onDeslogar}: Card
         {/* cabeçalho */}
         <section className="flex gap-2 items-center">
           
-          <strong className="flex w-full">
+          <strong className="flex w-full" onClick={onClickExpadirRecolher}>
             {usuario}              
           </strong>
 
-          <button onClick={onExpadirRecolher}>
-            {expandir ? <FaMinus size={10}/> : <FaPlus size={10}/>  }
+          <button onClick={onClickExpadirRecolher}>
+            {expandir ? <FaMinus size={12}/> : <FaPlus size={12}/>  }
           </button>
         </section>
 

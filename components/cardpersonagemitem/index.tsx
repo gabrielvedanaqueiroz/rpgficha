@@ -43,14 +43,14 @@ export default function CardPersonagemItem( { personagem, ativo, onEditar, onExc
           {/* cabeçalho */}
           <section className="flex gap-2 items-center">
             
-            <strong className="flex w-full">
+            <strong className="flex w-full" onClick={onClickExpadirRecolher}>
               { personagem.pe_nome}              
             </strong>
 
             {ativo ? <strong className="text-xs bg-green-800 py-0.5 px-1 rounded text-white">Ativo</strong>:<></>}             
 
             <button onClick={onClickExpadirRecolher}>
-              {expandir ? <FaMinus size={10}/> : <FaPlus size={10}/>  }
+              {expandir ? <FaMinus size={12}/> : <FaPlus size={12}/>  }
             </button>
           </section>
 

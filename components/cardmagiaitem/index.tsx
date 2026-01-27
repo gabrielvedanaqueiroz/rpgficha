@@ -46,7 +46,7 @@ export default function CardMagiaItem({item, isCategKnown = false, onEditar, onE
           <section className="flex gap-2 items-center">
             
             <div className="flex flex-col w-full">
-              <strong>{item.mg_nome}</strong>
+              <strong onClick={onClickExpadirRecolher}>{item.mg_nome}</strong>
               <div className="flex gap-2 items-center justify-between">
                 <label className="text-xs">Nv: { item.mg_nivel === 0? 'Truque': item.mg_nivel.toString()}</label>
                 {
@@ -58,7 +58,7 @@ export default function CardMagiaItem({item, isCategKnown = false, onEditar, onE
             </div>
 
             <button className="h-10 w-2.5 pt-1.5" onClick={onClickExpadirRecolher}>
-              {expandir ? <FaMinus size={10}/> : <FaPlus size={10}/>  }
+              {expandir ? <FaMinus size={12}/> : <FaPlus size={12}/>  }
             </button>
           </section>
 
