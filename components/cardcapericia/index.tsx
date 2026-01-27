@@ -12,7 +12,7 @@ function CardCaPericia({personagem}: CardCaPericiaProps){
   function onFlag(aId: number, aAtrib: number, aMod: number|undefined){
     return(
       <CardFlag>
-        <div key={aId} className="flex flex-col text-amber-300 justify-center items-center p-2 text-[10px] w-16 h-16">
+        <div key={aId} className="flex flex-col text-(--cprimary) justify-center items-center p-2 text-[10px] w-16 h-16">
           <label className="text-sm border-b">{aMod}</label>
           <label>{aAtrib}</label>
         </div>

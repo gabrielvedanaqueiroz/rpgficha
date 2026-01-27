@@ -20,7 +20,7 @@ export default function ModalFiAtaqueAdd({onSalvar, onClose}:ModalFiAtaqueAddPro
   } = useForm<AtaqueType>({
       resolver: zodResolver(ataqueSchema)      
   });
-
+  
   async function onSubmit(data: AtaqueType) {
     onSalvar({
       at_id: data.at_id ?? "",
@@ -65,12 +65,36 @@ export default function ModalFiAtaqueAdd({onSalvar, onClose}:ModalFiAtaqueAddPro
           />
         </div>
 
-        <FormInput<AtaqueType>
+        {/* <FormInput<AtaqueType>
           name="at_tipo"
           label="Tipo"
           register={register}
           error={errors.at_tipo}
-        />
+        /> */}
+
+        <div className="flex flex-col w-full gap-0.5">
+          <label className="w-full">
+            Tipo de dano
+          </label>
+
+          <select 
+          className={`peer w-full bg-transparent border-0 border-b-2
+            ${errors.at_tipo ? "border-red-500 focus:border-red-500 " : "border-gray-400 focus:border-blue-500 "}
+            focus:outline-none transition-colors`}
+            {...register("at_tipo")}>
+            <option value={0}>Selecione</option>
+            <option>Concussão</option>
+            <option>Cortante</option>
+            <option>Perfurante</option>
+          </select>
+
+          {errors.at_tipo && (
+            <span className="text-xs text-red-500">
+              {errors.at_tipo.message}
+            </span>
+          )}
+        </div>
+        
         
         <div className="flex gap-2 justify-end">
           <button className="border border-gray-300 px-2 py-1 rounded" 
@@ -78,7 +102,7 @@ export default function ModalFiAtaqueAdd({onSalvar, onClose}:ModalFiAtaqueAddPro
             Cancelar
           </button>
           
-          <button type="submit" className="bg-orange-600 text-yellow-300 px-2 py-1 rounded">
+          <button type="submit" className="bg-(--csecundary) text-(--cprimary) px-2 py-1 rounded">
             Salvar
           </button>
         </div>

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { memo } from "react";
 import { FaDiceD20 } from "react-icons/fa";
 

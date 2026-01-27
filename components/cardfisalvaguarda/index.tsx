@@ -65,14 +65,14 @@ function CardFiSalvaGuarda({ personagem }: CardFiSalvaGuardaProps){
 
       <section className="flex flex-col items-center w-1/3 h-fit p-2 gap-1">
 
-        <div className="bg-black w-18 h-16 rounded flex flex-col gap-0.5 text-amber-300 justify-center items-center p-2">
+        <div className="bg-black w-18 h-16 rounded flex flex-col gap-0.5 text-(--cprimary) justify-center items-center p-2">
           <label className="text-center text-sm border-b">{personagem?.getPercepcaoPassiva()}</label>          
           <label className="w-full text-center text-[10px]">Perc. Passiva</label>
         </div>
 
         <button onClick={onClickCA}>
           <CardFlag>
-            <div className="bg-black w-18 h-16 rounded flex flex-col gap-0.5 text-amber-300 justify-center items-center p-2">
+            <div className="bg-black w-18 h-16 rounded flex flex-col gap-0.5 text-(--cprimary) justify-center items-center p-2">
               <label className="text-center text-sm border-b">{personagem?.pe_catotal}</label>          
               <label className="w-full text-center text-[10px]">CA+</label>
             </div>

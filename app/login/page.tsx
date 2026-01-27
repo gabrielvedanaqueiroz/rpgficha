@@ -36,7 +36,7 @@ export default function Login(){
   }
 
   return(
-    <main className="flex flex-col justify-center items-center bg-yellow-300 h-screen gap-2 p-12 md:p-96">
+    <main className="flex flex-col justify-center items-center bg-(--cprimary) h-screen gap-2 p-12 md:p-96">
 
       <div className="w-full flex justify-center items-center gap-2">
         <FaDiceD20 size={32} />
@@ -60,12 +60,14 @@ export default function Login(){
               onChange={(e)=>{setSenha(e.target.value)}}
               placeholder="Senha"
             />
-          <button type="button" className="bg-orange-600 p-2 rounded" onClick={()=>{setExibirSenha(!exibirSenha)}}>
+          <button type="button" className="bg-(--csecundary) p-2 rounded" 
+          onClick={()=>{setExibirSenha(!exibirSenha)}}>
             {exibirSenha ? <FaRegEyeSlash size={18} />: <FaRegEye size={18} />}
           </button>
         </div>
 
-        <button type="submit" className="flex bg-amber-600 text-white py-2 px-3 rounded justify-center items-center" onClick={onLogin}>
+        <button type="submit" className="flex bg-(--csecundary) text-white py-2 px-3 rounded justify-center items-center" 
+        onClick={onLogin}>
           {
             loadingAuth
             ? <div className="flex gap-2 justify-center items-center">
@@ -79,7 +81,7 @@ export default function Login(){
 
       <button 
         onClick={()=>{router.push('/registrar')}}
-        className="text-orange-600 text-xs">Não possui uma conta? Cadastre-se</button>
+        className="text-(--csecundary) text-xs">Não possui uma conta? Cadastre-se</button>
 
     </main>
   )

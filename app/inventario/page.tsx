@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import SemPersonagem from "@/components/sempersonagem";
+import ButtonAdicionar from "@/components/buttonadicionar";
 
 export default function Inventario(){
     
@@ -94,13 +95,8 @@ export default function Inventario(){
 
           </section>
 
-          <section className="z-50 flex bottom-12 right-2 w-full pt-2 fixed h-14">
-            <button className="flex p-2 bg-orange-600 rounded-lg shadow-lg absolute right-0 text-amber-300"
-            onClick={onAdicionar}>
-              Adicionar
-            </button>
-          </section>
-
+          <ButtonAdicionar onAdicionar={onAdicionar}/>
+      
           {showAdd && <ModalInventarioAdd item={itemSel} onSalvar={onSalvar} onClose={()=>setShowAdd(false)} /> }
         
         </section>

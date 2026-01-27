@@ -14,6 +14,7 @@ import { usePersonagemByIdGet } from "@/hooks/personagem";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import SemPersonagem from "@/components/sempersonagem";
+import Buttonadicionar from "@/components/buttonadicionar";
 
 export default function Magias(){
 
@@ -143,8 +144,8 @@ export default function Magias(){
             <section className="flex w-full h-fit flex-col pt-2">
               
               <div className="flex w-full gap-2 items-center">
-                <strong className="text-orange-600  whitespace-nowrap">Magias Preparadas</strong>
-                <div className="h-0.5 flex-1 bg-amber-600 rounded-lg"/>
+                <strong className="text-(--csecundary) whitespace-nowrap">Magias Preparadas</strong>
+                <div className="h-0.5 flex-1 bg-(--csecundary) rounded-lg"/>
               </div>
 
               <ul className="flex flex-col gap-1">
@@ -165,8 +166,8 @@ export default function Magias(){
             <section className="flex w-full h-fit flex-col pt-2">
               
               <div className="flex w-full gap-2 items-center">
-                <strong className="text-orange-600  whitespace-nowrap">Magias Conhecidas</strong>
-                <div className="h-0.5 flex-1 bg-amber-600 rounded-lg"/>
+                <strong className="text-(--csecundary) whitespace-nowrap">Magias Conhecidas</strong>
+                <div className="h-0.5 flex-1 bg-(--csecundary) rounded-lg"/>
               </div>
 
               <ul className="flex flex-col gap-1">
@@ -185,12 +186,7 @@ export default function Magias(){
           </section>
 
           {/* botao */}
-          <section className="z-50 flex bottom-12 right-2 w-full pt-2 fixed h-14">
-            <button className="flex p-2 bg-orange-600 rounded-lg shadow-lg absolute right-0 text-amber-300"
-            onClick={onAdicionar}>
-              Adicionar
-            </button>
-          </section>
+          <Buttonadicionar onAdicionar={onAdicionar}/>
 
           {showAdd && <ModalMagiaAdd item={itemSel} onSalvar={onSalvar} onClose={()=>setShowAdd(false)} /> }
       

@@ -7,6 +7,7 @@ import { jClasses, jXPNivel } from "@/utils";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import { FaPlus } from "react-icons/fa";
 import { FiMinus } from "react-icons/fi";
+import ButtonsModal from "../buttonsmodal";
 
 export interface ModalUparRetorno{
   pe_id: string,
@@ -173,6 +174,27 @@ export default function ModalUpar({ personagem, onClose, onSalvar}:ModalUparProp
     }  
   }
 
+  function onSubmit(e: React.FormEvent){
+    
+    e.preventDefault();
+
+    let item :ModalUparRetorno = {
+      pe_id : personagem?.pe_id,
+      pe_nivel : personagem?.pe_nivel + 1,
+      pe_vida : vida,
+      pe_bproficiencia : bproficiencia,
+      pe_forca : habForca,
+      pe_destreza : habDestreza,
+      pe_constituicao : habConstituicao,
+      pe_inteligencia : habInteligencia,
+      pe_sabedoria : habSabedoria,
+      pe_carisma : habCarisma,
+      pe_subclasse : subclasse,
+    }
+
+    onSalvar(item);
+  }
+
   useEffect(()=>{
     
     setVida(Number(personagem?.pe_vidabase));
@@ -244,11 +266,11 @@ export default function ModalUpar({ personagem, onClose, onSalvar}:ModalUparProp
               <label>{personagem?.pe_vidabase}</label>
               <MdKeyboardDoubleArrowRight size={18}/>   
               <div className="flex items-center gap-2 justify-between w-fit">
-                <button className="p-0.5 bg-amber-600 rounded shadow text-yellow-300" onClick={onDecVida}>
+                <button className="p-0.5 bg-(--csecundary) rounded shadow text-(--cprimary)" onClick={onDecVida}>
                   <FiMinus size={14}/>
                 </button>
                 <label>{vida}</label>
-                <button className="p-0.5 bg-amber-600 rounded shadow text-yellow-300" onClick={onIncVida}>
+                <button className="p-0.5 bg-(--csecundary) rounded shadow text-(--cprimary)" onClick={onIncVida}>
                   <FaPlus size={14}/>
                 </button>
               </div>
@@ -268,11 +290,11 @@ export default function ModalUpar({ personagem, onClose, onSalvar}:ModalUparProp
                 <div className="flex items-center gap-2 justify-between w-fit">
                   <label>{personagem?.pe_forca}</label>
                   <MdKeyboardDoubleArrowRight size={18}/>                 
-                    <button className="p-0.5 bg-amber-600 rounded shadow text-yellow-300" onClick={onDecForca}>
+                    <button className="p-0.5 bg-(--csecundary) rounded shadow text-(--cprimary)" onClick={onDecForca}>
                       <FiMinus size={14}/>
                     </button>
                     <label>{habForca}</label>
-                    <button className="p-0.5 bg-amber-600 rounded shadow text-yellow-300" onClick={ onIncForca }>
+                    <button className="p-0.5 bg-(--csecundary) rounded shadow text-(--cprimary)" onClick={ onIncForca }>
                       <FaPlus size={14}/>
                     </button>
                   </div>
@@ -284,11 +306,11 @@ export default function ModalUpar({ personagem, onClose, onSalvar}:ModalUparProp
                 <div className="flex items-center gap-2 justify-between w-fit">
                   <label>{personagem?.pe_destreza}</label>
                   <MdKeyboardDoubleArrowRight size={18}/>                 
-                    <button className="p-0.5 bg-amber-600 rounded shadow text-yellow-300" onClick={onDecDestreza}>
+                    <button className="p-0.5 bg-(--csecundary) rounded shadow text-(--cprimary)" onClick={onDecDestreza}>
                       <FiMinus size={14}/>
                     </button>
                     <label>{habDestreza}</label>
-                    <button className="p-0.5 bg-amber-600 rounded shadow text-yellow-300" onClick={onIncDestreza}>
+                    <button className="p-0.5 bg-(--csecundary) rounded shadow text-(--cprimary)" onClick={onIncDestreza}>
                       <FaPlus size={14}/>
                     </button>
                   </div>
@@ -300,11 +322,11 @@ export default function ModalUpar({ personagem, onClose, onSalvar}:ModalUparProp
                 <div className="flex items-center gap-2 justify-between w-fit">
                   <label>{personagem?.pe_constituicao}</label>
                   <MdKeyboardDoubleArrowRight size={18}/>                 
-                    <button className="p-0.5 bg-amber-600 rounded shadow text-yellow-300" onClick={onDecConstituicao}>
+                    <button className="p-0.5 bg-(--csecundary) rounded shadow text-(--cprimary)" onClick={onDecConstituicao}>
                       <FiMinus size={14}/>
                     </button>
                     <label>{habConstituicao}</label>
-                    <button className="p-0.5 bg-amber-600 rounded shadow text-yellow-300" onClick={onIncConstituicao}>
+                    <button className="p-0.5 bg-(--csecundary) rounded shadow text-(--cprimary)" onClick={onIncConstituicao}>
                       <FaPlus size={14}/>
                     </button>
                   </div>
@@ -316,11 +338,11 @@ export default function ModalUpar({ personagem, onClose, onSalvar}:ModalUparProp
                 <div className="flex items-center gap-2 justify-between w-fit">
                   <label>{personagem?.pe_inteligencia}</label>
                   <MdKeyboardDoubleArrowRight size={18}/>                 
-                    <button className="p-0.5 bg-amber-600 rounded shadow text-yellow-300" onClick={onDecInteligencia}>
+                    <button className="p-0.5 bg-(--csecundary) rounded shadow text-(--cprimary)" onClick={onDecInteligencia}>
                       <FiMinus size={14}/>
                     </button>
                     <label>{habInteligencia}</label>
-                    <button className="p-0.5 bg-amber-600 rounded shadow text-yellow-300" onClick={onIncInteligencia}>
+                    <button className="p-0.5 bg-(--csecundary) rounded shadow text-(--cprimary)" onClick={onIncInteligencia}>
                       <FaPlus size={14}/>
                     </button>
                   </div>
@@ -332,11 +354,11 @@ export default function ModalUpar({ personagem, onClose, onSalvar}:ModalUparProp
                 <div className="flex items-center gap-2 justify-between w-fit">
                   <label>{personagem?.pe_sabedoria}</label>
                   <MdKeyboardDoubleArrowRight size={18}/>                 
-                    <button className="p-0.5 bg-amber-600 rounded shadow text-yellow-300" onClick={onDecSabedoria}>
+                    <button className="p-0.5 bg-(--csecundary) rounded shadow text-(--cprimary)" onClick={onDecSabedoria}>
                       <FiMinus size={14}/>
                     </button>
                     <label>{habSabedoria}</label>
-                    <button className="p-0.5 bg-amber-600 rounded shadow text-yellow-300" onClick={onIncSabedoria}>
+                    <button className="p-0.5 bg-(--csecundary) rounded shadow text-(--cprimary)" onClick={onIncSabedoria}>
                       <FaPlus size={14}/>
                     </button>
                   </div>
@@ -348,11 +370,11 @@ export default function ModalUpar({ personagem, onClose, onSalvar}:ModalUparProp
                 <div className="flex items-center gap-2 justify-between w-fit">
                   <label>{personagem?.pe_carisma}</label>
                   <MdKeyboardDoubleArrowRight size={18}/>                 
-                    <button className="p-0.5 bg-amber-600 rounded shadow text-yellow-300" onClick={onDecCarisma}>
+                    <button className="p-0.5 bg-(--csecundary) rounded shadow text-(--cprimary)" onClick={onDecCarisma}>
                       <FiMinus size={14}/>
                     </button>
                     <label>{habCarisma}</label>
-                    <button className="p-0.5 bg-amber-600 rounded shadow text-yellow-300" onClick={onIncCarisma}>
+                    <button className="p-0.5 bg-(--csecundary) rounded shadow text-(--cprimary)" onClick={onIncCarisma}>
                       <FaPlus size={14}/>
                     </button>
                   </div>
@@ -376,36 +398,7 @@ export default function ModalUpar({ personagem, onClose, onSalvar}:ModalUparProp
           <div/>
         }
 
-        <div className="flex gap-2 justify-end">
-          <button className="border border-gray-300 px-2 py-1 rounded" 
-          onClick={onClose}>
-            Cancelar
-          </button>
-          
-          <button 
-          type="submit" 
-          className="bg-orange-600 text-yellow-300 px-2 py-1 rounded" 
-          onClick={()=>{
-            
-            let item :ModalUparRetorno = {
-              pe_id : personagem?.pe_id,
-              pe_nivel : personagem?.pe_nivel + 1,
-              pe_vida : vida,
-              pe_bproficiencia : bproficiencia,
-              pe_forca : habForca,
-              pe_destreza : habDestreza,
-              pe_constituicao : habConstituicao,
-              pe_inteligencia : habInteligencia,
-              pe_sabedoria : habSabedoria,
-              pe_carisma : habCarisma,
-              pe_subclasse : subclasse,
-            }
-
-            onSalvar(item);
-          }}>
-            Salvar
-          </button>
-        </div>
+        <ButtonsModal onClose={onClose} onSubmit={onSubmit}/> 
       </div>
     </ModalBase>
   )

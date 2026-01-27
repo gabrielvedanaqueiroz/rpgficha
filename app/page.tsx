@@ -22,11 +22,8 @@ export default function Home() {
   const [IdPersonagem, setIdPersonagem] = useState<string>(''); 
   const {data, isLoading, isError}      = usePersonagemByIdGet(IdPersonagem); 
   
-  // const {onCheckLogin, signed} = useContext(AuthContext);
   
   useEffect(()=>{
-    // onCheckLogin();
-
     let id = localStorage.getItem('RF@personagemID') || '';
     setIdPersonagem(id);
   }, []);
@@ -42,11 +39,6 @@ export default function Home() {
       </div>
     )
   }
-
-  // if(!signed)
-  //   console.log('abrir tel de login')
-  // else
-  //   console.log('nao abrir tel de login')  
 
   return (
     <main>

@@ -1,3 +1,4 @@
+import ButtonsModal from "../buttonsmodal";
 import ModalBase from "../modalbase";
 import { useState } from "react";
 
@@ -50,16 +51,7 @@ export default function ModalCArmEdit({ca, onClose, onSalvar}: ModalCArmEditProp
           )}
         </div>
 
-        <div className="flex gap-2 justify-end">
-          <button className="border border-gray-300 px-2 py-1 rounded" 
-          onClick={onClose}>
-            Cancelar
-          </button>
-          
-          <button type="submit" className="bg-orange-600 text-yellow-300 px-2 py-1 rounded" onClick={onSubmit}>
-            Salvar
-          </button>
-        </div>
+        <ButtonsModal onClose={onClose} onSubmit={onSubmit}/> 
 
       </div>
 

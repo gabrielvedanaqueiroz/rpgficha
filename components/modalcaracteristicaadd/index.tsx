@@ -7,6 +7,7 @@ import { FormTextarea } from "../formtextarea";
 import { useEffect, useState } from "react";
 import CaracteristicaProps, { caracteristicaSchema, CaracteristicaType } from "@/classes/caracteristica";
 import ModalBase from "../modalbase";
+import ButtonsModal from "../buttonsmodal";
 
 interface ModalCaracteristicaAddProps{
   item?: CaracteristicaProps,
@@ -65,7 +66,7 @@ export default function ModallCaracteristicaAdd({item, tipoReg, onSalvar, onClos
   }
 
   return(
-    <ModalBase title="Adicionar caracteristica">
+    <ModalBase title="Adicionar característica">
       <form className="flex flex-col w-full gap-2" onSubmit={handleSubmit(onSubmit)}>
 
         <FormInput<CaracteristicaType>
@@ -90,17 +91,8 @@ export default function ModallCaracteristicaAdd({item, tipoReg, onSalvar, onClos
             <option value={2}>Anotação</option>
           </select>
         </div>
-        
-        <div className="flex gap-2 justify-end  mt-2">
-          <button className="border border-gray-300 px-2 py-1 rounded" 
-          onClick={onClose}>
-            Cancelar
-          </button>
-          
-          <button type="submit" className="bg-orange-600 text-yellow-300 px-2 py-1 rounded">
-            Salvar
-          </button>
-        </div>
+
+        <ButtonsModal onClose={onClose}/> 
       </form>
     </ModalBase>
   )

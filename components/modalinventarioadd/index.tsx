@@ -7,6 +7,7 @@ import { FormInput } from "../forminput";
 import { FormTextarea } from "../formtextarea";
 import { useEffect } from "react";
 import ModalBase from "../modalbase";
+import ButtonsModal from "../buttonsmodal";
 
 interface ModalInventarioAddProps{
   item?: InventarioProps,
@@ -72,16 +73,7 @@ export default function ModalInventarioAdd({item, onSalvar, onClose}:ModalInvent
           error={errors.in_descricao}
         />
         
-        <div className="flex gap-2 justify-end mt-2">
-          <button className="border border-gray-300 px-2 py-1 rounded" 
-          onClick={onClose}>
-            Cancelar
-          </button>
-          
-          <button type="submit" className="bg-orange-600 text-yellow-300 px-2 py-1 rounded">
-            Salvar
-          </button>
-        </div>
+        <ButtonsModal onClose={onClose}/> 
       </form>
     </ModalBase>
   )

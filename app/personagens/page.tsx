@@ -14,19 +14,19 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import { toast } from "react-toastify";
 import {AuthContext} from "@/utils/auth";
 import { useJogadorGet } from "@/hooks/jogador";
+import Buttonadicionar from "@/components/buttonadicionar";
 
 export default function Personagens(){
 
   const router      = useRouter();
   const {onSingOut} = useContext(AuthContext);
 
-  const [personagemID, setPersonagemId]       = useState<string>('');  
+  const [personagemID, setPersonagemId] = useState<string>('');  
   
   const [joId, setJoId]       = useState<string>('');
-  const [joNome, setJoNome]   = useState<string>('');
   const [joEmail, setJoEmail] = useState<string>('');
 
-  const {data : jogador, isLoading: isLoadingJogador, isError: isErroJodador}  = useJogadorGet(joId);
+  const {data : jogador}  = useJogadorGet(joId);
   const {data, isLoading, isError, refetch} = usePersonagemGet(joId);
  
 
@@ -37,7 +37,6 @@ export default function Personagens(){
     if (usuarioData) {
       const data = JSON.parse(usuarioData);
   
-      setJoNome(data.nome);
       setJoEmail(data.email);
       setJoId(data.uid);
 
@@ -134,12 +133,7 @@ export default function Personagens(){
         
       </section>
 
-      <section className="z-50 flex bottom-12 right-2 w-full pt-2 fixed h-14">
-        <button className="flex p-2 bg-orange-600 rounded-lg shadow-lg absolute right-0 text-amber-300"
-        onClick={onAdicionar}>
-          Adicionar
-        </button>
-      </section>
+      <Buttonadicionar onAdicionar={onAdicionar}/>
 
     </PageBase>
   );

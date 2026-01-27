@@ -160,66 +160,66 @@ function CardFiTopo({personagem, isLoading}: CardFiTopoProps){
       ? loading()
       : <section className="flex w-full h-fit bg-(--cprimary) shadow-lg md:px-96">
       
-      <div className="flex w-2/5 p-2 flex-col text-xs gap-1">
+          <section className="flex w-2/5 p-2 flex-col text-xs gap-1 justify-between">
 
-        <div className="flex flex-col w-full h-fit text-xs">
-          <strong className="text-sm w-full border-b-2">{personagem?.pe_nome}</strong>
-          <strong>{personagem?.getClasse()}</strong>
-          <strong>{personagem?.getRaca()}</strong>
-        </div>
+            <div className="flex flex-col w-full h-fit text-xs">
+              <strong className="text-sm w-full border-b-2">{personagem?.pe_nome}</strong>
+              <strong>{personagem?.getClasse()}</strong>
+              <strong>{personagem?.getRaca()}</strong>
+            </div>
 
-        <div className="flex w-full h-fit gap-2 px-2">
+            <div className="flex w-full h-fit gap-2 px-2 justify-center items-center">
 
-          {onFlag(0, personagem?.getModDestreza(), 'Iniciativa')}
-          {onFlag(1, personagem?.pe_movimento, 'Movimento')}
+              {onFlag(0, personagem?.getModDestreza(), 'Iniciativa')}
+              {onFlag(1, personagem?.pe_movimento, 'Movimento')}
 
-        </div>
+            </div>
 
-      </div>
+          </section>
 
-      <div className="flex w-1/5 py-4">
+          <section className="flex w-1/5 py-4">
 
-        <div className="flex border-4 p-1 rounded-[50%] w-full h-full items-center justify-center">
-          { 
-            personagem?.getImagemClasse() 
-            ? <Image className="brightness-0" src={personagem?.getImagemClasse()||""} width={75} height={75} alt={personagem.pe_classe} />
-            : <></>
-          }
-          
-        </div>
+            <div className="flex border-4 p-1 rounded-[50%] w-full h-full items-center justify-center">
+              { 
+                personagem?.getImagemClasse() 
+                ? <Image className="brightness-0" src={personagem?.getImagemClasse()||""} width={75} height={75} alt={personagem.pe_classe} />
+                : <></>
+              }
+              
+            </div>
 
-      </div>
+          </section>
 
-      <div className="flex w-2/5 p-2 flex-col text-xs gap-1 justify-between">
+          <section className="flex w-2/5 p-2 flex-col text-xs gap-1 justify-between">
 
-        <div className="flex flex-col w-full h-fit text-xs">
-          <div className="flex text-sm w-full border-b-2 items-center gap-2">
-            <strong>Nível {personagem?.pe_nivel}</strong>
-            {
-              personagem?.podeUpar()
-              ? <button onClick={onUpar}> <FaAngleDoubleUp size={18}/> </button>
-              : <></>
-            }
-          </div>
-          <strong>{personagem?.pe_antecedente}</strong>
-          <strong>{personagem?.pe_tendencia}</strong>
-        </div>
+            <div className="flex flex-col w-full h-fit text-xs">
+              <div className="flex text-sm w-full border-b-2 items-center gap-2">
+                <strong>Nível {personagem?.pe_nivel}</strong>
+                {
+                  personagem?.podeUpar()
+                  ? <button onClick={onUpar}> <FaAngleDoubleUp size={18}/> </button>
+                  : <></>
+                }
+              </div>
+              <strong>{personagem?.pe_antecedente}</strong>
+              <strong>{personagem?.pe_tendencia}</strong>
+            </div>
 
-        <div className="flex w-full h-fit gap-2 px-2">
+            <div className="flex w-full h-fit gap-2 px-2 justify-center items-center">
 
-          {onFlag(3,personagem?.pe_bproficiencia, 'Bônus Prof.')}
-         
-          <button onClick={onClickExp}>
-            {onFlag(4, personagem?.pe_experiencia, 'Exp +')}
-          </button>
-        
-        </div>
+              {onFlag(3,personagem?.pe_bproficiencia, 'Bônus Prof.')}
+            
+              <button onClick={onClickExp}>
+                {onFlag(4, personagem?.pe_experiencia, 'Exp +')}
+              </button>
+            
+            </div>
 
-      </div>
+          </section>
 
-      {showXP ? <ModalXPEdit xp={personagem?.pe_experiencia} nivel={personagem?.pe_nivel} onClose={onCloseExp} onSalvar={onSalvarExp}/> : <></>}
-      {showUpar ? <ModalUpar personagem={personagem} onClose={onCloseUpar} onSalvar={onSalvarUpar}/> : <></>}
-    </section>
+          {showXP ? <ModalXPEdit xp={personagem?.pe_experiencia} nivel={personagem?.pe_nivel} onClose={onCloseExp} onSalvar={onSalvarExp}/> : <></>}
+          {showUpar ? <ModalUpar personagem={personagem} onClose={onCloseUpar} onSalvar={onSalvarUpar}/> : <></>}
+        </section>
     
   );
 

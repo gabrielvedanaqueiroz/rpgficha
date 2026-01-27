@@ -17,6 +17,7 @@ import { toast } from "react-toastify";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import SemPersonagem from "@/components/sempersonagem";
+import ButtonAdicionar from "@/components/buttonadicionar";
 
 export default function Caracteristicas(){
   
@@ -135,12 +136,13 @@ export default function Caracteristicas(){
         <section className="flex w-full h-fit flex-col">
 
           <section className="flex flex-col w-full h-fit pb-12">
+            
             {/* pericias */}
             <section className="flex w-full h-fit flex-col">
       
               <div className="flex w-full gap-2 items-center">
-                <strong className="text-orange-600  whitespace-nowrap">Pericias</strong>
-                <div className="h-0.5 flex-1 bg-amber-600 rounded-lg"/>
+                <strong className="text-(--csecundary)  whitespace-nowrap">Pericias</strong>
+                <div className="h-0.5 flex-1 bg-(--csecundary) rounded-lg"/>
               </div>
                 {
                   isLoadingPer
@@ -155,8 +157,8 @@ export default function Caracteristicas(){
             <section className="flex w-full h-fit flex-col pt-2">
 
               <div className="flex w-full gap-2 items-center">
-                <strong className="text-orange-600  whitespace-nowrap">Características</strong>
-                <div className="h-0.5 flex-1 bg-amber-600 rounded-lg"/>
+                <strong className="text-(--csecundary) whitespace-nowrap">Características</strong>
+                <div className="h-0.5 flex-1 bg-(--csecundary) rounded-lg"/>
               </div>
                 
               <ul className="flex flex-col gap-1">
@@ -175,8 +177,8 @@ export default function Caracteristicas(){
             <section className="flex w-full h-fit flex-col pt-2">
 
               <div className="flex w-full gap-2 items-center">
-                <strong className="text-orange-600  whitespace-nowrap">Anotações</strong>
-                <div className="h-0.5 flex-1 bg-amber-600 rounded-lg"/>
+                <strong className="text-(--csecundary) whitespace-nowrap">Anotações</strong>
+                <div className="h-0.5 flex-1 bg-(--csecundary) rounded-lg"/>
               </div>
                 
               <ul className="flex flex-col gap-1">
@@ -192,14 +194,8 @@ export default function Caracteristicas(){
             </section>
           </section>
           
-
           {/* botao */}
-          <section className="z-50 flex bottom-12 right-2 w-full pt-2 fixed h-14">
-            <button className="flex p-2 bg-orange-600 rounded-lg shadow-lg absolute right-0 text-amber-300"
-            onClick={onAdicionar}>
-              Adicionar
-            </button>
-          </section>
+          <ButtonAdicionar onAdicionar={onAdicionar}/>
 
           {showAdd && <ModallCaracteristicaAdd item={itemSelCar} tipoReg={tipoReg} onSalvar={onSalvar} onClose={()=>setShowAdd(false)} /> }
         </section>

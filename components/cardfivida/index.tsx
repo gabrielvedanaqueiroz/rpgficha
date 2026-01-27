@@ -260,12 +260,12 @@ export default function CardFiVida({personagem}: CardFiVidaProps){
               </label>
             </div>
             
-            <div className="flex w-full bg-orange-600 shadow-lg rounded-lg h-6 justify-around items-center text-yellow-300 overflow-hidden">
+            <div className="flex w-full bg-(--csecundary) shadow-lg rounded-lg h-6 justify-around items-center text-(--cprimary) overflow-hidden">
               <button className="w-6 flex items-center justify-center transition-transform duration-150 active:scale-85"
               onClick={onIncrementar}>
                 <FaPlus size={10}/>
               </button>
-              <div className="border w h-full bg-amber-300"/>
+              <div className="border w h-full bg-(--cprimary)"/>
               <button className="w-6 flex items-center justify-center transition-transform duration-150 active:scale-85"
               onClick={onDecrementar}>
                 <FiMinus size={10}/>

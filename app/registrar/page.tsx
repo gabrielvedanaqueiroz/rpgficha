@@ -73,12 +73,12 @@ export default function Registar(){
               onChange={(e)=>{setSenha(e.target.value)}}
               placeholder="Senha"
             />
-          <button type="button" className="bg-orange-600 p-2 rounded" onClick={()=>{setExibirSenha(!exibirSenha)}}>
+          <button type="button" className="bg-(--csecundary) p-2 rounded" onClick={()=>{setExibirSenha(!exibirSenha)}}>
             {exibirSenha ? <FaRegEyeSlash size={18} />: <FaRegEye size={18} />}
           </button>
         </div>
 
-        <button type="submit" className="flex bg-amber-600 text-white py-2 px-3 rounded justify-center items-center" onClick={onLogin}>
+        <button type="submit" className="flex bg-(--csecundary) text-white py-2 px-3 rounded justify-center items-center" onClick={onLogin}>
             {
               loadingAuth
               ? <div className="flex gap-2 justify-center items-center">

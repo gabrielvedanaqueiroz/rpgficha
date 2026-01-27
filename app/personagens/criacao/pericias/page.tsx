@@ -337,7 +337,7 @@ export default function CriacaoPericias(){
           
         </div>      
         
-        <button type="submit" className="bg-yellow-300 px-3 py-2 rounded shadow" 
+        <button type="submit" className="bg-(--cprimary) px-3 py-2 rounded shadow" 
         onClick={onSubmit}>
           <label className="flex justify-center items-center">
             Concluir 

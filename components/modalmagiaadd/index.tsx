@@ -8,6 +8,7 @@ import { FormInput } from "../forminput";
 import { FormTextarea } from "../formtextarea";
 import {jMagias} from "@/utils"
 import ModalBase from "../modalbase";
+import ButtonsModal from "../buttonsmodal";
 
 interface ModalMagiaAddProps{
   item?: MagiaProps,
@@ -242,17 +243,9 @@ export default function ModalMagiaAdd({item, onSalvar, onClose}:ModalMagiaAddPro
           register={register}
           error={errors.mg_material}
         />
-                    
-        <div className="flex gap-2 justify-end mt-2">
-          <button className="border border-gray-300 px-2 py-1 rounded" 
-          onClick={onClose}>
-            Cancelar
-          </button>
-          
-          <button type="submit" className="bg-orange-600 text-yellow-300 px-2 py-1 rounded">
-            Salvar
-          </button>
-        </div>
+
+        <ButtonsModal onClose={onClose}/>         
+
       </form>
     </ModalBase>
   )

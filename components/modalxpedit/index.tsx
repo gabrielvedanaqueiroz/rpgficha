@@ -1,6 +1,7 @@
 import { jXPNivel } from "@/utils";
 import ModalBase from "../modalbase";
 import { useState } from "react";
+import ButtonsModal from "../buttonsmodal";
 
 interface ModalXPEditProps{
   xp: number,
@@ -48,7 +49,7 @@ export default function ModalXPEdit({xp, nivel, onClose, onSalvar}: ModalXPEditP
           {/* Barra */}
           <div className="w-full h-2 bg-gray-300 rounded overflow-hidden">
             <div
-              className="h-full bg-yellow-300 transition-all duration-300"
+              className="h-full bg-(--cprimary) transition-all duration-300"
               style={{ width: `${percentual}%` }}
             />
             
@@ -70,16 +71,7 @@ export default function ModalXPEdit({xp, nivel, onClose, onSalvar}: ModalXPEditP
           
         </div>
 
-        <div className="flex gap-2 justify-end">
-          <button className="border border-gray-300 px-2 py-1 rounded" 
-          onClick={onClose}>
-            Cancelar
-          </button>
-          
-          <button type="submit" className="bg-orange-600 text-yellow-300 px-2 py-1 rounded" onClick={onSubmit}>
-            Salvar
-          </button>
-        </div>
+        <ButtonsModal onClose={onClose} onSubmit={onSubmit}/> 
 
       </div>
 
