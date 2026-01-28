@@ -32,18 +32,18 @@ export default function CardFiMagia({IdPersonagem}: CardFiMagiaProps){
 
   function onItem(aItem: MagiaProps){
     return(
-      <li key={aItem.mg_id} className="flex">
-        <button className="border-b mb-0.5 flex justify-start gap-1" 
+      <li key={aItem.mg_id} className="flex w-full">
+        <button className="border-b mb-0.5 flex justify-start gap-1 w-full" 
         onClick={()=>{
           setShowModal(true);
           setItemSel(aItem.mg_id);
         }}>
-          <label className="w-34 justify-items-start flex">{aItem.mg_nome}</label>
-          <label className="w-18 justify-items-start flex">{aItem.mg_alcance}</label>
-          <label className="w-10 ">{aItem.mg_tempoconjuracao}</label>
-          <label className="w-10 ">{(aItem.mg_nivel === 0? 'Truque': aItem.mg_nivel.toString())}</label>
-          <label className="w-8 ">{aItem.mg_dano}</label>        
-          <label className="w-18 ">{aItem.mg_duracao}</label>
+          <label className="w-34 items-start flex md:w-md">{aItem.mg_nome}</label>
+          <label className="w-18 items-start flex">{aItem.mg_alcance}</label>
+          <label className="w-10 items-start flex md:w-18">{aItem.mg_tempoconjuracao}</label>
+          <label className="w-10">{(aItem.mg_nivel === 0? 'Truque': aItem.mg_nivel.toString())}</label>
+          <label className="w-8 items-start flex">{aItem.mg_dano}</label>        
+          <label className="w-18 items-start flex md:w-20">{aItem.mg_duracao}</label>
         </button>
         
       </li>
@@ -67,12 +67,12 @@ export default function CardFiMagia({IdPersonagem}: CardFiMagiaProps){
           
           <ul className="flex flex-col bg-gray-300 p-1 rounded text-xs">
             <li key={0} className="border-b mb-0.5 flex justify-start gap-1">
-              <label className="w-34">Nome</label>
-              <label className="w-18">Alcance</label>
-              <label className="w-10">Tempo</label>
-              <label className="w-10">Nível</label>
-              <label className="w-8">Dano</label>
-              <div className="w-18">Duração</div>
+              <label className="w-34 items-start flex md:w-md">Nome</label>
+              <label className="w-18 items-start flex ">Alcance</label>
+              <label className="w-10 items-start flex md:w-18">Tempo</label>
+              <label className="w-10 items-start flex ">Nível</label>
+              <label className="w-8 items-start flex">Dano</label>
+              <div className="w-18 items-start flex md:w-20">Duração</div>
             </li>
             {
               isLoading 

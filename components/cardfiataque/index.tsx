@@ -63,12 +63,12 @@ export default function CardFiAtaque({IdPersonagem}: CardFiAtaqueProps){
 
   function onItem(aItem: AtaqueProps){
     return(
-      <li key={aItem.at_id} className="border-b mb-0.5 flex justify-start gap-1">
-        <label className="w-32">{aItem.at_descricao}</label>
-        <label className="w-32">{aItem.at_alcance}</label>
-        <label className="w-10">{aItem.at_bonus}</label>
+      <li key={aItem.at_id} className="border-b mb-0.5 flex justify-start gap-1 w-full">
+        <label className="w-32 items-start flex md:w-md">{aItem.at_descricao}</label>
+        <label className="w-32 items-start flex">{aItem.at_alcance}</label>
+        <label className="w-10 items-start flex">{aItem.at_bonus}</label>
         <label className="w-10">{aItem.at_dano}</label>
-        <label className="w-14">{aItem.at_tipo}</label>
+        <label className="w-14 items-start flex md:w-24">{aItem.at_tipo}</label>
         <button className="w-4" onClick={()=>{onExcluirItem(aItem.at_id)}}>
           <MdDelete size={16}/>
         </button>
@@ -90,13 +90,13 @@ export default function CardFiAtaque({IdPersonagem}: CardFiAtaqueProps){
         <div className={`flex flex-col transition-all duration-300 ease-in-out
             ${expandir ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
 
-          <ul className="flex flex-col bg-gray-300 p-1 rounded text-xs">
-            <li key={0} className="border-b mb-0.5 flex justify-start gap-1">
-              <label className="w-32">Nome</label>
-              <label className="w-32">Alcance</label>
-              <label className="w-10">Bônus</label>
+          <ul className="flex flex-col bg-gray-300 p-1 rounded text-xs w-full">
+            <li key={0} className="border-b mb-0.5 flex justify-start gap-1 w-wull">
+              <label className="w-32 items-start flex md:w-md">Nome</label>
+              <label className="w-32 items-start flex">Alcance</label>
+              <label className="w-10 items-start flex">Bônus</label>
               <label className="w-10">Dano</label>
-              <label className="w-14">Tipo</label>
+              <label className="w-14 items-start flex md:w-24">Tipo</label>
               <div className="w-4"></div>
             </li>
 

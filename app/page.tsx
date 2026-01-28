@@ -58,7 +58,7 @@ export default function Home() {
           : 
             data 
             ?(
-              <section className="flex flex-col p-2 gap-2 md:px-96 px-3">
+              <section className="flex flex-col py-2 px-3 gap-2 md:grid md:grid-cols-2 md:px-8 ">
 
                 <CardFiVida personagem={data}/>
 
@@ -66,9 +66,11 @@ export default function Home() {
 
                 <CardFiHabilidade personagem={data}/>
 
-                <CardFiAtaque IdPersonagem={data?.pe_id}/>
+                <div className="flex flex-col gap-2">
+                  <CardFiAtaque IdPersonagem={data?.pe_id}/>
 
-                <CardFiMagia IdPersonagem={data?.pe_id}/>
+                  <CardFiMagia IdPersonagem={data?.pe_id}/>
+                </div>
 
               </section>
             )            

@@ -23,7 +23,7 @@ function CardFiHabilidade({personagem}: CardFiHabilidadeProps){
 
   return(
     <Card>
-      <section className="w-full grid grid-cols-3 grid-rows-2 gap-4 px-2 items-center justify-items-center">
+      <section className="w-full h-fit grid grid-cols-3 grid-rows-2 gap-4 px-2 items-center justify-items-center">
         {onFlag(1, personagem?.pe_forca, personagem?.getModForca(), 'Força')}
         {onFlag(2, personagem?.pe_destreza, personagem?.getModDestreza(),  'Destreza')}
         {onFlag(3, personagem?.pe_constituicao, personagem?.getModConstituicao(), 'Constituição')}

@@ -23,7 +23,7 @@ export default function PageBase({title, children}: PagebaseProps){
       
       {<SubHeader title={title}/>}
 
-      <section className="flex flex-col gap-1 h-fit pb-14 pt-2 md:px-96 px-3">
+      <section className="flex flex-col gap-1 h-fit pb-14 pt-2 md:px-8 px-3">
         {children}
       </section>      
 

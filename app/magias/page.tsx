@@ -140,48 +140,53 @@ export default function Magias(){
               </div>
             </Card>
 
-            {/* preparadas */}
-            <section className="flex w-full h-fit flex-col pt-2">
-              
-              <div className="flex w-full gap-2 items-center">
-                <strong className="text-(--csecundary) whitespace-nowrap">Magias Preparadas</strong>
-                <div className="h-0.5 flex-1 bg-(--csecundary) rounded-lg"/>
-              </div>
+            {/* magias */}
+            <div className="flex flex-col w-full md:grid md:grid-cols-2 md:gap-2">
 
-              <ul className="flex flex-col gap-1">
-                {
-                  isLoading
-                  ? <Skeleton height={150}/>
-                  : isError 
-                    ?<div>erro...</div>
-                    : listaPrep.map((item)=>(
-                        <CardMagiaItem key={item.mg_id} item={item} onEditar={onEditar} onExcluir={onExcluir} onPreparar={onPreparar}/>
-                      ))
-                }    
-              </ul>
-
-            </section>
-
-            {/* conhecidas */}
-            <section className="flex w-full h-fit flex-col pt-2">
-              
-              <div className="flex w-full gap-2 items-center">
-                <strong className="text-(--csecundary) whitespace-nowrap">Magias Conhecidas</strong>
-                <div className="h-0.5 flex-1 bg-(--csecundary) rounded-lg"/>
-              </div>
-
-              <ul className="flex flex-col gap-1">
-                {
-                  isLoading
-                  ? <Skeleton height={150}/>
-                  :data.map((item)=>(
-                    <CardMagiaItem key={item.mg_id} item={item} isCategKnown onEditar={onEditar} onExcluir={onExcluir} onPreparar={onPreparar}/>
+              {/* preparadas */}
+              <section className="flex w-full h-fit flex-col pt-2 md:order-2">
                 
-                  ))
-                }
-              
-              </ul>
-            </section>
+                <div className="flex w-full gap-2 items-center">
+                  <strong className="text-(--csecundary) whitespace-nowrap">Magias Preparadas</strong>
+                  <div className="h-0.5 flex-1 bg-(--csecundary) rounded-lg"/>
+                </div>
+
+                <ul className="flex flex-col gap-1">
+                  {
+                    isLoading
+                    ? <Skeleton height={150}/>
+                    : isError 
+                      ?<div>erro...</div>
+                      : listaPrep.map((item)=>(
+                          <CardMagiaItem key={item.mg_id} item={item} onEditar={onEditar} onExcluir={onExcluir} onPreparar={onPreparar}/>
+                        ))
+                  }    
+                </ul>
+
+              </section>
+
+              {/* conhecidas */}
+              <section className="flex w-full h-fit flex-col pt-2 md:order-1">
+                
+                <div className="flex w-full gap-2 items-center">
+                  <strong className="text-(--csecundary) whitespace-nowrap">Magias Conhecidas</strong>
+                  <div className="h-0.5 flex-1 bg-(--csecundary) rounded-lg"/>
+                </div>
+
+                <ul className="flex flex-col gap-1">
+                  {
+                    isLoading
+                    ? <Skeleton height={150}/>
+                    :data.map((item)=>(
+                      <CardMagiaItem key={item.mg_id} item={item} isCategKnown onEditar={onEditar} onExcluir={onExcluir} onPreparar={onPreparar}/>
+                  
+                    ))
+                  }
+                
+                </ul>
+              </section>
+
+            </div>            
             
           </section>
 
