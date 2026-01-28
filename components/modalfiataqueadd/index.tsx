@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { FormInput } from "../forminput";
 import ModalBase from "../modalbase";
+import ButtonsModal from "../buttonsmodal";
 
 interface ModalFiAtaqueAddProps{
   onSalvar: (item: AtaqueProps)=>void,
@@ -93,19 +94,9 @@ export default function ModalFiAtaqueAdd({onSalvar, onClose}:ModalFiAtaqueAddPro
               {errors.at_tipo.message}
             </span>
           )}
-        </div>
+        </div>        
         
-        
-        <div className="flex gap-2 justify-end">
-          <button className="border border-gray-300 px-2 py-1 rounded" 
-          onClick={onClose}>
-            Cancelar
-          </button>
-          
-          <button type="submit" className="bg-(--csecundary) text-(--cprimary) px-2 py-1 rounded">
-            Salvar
-          </button>
-        </div>
+        <ButtonsModal onClose={onClose}/> 
       </form>
     </ModalBase>
   )

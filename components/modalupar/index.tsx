@@ -266,11 +266,11 @@ export default function ModalUpar({ personagem, onClose, onSalvar}:ModalUparProp
               <label>{personagem?.pe_vidabase}</label>
               <MdKeyboardDoubleArrowRight size={18}/>   
               <div className="flex items-center gap-2 justify-between w-fit">
-                <button className="p-0.5 bg-(--csecundary) rounded shadow text-(--cprimary)" onClick={onDecVida}>
+                <button className="p-0.5 bg-(--csecundary) rounded shadow text-white" onClick={onDecVida}>
                   <FiMinus size={14}/>
                 </button>
                 <label>{vida}</label>
-                <button className="p-0.5 bg-(--csecundary) rounded shadow text-(--cprimary)" onClick={onIncVida}>
+                <button className="p-0.5 bg-(--csecundary) rounded shadow text-white" onClick={onIncVida}>
                   <FaPlus size={14}/>
                 </button>
               </div>

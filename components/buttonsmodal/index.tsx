@@ -21,13 +21,13 @@ function ButtonsModal({onClose, onSubmit}: ButtonsModalProps){
         ? (
           <button 
             type="submit" 
-            className="bg-(--csecundary) text-(--cprimary) px-2 py-1 rounded" 
+            className="bg-(--csecundary) text-white px-2 py-1 rounded" 
             onClick={onSubmit}>
             Salvar
           </button>
         )
         : (
-          <button type="submit" className="bg-(--csecundary) text-(--cprimary) px-2 py-1 rounded">
+          <button type="submit" className="bg-(--csecundary) text-white px-2 py-1 rounded">
             Salvar
           </button>
         )

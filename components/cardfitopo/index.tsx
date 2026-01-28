@@ -48,7 +48,7 @@ function CardFiTopo({personagem, isLoading}: CardFiTopoProps){
   function onFlag(aId: number, aValor: number|undefined, aDesc:String){
     return(
       <CardFlag>
-        <div key={aId} className="flex flex-col h-14 w-16 text-amber-300 justify-center items-center gap-0.5 text-[10px] px-2">
+        <div key={aId} className="flex flex-col h-14 w-16 text-(--cprimary) justify-center items-center gap-0.5 text-[10px] px-2">
           <label className="text-sm">{aValor}</label>
           <label className="flex border-t w-full justify-center">{aDesc}</label>
         </div>

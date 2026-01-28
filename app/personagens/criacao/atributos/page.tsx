@@ -250,7 +250,7 @@ export default function CriacaoAtributos(){
           </div>
         </div>      
         
-        <button type="submit" className="bg-(--cprimary) px-3 py-2 rounded shadow">
+        <button type="submit" className="bg-(--cprimary) px-3 py-2 rounded shadow text-white">
           <label className="flex justify-center items-center">
             Avançar 
             <MdKeyboardDoubleArrowRight size={18}/> 
