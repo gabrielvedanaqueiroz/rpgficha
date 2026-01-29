@@ -77,7 +77,7 @@ export default function CardMagiaItem({item, isCategKnown = false, onEditar, onE
               </div>
             }
 
-            <div className="grid grid-cols-2 h-fit w-full text-xs">
+            <div className="grid grid-cols-2 h-fit w-full text-xs py-1">
               <div className="flex w-full gap-0.5 items-center">
                 <AiFillHourglass size={12}/> <label>Tempo de Conjuração: {item.mg_tempoconjuracao}</label>
               </div>

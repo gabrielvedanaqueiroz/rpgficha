@@ -24,18 +24,19 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{children: React.ReactNode}>) {
   return (
     <html lang="pt-br">
-      <meta name="theme-color" content="#F8cc27" />
+      <meta name="theme-color" content="#e9bd20" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} >
+        
         <AuthProvider>
           {children}
         </AuthProvider>
         
         <ToastContainer />
       </body>
+      
     </html>
   );
 }

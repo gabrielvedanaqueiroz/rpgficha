@@ -3,7 +3,7 @@
 import { AnotacaoProps } from "@/classes/anotacao";
 import CaracteristicaProps from "@/classes/caracteristica";
 import CardCaAnotacaoItem from "@/components/cardcaanotacaoitem";
-import CardCapericia from "@/components/cardcapericia";
+import CardCaPericia from "@/components/cardcapericia";
 import CardCaracteristicaItem from "@/components/cardcaracteristicaitem";
 import ModallCaracteristicaAdd from "@/components/modalcaracteristicaadd";
 import PageBase from "@/components/pagebase";
@@ -149,7 +149,7 @@ export default function Caracteristicas(){
                   ? <Skeleton height={150}/>          
                   : isErrorPer
                     ? 'erro'
-                    : <CardCapericia personagem={personagem}/>
+                    : <CardCaPericia personagem={personagem}/>
                 }
             </section>
 
@@ -192,6 +192,7 @@ export default function Caracteristicas(){
               </ul>
 
             </section>
+            
           </section>
           
           {/* botao */}
