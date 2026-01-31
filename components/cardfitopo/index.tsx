@@ -49,8 +49,8 @@ function CardFiTopo({personagem, isLoading}: CardFiTopoProps){
     return(
       <CardFlag>
         <div key={aId} className="flex flex-col h-14 w-16 text-(--cprimary) justify-center items-center gap-0.5 text-[10px] px-2">
-          <label className="text-sm">{aValor}</label>
-          <label className="flex border-t w-full justify-center">{aDesc}</label>
+          <strong className="text-sm">{aValor}</strong>
+          <strong className="flex border-t w-full justify-center">{aDesc}</strong>
         </div>
       </CardFlag>
     )
@@ -63,9 +63,9 @@ function CardFiTopo({personagem, isLoading}: CardFiTopoProps){
       <div className="flex w-2/5 p-2 flex-col text-xs gap-1 ">
 
         <div className="flex flex-col w-full h-fit text-xs">
-          <Skeleton height={14} baseColor="#fadf7c"/>
-          <Skeleton height={14} baseColor="#fadf7c"/>
-          <Skeleton height={14} baseColor="#fadf7c"/>
+          <Skeleton height={14} baseColor="#2F3E2E"/>
+          <Skeleton height={14} baseColor="#2F3E2E"/>
+          <Skeleton height={14} baseColor="#2F3E2E"/>
         </div>
 
         <div className="flex w-full h-fit gap-2 px-2">
@@ -93,9 +93,9 @@ function CardFiTopo({personagem, isLoading}: CardFiTopoProps){
 
         <div className="flex flex-col w-full h-fit text-xs">
           
-          <Skeleton height={14} baseColor="#F8cc27"/>          
-          <Skeleton height={14} baseColor="#F8cc27"/>          
-          <Skeleton height={14} baseColor="#F8cc27"/>
+          <Skeleton height={14} baseColor="#2F3E2E"/>          
+          <Skeleton height={14} baseColor="#2F3E2E"/>          
+          <Skeleton height={14} baseColor="#2F3E2E"/>
         </div>
 
         <div className="flex w-full h-fit gap-2 px-2">
@@ -154,12 +154,29 @@ function CardFiTopo({personagem, isLoading}: CardFiTopoProps){
     setShowUpar(false);
   }
 
+  function onImagem(){
+
+    let url = personagem?.getImagemClasse();
+
+    return(
+      <div 
+        about={personagem?.pe_classe}
+        className="bg-(--csecundary) w-20 h-20"
+        style={{
+          mask: 'url('+url+') no-repeat center / contain',
+          WebkitMask: 'url('+url+') no-repeat center / contain',
+        }}
+      />
+    )
+  }
+
   return(
  
     isLoading
       ? loading()
-      : <section className="flex w-full h-fit bg-(--cprimary) shadow-lg md:px-96">
+      : <section className="flex w-full h-fit bg-(--cprimary) shadow-lg md:px-4 text-(--csecundary)">
       
+          {/* nome  */}
           <section className="flex w-2/5 p-2 flex-col text-xs gap-1 justify-between">
 
             <div className="flex flex-col w-full h-fit text-xs">
@@ -168,7 +185,7 @@ function CardFiTopo({personagem, isLoading}: CardFiTopoProps){
               <strong>{personagem?.getRaca()}</strong>
             </div>
 
-            <div className="flex w-full h-fit gap-2 px-2 justify-center items-center">
+            <div className="flex w-full h-fit gap-2 px-2 justify-center items-center md:justify-start">
 
               {onFlag(0, personagem?.getModDestreza(), 'Iniciativa')}
               {onFlag(1, personagem?.pe_movimento, 'Movimento')}
@@ -177,19 +194,30 @@ function CardFiTopo({personagem, isLoading}: CardFiTopoProps){
 
           </section>
 
-          <section className="flex w-1/5 py-4">
+          {/* logo classe */}
+          <section className="flex w-1/5 py-4 justify-center">
 
-            <div className="flex border-4 p-1 rounded-[50%] w-full h-full items-center justify-center">
+            
+            <div className="flex border-4 p-1 rounded-[50%] w-full h-full items-center justify-center md:w-28">
+              { 
+                personagem?.getImagemClasse() 
+                ? onImagem()
+                : <></>
+              }
+              
+            </div>
+            {/* <div className="flex border-4 p-1 rounded-[50%] w-full h-full items-center justify-center md:w-28">
               { 
                 personagem?.getImagemClasse() 
                 ? <Image className="brightness-0" src={personagem?.getImagemClasse()||""} width={75} height={75} alt={personagem.pe_classe} />
                 : <></>
               }
               
-            </div>
+            </div> */}
 
           </section>
 
+          {/* nivel */}
           <section className="flex w-2/5 p-2 flex-col text-xs gap-1 justify-between">
 
             <div className="flex flex-col w-full h-fit text-xs">
@@ -205,7 +233,7 @@ function CardFiTopo({personagem, isLoading}: CardFiTopoProps){
               <strong>{personagem?.pe_tendencia}</strong>
             </div>
 
-            <div className="flex w-full h-fit gap-2 px-2 justify-center items-center">
+            <div className="flex w-full h-fit gap-2 px-2 justify-center items-center md:justify-start">
 
               {onFlag(3,personagem?.pe_bproficiencia, 'Bônus Prof.')}
             

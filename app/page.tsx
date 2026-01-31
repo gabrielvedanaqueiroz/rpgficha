@@ -11,17 +11,14 @@ import Headerbar from "@/components/headerbar";
 import { usePersonagemByIdGet } from "@/hooks/personagem";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import SemPersonagem from "@/components/sempersonagem";
-import { AuthContext } from "@/utils/auth";
+import Leftbar from "@/components/leftbar";
 
 export default function Home() {
 
-  // validar login
-
   const [IdPersonagem, setIdPersonagem] = useState<string>(''); 
   const {data, isLoading, isError}      = usePersonagemByIdGet(IdPersonagem); 
-  
   
   useEffect(()=>{
     let id = localStorage.getItem('RF@personagemID') || '';
@@ -43,43 +40,50 @@ export default function Home() {
   return (
     <main>
       <Headerbar/>
-      
-      <section className="flex flex-col gap-1 h-fit pb-14">
 
-        {/* cabeçalho */}
-        {isLoading 
-          ? <CardFiTopo personagem={data} isLoading={isLoading}/> 
-          : data && <CardFiTopo personagem={data} isLoading={isLoading}/> 
-        }
+      <section className="flex flex-col md:flex-row gap-0.5 md:gap-0 w-full h-dvh">
         
-        {
-          isLoading 
-          ? loading()
-          : 
-            data 
-            ?(
-              <section className="flex flex-col py-2 px-3 gap-2 md:grid md:grid-cols-2 md:px-8 ">
+        <Leftbar/>
 
-                <CardFiVida personagem={data}/>
+        <section className="flex w-full flex-col gap-1 h-fit pb-14">
 
-                <CardFiSalvaGuarda personagem={data}/>
+          {/* cabeçalho */}
+          {isLoading 
+            ? <CardFiTopo personagem={data} isLoading={isLoading}/> 
+            : data && <CardFiTopo personagem={data} isLoading={isLoading}/> 
+          }
+          
+          {
+            isLoading 
+            ? loading()
+            : 
+              data 
+              ?(
+                <section className="flex flex-col py-2 px-3 gap-2 md:grid md:grid-cols-2 md:px-8 ">
 
-                <CardFiHabilidade personagem={data}/>
+                  <CardFiVida personagem={data}/>
 
-                <div className="flex flex-col gap-2">
-                  <CardFiAtaque IdPersonagem={data?.pe_id}/>
+                  <CardFiSalvaGuarda personagem={data}/>
 
-                  <CardFiMagia IdPersonagem={data?.pe_id}/>
-                </div>
+                  <CardFiHabilidade personagem={data}/>
 
-              </section>
-            )            
-            : <SemPersonagem/>
-        }
+                  <div className="flex flex-col gap-2">
+                    <CardFiAtaque IdPersonagem={data?.pe_id}/>
+
+                    <CardFiMagia IdPersonagem={data?.pe_id}/>
+                  </div>
+
+                </section>
+              )            
+              : <SemPersonagem/>
+          }
+          
+        </section>
         
-      </section>
+        <Footebar/>
+
+      </section>      
       
-      <Footebar/>
     </main>
 
   );
