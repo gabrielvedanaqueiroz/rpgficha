@@ -10,7 +10,7 @@ import { LuDiamondPlus } from "react-icons/lu";
 function LeftBar(){
 
   return(
-    <aside className="flex flex-col hidden md:block z-50 shrink-0 w-64 bg-(--cprimary) p-2 text-(--csecundary) items-center justify-between gap-2">
+    <aside className="flex-col hidden md:block z-50 shrink-0 w-64 bg-(--cprimary) p-2 text-(--csecundary) items-center justify-between gap-2">
       
       <Link href={'/'} className="flex gap-1 items-center py-2">
         <div className="h-10 w-10 bg-(--csecundary) rounded-4xl flex justify-center items-center text-(--cprimary) transition-transform duration-150 active:scale-95">

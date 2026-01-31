@@ -7,7 +7,7 @@ import { LuDiamondPlus } from "react-icons/lu";
 
 function FooterBar(){
   return(
-    <footer id="router-footer" className="flex z-50 fixed  md:hidden block w-full bottom-0 bg-(--cprimary) h-12 p-2 text-(--csecundary) items-center justify-between gap-2">
+    <footer id="router-footer" className="flex z-50 fixed md:hidden w-full bottom-0 bg-(--cprimary) h-12 p-2 text-(--csecundary) items-center justify-between gap-2">
 
       <Link href={'/personagens'}>
         <LuDiamondPlus size={32} title="personagens" className="transition-transform duration-150 active:scale-85"/> 

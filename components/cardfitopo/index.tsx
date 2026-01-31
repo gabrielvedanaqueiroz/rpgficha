@@ -2,7 +2,6 @@
 
 import { memo, useState } from "react";
 import CardFlag from "../cardflag";
-import Image from "next/image";
 import Personagem from "@/classes/personagem";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
@@ -58,7 +57,7 @@ function CardFiTopo({personagem, isLoading}: CardFiTopoProps){
 
   function loading(){
     return(
-      <section className="flex w-full h-34 bg-(--cprimary) shadow-lg md:px-96">
+      <section className="flex w-full h-34 bg-(--cprimary) shadow-lg md:px-96 text-(--csecundary)">
       
       <div className="flex w-2/5 p-2 flex-col text-xs gap-1 ">
 
@@ -80,12 +79,15 @@ function CardFiTopo({personagem, isLoading}: CardFiTopoProps){
       <div className="flex w-1/5 py-4">
 
         <div className="flex border-4 p-1 rounded-[50%] w-full h-full items-center justify-center">
-          { 
-            personagem?.getImagemClasse() 
-            ? <Image className="brightness-0" src={personagem?.getImagemClasse()||""} width={75} height={75} alt={personagem.pe_classe} />
-            : <Image className="brightness-0" src={'./res/logo.svg'} width={75} height={75} alt={'classe'} />
-          }
-          
+
+          <div 
+            about={personagem?.pe_classe}
+            className="bg-(--csecundary) w-20 h-20"
+            style={{
+              mask: 'url(/res/logo.svg) no-repeat center / contain',
+              WebkitMask: 'url(/res/logo.svg) no-repeat center / contain',
+            }}
+          />
         </div>
 
       </div>
@@ -196,7 +198,6 @@ function CardFiTopo({personagem, isLoading}: CardFiTopoProps){
 
           {/* logo classe */}
           <section className="flex w-1/5 py-4 justify-center">
-
             
             <div className="flex border-4 p-1 rounded-[50%] w-full h-full items-center justify-center md:w-28">
               { 
@@ -206,14 +207,6 @@ function CardFiTopo({personagem, isLoading}: CardFiTopoProps){
               }
               
             </div>
-            {/* <div className="flex border-4 p-1 rounded-[50%] w-full h-full items-center justify-center md:w-28">
-              { 
-                personagem?.getImagemClasse() 
-                ? <Image className="brightness-0" src={personagem?.getImagemClasse()||""} width={75} height={75} alt={personagem.pe_classe} />
-                : <></>
-              }
-              
-            </div> */}
 
           </section>
 
