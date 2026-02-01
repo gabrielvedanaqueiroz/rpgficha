@@ -50,7 +50,6 @@ export default function CardFiAtaque({IdPersonagem}: CardFiAtaqueProps){
     }  
   }
 
-
   async function onExcluirItem(aId: string){
     try {
       const docRef = doc(db, "tb_ataque", aId);
@@ -69,7 +68,7 @@ export default function CardFiAtaque({IdPersonagem}: CardFiAtaqueProps){
         <label className="w-10 items-start flex">{aItem.at_bonus}</label>
         <label className="w-10">{aItem.at_dano}</label>
         <label className="w-14 items-start flex md:w-24">{aItem.at_tipo}</label>
-        <button className="w-4" onClick={()=>{onExcluirItem(aItem.at_id)}}>
+        <button className="w-4" onClick={()=>{onExcluirItem(aItem.at_id)}} aria-label="excluir">
           <MdDelete size={16}/>
         </button>
       </li>
@@ -82,7 +81,7 @@ export default function CardFiAtaque({IdPersonagem}: CardFiAtaqueProps){
 
         <div className="flex items-center w-full">
           <strong className="w-full" onClick={onClickExpadirRecolher}>Ataques</strong>
-         <button onClick={onClickExpadirRecolher}>
+          <button onClick={onClickExpadirRecolher} aria-label="expandir\recolher">
             {expandir ? <FaMinus size={12}/> : <FaPlus size={12}/>}
           </button>
         </div>
@@ -111,12 +110,11 @@ export default function CardFiAtaque({IdPersonagem}: CardFiAtaqueProps){
             }        
           </ul>
 
-          <button className="flex w-full mt-0.5" onClick={()=>{setShowModal(true)}}>
+          <button className="flex w-full mt-0.5" onClick={()=>{setShowModal(true)}} aria-label="adicionar">
             <label className="text-gray-500 text-xs">Adicionar +</label>
           </button>
         </div>       
       </div> 
-
       
       {showModal && <ModalFiAtaqueAdd onSalvar={onSalvar} onClose={onClose} />}
     </Card>

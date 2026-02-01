@@ -199,7 +199,7 @@ function CardFiTopo({personagem, isLoading}: CardFiTopoProps){
           {/* logo classe */}
           <section className="flex w-1/5 py-4 justify-center">
             
-            <div className="flex border-4 p-1 rounded-[50%] w-full h-full items-center justify-center md:w-28">
+            <div className="flex border-4 p-1 rounded-[50%] w-fit h-fit items-center justify-center md:w-28">
               { 
                 personagem?.getImagemClasse() 
                 ? onImagem()
@@ -230,7 +230,7 @@ function CardFiTopo({personagem, isLoading}: CardFiTopoProps){
 
               {onFlag(3,personagem?.pe_bproficiencia, 'Bônus Prof.')}
             
-              <button onClick={onClickExp}>
+              <button onClick={onClickExp} aria-label="experiência">
                 {onFlag(4, personagem?.pe_experiencia, 'Exp +')}
               </button>
             

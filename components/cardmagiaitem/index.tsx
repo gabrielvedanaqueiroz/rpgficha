@@ -57,7 +57,7 @@ export default function CardMagiaItem({item, isCategKnown = false, onEditar, onE
               </div>
             </div>
 
-            <button className="h-10 w-2.5 pt-1.5" onClick={onClickExpadirRecolher}>
+            <button className="h-10 w-2.5 pt-1.5" onClick={onClickExpadirRecolher} aria-label="expandir\recolher">
               {expandir ? <FaMinus size={12}/> : <FaPlus size={12}/>  }
             </button>
           </section>
@@ -100,10 +100,10 @@ export default function CardMagiaItem({item, isCategKnown = false, onEditar, onE
 
             {/* botoes */}
             <div className="flex border-t border-gray-300 mt-2 justify-end items-center py-2 gap-2">
-              <button onClick={onDelete}> <MdDelete size={20}/> </button>
-              <button onClick={onEdit}> <MdEdit size={20}/> </button>
+              <button onClick={onDelete}> <MdDelete size={20} aria-label="excluir"/> </button>
+              <button onClick={onEdit} aria-label="editar"> <MdEdit size={20}/> </button>
               <div className="bg-gray-400 h-5 w-0.5"/>
-              <button onClick={onPrepare}> <FaCheck size={20}/> </button>         
+              <button onClick={onPrepare} aria-label="preparar"> <FaCheck size={20}/> </button>         
             </div>
           </section>
 

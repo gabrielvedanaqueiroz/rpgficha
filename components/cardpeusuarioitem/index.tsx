@@ -35,7 +35,7 @@ export default function CardPeUsuarioItem({id, usuario, email, onDeslogar}: Card
             {usuario}              
           </strong>
 
-          <button onClick={onClickExpadirRecolher}>
+          <button onClick={onClickExpadirRecolher} aria-label="expandir\recolher">
             {expandir ? <FaMinus size={12}/> : <FaPlus size={12}/>  }
           </button>
         </section>
@@ -48,7 +48,7 @@ export default function CardPeUsuarioItem({id, usuario, email, onDeslogar}: Card
           <label>{email}</label>
 
           <button className="flex items-center gap-1 bg-gray-200 rounded-md shadow-lg px-2 py-1 w-fit"
-          onClick={onDesconectar}>
+          onClick={onDesconectar} aria-label="desconectar">
             <RiLogoutCircleLine size={18} /> Desconectar
           </button>  
           

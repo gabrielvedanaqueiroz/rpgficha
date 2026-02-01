@@ -70,7 +70,7 @@ function CardFiSalvaGuarda({ personagem }: CardFiSalvaGuardaProps){
           <label className="w-full text-center text-[10px]">Perc. Passiva</label>
         </div>
 
-        <button onClick={onClickCA}>
+        <button onClick={onClickCA} aria-label="classe de armadura">
           <CardFlag>
             <div className="w-18 h-16 rounded flex flex-col gap-0.5 justify-center items-center p-2">
               <strong className="text-center text-sm border-b">{personagem?.pe_catotal}</strong>          
@@ -78,6 +78,7 @@ function CardFiSalvaGuarda({ personagem }: CardFiSalvaGuardaProps){
             </div>
           </CardFlag>
         </button>
+        
       </section>
 
       {showCA ? <ModalCArmEdit ca={personagem?.pe_catotal} onClose={onClose} onSalvar={onSalvar}/> : <></>}

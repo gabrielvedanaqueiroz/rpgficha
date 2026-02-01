@@ -41,7 +41,7 @@ export default function CardCaAnotacaoItem({item, onEditar, onExcluir}:CardCaAno
               {item.an_titulo}, {getData(item.an_data)}              
             </strong>
 
-            <button onClick={onClickExpadirRecolher}>
+            <button onClick={onClickExpadirRecolher} aria-label="expandir\recolher">
               {expandir ? <FaMinus size={12}/> : <FaPlus size={12}/>  }
             </button>
           </section>
@@ -55,8 +55,8 @@ export default function CardCaAnotacaoItem({item, onEditar, onExcluir}:CardCaAno
 
             {/* botoes */}
             <div className="flex border-t border-gray-300 mt-2 justify-end items-center py-2 gap-2">
-              <button onClick={onDelete}> <MdDelete size={20}/> </button>
-              <button onClick={onEdit}> <MdEdit size={20}/> </button>     
+              <button onClick={onDelete} aria-label="excluir"> <MdDelete size={20} /> </button>
+              <button onClick={onEdit} aria-label="editar"> <MdEdit size={20}/> </button>     
             </div>
           </section>
 

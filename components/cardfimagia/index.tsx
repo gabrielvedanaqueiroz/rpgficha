@@ -58,10 +58,11 @@ export default function CardFiMagia({IdPersonagem}: CardFiMagiaProps){
         <div className="flex items-center w-full">
           <strong className="w-full" onClick={onClickExpadirRecolher}>Magias preparadas</strong>
           
-          <button onClick={onClickExpadirRecolher}>
+          <button onClick={onClickExpadirRecolher} aria-label="expandir\recolher">
             {expandir ? <FaMinus size={12}/> : <FaPlus size={12}/>}
           </button>
         </div>
+        
         <div className={`flex flex-col transition-all duration-300 ease-in-out
             ${expandir ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
           
@@ -84,10 +85,9 @@ export default function CardFiMagia({IdPersonagem}: CardFiMagiaProps){
                 )
             }
           </ul>
-          <button className="flex w-full mt-0.5" onClick={()=>{
-            
-            router.push('/magias')
-          }}>
+
+          <button className="flex w-full mt-0.5" aria-label="adicionar" 
+          onClick={()=>{ router.push('/magias') }}>
             <label className="text-gray-500 text-xs">Adicionar +</label>
           </button>
         </div>      
