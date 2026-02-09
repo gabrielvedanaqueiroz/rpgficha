@@ -28,7 +28,7 @@ export default function CardCaPericiaItem({id, title, children}:CardCaracteristi
                 {title}              
               </strong>
   
-              <button onClick={onClickExpadirRecolher}>
+              <button onClick={onClickExpadirRecolher} aria-label="expandir\recolher">
                 {expandir ? <FaMinus size={12}/> : <FaPlus size={12}/>  }
               </button>
             </section>

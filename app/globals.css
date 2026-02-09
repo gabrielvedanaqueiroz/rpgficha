@@ -3,8 +3,8 @@
 :root {
   --background: #f5f4f4;
   --foreground: #171717;
-  --cprimary: #e9bd20;   /*yellow-300 #F8cc27 #c97156*/
-  --csecundary: #EA580C; /*orange-600 */
+  --cprimary: #2F3E2E;   /* #e9bd20, yellow-300 */  /*sugestoes: #2F3E2E, #3B1E5A, #1F1F1F, #2C3E50 #c97156*/
+  --csecundary: #C9A24D; /* #EA580C, orange-600 */  /*sugestoes: #C9A24D, #4FD1C5, #8B1E1E, #B87333*/
 }
 
 @theme inline {

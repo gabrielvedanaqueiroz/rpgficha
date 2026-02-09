@@ -65,19 +65,20 @@ function CardFiSalvaGuarda({ personagem }: CardFiSalvaGuardaProps){
 
       <section className="flex flex-col items-center w-1/3 h-fit p-2 gap-1 text-(--cprimary)">
 
-        <div className="bg-black w-18 h-16 rounded flex flex-col gap-0.5 justify-center items-center p-2">
-          <label className="text-center text-sm border-b">{personagem?.getPercepcaoPassiva()}</label>          
+        <div className="bg-(--csecundary) w-18 h-16 rounded flex flex-col gap-0.5 justify-center items-center p-2">
+          <strong className="text-center text-sm border-b">{personagem?.getPercepcaoPassiva()}</strong>          
           <label className="w-full text-center text-[10px]">Perc. Passiva</label>
         </div>
 
-        <button onClick={onClickCA}>
+        <button onClick={onClickCA} aria-label="classe de armadura">
           <CardFlag>
-            <div className="bg-black w-18 h-16 rounded flex flex-col gap-0.5 justify-center items-center p-2">
-              <label className="text-center text-sm border-b">{personagem?.pe_catotal}</label>          
+            <div className="w-18 h-16 rounded flex flex-col gap-0.5 justify-center items-center p-2">
+              <strong className="text-center text-sm border-b">{personagem?.pe_catotal}</strong>          
               <label className="w-full text-center text-[10px]">CA+</label>
             </div>
           </CardFlag>
         </button>
+        
       </section>
 
       {showCA ? <ModalCArmEdit ca={personagem?.pe_catotal} onClose={onClose} onSalvar={onSalvar}/> : <></>}

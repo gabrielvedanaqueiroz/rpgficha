@@ -13,10 +13,13 @@ export default function ModalBase({title, children, view, onClose}: ModalBasePro
   return(
     <section className="z-50 relative">
   
-      <div className="fixed inset-0 z-30 bg-black/40"/>
+      {/* fundo */}
+      <div className="fixed inset-0 z-30 bg-black/40"/> 
       
-      <div className="w-screen flex flex-col h-screen fixed top-0 left-0 z-50 gap-2 py-10 px-4 md:items-center"> 
+      {/* frente */}
+      <div className="w-screen flex flex-col h-screen fixed top-0 left-0 z-50 gap-2 py-16 px-4 md:items-center"> 
         
+        {/* view */}
         <div className="flex flex-col w-full bg-[#f5f4f4] shadow-lg rounded-lg md:w-2xl">
 
           <div className="flex justify-between items-center bg-black rounded-t-lg text-white p-2 w-full">
@@ -29,6 +32,7 @@ export default function ModalBase({title, children, view, onClose}: ModalBasePro
           </div>
 
         </div>
+      
       </div>      
     </section>
   )

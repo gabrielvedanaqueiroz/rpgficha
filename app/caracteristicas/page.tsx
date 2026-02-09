@@ -141,7 +141,7 @@ export default function Caracteristicas(){
             <section className="flex w-full h-fit flex-col">
       
               <div className="flex w-full gap-2 items-center">
-                <strong className="text-(--csecundary)  whitespace-nowrap">Pericias</strong>
+                <strong className="text-(--csecundary)  whitespace-nowrap">Perícias</strong>
                 <div className="h-0.5 flex-1 bg-(--csecundary) rounded-lg"/>
               </div>
                 {

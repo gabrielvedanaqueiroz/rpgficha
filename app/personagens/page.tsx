@@ -123,8 +123,8 @@ export default function Personagens(){
 
         <section className="flex w-full h-fit flex-col pt-2">
           <div className="flex w-full gap-2 items-center">
-            <strong className="text-orange-600  whitespace-nowrap">Usuário</strong>
-            <div className="h-0.5 flex-1 bg-amber-600 rounded-lg"/>
+            <strong className="text-(--csecundary)  whitespace-nowrap">Usuário</strong>
+            <div className="h-0.5 flex-1 bg-(--csecundary) rounded-lg"/>
           </div>
 
           <CardPeUsuarioItem id={joId} usuario={jogador?.jo_nome} email={joEmail} onDeslogar={onDeslogar}/> 

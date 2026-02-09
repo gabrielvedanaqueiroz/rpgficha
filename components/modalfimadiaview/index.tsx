@@ -51,7 +51,7 @@ export default function ModalFiMagiaView({id, onClose}: ModalFiMagiaViewProps){
                 </div>
               }
 
-              <div className="grid grid-cols-2 h-fit w-full text-xs">
+              <div className="grid grid-cols-2 h-fit w-full text-xs py-1">
                 <div className="flex w-full gap-0.5 items-center">
                   <AiFillHourglass size={12}/> <label>Tempo de Conjuração: {data?.mg_tempoconjuracao}</label>
                 </div>

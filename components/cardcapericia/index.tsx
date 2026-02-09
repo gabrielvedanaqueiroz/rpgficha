@@ -13,7 +13,7 @@ function CardCaPericia({personagem}: CardCaPericiaProps){
     return(
       <CardFlag>
         <div key={aId} className="flex flex-col text-(--cprimary) justify-center items-center p-2 text-[10px] w-16 h-16">
-          <label className="text-sm border-b">{aMod}</label>
+          <strong className="text-sm border-b">{aMod}</strong>
           <label>{aAtrib}</label>
         </div>
       </CardFlag>
