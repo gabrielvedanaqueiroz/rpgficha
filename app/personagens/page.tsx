@@ -18,30 +18,16 @@ import Buttonadicionar from "@/components/buttonadicionar";
 
 export default function Personagens(){
 
-  const router      = useRouter();
-  const {onSingOut} = useContext(AuthContext);
+  const router                = useRouter();
+  const {onSingOut, usuario}  = useContext(AuthContext);
 
   const [personagemID, setPersonagemId] = useState<string>('');  
   
-  const [joId, setJoId]       = useState<string>('');
-  const [joEmail, setJoEmail] = useState<string>('');
-
-  const {data : jogador}  = useJogadorGet(joId);
-  const {data, isLoading, isError, refetch} = usePersonagemGet(joId);
+  const {data : jogador}  = useJogadorGet(String(usuario?.id) );
+  const {data, isLoading, isError, refetch} = usePersonagemGet(String(usuario?.id));
  
-
   useEffect(()=>{
-    let id            = localStorage.getItem('RF@personagemID'); 
-    let usuarioData   = localStorage.getItem('RF@detailUser'); 
-
-    if (usuarioData) {
-      const data = JSON.parse(usuarioData);
-  
-      setJoEmail(data.email);
-      setJoId(data.uid);
-
-    }
-
+    let id            = localStorage.getItem('RF@personagemID');   
     setPersonagemId(id||'');
   },[]);
 
@@ -123,11 +109,11 @@ export default function Personagens(){
 
         <section className="flex w-full h-fit flex-col pt-2">
           <div className="flex w-full gap-2 items-center">
-            <strong className="text-(--csecundary)  whitespace-nowrap">Usuário</strong>
+            <strong className="text-(--csecundary) whitespace-nowrap">Usuário</strong>
             <div className="h-0.5 flex-1 bg-(--csecundary) rounded-lg"/>
           </div>
 
-          <CardPeUsuarioItem id={joId} usuario={jogador?.jo_nome} email={joEmail} onDeslogar={onDeslogar}/> 
+          <CardPeUsuarioItem id={usuario?.id} usuario={jogador?.jo_nome} email={usuario?.email} onDeslogar={onDeslogar}/> 
           
         </section> 
         

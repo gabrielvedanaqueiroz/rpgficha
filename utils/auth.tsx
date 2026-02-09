@@ -34,7 +34,7 @@ export const AuthContext = createContext<AuthContextData>(
 export function AuthProvider({ children }: AuthProviderProps) {
   
   const [signed, setSigned]           = useState<boolean>(false);
-  const [usuario, setUsuarioInterno]  = useState<AuthUser| null>(null);
+  const [usuario, setUsuario]         = useState<AuthUser| null>(null);
   const [loadingAuth, setLoadingAuth] = useState<boolean>(false);  
 
   const router = useRouter();
@@ -56,7 +56,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         };
 
         localStorage.setItem('RF@detailUser', JSON.stringify(userData));
-        setUsuarioInterno({
+        setUsuario({
           id: userCredential?.user?.uid||"",
           email: userCredential?.user?.email||"",
           nome : userCredential?.user.displayName||"",
@@ -175,6 +175,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
         
         setSigned(true);
         setLoadingAuth(false);
+        setUsuario({ 
+            id: user.uid, 
+            nome: '',
+            email: String(user.email)
+        })
       }
       else{        
         router.replace('/login');
@@ -190,7 +195,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
         signed,
         usuario,
         loadingAuth,
-        // setUsuario,
         onSingIn, 
         onSingOut,
         onCriarUsuario,

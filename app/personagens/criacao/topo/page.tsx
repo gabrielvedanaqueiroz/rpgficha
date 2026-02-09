@@ -3,10 +3,11 @@
 import PageBase from "@/components/pagebase";
 import { db } from "@/services/firebaseConnection";
 import { jClasses, jRacas, ocultarBarras } from "@/utils";
+import { AuthContext } from "@/utils/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addDoc, collection } from "firebase/firestore";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import { toast } from "react-toastify";
@@ -69,10 +70,12 @@ export default function CriacaoTopo(){
   const [CABase, setCABase]                 = useState<number>(0);
   const [idhabilidadeconjuracao, setIdHabilidadeConjuracao]  = useState<number>(0);
 
+  const {usuario} = useContext(AuthContext);
+
   async function onSubmit(data: TopoType) {
 
     await addDoc(collection(db, 'tb_personagem'),{
-      pe_idjogador      : String(process.env.NEXT_PUBLIC_IDJOGADOR),
+      pe_idjogador      : usuario?.id,
       pe_idclasse       : data.pe_idclasse,
       pe_idraca         : data.pe_idraca,
       pe_subraca        : data.pe_subraca.trim(),
