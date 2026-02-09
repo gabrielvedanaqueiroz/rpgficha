@@ -18,7 +18,7 @@ export interface MagiaProps{
 
 export const magiaSchema = z.object({
   mg_id: z.string().optional(),
-  mg_nome: z.string().min(5, "Nome obrigatório"),
+  mg_nome: z.string().min(2, "Nome obrigatório"),
   mg_descricao: z.string().min(5, "Descrição obrigatória"),
   mg_alcance: z.string().min(1, 'Alcance obrigatório'),
   mg_componentes: z.string().optional(),

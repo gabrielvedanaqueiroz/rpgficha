@@ -91,10 +91,10 @@ export function usePersonagemByIdGet(aIdPersonagem:string){
           Boolean(snapshot.data().pe_promedicina),
           Boolean(snapshot.data().pe_pronatureza),
           Boolean(snapshot.data().pe_propercepcao),
-          Boolean(snapshot.data().pe_propersusao),
+          Boolean(snapshot.data().pe_proprestidigitacao),
           Boolean(snapshot.data().pe_prosobrevivencia),
           Boolean(snapshot.data().pe_proreligiao),
-          Boolean(snapshot.data().pe_proprestidigitacao),
+          Boolean(snapshot.data().pe_propersusao),
 
           Number(snapshot.data().pe_idhabilidadeconjuracao ?? 0),
         ); 
@@ -199,10 +199,10 @@ export function usePersonagemGet(aIdJogador: string) {
           Boolean(doc.data().pe_promedicina),
           Boolean(doc.data().pe_pronatureza),
           Boolean(doc.data().pe_propercepcao),
-          Boolean(doc.data().pe_propersusao),
+          Boolean(doc.data().pe_proprestidigitacao),
           Boolean(doc.data().pe_prosobrevivencia),
           Boolean(doc.data().pe_proreligiao),
-          Boolean(doc.data().pe_proprestidigitacao),
+          Boolean(doc.data().pe_propersusao),
 
           doc.data().pe_idhabilidadeconjuracao ?? null,
         ))
