@@ -60,7 +60,7 @@ export default function Registar(){
         />
       
         <input 
-          className="flex w-full bg-white p-2 rounded" placeholder="Usuário"
+          className="flex w-full bg-white p-2 rounded" placeholder="E-mail"
           value={email}
           onChange={(e)=>{setEmail(e.target.value)}}
         />
